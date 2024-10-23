@@ -31,9 +31,7 @@ class _MainWrapperState extends State<MainWrapper> {
     }
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        title: const Text('Main Wrapper'),
-      ),
+      extendBodyBehindAppBar: true,
       body: widget.navigationShell, // Use the navigation shell
       bottomNavigationBar: SizedBox(
         height: 140,
@@ -42,125 +40,135 @@ class _MainWrapperState extends State<MainWrapper> {
             Positioned(
               bottom: 0,
               child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 110,
-                  color: Colors.grey.withOpacity(0.2),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // Home Button
-                        InkWell(
-                          onTap: () {
-                            _onTabTapped(0);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.play_circle_fill_rounded,
-                                size: 28,
+                width: MediaQuery.of(context).size.width,
+                height: 110,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.8),
+                      Colors.white.withOpacity(1),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Home Button
+                      InkWell(
+                        onTap: () {
+                          _onTabTapped(0);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.play_circle_fill_rounded,
+                              size: 28,
+                              color: widget.navigationShell.currentIndex == 0
+                                  ? AppColor.primaryColor
+                                  : Colors.grey.withOpacity(0.4),
+                            ),
+                            Text(
+                              "Home",
+                              style: TextStyle(
                                 color: widget.navigationShell.currentIndex == 0
                                     ? AppColor.primaryColor
-                                    : Colors.grey.withOpacity(0.4),
+                                    : Colors.grey.withOpacity(0.8),
                               ),
-                              Text(
-                                "Home",
-                                style: TextStyle(
-                                  color:
-                                      widget.navigationShell.currentIndex == 0
-                                          ? AppColor.primaryColor
-                                          : Colors.grey.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        // Browse Button
-                        InkWell(
-                          onTap: () {
-                            _onTabTapped(1);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                AppIcon.browse,
-                                height: 25,
+                      ),
+                      // Browse Button
+                      InkWell(
+                        onTap: () {
+                          _onTabTapped(1);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppIcon.browse,
+                              height: 25,
+                              color: widget.navigationShell.currentIndex == 1
+                                  ? AppColor.primaryColor
+                                  : Colors.grey.withOpacity(0.4),
+                            ),
+                            Text(
+                              "Browse",
+                              style: TextStyle(
                                 color: widget.navigationShell.currentIndex == 1
                                     ? AppColor.primaryColor
-                                    : Colors.grey.withOpacity(0.4),
+                                    : Colors.grey.withOpacity(0.8),
                               ),
-                              Text(
-                                "Browse",
-                                style: TextStyle(
-                                  color:
-                                      widget.navigationShell.currentIndex == 1
-                                          ? AppColor.primaryColor
-                                          : Colors.grey.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        // Library Button
-                        InkWell(
-                          onTap: () {
-                            _onTabTapped(2);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                AppIcon.library,
-                                height: 25,
+                      ),
+                      // Library Button
+                      InkWell(
+                        onTap: () {
+                          _onTabTapped(2);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppIcon.library,
+                              height: 25,
+                              color: widget.navigationShell.currentIndex == 2
+                                  ? AppColor.primaryColor
+                                  : Colors.grey.withOpacity(0.4),
+                            ),
+                            Text(
+                              "Library",
+                              style: TextStyle(
                                 color: widget.navigationShell.currentIndex == 2
                                     ? AppColor.primaryColor
-                                    : Colors.grey.withOpacity(0.4),
+                                    : Colors.grey.withOpacity(0.8),
                               ),
-                              Text(
-                                "Library",
-                                style: TextStyle(
-                                  color:
-                                      widget.navigationShell.currentIndex == 2
-                                          ? AppColor.primaryColor
-                                          : Colors.grey.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        // Search Button
-                        InkWell(
-                          onTap: () {
-                            _onTabTapped(3);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.search,
-                                size: 25,
+                      ),
+                      // Search Button
+                      InkWell(
+                        onTap: () {
+                          _onTabTapped(3);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search,
+                              size: 25,
+                              color: widget.navigationShell.currentIndex == 3
+                                  ? AppColor.primaryColor
+                                  : Colors.grey.withOpacity(0.4),
+                            ),
+                            Text(
+                              "Search",
+                              style: TextStyle(
                                 color: widget.navigationShell.currentIndex == 3
                                     ? AppColor.primaryColor
-                                    : Colors.grey.withOpacity(0.4),
+                                    : Colors.grey.withOpacity(0.8),
                               ),
-                              Text(
-                                "Search",
-                                style: TextStyle(
-                                  color:
-                                      widget.navigationShell.currentIndex == 3
-                                          ? AppColor.primaryColor
-                                          : Colors.grey.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             // Mini music player at the top of the bottom navigation bar
             Positioned(
