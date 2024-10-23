@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/home/components/best_album_section.dart';
@@ -6,6 +7,7 @@ import 'package:sound_sphere/presentation/views/home/components/history_playlist
 import 'package:sound_sphere/presentation/views/home/components/mixed_playlist.dart';
 import 'package:sound_sphere/presentation/views/home/components/playlist_section.dart';
 import 'package:sound_sphere/presentation/views/home/components/song_section.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -55,7 +57,10 @@ class _HomePageState extends State<HomePage> {
                           AddedArtist(
                               myArtistList: FakeData.artists.take(3).toList()),
                           const Spacer(),
-                          HistoryPlaylist(),
+                          HistoryPlaylist(
+                            onPressed: () =>
+                                context.pushNamed(Routes.historyPlaylist),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),

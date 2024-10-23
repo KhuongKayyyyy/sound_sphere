@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
+import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
+import 'package:sound_sphere/presentation/views/home/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper.dart';
@@ -44,7 +46,12 @@ class AppNavigation {
           path: Routes.home, // Home path
           name: 'home', // Unique name for home
           builder: (context, state) => const HomePage(),
-        )
+        ),
+        GoRoute(
+          path: Routes.historyPlaylist,
+          name: Routes.historyPlaylist,
+          builder: (context, state) => HistoryPlaylistPage(),
+        ),
       ],
     );
   }
