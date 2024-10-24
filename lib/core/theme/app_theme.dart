@@ -8,7 +8,7 @@ class AppTheme {
       primaryColor: AppColor.primaryColor,
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white.withOpacity(0.1),
+        backgroundColor: Colors.white.withOpacity(0.9),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),

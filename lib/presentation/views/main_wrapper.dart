@@ -26,9 +26,6 @@ class _MainWrapperState extends State<MainWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.navigationShell == null) {
-      return const Center(child: CircularProgressIndicator());
-    }
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -189,7 +186,7 @@ class _MainWrapperState extends State<MainWrapper> {
                   ],
                 ),
                 height: 60,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
