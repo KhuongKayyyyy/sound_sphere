@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 return FlexibleSpaceBar(
                   titlePadding: const EdgeInsets.only(left: 16, bottom: 8),
                   title: Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -139,7 +139,10 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BestAlbumSection(),
+                  child: BestAlbumSection(
+                    onPressed: () => context.pushNamed(Routes.albumDetail,
+                        extra: FakeData.albums.first),
+                  ),
                 ),
                 const SizedBox(height: 150),
               ],

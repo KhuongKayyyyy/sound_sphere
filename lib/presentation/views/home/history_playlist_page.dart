@@ -48,15 +48,15 @@ class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
       });
     }
 
-    if (_scrollController!.offset > 300 && showSearchBar) {
-      setState(() {
-        showSearchBar = false;
-      });
-    } else if (_scrollController!.offset <= 300 && !showSearchBar) {
-      setState(() {
-        showSearchBar = true;
-      });
-    }
+    // if (_scrollController!.offset > 400 && showSearchBar) {
+    //   setState(() {
+    //     showSearchBar = false;
+    //   });
+    // } else if (_scrollController!.offset <= 400 && !showSearchBar) {
+    //   setState(() {
+    //     showSearchBar = true;
+    //   });
+    // }
 
     // Change icon color based on scroll position
     if (_scrollController!.offset > 250) {
@@ -79,12 +79,19 @@ class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
           SliverAppBar(
             pinned: true,
             expandedHeight: 300,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              color: appBarIconColor,
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            leading: Container(
+              margin: const EdgeInsets.only(left: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withOpacity(0.1),
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                color: appBarIconColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
             actions: [
               Container(
@@ -179,14 +186,14 @@ class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                if (showSearchBar)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomSearchBar(
-                      textHint: "What should we listen to?",
-                      isWhite: false,
-                    ),
+                // if (showSearchBar)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: CustomSearchBar(
+                    textHint: "What should we listen to?",
+                    isWhite: false,
                   ),
+                ),
                 const SizedBox(height: 15),
               ],
             ),

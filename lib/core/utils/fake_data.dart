@@ -213,7 +213,7 @@ class FakeData {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Nicki_Minaj_2013.jpg/800px-Nicki_Minaj_2013.jpg"),
   ];
 
-  List<Genres> genres = [
+  static List<Genres> genres = [
     Genres(
         name: "Pop",
         imgURL:
@@ -514,15 +514,17 @@ class FakeData {
 
   static List<Album> albums = [
     Album(
-        title: "21",
-        artistName: "Micheal Jackson",
-        releaseDate: "2011-01-24",
+        title: "ASTROWORLD",
+        artistName: "Travis Scott",
+        genre: genres[2],
+        releaseDate: "2019",
         imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png",
-        songs: songs),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNm1furF44UIecVS2SQXeAMQV58-0cmPt5Fg&s",
+        songs: songs.take(10).toList()),
     Album(
         title: "Lemonade",
         artistName: "Beyoncé",
+        genre: genres[2],
         releaseDate: "2016-04-23",
         imgURL:
             "https://aimm.edu/hubfs/Blog%20Images/Top%2010%20Album%20Covers%20of%202017/Tyler%20the%20Creator-%20Flower%20boy.jpg",
@@ -531,6 +533,7 @@ class FakeData {
     Album(
         title: "Scorpion",
         artistName: "Drake",
+        genre: genres[2],
         releaseDate: "2018-06-29",
         imgURL:
             "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
@@ -539,6 +542,7 @@ class FakeData {
     Album(
         title: "Divide",
         artistName: "Ed Sheeran",
+        genre: genres[0],
         releaseDate: "2017-03-03",
         imgURL:
             "https://www.billboard.com/wp-content/uploads/2023/07/SZA-SOS-album-art-billboard-1240.jpg?w=800",
@@ -547,6 +551,7 @@ class FakeData {
     Album(
         title: "1989",
         artistName: "Taylor Swift",
+        genre: genres[0],
         releaseDate: "2014-10-27",
         imgURL:
             "https://images.prismic.io/milanote/df7eeb83a07162b45ac2e882cac055de9411054a_cover.jpg?auto=compress,format",
@@ -555,6 +560,7 @@ class FakeData {
     Album(
         title: "Thank U, Next",
         artistName: "Ariana Grande",
+        genre: genres[0],
         releaseDate: "2019-02-08",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Ariana_Grande_-_Thank_U%2C_Next.png/220px-Ariana_Grande_-_Thank_U%2C_Next.png",
@@ -563,6 +569,7 @@ class FakeData {
     Album(
         title: "Purpose",
         artistName: "Justin Bieber",
+        genre: genres[0],
         releaseDate: "2015-11-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Justin_Bieber_-_Purpose.png/220px-Justin_Bieber_-_Purpose.png",
@@ -571,6 +578,7 @@ class FakeData {
     Album(
         title: "When We All Fall Asleep, Where Do We Go?",
         artistName: "Billie Eilish",
+        genre: genres[0],
         releaseDate: "2019-03-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png/220px-Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png",
@@ -579,6 +587,7 @@ class FakeData {
     Album(
         title: "After Hours",
         artistName: "The Weeknd",
+        genre: genres[0],
         releaseDate: "2020-03-20",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png",
@@ -587,6 +596,7 @@ class FakeData {
     Album(
         title: "Hollywood's Bleeding",
         artistName: "Post Malone",
+        genre: genres[0],
         releaseDate: "2019-09-06",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Post_Malone_-_Hollywood%27s_Bleeding.png/220px-Post_Malone_-_Hollywood%27s_Bleeding.png",
@@ -595,6 +605,7 @@ class FakeData {
     Album(
         title: "The Fame",
         artistName: "Lady Gaga",
+        genre: genres[0],
         releaseDate: "2008-10-28",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Lady_Gaga_The_Fame.png/220px-Lady_Gaga_The_Fame.png",
@@ -603,6 +614,7 @@ class FakeData {
     Album(
         title: "Teenage Dream",
         artistName: "Katy Perry",
+        genre: genres[0],
         releaseDate: "2010-08-24",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Katy_Perry_Teenage_Dream.png/220px-Katy_Perry_Teenage_Dream.png",
@@ -611,6 +623,7 @@ class FakeData {
     Album(
         title: "Uptown Special",
         artistName: "Mark Ronson",
+        genre: genres[0],
         releaseDate: "2015-01-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/Mark_Ronson_Uptown_Special.png/220px-Mark_Ronson_Uptown_Special.png",
@@ -619,6 +632,7 @@ class FakeData {
     Album(
         title: "Good Girl Gone Bad",
         artistName: "Rihanna",
+        genre: genres[0],
         releaseDate: "2007-05-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Rihanna_-_Good_Girl_Gone_Bad.png/220px-Rihanna_-_Good_Girl_Gone_Bad.png",
@@ -627,6 +641,7 @@ class FakeData {
     Album(
         title: "Handwritten",
         artistName: "Shawn Mendes",
+        genre: genres[0],
         releaseDate: "2015-04-14",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Shawn_Mendes_Handwritten.png/220px-Shawn_Mendes_Handwritten.png",
@@ -635,6 +650,7 @@ class FakeData {
     Album(
         title: "Rare",
         artistName: "Selena Gomez",
+        genre: genres[0],
         releaseDate: "2020-01-10",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Selena_Gomez_-_Rare.png/220px-Selena_Gomez_-_Rare.png",
@@ -643,6 +659,7 @@ class FakeData {
     Album(
         title: "Future Nostalgia",
         artistName: "Dua Lipa",
+        genre: genres[0],
         releaseDate: "2020-03-27",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Dua_Lipa_-_Future_Nostalgia.png/220px-Dua_Lipa_-_Future_Nostalgia.png",
@@ -651,6 +668,7 @@ class FakeData {
     Album(
         title: "Fine Line",
         artistName: "Harry Styles",
+        genre: genres[0],
         releaseDate: "2019-12-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Harry_Styles_Fine_Line.png/220px-Harry_Styles_Fine_Line.png",
@@ -659,6 +677,7 @@ class FakeData {
     Album(
         title: "Plastic Hearts",
         artistName: "Miley Cyrus",
+        genre: genres[0],
         releaseDate: "2020-11-27",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Miley_Cyrus_Plastic_Hearts.png/220px-Miley_Cyrus_Plastic_Hearts.png",
@@ -667,6 +686,7 @@ class FakeData {
     Album(
         title: "Love Goes",
         artistName: "Sam Smith",
+        genre: genres[0],
         releaseDate: "2020-10-30",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sam_Smith_-_Love_Goes.png/220px-Sam_Smith_-_Love_Goes.png",
@@ -675,6 +695,7 @@ class FakeData {
     Album(
         title: "Cuz I Love You",
         artistName: "Lizzo",
+        genre: genres[0],
         releaseDate: "2019-04-19",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Lizzo_-_Cuz_I_Love_You.png/220px-Lizzo_-_Cuz_I_Love_You.png",
@@ -683,6 +704,7 @@ class FakeData {
     Album(
         title: "DAMN.",
         artistName: "Kendrick Lamar",
+        genre: genres[2],
         releaseDate: "2017-04-14",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Kendrick_Lamar_-_DAMN.png/220px-Kendrick_Lamar_-_DAMN.png",
@@ -691,6 +713,7 @@ class FakeData {
     Album(
         title: "Invasion of Privacy",
         artistName: "Cardi B",
+        genre: genres[2],
         releaseDate: "2018-04-06",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Cardi_B_Invasion_of_Privacy.png/220px-Cardi_B_Invasion_of_Privacy.png",
@@ -699,6 +722,7 @@ class FakeData {
     Album(
         title: "Hot Pink",
         artistName: "Doja Cat",
+        genre: genres[2],
         releaseDate: "2019-11-07",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Doja_Cat_Hot_Pink.png/220px-Doja_Cat_Hot_Pink.png",
@@ -707,6 +731,7 @@ class FakeData {
     Album(
         title: "7",
         artistName: "Lil Nas X",
+        genre: genres[2],
         releaseDate: "2019-06-21",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Lil_Nas_X_7.png/220px-Lil_Nas_X_7.png",
@@ -715,6 +740,7 @@ class FakeData {
     Album(
         title: "SOUR",
         artistName: "Olivia Rodrigo",
+        genre: genres[0],
         releaseDate: "2021-05-21",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Olivia_Rodrigo_-_SOUR.png/220px-Olivia_Rodrigo_-_SOUR.png",
@@ -723,6 +749,7 @@ class FakeData {
     Album(
         title: "ASTROWORLD",
         artistName: "Travis Scott",
+        genre: genres[2],
         releaseDate: "2018-08-03",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/ASTROWORLD.jpg/220px-ASTROWORLD.jpg",
@@ -731,6 +758,7 @@ class FakeData {
     Album(
         title: "Vivir Mi Vida",
         artistName: "Marc Anthony",
+        genre: genres[6],
         releaseDate: "2013-07-23",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Marc_Anthony_-_Vivir_Mi_Vida.png/220px-Marc_Anthony_-_Vivir_Mi_Vida.png",
@@ -739,6 +767,7 @@ class FakeData {
     Album(
         title: "K.O.",
         artistName: "J Balvin",
+        genre: genres[6],
         releaseDate: "2019-08-30",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/3/32/J_Balvin_K.O.png/220px-J_Balvin_K.O.png",
@@ -747,6 +776,7 @@ class FakeData {
     Album(
         title: "YHLQMDLG",
         artistName: "Bad Bunny",
+        genre: genres[6],
         releaseDate: "2020-02-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Bad_Bunny_-_YHLQMDLG.png/220px-Bad_Bunny_-_YHLQMDLG.png",
@@ -755,6 +785,7 @@ class FakeData {
     Album(
         title: "Versions of Me",
         artistName: "Anitta",
+        genre: genres[6],
         releaseDate: "2022-04-22",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Anitta_Versions_of_Me.png/220px-Anitta_Versions_of_Me.png",
@@ -763,6 +794,7 @@ class FakeData {
     Album(
         title: "1000 Forms of Fear",
         artistName: "Sia",
+        genre: genres[0],
         releaseDate: "2014-07-04",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Sia_1000_Forms_of_Fear.png/220px-Sia_1000_Forms_of_Fear.png",

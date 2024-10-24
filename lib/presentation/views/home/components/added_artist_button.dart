@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/presentation/views/home/components/artist_item.dart';
+import 'package:sound_sphere/presentation/widgets/artist/artist_item.dart';
 
 class AddedArtist extends StatelessWidget {
   final List<Artist> myArtistList;

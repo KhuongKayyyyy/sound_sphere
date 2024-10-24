@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/home/components/artist_name_item.dart';
+import 'package:sound_sphere/presentation/widgets/artist/artist_name_item.dart';
 import 'package:sound_sphere/presentation/widgets/main_play_button.dart';
 
 class MixedPlaylistSmall extends StatelessWidget {
