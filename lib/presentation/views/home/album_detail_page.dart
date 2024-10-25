@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:go_router/go_router.dart';
@@ -8,15 +9,15 @@ import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
 class AlbumDetailPage extends StatefulWidget {
-  final Album album;
+  final String albumId;
 
-  AlbumDetailPage({super.key, required this.album});
-
+  AlbumDetailPage({super.key, required this.albumId});
   @override
   State<AlbumDetailPage> createState() => _AlbumDetailPageState();
 }
 
 class _AlbumDetailPageState extends State<AlbumDetailPage> {
+  Album tempAlbum = FakeData.albums.first;
   ScrollController? _scrollController;
   bool showAppBarTitle = false;
   Color appBarIconColor = Colors.white;
@@ -130,7 +131,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
             flexibleSpace: FlexibleSpaceBar(
               title: showAppBarTitle
                   ? Text(
-                      widget.album.title,
+                      tempAlbum.title,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     )
                   : null,
@@ -138,7 +139,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
               background: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(widget.album.imgURL),
+                    image: NetworkImage(tempAlbum.imgURL),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -146,19 +147,27 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      widget.album.title,
+                      tempAlbum.title,
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 25),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      widget.album.artistName,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed(
+                          Routes.artistDetail,
+                          extra: "artistId",
+                        );
+                      },
+                      child: Text(
+                        tempAlbum.artistName,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Padding(
@@ -169,7 +178,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  "${widget.album.genre.name}·${widget.album.releaseDate}",
+                                  "${tempAlbum.genre.name}·${tempAlbum.releaseDate}",
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -274,7 +283,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            widget.album.songs[index].title,
+                            tempAlbum.songs[index].title,
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
@@ -295,7 +304,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                     ],
                   );
                 },
-                childCount: widget.album.songs.length,
+                childCount: tempAlbum.songs.length,
               ),
             ),
           ),
@@ -307,12 +316,12 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.album.releaseDate,
+                    tempAlbum.releaseDate,
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   Text(
                     style: const TextStyle(fontWeight: FontWeight.w500),
-                    "${widget.album.songs.length} songs, ${widget.album.getAlbumDuration()}",
+                    "${tempAlbum.songs.length} songs, ${tempAlbum.getAlbumDuration()}",
                   ),
                   Row(
                     children: [
@@ -323,7 +332,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        widget.album.artistName,
+                        tempAlbum.artistName,
                         style: const TextStyle(fontWeight: FontWeight.w500),
                       ), // Display the album artist name
                     ],
@@ -352,7 +361,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                             child: Row(
                               children: [
                                 Text(
-                                  "More from ${widget.album.artistName}",
+                                  "More from ${tempAlbum.artistName}",
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22),

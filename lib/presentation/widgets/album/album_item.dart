@@ -1,10 +1,37 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/data/models/song.dart';
 
 class AlbumItem extends StatelessWidget {
-  const AlbumItem({super.key});
-
+  Album album;
+  AlbumItem({required this.album});
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 150,
+          width: 150,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: CachedNetworkImage(
+              imageUrl: album.imgURL,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Text(
+          album.title,
+        ),
+        Text(
+          album.artistName,
+          style: TextStyle(color: AppColor.inkGreyDark),
+        )
+      ],
+    );
   }
 }

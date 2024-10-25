@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
 import 'package:sound_sphere/presentation/views/home/album_detail_page.dart';
+import 'package:sound_sphere/presentation/views/home/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/home/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/home/home_page.dart';
@@ -58,10 +60,22 @@ class AppNavigation {
           path: Routes.albumDetail,
           name: Routes.albumDetail,
           builder: (context, state) {
-            final album = state.extra as Album;
-            return AlbumDetailPage(album: album);
+            final albumId = state.extra as String;
+            return AlbumDetailPage(
+              albumId: albumId,
+            );
           },
         ),
+        GoRoute(
+          path: Routes.artistDetail,
+          name: Routes.artistDetail,
+          builder: (context, state) {
+            final artistId = state.extra as String;
+            return ArtistDetailPage(
+              artistId: artistId,
+            );
+          },
+        )
       ],
     );
   }

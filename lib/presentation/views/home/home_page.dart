@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: BestAlbumSection(
                     onPressed: () => context.pushNamed(Routes.albumDetail,
-                        extra: FakeData.albums.first),
+                        extra: "albumId"), // Navigate to album detail page
                   ),
                 ),
                 const SizedBox(height: 150),
