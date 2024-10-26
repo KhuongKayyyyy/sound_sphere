@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/constant/app_image.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class AlbumDetailPopup extends StatefulWidget {
@@ -14,6 +15,15 @@ class AlbumDetailPopup extends StatefulWidget {
 }
 
 class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
+  List<String> tempArtwork = [
+    "https://boldinprints.in/cdn/shop/files/7E0F53D2-DE3E-4697-AE57-01756958F772_c23ce0d3-143d-4264-9339-d1e3775a116c.jpg?v=1720173779&width=1946",
+    "https://posterwa.com/cdn/shop/files/TRAVISS5_5fb8f426-a60b-40a7-9033-b88ece7f7b8c.jpg?v=1714549590",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTTfEhkdF1gAVLGNw8cZdtgjIz0rUKLzhmGA&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4lolvp9rV3WU8rhIXorwPcemOKC4Jy6SYzg&s",
+    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpostersbase.com%2Fproducts%2Fposter-travis-scott-astroworld-astroboy&psig=AOvVaw10qovsdCY7gPcIaUdfl1-M&ust=1730037639712000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCik8uarIkDFQAAAAAdAAAAABAh",
+    "https://render.fineartamerica.com/images/rendered/default/print/8/8/break/images/artworkimages/medium/3/2-travis-scott-astroworld-vibrant-by-asar-studios-celestial-images.jpg"
+  ];
+
   int selectedIndex = 0;
   int? _sliding = 0;
   int? _quality1 = 1;
@@ -49,12 +59,14 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
             // Equalizer Content
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  _buildAlbumInfo(),
-                  _buildSegmentedControl(),
-                  _buildSegmentContent(),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildAlbumInfo(),
+                    _buildSegmentedControl(),
+                    _buildSegmentContent(),
+                  ],
+                ),
               ),
             )
           ] else if (selectedIndex == 1) ...[
@@ -553,6 +565,35 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
 
   Widget _buildArtworkContent() {
     // Replace with actual artwork content
-    return Center(child: Text('Artwork for the album.'));
+    return SingleChildScrollView(
+      child: GridView.builder(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+        ),
+        itemCount: tempArtwork.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                tempArtwork[index],
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    AppImage.defaultImage,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
