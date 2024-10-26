@@ -34,7 +34,14 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: particleColor.withOpacity(0.3),
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(18),
+      ),
       width: 170, // Constrain the size of the AnimatedBackground
       child: AnimatedBackground(
         vsync: this,

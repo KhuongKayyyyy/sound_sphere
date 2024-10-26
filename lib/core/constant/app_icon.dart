@@ -10,4 +10,7 @@ class AppIcon {
   static const String dolby = 'assets/icons/dolby.png';
   static const String audio = 'assets/icons/audio.png';
   static const String producer = 'assets/icons/producer.png';
+  static const String cross = 'assets/icons/cross.png';
+  static const String equalizer = 'assets/icons/equalizer.png';
+  static const String stack = 'assets/icons/stack.png';
 }

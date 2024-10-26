@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
@@ -6,6 +7,7 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/presentation/views/home/album_detail_popup.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
 class AlbumDetailPage extends StatefulWidget {
@@ -58,13 +60,26 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
     }
   }
 
+  // Function to show Cupertino bottom sheet
+  void _showCupertinoBottomSheet(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext builder) {
+        return CupertinoPopupSurface(
+          child: AlbumDetailPopup(
+            album: tempAlbum,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          // app bar
           SliverAppBar(
             pinned: true,
             expandedHeight: 300,
@@ -95,7 +110,8 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                     icon: const Icon(Icons.info),
                     color: appBarIconColor,
                     onPressed: () {
-                      Navigator.pop(context);
+                      _showCupertinoBottomSheet(
+                          context); // Call the new function
                     },
                   ),
                 ),
@@ -298,150 +314,12 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                       ),
                       Divider(
                         color: Colors.black.withOpacity(0.2),
-                        thickness:
-                            1, // Optional: You can specify the thickness of the divider
+                        thickness: 1,
                       ),
                     ],
                   );
                 },
                 childCount: tempAlbum.songs.length,
-              ),
-            ),
-          ),
-          // information section
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    tempAlbum.releaseDate,
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                    "${tempAlbum.songs.length} songs, ${tempAlbum.getAlbumDuration()}",
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 15,
-                        width: 15,
-                        child: Image.asset(AppIcon.producer),
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        tempAlbum.artistName,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ), // Display the album artist name
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-              child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align children to the start
-                children: [
-                  // First song list container
-                  Container(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: InkWell(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "More from ${tempAlbum.artistName}",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Colors.grey,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          // Set a fixed height for the horizontal list
-                          height: 200,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 8,
-                            itemBuilder: (context, index) {
-                              List<Song> songs =
-                                  FakeData.songs.take(8).toList();
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: SongItem(song: songs.elementAt(index)),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // Second song list container
-                  Container(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: InkWell(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Featured on",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Colors.grey,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          // Set a fixed height for the horizontal list
-                          height: 200,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 8,
-                            itemBuilder: (context, index) {
-                              List<Song> songs =
-                                  FakeData.songs.take(8).toList();
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: SongItem(song: songs.elementAt(index)),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 150),
-                      ],
-                    ),
-                  ),
-                ],
               ),
             ),
           ),
