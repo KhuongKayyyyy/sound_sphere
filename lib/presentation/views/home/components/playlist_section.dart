@@ -3,15 +3,17 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/widgets/playlist/mixed_playlist_big.dart';
 
 class PlaylistSection extends StatelessWidget {
-  String playlistSectionTitle;
+  final String playlistSectionTitle;
+
   PlaylistSection({required this.playlistSectionTitle});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: Text(
             playlistSectionTitle,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -21,7 +23,7 @@ class PlaylistSection extends StatelessWidget {
           height: 10,
         ),
         SizedBox(
-          height: 200,
+          height: 250, // Constrain height of ListView to avoid infinite layout
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 3,

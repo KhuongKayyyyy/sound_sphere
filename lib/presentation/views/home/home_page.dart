@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             textAlign:
                                 isExpanded ? TextAlign.start : TextAlign.center,
-                            'Browse',
+                            'Listen now',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: isExpanded ? 24.0 : 16.0,
@@ -122,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                         const MixedPlaylistSmall(),
                       ],
                     )),
+                const SizedBox(height: 10),
                 PlaylistSection(playlistSectionTitle: "Top Playlists"),
                 SongSection(
                   songSectionTitle: "Today hits",
