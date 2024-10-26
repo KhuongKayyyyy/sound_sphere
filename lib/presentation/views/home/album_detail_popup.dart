@@ -16,6 +16,10 @@ class AlbumDetailPopup extends StatefulWidget {
 class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
   int selectedIndex = 0;
   int? _sliding = 0;
+  int? _quality1 = 1;
+  int? _quality2 = 1;
+  int? _quality3 = 0;
+  int? _quality4 = 1;
 
   void _onIconTap(int index) {
     setState(() {
@@ -54,10 +58,223 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
               ),
             )
           ] else if (selectedIndex == 1) ...[
-            // Stack Content
-            const SizedBox(height: 20),
-            const Text('Stack'),
+            _buildAlbumVersion()
           ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAlbumVersion() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                height: 150,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    widget.album.imgURL,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.album.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  Text(
+                    "By ${widget.album.artistName}",
+                    style: TextStyle(
+                      color: AppColor.primaryColor,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "${widget.album.genre.name} · ${widget.album.releaseDate}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.grey[500]),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Image.asset(
+                        AppIcon.quality,
+                        scale: 25,
+                        color: Colors.grey[500],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Image.asset(
+                        AppIcon.audio,
+                        scale: 25,
+                        color: Colors.grey[500],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Image.asset(
+                        AppIcon.dolby,
+                        scale: 25,
+                        color: Colors.grey[500],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: CupertinoSlidingSegmentedControl(
+                children: {
+                  0: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Standard',
+                          style: TextStyle(
+                              color: _quality1 == 0
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  1: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Explicit',
+                          style: TextStyle(
+                              color: _quality1 == 1
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                },
+                groupValue: _quality1,
+                onValueChanged: (value) {
+                  setState(() {
+                    _quality1 = value;
+                  });
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: CupertinoSlidingSegmentedControl(
+                children: {
+                  0: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 5),
+                      child: Text('Digital Master',
+                          style: TextStyle(
+                              color: _quality2 == 0
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  1: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Lossless',
+                          style: TextStyle(
+                              color: _quality2 == 1
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  2: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Atmos',
+                          style: TextStyle(
+                              color: _quality2 == 2
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                },
+                groupValue: _quality2,
+                onValueChanged: (value) {
+                  setState(() {
+                    _quality2 = value;
+                  });
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: CupertinoSlidingSegmentedControl(
+                children: {
+                  0: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 5),
+                      child: Text('Original',
+                          style: TextStyle(
+                              color: _quality3 == 0
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  1: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Deluxe',
+                          style: TextStyle(
+                              color: _quality3 == 1
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  2: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 5),
+                      child: Text('Aniversary',
+                          style: TextStyle(
+                              color: _quality3 == 2
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                },
+                groupValue: _quality3,
+                onValueChanged: (value) {
+                  setState(() {
+                    _quality3 = value;
+                  });
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: CupertinoSlidingSegmentedControl(
+                children: {
+                  0: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Standard',
+                          style: TextStyle(
+                              color: _quality4 == 0
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                  1: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text('Explicit',
+                          style: TextStyle(
+                              color: _quality4 == 1
+                                  ? AppColor.primaryColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.w600))),
+                },
+                groupValue: _quality4,
+                onValueChanged: (value) {
+                  setState(() {
+                    _quality4 = value;
+                  });
+                }),
+          ),
         ],
       ),
     );
