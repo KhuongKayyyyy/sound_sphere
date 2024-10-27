@@ -56,57 +56,10 @@ class _HomePageState extends State<HomePage> {
         slivers: [
           // app bar
           _buildHomePageAppBar(),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            AddedArtist(
-                                myArtistList:
-                                    FakeData.artists.take(3).toList()),
-                            const Spacer(),
-                            HistoryPlaylist(
-                              onPressed: () =>
-                                  context.pushNamed(Routes.historyPlaylist),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        const MixedPlaylistSmall(),
-                      ],
-                    )),
-                const SizedBox(height: 10),
-                PlaylistSection(playlistSectionTitle: "Top Playlists"),
-                SongSection(
-                  songSectionTitle: "Today hits",
-                  songList: FakeData.songs.take(10).toList(),
-                  isExpandable: true,
-                ),
-                const SizedBox(height: 10),
-                PlaylistSection(playlistSectionTitle: "Made for you"),
-                const SizedBox(height: 10),
-                SongSection(
-                  songSectionTitle: "Son Tung MTP's fan like",
-                  songList: FakeData.songs.take(10).toList(),
-                  isExpandable: false,
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BestAlbumSection(
-                    onPressed: () => context.pushNamed(Routes.albumDetail,
-                        extra: "albumId"), // Navigate to album detail page
-                  ),
-                ),
-                const SizedBox(height: 150),
-              ],
-            ),
-          ),
+          // app utility section
+          _buildAppUltilitySection(),
+          // recommended music section
+          _buildReccommendedMusicSection(),
         ],
       ),
     );
@@ -155,6 +108,61 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildAppUltilitySection() {
+    return SliverToBoxAdapter(
+      child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  AddedArtist(myArtistList: FakeData.artists.take(3).toList()),
+                  const Spacer(),
+                  HistoryPlaylist(
+                    onPressed: () => context.pushNamed(Routes.historyPlaylist),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const MixedPlaylistSmall(),
+            ],
+          )),
+    );
+  }
+
+  Widget _buildReccommendedMusicSection() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          PlaylistSection(playlistSectionTitle: "Top Playlists"),
+          SongSection(
+            songSectionTitle: "Today hits",
+            songList: FakeData.songs.take(10).toList(),
+            isExpandable: true,
+          ),
+          const SizedBox(height: 10),
+          PlaylistSection(playlistSectionTitle: "Made for you"),
+          const SizedBox(height: 10),
+          SongSection(
+            songSectionTitle: "Son Tung MTP's fan like",
+            songList: FakeData.songs.take(10).toList(),
+            isExpandable: false,
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: BestAlbumSection(
+              onPressed: () => context.pushNamed(Routes.albumDetail,
+                  extra: "albumId"), // Navigate to album detail page
+            ),
+          ),
+          const SizedBox(height: 150),
+        ],
       ),
     );
   }

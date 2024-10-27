@@ -10,6 +10,7 @@ import 'package:sound_sphere/presentation/views/home/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/home/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/home/home_page.dart';
+import 'package:sound_sphere/presentation/views/home/song_detail_page.dart';
 import 'package:sound_sphere/presentation/views/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/search/search_page.dart';
@@ -86,6 +87,16 @@ class AppNavigation {
             final artistId = state.extra as String;
             return ArtistDetailPage(
               artistId: artistId,
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.songDetail,
+          name: Routes.songDetail,
+          builder: (context, state) {
+            final songId = state.extra as String;
+            return SongDetailPage(
+              songId: songId,
             );
           },
         )
