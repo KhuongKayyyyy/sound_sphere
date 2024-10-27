@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/presentation/views/home/components/artist_rounded_avatar.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
@@ -143,362 +145,298 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
             child: Column(
               children: [
                 // new song
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            newSong.imgURL,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "22 OCT 2022",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: Colors.grey,
-                                fontSize: 15),
-                          ),
-                          Text(
-                            "${newSong.title} - Single",
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 20),
-                          ),
-                          const Text(
-                            "1 song",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                                fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.add,
-                                    color: AppColor.primaryColor,
-                                    size: 25,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    "Add",
-                                    style: TextStyle(
-                                        color: AppColor.primaryColor,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                _buildArtistNewSong(),
                 // top songs
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Row(
-                          children: [
-                            Text(
-                              "Top Songs ",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w900),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 350,
-                      width: double.infinity,
-                      child: GridView.builder(
-                        scrollDirection: Axis.horizontal,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          mainAxisSpacing: 10,
-                          mainAxisExtent: 330,
-                        ),
-                        itemCount: 8,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 70,
-                                  width: 70,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      FakeData.songs[index].imgURL,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                    width:
-                                        10), // Add spacing between image and text
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FakeData.songs[index].title,
-                                        overflow: TextOverflow
-                                            .ellipsis, // Prevent overflow in text
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Text(
-                                        "${FakeData.albums[index].title}·${FakeData.albums[index].releaseDate}",
-                                        overflow: TextOverflow
-                                            .ellipsis, // Prevent overflow in text
-                                        style: const TextStyle(
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Divider(
-                                        color: Colors.grey[200],
-                                        height: 30,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.more_horiz))
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ),
-
+                _buildAritstTopSongs(),
                 const SizedBox(
                   height: 10,
                 ),
                 // albums
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Row(
-                          children: [
-                            Text(
-                              "Albums",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w900),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: AlbumItem(album: FakeData.albums[index]));
-                        },
-                      ),
-                    )
-                  ],
-                ),
-
+                _buildAritstMusic("Albums",
+                    albumList: FakeData.albums.take(8).toList()),
+                // artist song and eps
+                _buildAritstMusic("Single & EPs",
+                    songList: FakeData.songs.take(8).toList()),
                 // artist playlist
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Row(
-                          children: [
-                            Text(
-                              "Artist Playlist",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w900),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: AlbumItem(album: FakeData.albums[index]));
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                _buildAritstMusic("Artist Playlists",
+                    albumList: FakeData.albums.take(8).toList()),
+                // similar artist
+                _buildSimilarArtist()
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Row(
-                          children: [
-                            Text(
-                              "Single & Eps",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w900),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: SongItem(song: FakeData.songs[index]));
-                        },
-                      ),
-                    )
-                  ],
-                ),
-                Container(
-                  color: Colors.grey[200],
-                  child: Column(
+  Widget _buildArtistNewSong() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                newSong.imgURL,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "22 OCT 2022",
+                style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: Colors.grey,
+                    fontSize: 15),
+              ),
+              Text(
+                "${newSong.title} - Single",
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              ),
+              const Text(
+                "1 song",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                    fontSize: 15),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Row(
                     children: [
-                      const SizedBox(
-                        height: 10,
+                      Icon(
+                        Icons.add,
+                        color: AppColor.primaryColor,
+                        size: 25,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: InkWell(
-                          onTap: () {},
-                          child: const Row(
-                            children: [
-                              Text(
-                                "Similar Artists",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w900),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
-                        ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Add",
+                        style: TextStyle(
+                            color: AppColor.primaryColor,
+                            fontWeight: FontWeight.w900),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 300,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 100,
-                                      width: 100,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.network(
-                                          FakeData.artists[index].avatarURL,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      FakeData.artists[index].name,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ));
-                          },
-                        ),
-                      )
                     ],
                   ),
                 ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAritstTopSongs() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: InkWell(
+            onTap: () {},
+            child: const Row(
+              children: [
+                Text(
+                  "Top Songs ",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.grey,
+                )
               ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 350,
+          width: double.infinity,
+          child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              mainAxisSpacing: 10,
+              mainAxisExtent: 330,
+            ),
+            itemCount: 8,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      height: 70,
+                      width: 70,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          FakeData.songs[index].imgURL,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 10), // Add spacing between image and text
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            FakeData.songs[index].title,
+                            overflow: TextOverflow
+                                .ellipsis, // Prevent overflow in text
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            "${FakeData.albums[index].title}·${FakeData.albums[index].releaseDate}",
+                            overflow: TextOverflow
+                                .ellipsis, // Prevent overflow in text
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Divider(
+                            color: Colors.grey[200],
+                            height: 30,
+                          )
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.more_horiz))
+                  ],
+                ),
+              );
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildAritstMusic(String sectionName,
+      {List<Song>? songList, List<Album>? albumList}) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                Text(
+                  sectionName,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w900),
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.grey,
+                )
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        if (songList != null)
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: songList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: SongItem(song: songList[index]));
+              },
+            ),
+          ),
+        if (albumList != null)
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: albumList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: AlbumItem(album: albumList[index]));
+              },
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildSimilarArtist() {
+    return Container(
+      color: Colors.grey[200],
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: InkWell(
+              onTap: () {},
+              child: const Row(
+                children: [
+                  Text(
+                    "Similar Artists",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey,
+                  )
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: ArtistRoundedAvatar(
+                    artist: FakeData.artists[index],
+                    isLike: false,
+                  ),
+                );
+              },
             ),
           )
         ],

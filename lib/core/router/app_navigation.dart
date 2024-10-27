@@ -4,6 +4,7 @@ import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
+import 'package:sound_sphere/presentation/views/home/add_artist_page.dart';
 import 'package:sound_sphere/presentation/views/home/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/home/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
@@ -27,7 +28,7 @@ class AppNavigation {
 
   static final GoRouter router = GoRouter(
       initialLocation: Routes.home,
-      routes: [_buildMainShellRoute()],
+      routes: [_buildMainShellRoute(), ..._buildNoPlayerBranch()],
       navigatorKey: _rootNavigatorKey);
 
   static StatefulShellRoute _buildMainShellRoute() {
@@ -38,8 +39,20 @@ class AppNavigation {
           _buildHomeBranch(),
           _buildBrowseBranch(),
           _buildLibraryBranch(),
-          _buildSearchBranch()
+          _buildSearchBranch(),
         ]);
+  }
+
+  static List<GoRoute> _buildNoPlayerBranch() {
+    return [
+      GoRoute(
+          path: Routes.addArtist,
+          name: Routes.addArtist,
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) {
+            return const AddArtistPage();
+          }),
+    ];
   }
 
   static StatefulShellBranch _buildHomeBranch() {

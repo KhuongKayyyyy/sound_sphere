@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/presentation/widgets/artist/artist_item.dart';
+import 'package:go_router/go_router.dart';
 
 class AddedArtist extends StatelessWidget {
   final List<Artist> myArtistList;
@@ -61,6 +63,7 @@ class AddedArtist extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
+            onTap: () => context.pushNamed(Routes.addArtist),
             child: Container(
               height: 50,
               width: double.infinity,

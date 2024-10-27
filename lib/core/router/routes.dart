@@ -11,4 +11,11 @@ class Routes {
   static const String artistDetail = '/artist-detail';
   static const String playlistDetail = '/playlist-detail';
   static const String songDetail = '/song-detail';
+
+  // onboarding routes
+
+  // auth routes
+
+  // no player routes
+  static const String addArtist = '/add-artist';
 }

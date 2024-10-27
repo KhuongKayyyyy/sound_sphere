@@ -98,7 +98,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
                     bottomRight: Radius.circular(15),
                     bottomLeft: Radius.circular(15),
                   ),
-                  color: particleColor.withOpacity(0.5),
+                  color: particleColor.withOpacity(0.8),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, bottom: 10, top: 5),
