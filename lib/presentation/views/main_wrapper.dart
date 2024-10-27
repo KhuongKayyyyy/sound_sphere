@@ -1,9 +1,11 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/presentation/views/player/player_page.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({
@@ -172,87 +174,102 @@ class _MainWrapperState extends State<MainWrapper> {
               top: 0,
               right: 0,
               left: 0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      blurRadius: 10,
-                      spreadRadius: 3,
-                    ),
-                  ],
-                ),
-                height: 60,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Mini player image
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 10,
-                            spreadRadius: 3,
+              child: InkWell(
+                onTap: () {
+                  _showBottomSheet(context);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 10,
+                        spreadRadius: 3,
+                      ),
+                    ],
+                  ),
+                  height: 60,
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Mini player image
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 10,
+                              spreadRadius: 3,
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            FakeData.songs.first.imgURL,
+                            height: 40,
+                            fit: BoxFit.cover,
                           ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      // Mini player text
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            FakeData.songs.first.title,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(FakeData.songs.first.artistName,
+                              style: TextStyle(
+                                color: AppColor.primaryColor,
+                                fontWeight: FontWeight.bold,
+                              )),
                         ],
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          FakeData.songs.first.imgURL,
-                          height: 40,
-                          fit: BoxFit.cover,
+                      const Spacer(),
+                      // Mini player buttons
+                      InkWell(
+                        child: Image.asset(
+                          AppIcon.play,
+                          height: 20,
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    // Mini player text
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          FakeData.songs.first.title,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        child: Image.asset(
+                          AppIcon.play_next,
+                          height: 22,
                         ),
-                        Text(FakeData.songs.first.artistName,
-                            style: TextStyle(
-                              color: AppColor.primaryColor,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ],
-                    ),
-                    const Spacer(),
-                    // Mini player buttons
-                    InkWell(
-                      child: Image.asset(
-                        AppIcon.play,
-                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      child: Image.asset(
-                        AppIcon.play_next,
-                        height: 22,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext builder) {
+        return const CupertinoPopupSurface(child: PlayerPage());
+      },
     );
   }
 }

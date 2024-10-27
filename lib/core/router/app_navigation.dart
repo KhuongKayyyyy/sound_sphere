@@ -13,6 +13,7 @@ import 'package:sound_sphere/presentation/views/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/home/song_detail_page.dart';
 import 'package:sound_sphere/presentation/views/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper.dart';
+import 'package:sound_sphere/presentation/views/player/player_page.dart';
 import 'package:sound_sphere/presentation/views/search/search_page.dart';
 
 class AppNavigation {
@@ -53,6 +54,12 @@ class AppNavigation {
           builder: (context, state) {
             return const AddArtistPage();
           }),
+      GoRoute(
+          path: Routes.player,
+          name: Routes.player,
+          builder: (context, state) {
+            return PlayerPage();
+          })
     ];
   }
 

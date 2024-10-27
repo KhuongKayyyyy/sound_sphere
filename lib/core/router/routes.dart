@@ -18,4 +18,5 @@ class Routes {
 
   // no player routes
   static const String addArtist = '/add-artist';
+  static const String player = '/player';
 }
