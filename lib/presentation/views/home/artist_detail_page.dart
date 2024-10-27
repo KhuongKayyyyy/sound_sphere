@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
@@ -427,13 +428,16 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
             height: 300,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: 7,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: ArtistRoundedAvatar(
                     artist: FakeData.artists[index],
                     isLike: false,
+                    onTap: () {
+                      context.pushNamed(Routes.artistDetail, extra: "");
+                    },
                   ),
                 );
               },

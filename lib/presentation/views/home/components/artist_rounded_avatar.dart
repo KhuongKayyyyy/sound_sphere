@@ -4,7 +4,12 @@ import 'package:sound_sphere/data/models/artist.dart';
 class ArtistRoundedAvatar extends StatefulWidget {
   Artist artist;
   bool isLike;
-  ArtistRoundedAvatar({super.key, required this.artist, required this.isLike});
+  VoidCallback onTap;
+  ArtistRoundedAvatar(
+      {super.key,
+      required this.artist,
+      required this.isLike,
+      required this.onTap});
 
   @override
   State<ArtistRoundedAvatar> createState() => _ArtistRoundedAvatarState();
@@ -16,17 +21,40 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 100,
-          width: 100,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.network(
-              widget.artist.avatarURL,
-              fit: BoxFit.cover,
+        Stack(
+          children: [
+            InkWell(
+              onTap: widget.onTap,
+              child: SizedBox(
+                height: 100,
+                width: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.network(
+                    widget.artist.avatarURL,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
+            if (widget.isLike)
+              Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black.withOpacity(0.5)),
+                child: const Center(
+                  child: Icon(
+                    Icons.favorite,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+          ],
         ),
         Text(
           widget.artist.name,

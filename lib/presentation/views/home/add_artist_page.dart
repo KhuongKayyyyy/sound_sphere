@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/presentation/views/home/components/artist_rounded_avatar.dart';
 import 'package:sound_sphere/presentation/widgets/search_bar/custom_search_bar.dart';
 
 class AddArtistPage extends StatefulWidget {
@@ -39,19 +41,30 @@ class _AddArtistPageState extends State<AddArtistPage> {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   childAspectRatio: 1.5,
                 ),
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppColor.secondaryColor,
-                    ),
-                  );
+                  if (index % 3 == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: ArtistRoundedAvatar(
+                          artist: FakeData.artists.first,
+                          isLike: true,
+                          onTap: () {}),
+                    );
+                  } else if (index % 3 != 0)
+                    // ignore: curly_braces_in_flow_control_structures
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: ArtistRoundedAvatar(
+                          artist: FakeData.artists.first,
+                          isLike: false,
+                          onTap: () {}),
+                    );
+                  return null;
                 },
-                itemCount: 10, // Add an item count for demonstration
+                itemCount: 14, // Add an item count for demonstration
               ),
             ),
           ),
