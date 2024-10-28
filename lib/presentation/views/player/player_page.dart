@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
@@ -136,6 +137,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 ),
                 child: Stack(
                   children: [
+                    // Favorite button
                     Positioned(
                       bottom: 10,
                       left: 10,
@@ -148,6 +150,7 @@ class _PlayerPageState extends State<PlayerPage> {
                           onPressed: () {
                             setState(() {
                               _isFavorite = !_isFavorite;
+                              _showFavoriteSnackBar();
                             });
                           },
                           icon: AnimatedSwitcher(
@@ -173,21 +176,32 @@ class _PlayerPageState extends State<PlayerPage> {
                         ),
                       ),
                     ),
+                    // More button
                     Positioned(
                       bottom: 10,
                       right: 10,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.7),
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
+                      child: CupertinoContextMenu(
+                        actions: [
+                          CupertinoContextMenuAction(
+                            child: const Text('Add to playlist'),
+                            onPressed: () {},
+                          ),
+                          CupertinoContextMenuAction(
+                            child: const Text('Share'),
+                            onPressed: () {},
+                          ),
+                        ],
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.7),
+                          ),
+                          child: const Icon(
                             Icons.more_horiz_rounded,
                             color: Colors.white,
+                            size: 35,
                           ),
-                          padding: EdgeInsets.zero,
                         ),
                       ),
                     ),
@@ -198,6 +212,7 @@ class _PlayerPageState extends State<PlayerPage> {
           ),
         ),
         const SizedBox(height: 20),
+        // song name and artist name
         Text(
           currentSong.title,
           style: const TextStyle(
@@ -328,6 +343,7 @@ class _PlayerPageState extends State<PlayerPage> {
             ],
           ),
           const Spacer(),
+          // Shuffle, Repeat, Infinity
           InkWell(
             onTap: () {
               // Handle shuffle action
@@ -412,7 +428,7 @@ class _PlayerPageState extends State<PlayerPage> {
       });
     }
 
-    void _removeSong(Song song) {
+    void removeSong(Song song) {
       setState(() {
         _playlistSongs.remove(song);
       });
@@ -443,10 +459,9 @@ class _PlayerPageState extends State<PlayerPage> {
                   color: Colors.white,
                 ),
               ),
-              direction: DismissDirection.endToStart, // Enable swipe left only
+              direction: DismissDirection.endToStart,
               onDismissed: (direction) {
-                // Handle remove song from playlist
-                _removeSong(song); // Define this function to update your list
+                removeSong(song);
               },
               child: Material(
                 color: Colors.transparent,
@@ -671,5 +686,56 @@ class _PlayerPageState extends State<PlayerPage> {
         ),
       )
     ];
+  }
+
+  void _showFavoriteSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Container(
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                spreadRadius: 5,
+              ),
+            ]),
+        height: 60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              height: 50,
+              width: 50,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(currentSong.imgURL, fit: BoxFit.cover),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(currentSong.title,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Text("Loved",
+                    style: TextStyle(
+                      color: AppColor.primaryColor,
+                    ))
+              ],
+            ),
+            Icon(Icons.favorite, color: AppColor.primaryColor),
+          ],
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 200,
+          right: 60,
+          left: 60),
+      elevation: 0,
+    ));
   }
 }

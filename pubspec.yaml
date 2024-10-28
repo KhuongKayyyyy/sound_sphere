@@ -43,6 +43,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   cached_network_image: ^3.2.0
   animated_background: ^2.0.0
+  another_flushbar: ^1.12.30
 
 
 
