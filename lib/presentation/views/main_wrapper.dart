@@ -20,6 +20,7 @@ class MainWrapper extends StatefulWidget {
 }
 
 class _MainWrapperState extends State<MainWrapper> {
+  bool _isPlaying = false; // Track play/pause state
   // Navigation logic moved to GoRouter integration
   void _onTabTapped(int index) {
     widget.navigationShell.goBranch(index,
@@ -174,86 +175,116 @@ class _MainWrapperState extends State<MainWrapper> {
               top: 0,
               right: 0,
               left: 0,
-              child: InkWell(
-                onTap: () {
-                  _showBottomSheet(context);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        blurRadius: 10,
-                        spreadRadius: 3,
-                      ),
-                    ],
-                  ),
-                  height: 60,
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Mini player image
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              blurRadius: 10,
-                              spreadRadius: 3,
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            FakeData.songs.first.imgURL,
-                            height: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      // Mini player text
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                    ),
+                  ],
+                ),
+                height: 60,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Mini player image
+                    InkWell(
+                      onTap: () => _showBottomSheet(context),
+                      child: Row(
                         children: [
-                          Text(
-                            FakeData.songs.first.title,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  blurRadius: 10,
+                                  spreadRadius: 3,
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                FakeData.songs.first.imgURL,
+                                height: 40,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          Text(FakeData.songs.first.artistName,
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontWeight: FontWeight.bold,
-                              )),
+                          const SizedBox(width: 10),
+                          // Mini player text
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                FakeData.songs.first.title,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(FakeData.songs.first.artistName,
+                                  style: TextStyle(
+                                    color: AppColor.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ],
+                          ),
                         ],
                       ),
-                      const Spacer(),
-                      // Mini player buttons
-                      InkWell(
-                        child: Image.asset(
-                          AppIcon.play,
-                          height: 20,
-                        ),
+                    ),
+                    const Spacer(),
+                    // Mini player buttons
+                    InkWell(
+                      onTap: () => _playMusic(),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        transitionBuilder:
+                            (Widget child, Animation<double> animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: ScaleTransition(
+                              scale:
+                                  Tween<double>(begin: 0.7, end: 1.0).animate(
+                                CurvedAnimation(
+                                  parent: animation,
+                                  curve: Curves.easeInOut,
+                                ),
+                              ),
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: !_isPlaying
+                            ? Image.asset(
+                                AppIcon.play,
+                                height: 20,
+                                key: const ValueKey('playIcon'),
+                              )
+                            : const Icon(
+                                Icons.pause_rounded,
+                                size: 30,
+                                key: ValueKey('pauseIcon'),
+                              ),
                       ),
-                      const SizedBox(
-                        width: 10,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: Image.asset(
+                        AppIcon.play_next,
+                        height: 22,
                       ),
-                      InkWell(
-                        child: Image.asset(
-                          AppIcon.play_next,
-                          height: 22,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -271,5 +302,11 @@ class _MainWrapperState extends State<MainWrapper> {
         return const CupertinoPopupSurface(child: PlayerPage());
       },
     );
+  }
+
+  void _playMusic() {
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
   }
 }

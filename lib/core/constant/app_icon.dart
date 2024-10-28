@@ -10,6 +10,9 @@ class AppIcon {
   static const String airplay = 'assets/icons/airplay.png';
   static const String quality = 'assets/icons/quality.png';
   static const String shuffle = 'assets/icons/shuffle.png';
+  static const String repeat = 'assets/icons/repeat.png';
+  static const String repeat_once = 'assets/icons/repeat_once.png';
+  static const String infinity = 'assets/icons/infinity.png';
   static const String dolby = 'assets/icons/dolby.png';
   static const String audio = 'assets/icons/audio.png';
   static const String producer = 'assets/icons/producer.png';
