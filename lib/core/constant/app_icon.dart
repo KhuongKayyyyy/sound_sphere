@@ -19,4 +19,5 @@ class AppIcon {
   static const String cross = 'assets/icons/cross.png';
   static const String equalizer = 'assets/icons/equalizer.png';
   static const String stack = 'assets/icons/stack.png';
+  static const String micro = 'assets/icons/micro.png';
 }

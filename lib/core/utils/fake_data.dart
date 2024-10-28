@@ -14,6 +14,18 @@ class FakeData {
         "https://yt3.googleusercontent.com/oN0p3-PD3HUzn2KbMm4fVhvRrKtJhodGlwocI184BBSpybcQIphSeh3Z0i7WBgTq7e12yKxb=s900-c-k-c0x00ffffff-no-rj",
   );
 
+  static List<String> chrismastPlaylistImg = [
+    "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFc9Sg5PxoxYxi-VIQfA6UU58Kr_T9Ekv0qg&s",
+    "https://www.shutterstock.com/image-photo/beautiful-christmas-holiday-frame-tree-600nw-2381173013.jpg",
+  ];
+
+  static List<String> newYearPlaylistImg = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+    "https://img.freepik.com/free-vector/flat-new-year-s-eve-celebration-illustration_23-2149853861.jpg",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a8e59f47383181.5f80a5fa5dc72.jpg",
+  ];
+
   static List<Artist> artists = [
     Artist(
         name: "Adele",

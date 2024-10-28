@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
+import 'package:go_router/go_router.dart';
 
 class PlayerPage extends StatefulWidget {
   const PlayerPage({super.key});
@@ -116,96 +118,166 @@ class _PlayerPageState extends State<PlayerPage> {
               scale: _isPlaying ? 1.3 : 1.0,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
-              child: Container(
-                height: 250,
-                width: 250,
-                decoration: BoxDecoration(
-                  boxShadow: _isPlaying
-                      ? [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          ),
-                        ]
-                      : [],
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: NetworkImage(currentSong.imgURL),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    // Favorite button
-                    Positioned(
-                      bottom: 10,
-                      left: 10,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.7),
+              child: CupertinoContextMenu(
+                actions: [
+                  CupertinoContextMenuAction(
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Go to Album',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(FakeData.albums[0].title,
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5),
+                                    fontWeight: FontWeight.bold)),
+                          ],
                         ),
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isFavorite = !_isFavorite;
-                              _showFavoriteSnackBar();
-                            });
-                          },
-                          icon: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 300),
-                            transitionBuilder:
-                                (Widget child, Animation<double> animation) {
-                              return ScaleTransition(
-                                  scale: animation, child: child);
-                            },
-                            child: _isFavorite
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: AppColor.primaryColor,
-                                    key: const ValueKey('favorite'),
-                                  )
-                                : const Icon(
-                                    Icons.favorite_outline_rounded,
-                                    color: Colors.white,
-                                    key: ValueKey('not_favorite'),
-                                  ),
-                          ),
-                          padding: EdgeInsets.zero,
+                        const Spacer(),
+                        Image.asset(
+                          AppIcon.stack,
+                          scale: 20,
+                          color: Colors.black.withOpacity(0.5),
                         ),
-                      ),
+                      ],
                     ),
-                    // More button
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: CupertinoContextMenu(
-                        actions: [
-                          CupertinoContextMenuAction(
-                            child: const Text('Add to playlist'),
-                            onPressed: () {},
-                          ),
-                          CupertinoContextMenuAction(
-                            child: const Text('Share'),
-                            onPressed: () {},
-                          ),
-                        ],
+                    onPressed: () {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      context.pushNamed(Routes.albumDetail, extra: "albumId");
+                    },
+                  ),
+                  CupertinoContextMenuAction(
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Go to Aritst',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(FakeData.artists.first.name,
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5),
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                        const Spacer(),
+                        Image.asset(
+                          AppIcon.micro,
+                          scale: 20,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      // Navigator.of(context).pop();
+                      context.pushNamed(Routes.artistDetail, extra: "artistId");
+                    },
+                  ),
+                  CupertinoContextMenuAction(
+                    child: const Text(
+                      'Share',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+                child: Container(
+                  height: 250,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    boxShadow: _isPlaying
+                        ? [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              spreadRadius: 5,
+                            ),
+                          ]
+                        : [],
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: NetworkImage(currentSong.imgURL),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Stack(
+                    children: [
+                      // Favorite button
+                      Positioned(
+                        bottom: 10,
+                        left: 10,
                         child: Container(
-                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.white.withOpacity(0.7),
                           ),
-                          child: const Icon(
-                            Icons.more_horiz_rounded,
-                            color: Colors.white,
-                            size: 35,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isFavorite = !_isFavorite;
+                                _showFavoriteSnackBar();
+                              });
+                            },
+                            icon: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder:
+                                  (Widget child, Animation<double> animation) {
+                                return ScaleTransition(
+                                    scale: animation, child: child);
+                              },
+                              child: _isFavorite
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: AppColor.primaryColor,
+                                      key: const ValueKey('favorite'),
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_outline_rounded,
+                                      color: Colors.white,
+                                      key: ValueKey('not_favorite'),
+                                    ),
+                            ),
+                            padding: EdgeInsets.zero,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      // More button
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: CupertinoContextMenu(
+                          actions: [
+                            CupertinoContextMenuAction(
+                              child: const Text('Add to playlist'),
+                              onPressed: () {},
+                            ),
+                            CupertinoContextMenuAction(
+                              child: const Text('Share'),
+                              onPressed: () {},
+                            ),
+                          ],
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                            child: const Icon(
+                              Icons.more_horiz_rounded,
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -213,21 +285,30 @@ class _PlayerPageState extends State<PlayerPage> {
         ),
         const SizedBox(height: 20),
         // song name and artist name
-        Text(
-          currentSong.title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+        InkWell(
+          onTap: () {
+            _showPopupMenu();
+          },
+          child: Column(
+            children: [
+              Text(
+                currentSong.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                currentSong.artistName,
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          currentSong.artistName,
-          style: TextStyle(
-              color: Colors.white.withOpacity(0.7),
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -738,4 +819,6 @@ class _PlayerPageState extends State<PlayerPage> {
       elevation: 0,
     ));
   }
+
+  void _showPopupMenu() {}
 }

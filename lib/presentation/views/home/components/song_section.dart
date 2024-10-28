@@ -45,7 +45,7 @@ class SongSection extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 200,
+          height: 210,
           child: ListView.builder(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
