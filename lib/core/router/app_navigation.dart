@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/artist.dart';
+import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
 import 'package:sound_sphere/presentation/views/home/add_artist_page.dart';
-import 'package:sound_sphere/presentation/views/home/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/home/artist_detail_page.dart';
-import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/home/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/home/song_detail_page.dart';
@@ -58,7 +55,7 @@ class AppNavigation {
           path: Routes.player,
           name: Routes.player,
           builder: (context, state) {
-            return PlayerPage();
+            return const PlayerPage();
           })
     ];
   }
