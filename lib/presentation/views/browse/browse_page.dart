@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/presentation/views/browse/components/browse_genre_page.dart';
+import 'package:sound_sphere/presentation/views/browse/subpage/browse_genre_page.dart';
 import 'components/app_bar.dart';
-import 'components/browse_home_page.dart';
+import 'subpage/browse_home_page.dart';
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({super.key});

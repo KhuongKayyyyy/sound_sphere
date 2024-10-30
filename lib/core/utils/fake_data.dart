@@ -26,6 +26,20 @@ class FakeData {
     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a8e59f47383181.5f80a5fa5dc72.jpg",
   ];
 
+  static List<Genres> moodList = [
+    Genres(name: "Happy", imgURL: "https://example.com/happy.jpg"),
+    Genres(name: "Sad", imgURL: "https://example.com/sad.jpg"),
+    Genres(name: "Angry", imgURL: "https://example.com/angry.jpg"),
+    Genres(name: "Focus", imgURL: "https://example.com/focus.jpg"),
+    Genres(name: "Chill", imgURL: "https://example.com/chill.jpg"),
+    Genres(name: "Relax", imgURL: "https://example.com/relax.jpg"),
+    Genres(name: "Workout", imgURL: "https://example.com/workout.jpg"),
+    Genres(name: "Study", imgURL: "https://example.com/study.jpg"),
+    Genres(name: "Party", imgURL: "https://example.com/party.jpg"),
+    Genres(name: "Sleep", imgURL: "https://example.com/sleep.jpg"),
+    Genres(name: "Work", imgURL: "https://example.com/work.jpg")
+  ];
+
   static List<Artist> artists = [
     Artist(
         name: "Adele",
