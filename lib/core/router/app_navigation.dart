@@ -7,11 +7,11 @@ import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
 import 'package:sound_sphere/presentation/views/home/add_artist_page.dart';
 import 'package:sound_sphere/presentation/views/home/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/home/home_page.dart';
-import 'package:sound_sphere/presentation/views/home/song_detail_page.dart';
 import 'package:sound_sphere/presentation/views/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
 import 'package:sound_sphere/presentation/views/search/search_page.dart';
+import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
 
 class AppNavigation {
   static final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -99,7 +99,7 @@ class AppNavigation {
           name: Routes.songDetail,
           builder: (context, state) {
             final songId = state.extra as String;
-            return SongDetailPage(
+            return SingleEPsDetailPage(
               songId: songId,
             );
           },

@@ -8,15 +8,15 @@ import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
-class SongDetailPage extends StatefulWidget {
+class SingleEPsDetailPage extends StatefulWidget {
   String songId;
-  SongDetailPage({super.key, required this.songId});
+  SingleEPsDetailPage({super.key, required this.songId});
 
   @override
-  State<SongDetailPage> createState() => _SongDetailPageState();
+  State<SingleEPsDetailPage> createState() => _SingleEPsDetailPageState();
 }
 
-class _SongDetailPageState extends State<SongDetailPage> {
+class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
   Song tempSong = FakeData.songs.first;
