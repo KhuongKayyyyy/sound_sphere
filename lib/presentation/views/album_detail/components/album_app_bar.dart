@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class AlbumDetailAppBar extends StatelessWidget {
@@ -11,12 +12,12 @@ class AlbumDetailAppBar extends StatelessWidget {
   final void Function(BuildContext) showCupertinoBottomSheet;
 
   const AlbumDetailAppBar({
-    Key? key,
+    super.key,
     required this.tempAlbum,
     required this.showAppBarTitle,
     required this.appBarIconColor,
     required this.showCupertinoBottomSheet,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class AlbumDetailAppBar extends StatelessWidget {
           const SizedBox(height: 10),
           InkWell(
             onTap: () {
-              context.pushNamed('artistDetail', extra: 'artistId');
+              context.pushNamed(Routes.artistDetail, extra: 'artistId');
             },
             child: Text(
               tempAlbum.artistName,

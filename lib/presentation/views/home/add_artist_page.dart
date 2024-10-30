@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/home/components/artist_rounded_avatar.dart';
+import 'package:sound_sphere/presentation/views/artist_detail/components/artist_rounded_avatar.dart';
 import 'package:sound_sphere/presentation/widgets/search_bar/custom_search_bar.dart';
 
 class AddArtistPage extends StatefulWidget {
