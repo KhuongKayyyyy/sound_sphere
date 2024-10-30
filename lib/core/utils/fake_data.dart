@@ -40,6 +40,70 @@ class FakeData {
     Genres(name: "Work", imgURL: "https://example.com/work.jpg")
   ];
 
+  static List<String> locationList = [
+    "Global",
+    "VietNam",
+    "Canada",
+    "Australia",
+    "France",
+    "Gremany",
+    "Japan",
+    "Korea",
+    "China",
+    "Russia",
+    "Brazil",
+    "India",
+    "Italy",
+    "Spain",
+    "Mexico"
+  ];
+  static List<Map<String, String>> locationImages = [
+    {
+      "location": "New York",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUhi0s72FfDSznKL39WrbN3VW6sr31F27zw&s"
+    },
+    {
+      "location": "Can Tho",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIcLaH_ZFE8kG9VVDBdm3-r0CH2t8WvLgYpg&s"
+    },
+    {
+      "location": "Los Angeles",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW6srZopstrWRUc-pxrEZ_x7pSF7ydd2aAdg&s"
+    },
+    {
+      "location": "Houston",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7uVn9qmYCa967nuUo6PUfARVECZanqazemw&s",
+    },
+    {
+      "location": "Phoenix",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNqIE45c3XRwsEzpcswNwJy7yhZDseTCv5IA&s",
+    },
+    {
+      "location": "London",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNLhqqEOOBzvZ44xKRuDR_bVEtpsMLWGh78Q&s",
+    },
+    {
+      "location": "Birmingham",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRRUa9zhSNLH3ulQ7QJBpfjDbMfwYeSrxYdQ&s",
+    },
+    {
+      "location": "Ha Noi",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMi91oQxfjS7xU5gHFszaqRmM4eyYNKpN8Sg&s",
+    },
+    {
+      "location": "Ho Chi Minh",
+      "imageURL":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdFxSCeRP_GVEn6nNG7uc09oSInbOK54aMng&s",
+    },
+  ];
   static List<Artist> artists = [
     Artist(
         name: "Adele",

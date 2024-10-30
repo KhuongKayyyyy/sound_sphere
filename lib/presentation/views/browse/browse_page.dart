@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/presentation/views/browse/subpage/browse_chart_page.dart';
 import 'package:sound_sphere/presentation/views/browse/subpage/browse_genre_page.dart';
 import 'components/app_bar.dart';
 import 'subpage/browse_home_page.dart';
@@ -48,9 +49,10 @@ class _BrowsePageState extends State<BrowsePage> {
           ),
           if (_currentIndex == 0) const BrowseHomePage(),
           if (_currentIndex == 2) const BrowseGenresPage(),
+          if (_currentIndex == 3) const BrowseChartPage(),
           SliverToBoxAdapter(
             child: Container(
-              color: Colors.grey[200],
+              color: Colors.white,
               height: 150,
             ),
           ),
