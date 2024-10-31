@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/presentation/views/authentication/login_page.dart';
 import 'package:sound_sphere/presentation/views/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/home/components/best_album_section.dart';
 import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
@@ -93,16 +96,25 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   // if (isExpanded &&
-                  //     showAvatar) // Only show avatar when expanded
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      FakeData.user.avatarURL,
-                      fit: BoxFit.cover,
-                      width: 40,
-                      height: 40,
-                    ),
-                  ),
+                  //
+                  //   showAvatar) // Only show avatar when expanded
+                  IconButton(
+                      onPressed: () {
+                        _showLoginModal();
+                      },
+                      icon: Icon(
+                        CupertinoIcons.person,
+                        color: AppColor.primaryColor,
+                      ))
+                  // ClipRRect(
+                  //   borderRadius: BorderRadius.circular(100),
+                  //   child: Image.network(
+                  //     FakeData.user.avatarURL,
+                  //     fit: BoxFit.cover,
+                  //     width: 40,
+                  //     height: 40,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -165,5 +177,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void _showLoginModal() {
+    // Show login modal
+    showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        isScrollControlled: true, // Make the modal fullscreen
+        builder: (context) => LoginPage());
   }
 }
