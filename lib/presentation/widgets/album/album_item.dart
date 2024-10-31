@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/song.dart';
 
+// ignore: must_be_immutable
 class AlbumItem extends StatelessWidget {
   Album album;
-  AlbumItem({required this.album});
+  AlbumItem({super.key, required this.album});
   @override
   Widget build(BuildContext context) {
     return Column(

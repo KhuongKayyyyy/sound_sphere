@@ -1,7 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
@@ -11,7 +9,10 @@ import 'package:sound_sphere/presentation/widgets/search_bar/custom_search_bar.d
 import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 class HistoryPlaylistPage extends StatefulWidget {
+  const HistoryPlaylistPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HistoryPlaylistPageState createState() => _HistoryPlaylistPageState();
 }
 

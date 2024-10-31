@@ -17,14 +17,14 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
   Song currentSong = FakeData.songs[2];
-  List<Song> _playlistSongs =
+  final List<Song> _playlistSongs =
       List.from(FakeData.songs.take(10)); // Initialize with 10 songs
   bool _isFavorite = false;
   bool _isPlaying = false;
   bool _isShowPlaylist = false;
   bool _isShuffle = false;
   bool _isRepeat = false;
-  bool _isLoop = false;
+  final bool _isLoop = false;
   bool _isInfinity = false;
 
   @override

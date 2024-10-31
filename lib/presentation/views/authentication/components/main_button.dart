@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
+// ignore: must_be_immutable
 class MainButton extends StatelessWidget {
   String buttonLabel;
   VoidCallback? onPressed;

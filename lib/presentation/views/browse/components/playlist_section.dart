@@ -8,8 +8,8 @@ class PlaylistSection extends StatelessWidget {
   const PlaylistSection({
     required this.imageList,
     required this.isBig,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

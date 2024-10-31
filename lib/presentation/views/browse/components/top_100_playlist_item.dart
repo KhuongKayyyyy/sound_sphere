@@ -1,12 +1,11 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Top100PlaylistItem extends StatelessWidget {
   final Color backgroundColor = const Color.fromRGBO(247, 243, 234, 1);
   final String location;
 
-  Top100PlaylistItem({super.key, required this.location});
+  const Top100PlaylistItem({super.key, required this.location});
 
   @override
   Widget build(BuildContext context) {

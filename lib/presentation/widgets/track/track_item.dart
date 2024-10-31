@@ -5,10 +5,11 @@ import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/home/components/add_music_success_dialog.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
+// ignore: must_be_immutable
 class TrackItem extends StatelessWidget {
   Song song;
   bool isLiked;
-  TrackItem({required this.song, required this.isLiked});
+  TrackItem({super.key, required this.song, required this.isLiked});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,7 +57,7 @@ class TrackItem extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                       context: context,
-                      builder: (context) => AddMusicSuccessfulyDialog());
+                      builder: (context) => const AddMusicSuccessfulyDialog());
                 },
                 icon: Icon(isLiked ? Icons.add : Icons.check),
                 color: Colors.grey,
@@ -149,13 +150,13 @@ class TrackItem extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: double.infinity,
                                     child: Row(
                                       children: [
                                         TrackBottomSheetButton(
                                             buttonText: "Like", isLiked: true),
-                                        const Spacer(),
+                                        Spacer(),
                                         TrackBottomSheetButton(
                                             buttonText: "Download",
                                             isLiked: true),
@@ -165,13 +166,13 @@ class TrackItem extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: double.infinity,
                                     child: Row(
                                       children: [
                                         TrackBottomSheetButton(
                                             buttonText: "Share", isLiked: true),
-                                        const Spacer(),
+                                        Spacer(),
                                         TrackBottomSheetButton(
                                             buttonText: "View Artist",
                                             isLiked: true),
@@ -181,7 +182,7 @@ class TrackItem extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: double.infinity,
                                     child: TrackBottomSheetButton(
                                         buttonText: "About track",

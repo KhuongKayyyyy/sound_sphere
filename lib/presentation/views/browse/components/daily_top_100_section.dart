@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/browse/components/top_100_playlist_item.dart';
 
+// ignore: must_be_immutable
 class DailyTop100Section extends StatelessWidget {
   List<String> locationList = FakeData.locationList;
   DailyTop100Section({super.key});

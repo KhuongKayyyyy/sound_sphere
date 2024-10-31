@@ -46,6 +46,12 @@ dependencies:
   another_flushbar: ^1.12.30
   animated_text_kit: ^4.2.2
   wave: ^0.2.2
+  firebase_core: ^2.32.0
+  firebase_auth: ^4.4.0
+  equatable: ^2.0.3
+  font_awesome_flutter: ^9.2.0
+  google_sign_in: ^5.2.1
+  rxdart: ^0.27.2
 
 
 

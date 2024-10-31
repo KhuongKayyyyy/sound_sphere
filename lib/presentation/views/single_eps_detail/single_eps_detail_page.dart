@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
-import 'package:sound_sphere/core/constant/app_image.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
+// ignore: must_be_immutable
 class SingleEPsDetailPage extends StatefulWidget {
   String songId;
   SingleEPsDetailPage({super.key, required this.songId});
@@ -24,22 +24,22 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController!.addListener(_onScroll);
+    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    _scrollController!.removeListener(_onScroll);
-    _scrollController!.dispose();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     super.dispose();
   }
 
   void _onScroll() {
-    if (_scrollController!.offset > 250 && !showAppBarTitle) {
+    if (_scrollController.offset > 250 && !showAppBarTitle) {
       setState(() {
         showAppBarTitle = true;
       });
-    } else if (_scrollController!.offset <= 250 && showAppBarTitle) {
+    } else if (_scrollController.offset <= 250 && showAppBarTitle) {
       setState(() {
         showAppBarTitle = false;
       });

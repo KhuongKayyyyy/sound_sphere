@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
+// ignore: must_be_immutable
 class SongSection extends StatelessWidget {
   String songSectionTitle;
   List<Song> songList;

@@ -1,19 +1,20 @@
 import 'dart:math';
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
 class MixedPlaylistBig extends StatefulWidget {
   final String mixedPlaylistTitle;
   final List<Artist> artistList;
 
-  MixedPlaylistBig({
+  const MixedPlaylistBig({
+    super.key,
     required this.artistList,
     required this.mixedPlaylistTitle,
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _MixedPlaylistBigState createState() => _MixedPlaylistBigState();
 }
 

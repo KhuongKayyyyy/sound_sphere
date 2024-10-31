@@ -10,8 +10,7 @@ class ArtistMusicSection extends StatelessWidget {
   final List<Album>? albums;
 
   const ArtistMusicSection(
-      {Key? key, required this.title, this.songs, this.albums})
-      : super(key: key);
+      {super.key, required this.title, this.songs, this.albums});
 
   @override
   Widget build(BuildContext context) {

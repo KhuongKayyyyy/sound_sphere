@@ -560,7 +560,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
 
   Widget _buildOptionsContent() {
     // Replace with actual options content
-    return Center(child: Text('Options for the album.'));
+    return const Center(child: Text('Options for the album.'));
   }
 
   Widget _buildArtworkContent() {

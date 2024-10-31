@@ -12,7 +12,7 @@ import 'package:sound_sphere/presentation/views/album_detail/components/artist_m
 class AlbumDetailPage extends StatefulWidget {
   final String albumId;
 
-  AlbumDetailPage({super.key, required this.albumId});
+  const AlbumDetailPage({super.key, required this.albumId});
 
   @override
   State<AlbumDetailPage> createState() => _AlbumDetailPageState();

@@ -78,7 +78,7 @@ class AppNavigation {
         GoRoute(
           path: Routes.historyPlaylist,
           name: Routes.historyPlaylist,
-          builder: (context, state) => HistoryPlaylistPage(),
+          builder: (context, state) => const HistoryPlaylistPage(),
         ),
         GoRoute(
           path: Routes.albumDetail,

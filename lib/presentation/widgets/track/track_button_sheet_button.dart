@@ -5,12 +5,13 @@ class TrackBottomSheetButton extends StatelessWidget {
   final String buttonText;
   final bool isLiked;
 
-  TrackBottomSheetButton({required this.buttonText, required this.isLiked});
+  const TrackBottomSheetButton(
+      {super.key, required this.buttonText, required this.isLiked});
 
   @override
   Widget build(BuildContext context) {
     // Determine the icon based on the button text
-    IconData _getIcon() {
+    IconData getIcon() {
       switch (buttonText.toLowerCase()) {
         case 'like':
           return isLiked ? Icons.favorite : Icons.favorite_border;
@@ -40,7 +41,7 @@ class TrackBottomSheetButton extends StatelessWidget {
           children: [
             const SizedBox(width: 10),
             Icon(
-              _getIcon(),
+              getIcon(),
               color: isLiked && buttonText.toLowerCase() == 'like'
                   ? AppColor.primaryColor
                   : Colors.black,

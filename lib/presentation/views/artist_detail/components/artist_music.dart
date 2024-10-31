@@ -4,6 +4,7 @@ import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
+// ignore: must_be_immutable
 class ArtistMusic extends StatelessWidget {
   String sectionName;
   List<Song>? songList;
@@ -65,6 +66,5 @@ class ArtistMusic extends StatelessWidget {
           ),
       ],
     );
-    ;
   }
 }

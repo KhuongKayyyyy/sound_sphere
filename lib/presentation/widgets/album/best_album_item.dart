@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
+// ignore: must_be_immutable
 class BestAlbumItem extends StatelessWidget {
   VoidCallback? onPressed;
   final Color backgroundColor = const Color(0xffb9fade);

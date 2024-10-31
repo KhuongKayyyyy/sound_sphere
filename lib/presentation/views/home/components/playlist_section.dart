@@ -5,7 +5,7 @@ import 'package:sound_sphere/presentation/widgets/playlist/mixed_playlist_big.da
 class PlaylistSection extends StatelessWidget {
   final String playlistSectionTitle;
 
-  PlaylistSection({required this.playlistSectionTitle});
+  const PlaylistSection({required this.playlistSectionTitle});
 
   @override
   Widget build(BuildContext context) {

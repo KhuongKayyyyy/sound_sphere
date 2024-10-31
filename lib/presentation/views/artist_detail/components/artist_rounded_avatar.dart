@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
+// ignore: must_be_immutable
 class ArtistRoundedAvatar extends StatefulWidget {
   Artist artist;
   bool isLike;

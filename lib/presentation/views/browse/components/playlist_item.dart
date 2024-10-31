@@ -7,8 +7,8 @@ class PlaylistItem extends StatelessWidget {
   const PlaylistItem({
     required this.img,
     required this.isBig,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

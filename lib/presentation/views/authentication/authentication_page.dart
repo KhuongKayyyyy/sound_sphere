@@ -1,22 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/core/constant/app_icon.dart';
-import 'package:sound_sphere/core/constant/app_image.dart';
-import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_form.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_header.dart';
-import 'package:sound_sphere/presentation/views/authentication/components/main_button.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/sign_up_form.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/sign_up_header.dart';
-import 'package:sound_sphere/presentation/views/authentication/components/social_button.dart';
-import 'package:sound_sphere/presentation/views/authentication/components/text_container.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/wave_background.dart';
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -105,13 +93,13 @@ class _LoginPageState extends State<LoginPage>
                     isEmailValid: isEmailValid,
                     animationController: _animationController,
                     context: context,
-                    key: ValueKey('SignUpHeader'))
+                    key: const ValueKey('SignUpHeader'))
                 : LoginHeader(
                     emailController: emailController,
                     isEmailValid: isEmailValid,
                     animationController: _animationController,
                     context: context,
-                    key: ValueKey('LoginHeader')),
+                    key: const ValueKey('LoginHeader')),
           ),
           // Login and SignUp Form
           Positioned(
@@ -146,7 +134,7 @@ class _LoginPageState extends State<LoginPage>
                           isSignUp = !isSignUp;
                         });
                       },
-                      key: ValueKey('SignUpForm'),
+                      key: const ValueKey('SignUpForm'),
                     )
                   : LoginForm(
                       animationController: _animationController,
@@ -166,7 +154,7 @@ class _LoginPageState extends State<LoginPage>
                           isSignUp = !isSignUp;
                         });
                       },
-                      key: ValueKey('LoginForm'),
+                      key: const ValueKey('LoginForm'),
                     ),
             ),
           ),

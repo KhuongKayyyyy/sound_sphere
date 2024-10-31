@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/browse/components/city_top_songs_item.dart';
 
+// ignore: must_be_immutable
 class CityChartSection extends StatelessWidget {
   List<Map<String, String>> cityList = FakeData.locationImages;
   CityChartSection({super.key});

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_music.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_song.dart';
-import 'package:sound_sphere/presentation/views/artist_detail/components/artist_rounded_avatar.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/similar_artist_section.dart';
-import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
-import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
 
 // ignore: must_be_immutable
 class ArtistDetailPage extends StatefulWidget {
@@ -33,6 +28,7 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
   // bool showBackButton = true;
   Color appBarIconColor = Colors.white;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();

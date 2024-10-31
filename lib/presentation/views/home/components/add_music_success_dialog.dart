@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
 class AddMusicSuccessfulyDialog extends StatelessWidget {
+  const AddMusicSuccessfulyDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Dialog(

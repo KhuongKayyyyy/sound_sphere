@@ -5,7 +5,7 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 class AlbumSongList extends StatelessWidget {
   final List<Song> songs;
 
-  const AlbumSongList({Key? key, required this.songs}) : super(key: key);
+  const AlbumSongList({super.key, required this.songs});
 
   @override
   Widget build(BuildContext context) {

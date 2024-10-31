@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
+// ignore: must_be_immutable
 class WaveBackground extends StatelessWidget {
   List<Color> colorList;
   WaveBackground({super.key, required this.colorList});
@@ -38,6 +38,5 @@ class WaveBackground extends StatelessWidget {
       waveAmplitude: 0,
       size: const Size(double.infinity, 80),
     );
-    ;
   }
 }

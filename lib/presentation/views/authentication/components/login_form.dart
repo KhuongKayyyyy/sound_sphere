@@ -4,10 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
-import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/main_button.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/social_button.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginForm extends StatelessWidget {
   final AnimationController animationController;

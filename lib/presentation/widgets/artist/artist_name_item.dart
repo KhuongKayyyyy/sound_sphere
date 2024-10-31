@@ -5,7 +5,8 @@ class ArtistNameItem extends StatelessWidget {
   final Artist artist;
   final bool isBlackText;
 
-  ArtistNameItem({super.key, required this.artist, this.isBlackText = false});
+  const ArtistNameItem(
+      {super.key, required this.artist, this.isBlackText = false});
 
   @override
   Widget build(BuildContext context) {

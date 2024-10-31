@@ -5,12 +5,14 @@ class AppIcon {
   static const String play = 'assets/icons/play.png';
   // ignore: constant_identifier_names
   static const String play_next = 'assets/icons/play_next.png';
+  // ignore: constant_identifier_names
   static const String play_previous = 'assets/icons/play_previous.png';
   static const String lyrics = 'assets/icons/lyrics.png';
   static const String airplay = 'assets/icons/airplay.png';
   static const String quality = 'assets/icons/quality.png';
   static const String shuffle = 'assets/icons/shuffle.png';
   static const String repeat = 'assets/icons/repeat.png';
+  // ignore: constant_identifier_names
   static const String repeat_once = 'assets/icons/repeat_once.png';
   static const String infinity = 'assets/icons/infinity.png';
   static const String dolby = 'assets/icons/dolby.png';

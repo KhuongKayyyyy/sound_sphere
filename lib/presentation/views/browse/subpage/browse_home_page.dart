@@ -3,7 +3,7 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import '../components/playlist_section.dart';
 
 class BrowseHomePage extends StatelessWidget {
-  const BrowseHomePage({Key? key}) : super(key: key);
+  const BrowseHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

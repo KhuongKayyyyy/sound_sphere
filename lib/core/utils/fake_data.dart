@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';

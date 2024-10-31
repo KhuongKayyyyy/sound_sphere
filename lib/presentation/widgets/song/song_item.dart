@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class SongItem extends StatelessWidget {
   final Song song;
 
-  SongItem({super.key, required this.song});
+  const SongItem({super.key, required this.song});
 
   @override
   Widget build(BuildContext context) {

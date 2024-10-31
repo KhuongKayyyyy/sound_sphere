@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/song.dart';
 
+// ignore: must_be_immutable
 class TopSongItem extends StatefulWidget {
   Song song;
   TopSongItem({super.key, required this.song});
