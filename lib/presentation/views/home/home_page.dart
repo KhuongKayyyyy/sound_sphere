@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/authentication/login_page.dart';
+import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/home/components/best_album_section.dart';
 import 'package:sound_sphere/presentation/views/home/components/history_playlist_button.dart';
@@ -185,6 +185,6 @@ class _HomePageState extends State<HomePage> {
         context: context,
         useRootNavigator: true,
         isScrollControlled: true, // Make the modal fullscreen
-        builder: (context) => LoginPage());
+        builder: (context) => const LoginPage());
   }
 }

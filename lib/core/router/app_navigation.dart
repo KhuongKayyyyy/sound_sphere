@@ -56,7 +56,13 @@ class AppNavigation {
           name: Routes.player,
           builder: (context, state) {
             return const PlayerPage();
-          })
+          }),
+      // GoRoute(
+      //     path: Routes.signup,
+      //     name: Routes.signup,
+      //     builder: (context, state) {
+      //       return const SignUpPage();
+      //     })
     ];
   }
 

@@ -15,6 +15,8 @@ class Routes {
   // onboarding routes
 
   // auth routes
+  static const String login = '/login';
+  static const String signup = '/signup';
 
   // no player routes
   static const String addArtist = '/add-artist';
