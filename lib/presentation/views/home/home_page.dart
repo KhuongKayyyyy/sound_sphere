@@ -151,14 +151,14 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           const SizedBox(height: 20),
-          PlaylistSection(playlistSectionTitle: "Top Playlists"),
+          const PlaylistSection(playlistSectionTitle: "Top Playlists"),
           SongSection(
             songSectionTitle: "Today hits",
             songList: FakeData.songs.take(10).toList(),
             isExpandable: true,
           ),
           const SizedBox(height: 10),
-          PlaylistSection(playlistSectionTitle: "Made for you"),
+          const PlaylistSection(playlistSectionTitle: "Made for you"),
           const SizedBox(height: 10),
           SongSection(
             songSectionTitle: "Son Tung MTP's fan like",

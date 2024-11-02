@@ -2,8 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/main_button.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/social_button.dart';
 
@@ -17,6 +19,7 @@ class LoginForm extends StatelessWidget {
   final bool isPasswordVisible;
   final VoidCallback onTogglePasswordVisibility;
   final VoidCallback onSignUpTap;
+  final VoidCallback onSignInTap;
 
   const LoginForm({
     super.key,
@@ -29,6 +32,7 @@ class LoginForm extends StatelessWidget {
     required this.isPasswordVisible,
     required this.onTogglePasswordVisibility,
     required this.onSignUpTap,
+    required this.onSignInTap,
   });
 
   @override
@@ -123,7 +127,10 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            MainButton(buttonLabel: "Login"),
+            MainButton(
+              buttonLabel: "Login",
+              onPressed: onSignInTap,
+            ),
             const SizedBox(height: 20),
             const Text("or Log in with",
                 style:

@@ -4,7 +4,7 @@ import 'package:sound_sphere/data/models/album.dart';
 class AlbumBriefInfo extends StatelessWidget {
   final Album tempAlbum;
 
-  const AlbumBriefInfo({Key? key, required this.tempAlbum}) : super(key: key);
+  const AlbumBriefInfo({super.key, required this.tempAlbum});
 
   @override
   Widget build(BuildContext context) {

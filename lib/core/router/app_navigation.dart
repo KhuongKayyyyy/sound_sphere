@@ -72,7 +72,7 @@ class AppNavigation {
       routes: [
         GoRoute(
           path: Routes.home, // Home path
-          name: 'home', // Unique name for home
+          name: Routes.home,
           builder: (context, state) => const HomePage(),
         ),
         GoRoute(
@@ -119,8 +119,8 @@ class AppNavigation {
       navigatorKey: _browseNavigatorKey,
       routes: [
         GoRoute(
-          path: Routes.browse, // Browse path
-          name: 'browse', // Unique name for browse
+          path: Routes.browse,
+          name: Routes.browse,
           builder: (context, state) => const BrowsePage(),
         )
       ],
@@ -132,8 +132,8 @@ class AppNavigation {
       navigatorKey: _libraryNavigatorKey,
       routes: [
         GoRoute(
-          path: Routes.library, // Library path
-          name: 'library', // Unique name for library
+          path: Routes.library,
+          name: Routes.library,
           builder: (context, state) => const LibraryPage(),
         )
       ],
@@ -145,8 +145,8 @@ class AppNavigation {
       navigatorKey: _searchNavigatorKey,
       routes: [
         GoRoute(
-          path: Routes.search, // Search path
-          name: 'search', // Unique name for search
+          path: Routes.search,
+          name: Routes.search,
           builder: (context, state) => const SearchPage(),
         )
       ],

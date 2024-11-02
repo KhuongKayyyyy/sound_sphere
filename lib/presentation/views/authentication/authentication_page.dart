@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/core/theme/app_theme.dart';
+import 'package:sound_sphere/data/res/user_repository.dart';
+import 'package:sound_sphere/presentation/blocs/bloc/register_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_form.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_header.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/sign_up_form.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/sign_up_header.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/wave_background.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,9 +40,13 @@ class _LoginPageState extends State<LoginPage>
 
   late AnimationController _animationController;
 
+  // bloc
+  UserRepository userRepository = UserRepository();
+  late final LoginBloc loginBloc;
   @override
   void initState() {
     super.initState();
+    loginBloc = LoginBloc(userRepository: userRepository);
     emailController.addListener(_validateEmail);
     emailFocusNode.addListener(() {
       setState(() {});
@@ -107,56 +119,84 @@ class _LoginPageState extends State<LoginPage>
             left: 0,
             right: 0,
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 800),
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-              child: isSignUp
-                  ? SignUpForm(
-                      animationController: _animationController,
-                      nameController: nameController,
-                      emailController: emailController,
-                      passwordController: passwordController,
-                      passwordConfirmController: passwordConfirmController,
-                      nameFocusNode: nameFocusNode,
-                      emailFocusNode: emailFocusNode,
-                      passwordFocusNode: passwordFocusNode,
-                      passwordConfirmFocusNode: passwordConfirmFocusNode,
-                      isEmailValid: isEmailValid,
-                      isPasswordVisible: isPasswordVisible,
-                      onTogglePasswordVisibility: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
-                      onSignUpTap: () {
-                        setState(() {
-                          isSignUp = !isSignUp;
-                        });
-                      },
-                      key: const ValueKey('SignUpForm'),
-                    )
-                  : LoginForm(
-                      animationController: _animationController,
-                      emailController: emailController,
-                      passwordController: passwordController,
-                      emailFocusNode: emailFocusNode,
-                      passwordFocusNode: passwordFocusNode,
-                      isEmailValid: isEmailValid,
-                      isPasswordVisible: isPasswordVisible,
-                      onTogglePasswordVisibility: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
-                      onSignUpTap: () {
-                        setState(() {
-                          isSignUp = !isSignUp;
-                        });
-                      },
-                      key: const ValueKey('LoginForm'),
-                    ),
-            ),
+                duration: const Duration(milliseconds: 800),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: isSignUp
+                    ? SignUpForm(
+                        animationController: _animationController,
+                        nameController: nameController,
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        passwordConfirmController: passwordConfirmController,
+                        nameFocusNode: nameFocusNode,
+                        emailFocusNode: emailFocusNode,
+                        passwordFocusNode: passwordFocusNode,
+                        passwordConfirmFocusNode: passwordConfirmFocusNode,
+                        isEmailValid: isEmailValid,
+                        isPasswordVisible: isPasswordVisible,
+                        onTogglePasswordVisibility: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        onSignUpTap: () {
+                          setState(() {
+                            isSignUp = !isSignUp;
+                          });
+                        },
+                        key: const ValueKey('SignUpForm'),
+                      )
+                    : BlocListener<LoginBloc, LoginState>(
+                        listener: (context, state) {
+                          if (state is LoginFailure) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Error while logging in"),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          } else if (state is LoginSuccess) {
+                            context.pop();
+                            context.goNamed(Routes.home);
+                          } else if (state is LoginLoading) {
+                            EasyLoading.show(status: 'Logging in...');
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   SnackBar(
+                            //     content: Text("Logging in..."),
+                            //     backgroundColor: AppColor.primaryColor,
+                            //   ),
+                            // );
+                          }
+                        },
+                        bloc: loginBloc,
+                        child: LoginForm(
+                          animationController: _animationController,
+                          emailController: emailController,
+                          passwordController: passwordController,
+                          emailFocusNode: emailFocusNode,
+                          passwordFocusNode: passwordFocusNode,
+                          isEmailValid: isEmailValid,
+                          isPasswordVisible: isPasswordVisible,
+                          onTogglePasswordVisibility: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                          onSignUpTap: () {
+                            setState(() {
+                              isSignUp = !isSignUp;
+                            });
+                          },
+                          onSignInTap: () {
+                            loginBloc.add(LoginEventWithEmailAndPasswordPressed(
+                                email: emailController.text,
+                                password: passwordController.text));
+                          },
+                          key: const ValueKey('LoginForm'),
+                        ),
+                      )),
           ),
           Positioned(
             bottom: 0,

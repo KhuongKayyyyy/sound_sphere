@@ -8,7 +8,7 @@ import 'package:sound_sphere/data/models/album.dart';
 class AlbumDetailPopup extends StatefulWidget {
   final Album album;
 
-  AlbumDetailPopup({super.key, required this.album});
+  const AlbumDetailPopup({super.key, required this.album});
 
   @override
   State<AlbumDetailPopup> createState() => _AlbumDetailPopupState();

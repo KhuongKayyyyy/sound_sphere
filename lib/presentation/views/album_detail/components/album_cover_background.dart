@@ -6,9 +6,9 @@ class AlbumCoverBackground extends StatelessWidget {
   final Album tempAlbum;
 
   const AlbumCoverBackground({
-    Key? key,
+    super.key,
     required this.tempAlbum,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +45,9 @@ class AlbumMetadata extends StatelessWidget {
   final Album tempAlbum;
 
   const AlbumMetadata({
-    Key? key,
+    super.key,
     required this.tempAlbum,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

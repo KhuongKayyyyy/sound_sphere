@@ -6,7 +6,7 @@ class MusicByGenresSection extends StatelessWidget {
   final String sectionTitle;
   final List<Genres> genresList;
 
-  MusicByGenresSection(
+  const MusicByGenresSection(
       {super.key, required this.genresList, required this.sectionTitle});
 
   @override
