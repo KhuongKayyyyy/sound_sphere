@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/genres.dart';
-import 'package:sound_sphere/presentation/views/browse/components/genres_item.dart';
+import 'package:sound_sphere/presentation/views/main/browse/components/genres_item.dart';
 
 class MusicByGenresSection extends StatelessWidget {
   final String sectionTitle;

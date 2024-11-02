@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/song.dart';
-import 'package:sound_sphere/presentation/views/browse/components/top_song_item.dart';
+import 'package:sound_sphere/presentation/views/main/browse/components/top_song_item.dart';
 
 // ignore: must_be_immutable
 class TopSongsSection extends StatelessWidget {

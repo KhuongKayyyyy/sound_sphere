@@ -3,14 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
-import 'package:sound_sphere/presentation/views/browse/browse_page.dart';
-import 'package:sound_sphere/presentation/views/home/subpage/add_artist_page.dart';
-import 'package:sound_sphere/presentation/views/home/subpage/history_playlist_page.dart';
-import 'package:sound_sphere/presentation/views/home/home_page.dart';
-import 'package:sound_sphere/presentation/views/library/library_page.dart';
+import 'package:sound_sphere/presentation/views/main/browse/browse_page.dart';
+import 'package:sound_sphere/presentation/views/main/for_you/for_you_page.dart';
+import 'package:sound_sphere/presentation/views/main/home/subpage/add_artist_page.dart';
+import 'package:sound_sphere/presentation/views/main/home/subpage/history_playlist_page.dart';
+import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
-import 'package:sound_sphere/presentation/views/search/search_page.dart';
+import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
 
 class AppNavigation {
@@ -20,6 +21,8 @@ class AppNavigation {
       GlobalKey<NavigatorState>(debugLabel: 'homeNavigator');
   static final GlobalKey<NavigatorState> _browseNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'browseNavigator');
+  static final GlobalKey<NavigatorState> _forYouNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'searchNavigator');
   static final GlobalKey<NavigatorState> _libraryNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'libraryNavigator');
   static final GlobalKey<NavigatorState> _searchNavigatorKey =
@@ -37,6 +40,7 @@ class AppNavigation {
         branches: [
           _buildHomeBranch(),
           _buildBrowseBranch(),
+          _buildForYouBranch(),
           _buildLibraryBranch(),
           _buildSearchBranch(),
         ]);
@@ -122,6 +126,19 @@ class AppNavigation {
           path: Routes.browse,
           name: Routes.browse,
           builder: (context, state) => const BrowsePage(),
+        )
+      ],
+    );
+  }
+
+  static StatefulShellBranch _buildForYouBranch() {
+    return StatefulShellBranch(
+      navigatorKey: _forYouNavigatorKey,
+      routes: [
+        GoRoute(
+          path: Routes.forYou,
+          name: Routes.forYou,
+          builder: (context, state) => const ForYouPage(),
         )
       ],
     );

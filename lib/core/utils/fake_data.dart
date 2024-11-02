@@ -1,11 +1,11 @@
-import 'package:sound_sphere/data/models/user.dart';
+import 'package:sound_sphere/data/models/app_user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class FakeData {
-  static User user = User(
+  static AppUser user = AppUser(
     name: "Nguyen Dat Khuong",
     password: "1123",
     email: "zzkhngzz@gmail.com",

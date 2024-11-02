@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/data/res/user_repository.dart';
+import 'package:sound_sphere/data/res/user_repository_impl.dart';
 import 'package:sound_sphere/presentation/blocs/bloc/register_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_form.dart';
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage>
   late AnimationController _animationController;
 
   // bloc
-  UserRepository userRepository = UserRepository();
+  UserRepositoryImpl userRepository = UserRepositoryImpl();
   late final LoginBloc loginBloc;
   late final RegisterBloc registerBloc;
   @override
@@ -269,6 +269,5 @@ class _LoginPageState extends State<LoginPage>
         child: TextButton(onPressed: () {}, child: Text("Sign out")),
       );
     }
-    ;
   }
 }

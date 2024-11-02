@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/song.dart';
-import 'package:sound_sphere/presentation/views/home/components/add_music_success_dialog.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/add_music_success_dialog.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
 // ignore: must_be_immutable

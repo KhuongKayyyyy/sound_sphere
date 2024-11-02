@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/browse/components/city_top_songs_item.dart';
+import 'package:sound_sphere/presentation/views/main/browse/components/top_100_playlist_item.dart';
 
 // ignore: must_be_immutable
-class CityChartSection extends StatelessWidget {
-  List<Map<String, String>> cityList = FakeData.locationImages;
-  CityChartSection({super.key});
+class DailyTop100Section extends StatelessWidget {
+  List<String> locationList = FakeData.locationList;
+  DailyTop100Section({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,13 +41,14 @@ class CityChartSection extends StatelessWidget {
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 10),
               scrollDirection: Axis.horizontal,
-              itemCount: cityList.length,
+              itemCount: locationList.length,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: CityTopSongsItem(
-                        cityName: cityList.elementAt(index)["location"]!,
-                        imageUrl: cityList.elementAt(index)["imageURL"]!));
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Top100PlaylistItem(
+                    location: locationList.elementAt(index),
+                  ),
+                );
               },
             ),
           ),

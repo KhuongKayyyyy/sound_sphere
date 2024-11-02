@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/browse/components/music_by_genres_section.dart';
+import 'package:sound_sphere/presentation/views/main/browse/components/music_by_genres_section.dart';
 import '../components/playlist_section.dart';
 
 class BrowseGenresPage extends StatelessWidget {

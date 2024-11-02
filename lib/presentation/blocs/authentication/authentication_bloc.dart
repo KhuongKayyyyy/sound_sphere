@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sound_sphere/data/res/user_repository.dart';
+import 'package:sound_sphere/data/res/user_repository_impl.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final UserRepository userRepository;
+  final UserRepositoryImpl userRepository;
 
   AuthenticationBloc({required this.userRepository})
       : super(AuthenticationInitial()) {

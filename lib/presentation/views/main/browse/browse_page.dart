@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/presentation/views/browse/subpage/browse_chart_page.dart';
-import 'package:sound_sphere/presentation/views/browse/subpage/browse_genre_page.dart';
+import 'package:sound_sphere/presentation/views/main/browse/subpage/browse_chart_page.dart';
+import 'package:sound_sphere/presentation/views/main/browse/subpage/browse_genre_page.dart';
 import 'components/app_bar.dart';
 import 'subpage/browse_home_page.dart';
 
