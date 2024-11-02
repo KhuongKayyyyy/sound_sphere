@@ -37,9 +37,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       await _userRepository.createUserWithEmailAndPassword(
           event.email, event.password);
-      emit(state.cloneWith(isSuccess: true));
+      emit(RegisterSuccess());
     } catch (e) {
-      emit(state.cloneWith(isFailure: true));
+      emit(RegisterFailure());
     }
     // finally {
     //   emit(state.cloneWith(isSubmitting: false));

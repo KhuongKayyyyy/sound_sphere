@@ -20,6 +20,7 @@ class SignUpForm extends StatefulWidget {
   final bool isPasswordVisible;
   final VoidCallback onTogglePasswordVisibility;
   final VoidCallback onSignUpTap;
+  final VoidCallback onSignInTap;
 
   const SignUpForm({
     super.key,
@@ -36,6 +37,7 @@ class SignUpForm extends StatefulWidget {
     required this.isPasswordVisible,
     required this.onTogglePasswordVisibility,
     required this.onSignUpTap,
+    required this.onSignInTap,
   });
 
   @override
@@ -267,7 +269,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       fontWeight: FontWeight.bold,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = widget.onSignUpTap,
+                      ..onTap = widget.onSignInTap,
                   ),
                 ],
               ),

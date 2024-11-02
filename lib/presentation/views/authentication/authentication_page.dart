@@ -43,10 +43,12 @@ class _LoginPageState extends State<LoginPage>
   // bloc
   UserRepository userRepository = UserRepository();
   late final LoginBloc loginBloc;
+  late final RegisterBloc registerBloc;
   @override
   void initState() {
     super.initState();
     loginBloc = LoginBloc(userRepository: userRepository);
+    registerBloc = RegisterBloc(userRepository: userRepository);
     emailController.addListener(_validateEmail);
     emailFocusNode.addListener(() {
       setState(() {});
@@ -124,29 +126,55 @@ class _LoginPageState extends State<LoginPage>
                   return FadeTransition(opacity: animation, child: child);
                 },
                 child: isSignUp
-                    ? SignUpForm(
-                        animationController: _animationController,
-                        nameController: nameController,
-                        emailController: emailController,
-                        passwordController: passwordController,
-                        passwordConfirmController: passwordConfirmController,
-                        nameFocusNode: nameFocusNode,
-                        emailFocusNode: emailFocusNode,
-                        passwordFocusNode: passwordFocusNode,
-                        passwordConfirmFocusNode: passwordConfirmFocusNode,
-                        isEmailValid: isEmailValid,
-                        isPasswordVisible: isPasswordVisible,
-                        onTogglePasswordVisibility: () {
-                          setState(() {
-                            isPasswordVisible = !isPasswordVisible;
-                          });
+                    ? BlocListener<RegisterBloc, RegisterState>(
+                        bloc: registerBloc,
+                        listener: (context, state) {
+                          if (state is RegisterFailure) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Error while signing up"),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          } else if (state is RegisterSuccess) {
+                            while (context.canPop()) {
+                              context.pop();
+                            }
+                            context.goNamed(Routes.home);
+                          } else if (state is RegisterLoading) {
+                            EasyLoading.show(status: 'Signing up...');
+                          }
                         },
-                        onSignUpTap: () {
-                          setState(() {
-                            isSignUp = !isSignUp;
-                          });
-                        },
-                        key: const ValueKey('SignUpForm'),
+                        child: SignUpForm(
+                          animationController: _animationController,
+                          nameController: nameController,
+                          emailController: emailController,
+                          passwordController: passwordController,
+                          passwordConfirmController: passwordConfirmController,
+                          nameFocusNode: nameFocusNode,
+                          emailFocusNode: emailFocusNode,
+                          passwordFocusNode: passwordFocusNode,
+                          passwordConfirmFocusNode: passwordConfirmFocusNode,
+                          isEmailValid: isEmailValid,
+                          isPasswordVisible: isPasswordVisible,
+                          onTogglePasswordVisibility: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                          onSignUpTap: () {
+                            registerBloc.add(RegisterEventPressed(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ));
+                          },
+                          onSignInTap: () {
+                            setState(() {
+                              isSignUp = !isSignUp;
+                            });
+                          },
+                          key: const ValueKey('SignUpForm'),
+                        ),
                       )
                     : BlocListener<LoginBloc, LoginState>(
                         listener: (context, state) {
