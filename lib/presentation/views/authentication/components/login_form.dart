@@ -2,10 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
-import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/main_button.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/social_button.dart';
 
@@ -20,6 +18,7 @@ class LoginForm extends StatelessWidget {
   final VoidCallback onTogglePasswordVisibility;
   final VoidCallback onSignUpTap;
   final VoidCallback onSignInTap;
+  final VoidCallback? onGoogleSignInTap;
 
   const LoginForm({
     super.key,
@@ -33,6 +32,7 @@ class LoginForm extends StatelessWidget {
     required this.onTogglePasswordVisibility,
     required this.onSignUpTap,
     required this.onSignInTap,
+    this.onGoogleSignInTap,
   });
 
   @override
@@ -139,7 +139,10 @@ class LoginForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SocialButton(image: AppIcon.google),
+                SocialButton(
+                  image: AppIcon.google,
+                  onTap: onGoogleSignInTap,
+                ),
                 SocialButton(image: AppIcon.facebook),
                 SocialButton(image: AppIcon.apple),
               ],

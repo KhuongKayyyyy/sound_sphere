@@ -96,14 +96,12 @@ final class LoginSuccess extends LoginState {
 // Custom state to handle cloned or updated states
 final class LoginCustomState extends LoginState {
   const LoginCustomState({
-    required bool isEmailValid,
-    required bool isPasswordValid,
+    required super.isEmailValid,
+    required super.isPasswordValid,
     required bool isSubmitting,
     required bool isSuccess,
     required bool isFailure,
   }) : super(
-          isEmailValid: isEmailValid,
-          isPasswordValid: isPasswordValid,
           isSubmitting: false,
           isSuccess: false,
           isFailure: false,

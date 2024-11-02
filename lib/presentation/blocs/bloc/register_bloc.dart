@@ -13,9 +13,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({required UserRepository userRepository})
       : _userRepository = userRepository,
         super(RegisterInitial()) {
-    // on<RegisterEvent>((event, emit) {
-    //   // TODO: implement event handler
-    // });
     on<RegisterEmailChanged>(_onEmailChanged);
     on<RegisterPasswordChanged>(_onPasswordChanged);
     on<RegisterEventPressed>(_onRegisterPressed);
