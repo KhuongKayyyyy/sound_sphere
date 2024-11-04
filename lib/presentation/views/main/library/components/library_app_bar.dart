@@ -23,7 +23,7 @@ class LibraryAppBar extends StatelessWidget {
       pinned: true,
       toolbarHeight: 50,
       expandedHeight: !showAppBarTitle ? 120 : 50,
-      backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.white.withOpacity(0.9),
       centerTitle: true,
       title: showAppBarTitle
           ? Text(
@@ -32,7 +32,10 @@ class LibraryAppBar extends StatelessWidget {
                   : currentIndex == 1
                       ? 'Artists'
                       : 'Genres',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             )
           : null,
       actions: showAppBarTitle

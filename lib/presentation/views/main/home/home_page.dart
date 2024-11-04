@@ -90,9 +90,9 @@ class _HomePageState extends State<HomePage> {
                           isExpanded ? TextAlign.start : TextAlign.center,
                       'Listen now',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: isExpanded ? 24.0 : 16.0,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: isExpanded ? 24.0 : 16.0,
+                          color: Colors.black),
                     ),
                   ),
                   // if (isExpanded &&

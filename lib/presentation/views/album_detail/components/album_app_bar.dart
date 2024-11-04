@@ -56,7 +56,8 @@ class AlbumDetailAppBar extends StatelessWidget {
         title: showAppBarTitle
             ? Text(
                 tempAlbum.title,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black),
               )
             : null,
         centerTitle: true,

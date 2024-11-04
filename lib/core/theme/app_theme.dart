@@ -4,6 +4,7 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 class AppTheme {
   static ThemeData get theme {
     return ThemeData(
+      useMaterial3: false,
       primaryColor: AppColor.primaryColor,
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: AppBarTheme(

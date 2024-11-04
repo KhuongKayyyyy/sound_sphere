@@ -88,7 +88,8 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
       title: showAppBarTitle
           ? Text(
               FakeData.songs.first.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black),
             )
           : null,
       centerTitle: true,

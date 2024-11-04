@@ -3,6 +3,7 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_app_bar.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_artist_item.dart';
+import 'package:sound_sphere/presentation/views/main/library/components/library_genre_list.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
@@ -102,8 +103,15 @@ class _LibraryPageState extends State<LibraryPage> {
                   );
                 default:
                   return SliverToBoxAdapter(
-                    child: Center(
-                      child: Text('No content available'),
+                    child: Column(
+                      children: [
+                        LibraryGenreList(
+                            genres: FakeData.genres.take(3).toList()),
+                        LibraryGenreList(
+                            genres: FakeData.genres.skip(3).take(5).toList()),
+                        LibraryGenreList(
+                            genres: FakeData.genres.skip(8).toList())
+                      ],
                     ),
                   );
               }
@@ -111,8 +119,8 @@ class _LibraryPageState extends State<LibraryPage> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              color: Colors.black,
-              height: 2000,
+              color: Colors.white,
+              height: 150,
             ),
           ),
         ],
