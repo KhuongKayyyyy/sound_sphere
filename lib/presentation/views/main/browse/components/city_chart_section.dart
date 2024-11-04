@@ -25,7 +25,7 @@ class CityChartSection extends StatelessWidget {
               child: const Row(
                 children: [
                   Text(
-                    "Daily Top 100",
+                    "City Top Songs",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,

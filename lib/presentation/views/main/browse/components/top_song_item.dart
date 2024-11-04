@@ -27,6 +27,32 @@ class _TopSongItemState extends State<TopSongItem> {
             child: Image.network(
               widget.song.imgURL,
               fit: BoxFit.cover,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: AppColor.primaryColor,
+                      strokeWidth: 1.5,
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  );
+                }
+              },
+              errorBuilder:
+                  (BuildContext context, Object error, StackTrace? stackTrace) {
+                return const Center(
+                  child: Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                );
+              },
             ),
           ),
         ),

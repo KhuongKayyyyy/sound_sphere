@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/app_user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
+import 'package:sound_sphere/data/models/radio.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
@@ -102,6 +104,23 @@ class FakeData {
       "imageURL":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdFxSCeRP_GVEn6nNG7uc09oSInbOK54aMng&s",
     },
+  ];
+  static List<RadioStation> radioList = [
+    RadioStation(
+        name: "Music 1",
+        image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUmoCjYlwBy4UahDRUDth5yAW0ibgspq4ddA&s",
+        description: "Tommorow's hits today"),
+    RadioStation(
+        name: "Music Country",
+        image:
+            "https://www.apple.com/newsroom/images/product/apple-music/Apple_announces-apple-music-radio-country_08182020_inline.jpg.large.jpg",
+        description: "Defining the country"),
+    RadioStation(
+        name: "Centery Hits",
+        image:
+            "https://www.apple.com/newsroom/images/product/apple-music/Apple_announces-apple-music-hits_08182020_inline.jpg.large.jpg",
+        description: "Hits that change world"),
   ];
   static List<Artist> artists = [
     Artist(

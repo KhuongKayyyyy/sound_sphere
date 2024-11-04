@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/presentation/views/main/browse/subpage/browse_chart_page.dart';
 import 'package:sound_sphere/presentation/views/main/browse/subpage/browse_genre_page.dart';
+import 'package:sound_sphere/presentation/views/main/browse/subpage/browse_radio_page.dart';
 import 'components/app_bar.dart';
 import 'subpage/browse_home_page.dart';
 
@@ -48,6 +49,7 @@ class _BrowsePageState extends State<BrowsePage> {
             onTabSelected: (index) => setState(() => _currentIndex = index),
           ),
           if (_currentIndex == 0) const BrowseHomePage(),
+          if (_currentIndex == 1) const BrowseRadioPage(),
           if (_currentIndex == 2) const BrowseGenresPage(),
           if (_currentIndex == 3) const BrowseChartPage(),
           SliverToBoxAdapter(

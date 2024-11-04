@@ -691,18 +691,6 @@ class _PlayerPageState extends State<PlayerPage> {
                     color: Colors.white,
                   ),
                 ),
-                // IconButton(
-                //   onPressed: () {
-                //     setState(() {
-                //       _isPlaying = !_isPlaying;
-                //     });
-                //   },
-                //   icon: Icon(
-                //     _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                //     color: Colors.white,
-                //     size: 70,
-                //   ),
-                // ),
                 InkWell(
                   onTap: () {
                     // Handle next song action
