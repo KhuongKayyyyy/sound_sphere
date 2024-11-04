@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_app_bar.dart';
+import 'package:sound_sphere/presentation/views/main/library/components/library_artist_item.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
@@ -63,19 +64,50 @@ class _LibraryPageState extends State<LibraryPage> {
             showAppBarTitle: showAppBar,
           ),
           SliverToBoxAdapter(child: const SizedBox(height: 20)),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              childAspectRatio: 0.9,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return LibraryAlbumItem(album: FakeData.albums[index]);
-              },
-              childCount: FakeData.albums.length,
-            ),
+          Builder(
+            builder: (context) {
+              switch (_currentIndex) {
+                case 0:
+                  return SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 4.0,
+                      crossAxisSpacing: 4.0,
+                      childAspectRatio: 0.9,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return LibraryAlbumItem(album: FakeData.albums[index]);
+                      },
+                      childCount: FakeData.albums.length,
+                    ),
+                  );
+                case 1:
+                  return SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.85,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: LibraryArtistItem(
+                              artist: FakeData.artists[index]),
+                        );
+                      },
+                      childCount: FakeData.artists.length,
+                    ),
+                  );
+                default:
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: Text('No content available'),
+                    ),
+                  );
+              }
+            },
           ),
           SliverToBoxAdapter(
             child: Container(

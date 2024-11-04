@@ -28,9 +28,9 @@ class LibraryAppBar extends StatelessWidget {
       title: showAppBarTitle
           ? Text(
               currentIndex == 0
-                  ? 'Artists'
+                  ? 'Albums'
                   : currentIndex == 1
-                      ? 'Albums'
+                      ? 'Artists'
                       : 'Genres',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             )
@@ -147,9 +147,9 @@ class LibraryAppBar extends StatelessWidget {
                       children: [
                         Text(
                           currentIndex == 0
-                              ? 'Artists'
+                              ? 'Albums'
                               : currentIndex == 1
-                                  ? 'Albums'
+                                  ? 'Artists'
                                   : 'Genres',
                           style: const TextStyle(
                             fontSize: 30,
