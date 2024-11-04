@@ -665,6 +665,7 @@ class _PlayerPageState extends State<PlayerPage> {
               ],
             ),
           ),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -680,18 +681,28 @@ class _PlayerPageState extends State<PlayerPage> {
                     color: Colors.white,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isPlaying = !_isPlaying;
-                    });
+                InkWell(
+                  onTap: () {
+                    // Handle next song action
                   },
-                  icon: Icon(
-                    _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                  child: Image.asset(
+                    AppIcon.play,
+                    scale: 15,
                     color: Colors.white,
-                    size: 70,
                   ),
                 ),
+                // IconButton(
+                //   onPressed: () {
+                //     setState(() {
+                //       _isPlaying = !_isPlaying;
+                //     });
+                //   },
+                //   icon: Icon(
+                //     _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                //     color: Colors.white,
+                //     size: 70,
+                //   ),
+                // ),
                 InkWell(
                   onTap: () {
                     // Handle next song action
@@ -705,7 +716,7 @@ class _PlayerPageState extends State<PlayerPage> {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
