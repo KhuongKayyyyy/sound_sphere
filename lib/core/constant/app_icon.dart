@@ -12,6 +12,7 @@ class AppIcon {
   static const String quality = 'assets/icons/quality.png';
   static const String shuffle = 'assets/icons/shuffle.png';
   static const String repeat = 'assets/icons/repeat.png';
+  static const String arrowUpDown = 'assets/icons/up-down.png';
   // ignore: constant_identifier_names
   static const String repeat_once = 'assets/icons/repeat_once.png';
   static const String infinity = 'assets/icons/infinity.png';

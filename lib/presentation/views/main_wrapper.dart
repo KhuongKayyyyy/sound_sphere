@@ -31,7 +31,7 @@ class _MainWrapperState extends State<MainWrapper>
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.05).animate(
       CurvedAnimation(
         parent: _scaleController,
         curve: Curves.bounceInOut,
