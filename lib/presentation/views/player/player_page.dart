@@ -23,16 +23,14 @@ class _PlayerPageState extends State<PlayerPage> {
 
   bool _isFavorite = false;
   bool _isPlaying = false;
-  bool _isShowPlaylist = false;
-  bool _isShowLyrics = false;
   bool _isShuffle = false;
   bool _isRepeat = false;
   final bool _isLoop = false;
   bool _isInfinity = false;
 
-  bool _isChangingState = false; // To prevent animations from retriggering
-
-  bool _isInPlayerMenu = false;
+  bool _isShowPlaylist = false;
+  bool _isShowLyrics = false;
+  bool _isInMenu = false;
 
   static final List<Song> playlistSongs = List.from(FakeData.songs.take(10));
   late Song currentSong;
@@ -57,13 +55,6 @@ class _PlayerPageState extends State<PlayerPage> {
   void _moveToNextSong() async {
     try {
       await _audioPlayer.seekToNext();
-      // currentSongIndex = (currentSongIndex + 1) % playlistSongs.length;
-
-      // // Update the current song with the new song info
-      // currentSong = playlistSongs[currentSongIndex];
-
-      // // Update the UI with the new song info
-      // setState(() {});
     } catch (e) {
       print("Error moving to the next song: $e");
     }
@@ -74,15 +65,6 @@ class _PlayerPageState extends State<PlayerPage> {
     try {
       setState(() {});
       await _audioPlayer.seekToPrevious();
-      // currentSongIndex = (currentSongIndex - 1) % playlistSongs.length;
-      // if (currentSongIndex < 0) {
-      //   currentSongIndex = playlistSongs.length - 1; // Wrap to the last song
-      // }
-      // // Update the current song with the new song info
-      // currentSong = playlistSongs[currentSongIndex];
-
-      // // Update the UI with the new song info
-      // setState(() {});
     } catch (e) {
       print("Error moving to the previous song: $e");
     }
@@ -186,11 +168,10 @@ class _PlayerPageState extends State<PlayerPage> {
                       AnimatedPositioned(
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
-                        top: _isInPlayerMenu
-                            ? -MediaQuery.of(context).size.height
-                            : 0,
+                        top:
+                            _isInMenu ? -MediaQuery.of(context).size.height : 0,
                         child: AnimatedOpacity(
-                          opacity: _isInPlayerMenu ? 0.0 : 1.0,
+                          opacity: _isInMenu ? 0.0 : 1.0,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                           child: SizedBox(
@@ -204,11 +185,9 @@ class _PlayerPageState extends State<PlayerPage> {
                       AnimatedPositioned(
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
-                        top: _isInPlayerMenu
-                            ? 0
-                            : MediaQuery.of(context).size.height,
+                        top: _isInMenu ? 0 : MediaQuery.of(context).size.height,
                         child: AnimatedOpacity(
-                          opacity: _isInPlayerMenu ? 1.0 : 0.0,
+                          opacity: _isInMenu ? 1.0 : 0.0,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                           child: SizedBox(
@@ -764,18 +743,31 @@ class _PlayerPageState extends State<PlayerPage> {
             child: buildPlaylistFunction(),
           ),
           // playlist
-          _isShowPlaylist
-              ? Flexible(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: buildPlayListSongList(),
-                      ),
-                      const SizedBox(height: 350),
-                    ],
-                  ),
-                )
-              : Expanded(child: buildPlayetSongLyricsNoSync()),
+          Expanded(
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+              child: _isShowPlaylist
+                  ? Column(
+                      key: const ValueKey('playlist'),
+                      children: [
+                        Expanded(
+                          child: buildPlayListSongList(),
+                        ),
+                        const SizedBox(height: 350),
+                      ],
+                    )
+                  : _isShowLyrics
+                      ? Padding(
+                          key: const ValueKey('lyrics'),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: buildPlayetSongLyricsNoSync(),
+                        )
+                      : Container(), // Placeholder or fallback widget if neither is true
+            ),
+          ),
         ],
       ),
     );
@@ -861,7 +853,6 @@ class _PlayerPageState extends State<PlayerPage> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    // Handle previous song action
                     _moveToPreviousSong();
                   });
                 },
@@ -897,12 +888,6 @@ class _PlayerPageState extends State<PlayerPage> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    // Handle previous song action
-                    // currentSongIndex =
-                    //     (currentSongIndex + 1) % playlistSongs.length;
-                    // currentSong = playlistSongs[currentSongIndex];
-                    // _initializeAudio();
-                    // _audioPlayer.play();
                     _moveToNextSong();
                   });
                 },
@@ -922,35 +907,54 @@ class _PlayerPageState extends State<PlayerPage> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          !_isShowLyrics
+              ? InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (_isInMenu == true) {
+                        _isShowPlaylist = !_isShowPlaylist;
+                        _isShowLyrics = !_isShowLyrics;
+                      } else {
+                        _isInMenu = !_isInMenu;
+                        _isShowLyrics = !_isShowLyrics;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.transparent,
+                    ),
+                    child: Image.asset(
+                      AppIcon.lyrics,
+                      scale: 20,
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                  ),
+                )
+              : InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isInMenu = !_isInMenu;
+                      _isShowLyrics = !_isShowLyrics;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                    child: Image.asset(
+                      AppIcon.lyrics,
+                      scale: 20,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  ),
+                ),
           InkWell(
-            onTap: () {
-              setState(() {
-                if (_isInPlayerMenu == false &&
-                    _isShowLyrics == false &&
-                    _isShowPlaylist == false) {
-                  _isInPlayerMenu = true;
-                  _isShowLyrics = true;
-                  _isShowPlaylist = false;
-                } else if (_isInPlayerMenu &&
-                    _isShowLyrics == true &&
-                    _isShowPlaylist == false) {
-                  _isShowLyrics = false;
-                  _isShowPlaylist = true;
-                } else {}
-                Future.delayed(const Duration(milliseconds: 700), () {
-                  setState(() {
-                    _isChangingState = false;
-                  });
-                });
-              });
-            },
-            child: Image.asset(
-              AppIcon.lyrics,
-              scale: 20,
-              color: Colors.white.withOpacity(0.7),
-            ),
-          ),
-          InkWell(
+            onTap: () {}, // Airplay functionality
             child: Image.asset(
               AppIcon.airplay,
               scale: 20,
@@ -958,36 +962,52 @@ class _PlayerPageState extends State<PlayerPage> {
             ),
           ),
           IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.timer_sharp,
-                color: Colors.white.withOpacity(0.7),
-                size: 35,
-              )),
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  if (_isInPlayerMenu) {
-                    _isShowLyrics = false;
-                    _isShowPlaylist = true;
-                  } else {
-                    _isInPlayerMenu = !_isInPlayerMenu;
-                    _isShowLyrics = false;
-                    _isShowPlaylist = true;
-                  }
-                });
-                // Delay the state change to allow animations to complete before flipping the state
-                Future.delayed(const Duration(milliseconds: 700), () {
-                  setState(() {
-                    _isChangingState = false;
-                  });
-                });
-              },
-              icon: Icon(
-                Icons.list_rounded,
-                color: Colors.white.withOpacity(0.7),
-                size: 35,
-              ))
+            onPressed: () {}, // Timer functionality
+            icon: Icon(
+              Icons.timer_sharp,
+              color: Colors.white.withOpacity(0.7),
+              size: 35,
+            ),
+          ),
+          !_isShowPlaylist
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_isInMenu == true) {
+                        _isShowLyrics = !_isShowLyrics;
+                        _isShowPlaylist = !_isShowPlaylist;
+                      } else {
+                        _isInMenu = !_isInMenu;
+                        _isShowPlaylist = !_isShowPlaylist;
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    Icons.list_rounded,
+                    color: Colors.white.withOpacity(0.7),
+                    size: 35,
+                  ),
+                )
+              : Container(
+                  // padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isInMenu = !_isInMenu;
+                        _isShowPlaylist = !_isShowPlaylist;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.list_rounded,
+                      color: Colors.black.withOpacity(0.7),
+                      size: 35,
+                    ),
+                  ),
+                ),
         ],
       );
     }
