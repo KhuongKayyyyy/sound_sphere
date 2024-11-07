@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sound_sphere/core/router/app_navigation.dart';
 import 'package:sound_sphere/core/theme/app_theme.dart';
-// import 'package:sound_sphere/data/res/user_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
+// import 'package:sound_sphere/data/res/user_repository_impl.dart';
 import 'package:sound_sphere/presentation/blocs/app_bloc_observer.dart';
 
 void main() async {
@@ -13,12 +13,14 @@ void main() async {
   configLoading();
   Bloc.observer = AppBlocObserver();
 
-  // final userRepository = UserRepository();
+  // final userRepository = UserRepositoryImpl();
   // try {
   //   // await userRepository.createUserWithEmailAndPassword(
   //   //     "test@gmail.com", "test1123");
   //   await userRepository.signInWithEmailAndPassword(
   //       "test@gmail.com", "test1123");
+  //   final user = userRepository.getUser();
+  //   print("Firebase User: $user");
   // } catch (e) {
   //   print("Error signing in with email and password: $e");
   // }

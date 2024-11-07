@@ -4,6 +4,8 @@ class Song {
   final String albumName;
   final String duration;
   final String imgURL;
+  final String lyrics;
+  final String urlMedia;
 
   Song({
     required this.title,
@@ -11,5 +13,7 @@ class Song {
     required this.albumName,
     required this.duration,
     required this.imgURL,
+    required this.lyrics,
+    required this.urlMedia,
   });
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/router/routes.dart';
@@ -16,20 +17,144 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  Song currentSong = FakeData.songs[2];
-  final List<Song> _playlistSongs =
-      List.from(FakeData.songs.take(10)); // Initialize with 10 songs
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  Duration _currentPosition = Duration.zero;
+  Duration _totalDuration = Duration.zero;
+
   bool _isFavorite = false;
   bool _isPlaying = false;
   bool _isShowPlaylist = false;
+  bool _isShowLyrics = false;
   bool _isShuffle = false;
   bool _isRepeat = false;
   final bool _isLoop = false;
   bool _isInfinity = false;
 
+  bool _isChangingState = false; // To prevent animations from retriggering
+
+  bool _isInPlayerMenu = false;
+
+  static final List<Song> playlistSongs = List.from(FakeData.songs.take(10));
+  late Song currentSong;
+  late int currentSongIndex;
+
+  @override
+  void initState() {
+    currentSongIndex = 0;
+    currentSong = playlistSongs.elementAt(currentSongIndex);
+    List<AudioSource> audioSources = playlistSongs
+        .map((song) =>
+            AudioSource.uri(Uri.parse(song.urlMedia))) // Use the urlMedia field
+        .toList();
+    final concatenatingAudioSource =
+        ConcatenatingAudioSource(children: audioSources);
+    _audioPlayer.setAudioSource(concatenatingAudioSource);
+
+    super.initState();
+    _initializeAudio();
+  }
+
+  void _moveToNextSong() async {
+    try {
+      await _audioPlayer.seekToNext();
+      // currentSongIndex = (currentSongIndex + 1) % playlistSongs.length;
+
+      // // Update the current song with the new song info
+      // currentSong = playlistSongs[currentSongIndex];
+
+      // // Update the UI with the new song info
+      // setState(() {});
+    } catch (e) {
+      print("Error moving to the next song: $e");
+    }
+  }
+
+// To move to the previous song in the playlist
+  void _moveToPreviousSong() async {
+    try {
+      setState(() {});
+      await _audioPlayer.seekToPrevious();
+      // currentSongIndex = (currentSongIndex - 1) % playlistSongs.length;
+      // if (currentSongIndex < 0) {
+      //   currentSongIndex = playlistSongs.length - 1; // Wrap to the last song
+      // }
+      // // Update the current song with the new song info
+      // currentSong = playlistSongs[currentSongIndex];
+
+      // // Update the UI with the new song info
+      // setState(() {});
+    } catch (e) {
+      print("Error moving to the previous song: $e");
+    }
+  }
+
+  void _updateCurrentSong() {
+    final newIndex = _audioPlayer.currentIndex;
+    if (newIndex != currentSongIndex) {
+      currentSongIndex = newIndex!;
+      currentSong = playlistSongs[currentSongIndex];
+      setState(() {});
+    }
+  }
+
+  Future<void> _initializeAudio() async {
+    try {
+      // Set the audio URL
+
+      // await _audioPlayer.setUrl(currentSong.urlMedia);
+
+      // Listen to position changes
+      _audioPlayer.positionStream.listen((position) {
+        setState(() {
+          _currentPosition = position;
+        });
+      });
+
+      // Listen to the duration of the audio file
+      _audioPlayer.durationStream.listen((duration) {
+        setState(() {
+          _totalDuration = duration ?? Duration.zero;
+        });
+      });
+
+      // Listen to playback state changes
+      _audioPlayer.playerStateStream.listen((state) {
+        setState(() {
+          _isPlaying = state.playing;
+        });
+      });
+      _audioPlayer.playerStateStream.listen((state) {
+        if (state.processingState == ProcessingState.completed) {
+          print("Song completed");
+          setState(() {
+            _moveToNextSong;
+          });
+        }
+      });
+      _audioPlayer.playbackEventStream.listen((e) => _updateCurrentSong());
+    } catch (e) {
+      print("Error loading audio: $e");
+    }
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  void _togglePlayPause() {
+    if (_isPlaying) {
+      _audioPlayer.pause();
+    } else {
+      _audioPlayer.play();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           // Background image
@@ -61,11 +186,11 @@ class _PlayerPageState extends State<PlayerPage> {
                       AnimatedPositioned(
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
-                        top: _isShowPlaylist
+                        top: _isInPlayerMenu
                             ? -MediaQuery.of(context).size.height
                             : 0,
                         child: AnimatedOpacity(
-                          opacity: _isShowPlaylist ? 0.0 : 1.0,
+                          opacity: _isInPlayerMenu ? 0.0 : 1.0,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                           child: SizedBox(
@@ -79,17 +204,17 @@ class _PlayerPageState extends State<PlayerPage> {
                       AnimatedPositioned(
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
-                        top: _isShowPlaylist
+                        top: _isInPlayerMenu
                             ? 0
                             : MediaQuery.of(context).size.height,
                         child: AnimatedOpacity(
-                          opacity: _isShowPlaylist ? 1.0 : 0.0,
+                          opacity: _isInPlayerMenu ? 1.0 : 0.0,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            child: _buildPlayerPlaylist(),
+                            child: _buildPlayerFunction(),
                           ),
                         ),
                       ),
@@ -283,7 +408,6 @@ class _PlayerPageState extends State<PlayerPage> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
         // song name and artist name
         InkWell(
           onTap: () {
@@ -314,8 +438,8 @@ class _PlayerPageState extends State<PlayerPage> {
     );
   }
 
-  Widget _buildPlayerPlaylist() {
-    Widget buildPlaylistCurrentSong() {
+  Widget _buildPlayerFunction() {
+    Widget buildSmallCurrentSong() {
       return Row(
         children: [
           SizedBox(
@@ -333,12 +457,16 @@ class _PlayerPageState extends State<PlayerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                currentSong.title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                width: 180,
+                child: Text(
+                  currentSong.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Text(
@@ -504,14 +632,14 @@ class _PlayerPageState extends State<PlayerPage> {
         if (newIndex > oldIndex) {
           newIndex -= 1;
         }
-        final song = _playlistSongs.removeAt(oldIndex);
-        _playlistSongs.insert(newIndex, song);
+        final song = playlistSongs.removeAt(oldIndex);
+        playlistSongs.insert(newIndex, song);
       });
     }
 
     void removeSong(Song song) {
       setState(() {
-        _playlistSongs.remove(song);
+        playlistSongs.remove(song);
       });
     }
 
@@ -528,7 +656,7 @@ class _PlayerPageState extends State<PlayerPage> {
         shrinkWrap: true,
         buildDefaultDragHandles: false,
         children: [
-          for (var song in _playlistSongs)
+          for (var song in playlistSongs)
             Dismissible(
               key: ValueKey(song.title),
               background: Container(
@@ -587,7 +715,7 @@ class _PlayerPageState extends State<PlayerPage> {
                       ),
                       const Spacer(),
                       ReorderableDragStartListener(
-                        index: _playlistSongs.indexOf(song),
+                        index: playlistSongs.indexOf(song),
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -605,7 +733,23 @@ class _PlayerPageState extends State<PlayerPage> {
       );
     }
 
-    // playlist container
+    Widget buildPlayetSongLyricsNoSync() {
+      return SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Text(
+            currentSong.lyrics,
+            style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                fontWeight: FontWeight.w900,
+                height: 1.5,
+                fontSize: 35),
+          ),
+        ),
+      );
+    }
+
+    // player function container
     return Container(
       key: const ValueKey('playlist'),
       // color: Colors.white,
@@ -614,134 +758,249 @@ class _PlayerPageState extends State<PlayerPage> {
           // current song
           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: buildPlaylistCurrentSong()),
+              child: buildSmallCurrentSong()),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
             child: buildPlaylistFunction(),
           ),
           // playlist
-          Expanded(
-            child: buildPlayListSongList(),
-          ),
-          const SizedBox(height: 350),
+          _isShowPlaylist
+              ? Flexible(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: buildPlayListSongList(),
+                      ),
+                      const SizedBox(height: 350),
+                    ],
+                  ),
+                )
+              : Expanded(child: buildPlayetSongLyricsNoSync()),
         ],
       ),
     );
   }
 
   Widget _buildSongPlayControl() {
+    bool isSliding = false;
+    List<Widget> buildSongDuration() {
+      String formatDuration(Duration duration) {
+        String twoDigits(int n) => n.toString().padLeft(2, '0');
+        String minutes = twoDigits(duration.inMinutes);
+        String seconds = twoDigits(duration.inSeconds.remainder(60));
+        return "$minutes:$seconds";
+      }
+
+      return [
+        SizedBox(
+            width: double.infinity,
+            height: isSliding ? 10 : 5, // Scale up height when sliding
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  activeTrackColor: Colors.white,
+                  thumbColor: Colors.white,
+                  thumbShape: RoundSliderThumbShape(
+                      enabledThumbRadius: isSliding ? 10.0 : 6.0),
+                  overlayShape: RoundSliderOverlayShape(
+                      overlayRadius: isSliding ? 20.0 : 0),
+                ),
+                child: Slider(
+                  value: _currentPosition.inSeconds.toDouble(),
+                  max: _totalDuration.inSeconds.toDouble(),
+                  onChanged: (value) async {
+                    await _audioPlayer.seek(Duration(seconds: value.toInt()));
+                    setState(() {
+                      _currentPosition = Duration(seconds: value.toInt());
+                    });
+                  },
+                  onChangeStart: (value) {
+                    setState(() {
+                      isSliding = true; // Start scaling and color change
+                    });
+                  },
+                  onChangeEnd: (value) {
+                    setState(() {
+                      isSliding = false; // End scaling and color change
+                    });
+                  },
+                ),
+              ),
+            )),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          child: Row(
+            children: [
+              Text(
+                formatDuration(_currentPosition),
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+              Text(
+                formatDuration(_totalDuration - _currentPosition),
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
+
+    List<Widget> buildSongControl() {
+      return [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    // Handle previous song action
+                    _moveToPreviousSong();
+                  });
+                },
+                child: Image.asset(
+                  AppIcon.play_previous,
+                  scale: 15,
+                  color: Colors.white,
+                ),
+              ),
+              InkWell(
+                onTap: _togglePlayPause,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  child: !_isPlaying
+                      ? Image.asset(
+                          AppIcon.play,
+                          key: const ValueKey('play'),
+                          scale: 15,
+                          color: Colors.white,
+                        )
+                      : Image.asset(
+                          AppIcon.pause,
+                          key: const ValueKey('pause'),
+                          scale: 15,
+                          color: Colors.white,
+                        ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    // Handle previous song action
+                    // currentSongIndex =
+                    //     (currentSongIndex + 1) % playlistSongs.length;
+                    // currentSong = playlistSongs[currentSongIndex];
+                    // _initializeAudio();
+                    // _audioPlayer.play();
+                    _moveToNextSong();
+                  });
+                },
+                child: Image.asset(
+                  AppIcon.play_next,
+                  scale: 15,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
+
+    Widget buildSongUltility() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                if (_isInPlayerMenu == false &&
+                    _isShowLyrics == false &&
+                    _isShowPlaylist == false) {
+                  _isInPlayerMenu = true;
+                  _isShowLyrics = true;
+                  _isShowPlaylist = false;
+                } else if (_isInPlayerMenu &&
+                    _isShowLyrics == true &&
+                    _isShowPlaylist == false) {
+                  _isShowLyrics = false;
+                  _isShowPlaylist = true;
+                } else {}
+                Future.delayed(const Duration(milliseconds: 700), () {
+                  setState(() {
+                    _isChangingState = false;
+                  });
+                });
+              });
+            },
+            child: Image.asset(
+              AppIcon.lyrics,
+              scale: 20,
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ),
+          InkWell(
+            child: Image.asset(
+              AppIcon.airplay,
+              scale: 20,
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.timer_sharp,
+                color: Colors.white.withOpacity(0.7),
+                size: 35,
+              )),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  if (_isInPlayerMenu) {
+                    _isShowLyrics = false;
+                    _isShowPlaylist = true;
+                  } else {
+                    _isInPlayerMenu = !_isInPlayerMenu;
+                    _isShowLyrics = false;
+                    _isShowPlaylist = true;
+                  }
+                });
+                // Delay the state change to allow animations to complete before flipping the state
+                Future.delayed(const Duration(milliseconds: 700), () {
+                  setState(() {
+                    _isChangingState = false;
+                  });
+                });
+              },
+              icon: Icon(
+                Icons.list_rounded,
+                color: Colors.white.withOpacity(0.7),
+                size: 35,
+              ))
+        ],
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          SizedBox(
-            height: 5,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: LinearProgressIndicator(
-                value: 0.2,
-                backgroundColor: Colors.white.withOpacity(0.5),
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            child: Row(
-              children: [
-                Text(
-                  '0:00',
-                  style: TextStyle(
-                      color: Colors.white.withOpacity(0.7),
-                      fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                Text(
-                  '-3:45',
-                  style: TextStyle(
-                      color: Colors.white.withOpacity(0.7),
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          ...buildSongDuration(),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    // Handle previous song action
-                  },
-                  child: Image.asset(
-                    AppIcon.play_previous,
-                    scale: 15,
-                    color: Colors.white,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Handle next song action
-                  },
-                  child: Image.asset(
-                    AppIcon.play,
-                    scale: 15,
-                    color: Colors.white,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Handle next song action
-                  },
-                  child: Image.asset(
-                    AppIcon.play_next,
-                    scale: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ...buildSongControl(),
           const SizedBox(height: 50),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                child: Image.asset(
-                  AppIcon.lyrics,
-                  scale: 20,
-                  color: Colors.white.withOpacity(0.7),
-                ),
-              ),
-              InkWell(
-                child: Image.asset(
-                  AppIcon.airplay,
-                  scale: 20,
-                  color: Colors.white.withOpacity(0.7),
-                ),
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.timer_sharp,
-                    color: Colors.white.withOpacity(0.7),
-                    size: 35,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isShowPlaylist = !_isShowPlaylist;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.list_rounded,
-                    color: Colors.white.withOpacity(0.7),
-                    size: 35,
-                  ))
-            ],
-          )
+          buildSongUltility(),
         ],
       ),
     );

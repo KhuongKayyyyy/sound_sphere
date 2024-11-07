@@ -402,222 +402,187 @@ class FakeData {
   ];
   static List<Song> songs = [
     Song(
+        title: "Đầu đường xó chợ",
+        artistName: "Obito, Lăng LD",
+        albumName: "Đánh đổi",
+        duration: "3:41",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Gọi thằng anh để tránh cái án\nTrong xóm tao hỏi mày đang đâu\nTiếng canh sòng ở bên đường đắp\nGấp gáp trả lời là đang xâu\nCó thằng anh thì chấp hành tốt\nRa sớm nói chuyện như Đen Vâu\nTrên bàn nhậu nó kể\nHồi đó chỉ vì vài ánh nhìn\nMà bem nhau\nCó thằng kiếm cơm bằng xe đai\nLang thang nơi biên giới dù đêm thâu\nCó thằng mất đi anh chị em\nCần bia và rượu để quên đau\nTao lớn lên từ đường hẻm\nNơi không dễ dàng để tin nhau\nTao biết hết ngõ ngách tầng lớp thấp\nNơi không ai muốn vào thêm sâu\nMấy thằng trẻ còn chưa đầy hai mươi\nNhưng số vết nó chém\nNhiều hơn số tuổi\nMục tiêu chạy vệt đỏ còn đang tươi\nNhưng cái tôi lớn kêu nó cố đuổi\nMắt nó trừng như thể trời gầm\nDù nhà thờ Đức Mẹ Quan Âm\nDùng bạo lực để tạo ra luật\nQuyền lực là thứ mà nó quan tâm\nĐời tẩy chay vì nó dính án\nĐối với tao tụi nó là bạn\nTao thấy được lí do nó làm\nĐằng sau câu truyện mà nó dính dáng\nXưa nó vẫn cùng tao đến trường\nThầy cô khen tương lai nó sáng\nNhưng tất cả mọi thứ thay đổi\nChỉ vì một lần nó đeo khăn tang\nThằng tốt tính nhưng ba mẹ mất sớm\nVì chất kích thích nên phải vào đời\nThằng thì anh em ngã xuống\nVì dao kiếm\nHận thù nên lao đầu vào cuộc chơi\nThằng bị ăn hiếp ám ảnh từ nhỏ\nNên thích vung đấm\nĐể không thành trò cười\nThằng thì đỏ đen, bán gia bại sản\nCha mẹ từ mặt nên thành bụi đời\nThằng thì tâm lý tan nát vì tội\nMỗi đêm dằn vặt đọc kinh xám hối\nThằng thì vẫn chưa nhìn thấy được ngày ra\nVì một phút bốc đồng\nĐể cảm xúc lên ngôi\nThằng thì vốn không còn lựa chọn nào\nĐành bước chân vào để được tồn tại\nThằng thì chỉ mong\nTìm lại được yên bình\nNhư những ngày bé để không chọn sai\nGọi thằng anh để tránh cái án\nTrong xóm tao hỏi mày đang đâu\nTiếng canh sòng ở bên đường đắp\nGấp gáp trả lời là đang xâu\nCó thằng anh thì chấp hành tốt\nRa sớm nói chuyện như Đen Vâu\nTrên bàn nhậu nó kể\nHồi đó chỉ vì vài ánh nhìn\nMà bem nhau\nCó thằng kiếm cơm bằng xe đai\nLang thang nơi biên giới dù đêm thâu\nCó thằng mất đi anh chị em\nCần bia và rượu để quên đau\nTao lớn lên từ đường hẻm\nNơi không dễ dàng để tin nhau\nTao biết hết ngõ ngách tầng lớp thấp\nNơi không ai muốn vào thêm sâu\nThằng thì đi tắm sông chung bầy\nSẩy chân té vào tay người âm\nThằng hưởng dương trong khuôn viên trường\nNên nó sống mãi tuổi 15\nThằng bước ra sau phiên phúc thẩm\nChỉ cười rồi nói là thua rồi\nThằng có tiền còn sống không thọ\nThì thằng thiếu thốn thường đua đòi\nĐất chật người ngông\nCha nó lấy bạo lực làm nôi\nNên nó không thích sống kiếp làm công\nHai chữ gia đình sẻ làm đôi\nNó bỏ nhà đi bụi đời\nRa đường làm con tốt\nHay ra đường để làm con tốt\nThí cặp mắt này mù vì\nDù gì sống đách cần nhìn trước sau\nNó chưa từng có ước ao\nNgoài việc thoát khỏi bản chất\nCủa một thằng ù lì\nĐiểm cuối cuộc đời hên xui\nNhư chơi oẳn tù xì\nCái bo cũng chỉ để gõ\nNếu ở đó nó được gọi là cô nhi\nNên lánh nhanh\nTrước khi đột ngột qua đời\nNó không định đánh anh đâu\nMà là tới cắt nhượng\nMóc ruột lột da\nAnh liều một pha\nCho má có vốn mở sạp bán bánh canh\nRồi ra đầu thú theo lệnh\nTheo lệnh triệu tập của 113",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/DauDuongXoCho-Obito-11836720.mp3?st=UZXn7SFNYKW6jLCrvHdH2w&e=1730940483&a=1&p=0&r=4a25d3ccf74387bf4ec1dd6aba4d0e1c"),
+    Song(
+        title: "Biên Giới Long Bình",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Xe đai đang lăn bánh\nHướng thẳng về phía biên giới Long Bình\nTay nó vặn hết số với tiếng nẹt bô\nQua nhiều công trình\nĐồ phạm pháp sau lưng xe\nNên đường lui nó quyết không nhìn\nTốc độ nó đang đi\nĐủ có thể đưa nó lên khung hình\nLỡ đụng ai chết nó cũng mặc kệ\nVì lời khuyên trong nghề toàn thế\nThà là không ai nhìn thấy nó\nCòn hơn là không còn thấy đường về\nĐặt mạng sống lên trên bàn cân\nVì chỉ mong cho nhà cửa không đói\nTâm cắn rứt thì cũng phải cam\nNó trách sao đời đối xử nó tệ\nNó sẵn sàng cho kẹo đồng bay\nKhi giao dịch bị sai chi tiết\nSẵn sàng xuống tay hạ thằng khác\nNếu đó là cách để nó đi tiếp\nNếu là cách để nhà nó no\nKéo một khói thật to khi siết\nVới người thân nó là người tốt\nCòn với mày là một sự uy hiếp\nChấp nhận để thân dính mùi tanh\nĐể nhà ngửi mùi trong lành\nKhí nó toát ra mặt lạnh tanh\nKhi cuộc đời nó không thành\nNó là thứ gia đình mày sợ\nKhi đồng hồ báo là đêm về khuya\nNó là đứa con ngoan của quỷ\nKhi bị đời cho ra rìa\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một vụ\nThêm một vụ, thêm một vụ\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một vụ, thêm một vụ\nThêm một vụ nó gây ra\nGiác quan nhạy trong màn đêm\nKĩ thuật như là game\nSố vết thương cộng thêm\nTâm lý nguyên màu đen\nNgửi được sự nguy hiểm\nHành tung như là phim\nCoi nó như thằng điên\nThằng bé chỉ muốn được yên\nNó không muốn\nNó được sinh ra trên cõi đời này\nĐể trở thành xấu\nNó hối hận vì sự lựa chọn\nĐể làm việc sai của nó lần đầu\nGiày xéo chính bản thân vì tội\nNó gây đau thương cho bao người khác\nNhưng quá trễ trở thành cụm từ\nMà nó nhớ mãi như một bài nhạc\nNó ước được chọn, ước được chọn\nƯớc được chọn lại\nKhác cuộc đời, khác hoàn cảnh\nKhác cả thực tại\nKhác suy nghĩ, khác hành động\nKhác những lần dại\nNhưng nó phải đền tội trong hôm nay\nVì cuộc sống không ưu ái một ai\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một thằng, thêm một thằng\nDont let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một thằng, thêm một thằng\nThêm một thằng được sinh ra",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/BienGioiLongBinh-Obito-11836721.mp3?st=JU3Tz_zgIhP6j2XEIb2vZQ&e=1730872705&a=1&p=0&r=40bc0bbb44f75652e74b9f74d70ea85d"),
+    Song(
+        title: "16",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Bắt đầu 16\nTừ bỏ ý định làm người xấu\nTập tễnh viết lời vào tờ giấy\nĐem bao chuyện không hay\nMuốn kể cho mọi người thấu\nYoung boy with the passion\nLove to know he thinks back\nMặc kệ mọi thứ đang dang dở\nBut * it I still rap\nBắt đầu thêm những chuyện không vui\nNhưng lần này vấn đề\nNó không nằm ở ngoài đường\nThằng bé bắt đầu biết dùng âm nhạc\nĐể vẽ thêm màu sắc\nThêm hi vọng trong đời thường\nBa mẹ nó làm việc đến thâu đêm\nCũng không vui với cái cách nó chọn đường\nThằng bé lúc đó cũng không nghĩ\nÂm nhạc cùng với nó sau này\nTrở thành tình trường\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nLúc đầu toàn lời độc trong lời văn\nChửi thề dính ở mồm như thuốc phiện\nNhạc chửi thì ai mà muốn nghe\nCõi sâu của tâm hồn\nThì sau này nó mới tìm\nCảm xúc cứ như nén ở phần ngực\nCon người mới đôi khi khiến nó buồn bực\nMơ lớn và tính cách hiếu thắng\nNhưng tự tìm cách bước\nĐôi khi khiến nó ấm ức\nNhưng kiên quyết\nKhông muốn trở thành người xấu\nVẫn cố dù không biết đi từ đâu\nChân cứ bước đi trong vô thức\nCũng vô thức trưởng thành hơn ngày đầu\nSự vô thức làm tâm hồn nó nở hoa\nSự vô thức làm nó chìm trong cảm xúc\nSự vô thức tạo cho nó thế giới riêng\nVô tình khiến nó không biết\nChuyện gì đang diễn ra\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNgười thân trong nhà cắn xé nhau\nBiến cố ập ngay lúc nó bay bổng\nThêm một lần thằng bé đó đau lòng\nBắt đầu biết sao ba mẹ làm thâu đêm\nĐể ý khi mẹ trốn vào một góc\nBiết được những con số cần giải quyết\nNhững con số khi nhìn vào là bật khóc\nQuyết định đứng dậy và nó đi\nBỏ tâm sự vào âm nhạc điều nó nghĩ\nLao đầu vào cuộc đời mạng nó phi\nKhông ngại làm con tốt cho đời thí\nChuyến xe đưa nó đi xa thật xa\nTrách nhiệm không cho chân nó được ngã\nNuôi ý chí để dòng họ nó nhờ vả\nÔm giấc mộng thành công\nĐể tâm hồn được về nhà\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/16-Obito-11836722.mp3?st=hvwVuVSedw9_OSZBFgPUkA&e=1730941456&a=1&p=0&r=7e5eea6f1af4fb2c1c03367b79c6ce47"),
+    Song(
+        title: "Sài Gòn ơi",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Ouuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh\nTim anh nóng lòng gặp nàng\nĐể cảm xúc lên từng nhịp\nNơi quá khứ anh không vui\nHạnh phúc mắt anh không nhìn kịp\nAnh pack hết đồ nhìn thật lâu\nBồi hồi trên chuyến xe trong đêm\nMắt sáng như sao\nVì được nghe thật nhiều điều vui\nKhi bên em\nTrò chơi em thích đánh đố\nPhố sáng khi em lên đồ\nVì tương lai nên anh cũng cố\nDù em khiến anh đôi khi hơi rồ\nVà giá như giá như giá như\nVà giá như giá như giá như\nGiá như anh hiểu được em\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nTưởng chừng như dài lâu\nTưởng như yêu đậm sâu\nTưởng như ta hợp nhau\nGiờ còn chẳng nói với nhau một câu\nEm dắt anh đi gặp nhiều người\nDù họ không tốt với anh\nHọ khiến anh rơi giữa dòng đời\nMàn đêm đang kéo tới nhanh\nVà rồi em đâu\nTình mình thêm đau\nTại sao em nỡ vô tâm\nĐể vỡ trái tim người yêu em nhiều nhất\nOh oh baby à baby\nRồi người ta cũng sẽ bỏ em đi\nKhi mọi thứ đã đủ đầy\nChỉ mình em với những\nKhoảng không cô đơn\nỪ thì anh vẫn thương em\nNhưng làm sao để quay về\nNgày tình mình như hôm nào\nOh oh oh\nOh oh oh\nOh oh oh\nOh\nGiá như anh hiểu được em",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/SaiGonOi-Obito-11836723.mp3?st=y51o9x0jRFZce6uYriRd-Q&e=1730896233&a=1&p=0&r=209d155f38ece3be722e7eac81b938ac"),
+    Song(
+        title: "Trốn Chạy",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Đầu óc tao đang nặng trịch đi\nNếu mà ngay từ đầu\nNày chỉ muốn lợi dụng tao\nSao con ph* mày không nói m* vậy đi\nLàm ra vẻ ai cũng muốn làm hại mày\nCho tao hỏi mày làm vậy để chi\nNước mắt cá sấu để chi\nHay vì sợ cuộc đời mày dễ bí\nHay trên đời mày không còn ai để thí\nNội tao tim yếu rồi đêm đau\nSố mà tao kiếm được\nTao mong gửi về cho gia đình\nBao nhiêu thành phố nhiêu đêm thâu\nChạy show cho một đống\nĐể tâm lý rơi vào sự vô định\nLời mày nói đ** đúng với sự thật\nCơm mày ăn đ** phải là của mày\nVấn đề trong đời tao đủ chật\nVà tao nghĩ mặt mày cũng đủ dày\nTất cả thứ thuộc về tao\nĐáng ra có thể giúp\nCho ba mẹ tao bớt cực và bớt khóc\nTất cả thứ thuộc về tao\nĐáng ra có thể mua\nCho thằng em tao tuổi thơ không cực nhọc\nTất cả thứ thuộc về tao\nĐáng ra có thể làm\nCho gia đình tao thoát khỏi nơi chết chóc\nTất cả thứ thuộc về tao\nGiờ lại nằm trong túi mày\nTao phải nghĩ cách tồn tại đến nát óc\nCũng là giá tao phải trả cho hào quang\nGiá tao phải trả vì ngu dốt\nGiá tao phải trả\nVì những thứ tao không hiểu\nNhưng lại đi đặt niềm tin nơi không tốt\nTâm lý bị xé nát nơi quận 2\nSức khoẻ bị vắt kiệt đến hết sức\nKhoá miệng tao không tin một ai\nVà có cả suy nghĩ\nCần nhảy xuống để kết thúc\nChân cứ lê bước đi trong màn đêm\nCố tìm lại bản thân tao từng nên\nRượu gái chất cấm trong hộp đêm\nTrốn chạy những cảm xúc đang ập đến\nSự tự tin tao luôn có mất đi\nÁnh nắng trong nụ cười tao mất đi\nNgây thơ trong người tao mất đi\nCảm xúc cho âm nhạc cũng mất đi\nĐầu óc tao đang nặng trịch đi\nNếu mà ngay từ đầu\nMày chỉ muốn lợi dụng tao\nSao con ph* mày không nói m* vậy đi\nLàm ra vẻ ai cũng muốn làm hại mày\nCho tao hỏi mày làm vậy để chi\nNước mắt cá sấu để chi\nHay vì sợ cuộc đời mày dễ bí\nHay trên đời mày không còn ai để thí\nNội tao tim yếu rồi đêm đau\nSố mà tao kiếm được\nTao mong gửi về cho gia đình\nBao nhiêu thành phố nhiêu đêm thâu\nChạy show cho một đống\nĐể tâm lý rơi vào sự vô định\nLời mày nói đ** đúng với sự thật\nCơm mày ăn đ** phải là của mày\nVấn đề trong đời tao đủ chật\nVà tao nghĩ mặt mày cũng đủ dày\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nGiữ tất cả mọi thứ cho riêng tao\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nMong một giấc thật ngon trong chiêm bao\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nThêm thuốc vào cho quên đau\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nNỗi niềm này tao phải nuốt ngược vào\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy trốn chạy trốn chạy\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nTrốn chạy trốn chạy\nNên tao phải trốn\nNên tao phải trốn",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/TronChay-Obito-11836724.mp3?st=4iskjvq9LGjKzexQ8GeOcg&e=1730941467&a=1&p=0&r=4659e255b7dea9de38652b51fb63ab71"),
+    Song(
+        title: "Cất cánh (interlude)",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics: "Hẹn gấp chú ýChúng tôi xin báo báo chúng ta...",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/CatCanhInterlude-Obito-11836725.mp3?st=PyngbhDxU408JT7BQwYweA&e=1730941472&a=1&p=0&r=1f6f6862be768dd4c956d0208f162a7b"),
+    Song(
+        title: "Hà Nội",
+        artistName: "Obito VSTRA",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Họ gọi thành phố này là\nNơi khó tồn tại\nNhưng đây là nhà\nChỉ một mình em hiểu được buốt giá\nYêu sự buốt giá\nVì lòng lạnh lẽo nhiều rồi\nKhông có điều gì\nEm không hiểu được\nChỉ một tình yêu một lòng\nEm đã lựa chọn không ai lấy được\nAi làm đau anh à\nKhông sao đâu baby\nBaby hãy hãy nắm lấy tay em\nAi lừa dối anh à\nKhông sao đâu baby\nBaby có thể tin em\nEm xua đi cơn mưa buồn\nEm nuôi anh trong tâm hồn\nEm không chơi\nEm không đùa em yêu thôi\nEm cho anh thế giới đẹp\nEm cho anh thấy hết rồi\nNếu có ngã em sẽ dìu anh đi thôi\nBaby anh đang lo gì\nBaby anh đang nghĩ gì\nNghĩ nhiều mệt thêm thôi\nRơi sâu vô xuống bóng tối những góc tối\nChỉ mình anh thấy\nNước mắt giá buốt vết xước\nNhững nhức nhối\nVờ rằng không thấy\nAnh chỉ đang cố nuốt hết vào trong\nChờ một ngày nắng lên\nNhư anh hằng mong\nChợt bỗng dưng thấy em đến bên\nHealing all off my scars\nĐuổi đám mây tối đen\nVẽ lên cánh chim đang vươn xa\nLàm anh hiểu ra làm anh hiểu ra\nLàm anh hiểu ra nhiều điều\nEm khiến anh nhìn sâu vào tâm hồn\nLà tiếng êm mặc kệ\nBên ngoài kia ồn\nDẫn anh đi trong đêm\nSoi sáng bước anh đến\nLung linh như ánh nến trước gió",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/HaNoi-Obito-11836726.mp3?st=ymr6zD6Z6RoSpFft5dAfYQ&e=1730935954&a=1&p=0&r=6e396336ce1420af4ae3678531138da5"),
+    Song(
+        title: "Vô Điều Kiện",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Khi mà ngây thơ không còn nguyên\nThì tìm đâu ra bình yên\nNốc thêm viên để xua cơn noi\nChân đi tìm sự vô điều kiện\nThấy được nhiều thứ cần kiêng\nCố gắng cho đến lúc nằm yên\nKhông mở lòng một cách tuỳ tiện\nKhông để thứ không đáng làm phiền\nNhớ lại những lúc mà còn nhỏ\nThế giới này thật đẹp\nViệc cho việc nhận\nVốn không cần phải ghi chép\nCho đi vì mình yêu\nNhận lại dù không đòi\nTrao ai cũng như vậy\nKhông biết thế nào xấu\nThế nào là cao đẹp\nĐơn giản là tình yêu thuần khiết\nHay tại tao lớn quá nhanh\nTâm hồn đang héo mòn dần\nĐã từ bao giờ khi con tim\nVà lý trí chia hai\nRồi không còn thân\nĐã từ bao giờ\nTao đa nghi với mọi thứ\nNiềm vui kia không còn cần\nĐã từ bao giờ\nTao lại trở nên\nKhô cằn đến như này\nNụ cười kia không còn phần\nHay là tại tao tại mày tại đời\nTao cũng không biết\nHay là tại tao tại mày tại đời\nSự vô điều kiện từng trong tao\nNay lại thành có điều kiện\nTao cần điều kiện\nĐể có thể gặp một người\nCó thể đặt niềm tin vào một người\nCó thể làm việc cùng một người\nCó thể chia sẻ cho một người\nVà có thể để đi cùng với một người\nHay là tại tao tại mày tại đời\nTao cũng không biết\nHay là tại tao tại mày tại đời\nTao cũng không biết\nKhi mà ngây thơ không còn nguyên\nThì tìm đâu ra bình yên\nNốc thêm viên để xua cơn noi\nChân đi tìm sự vô điều kiện\nThấy được nhiều thứ cần kiêng\nCố gắng cho đến lúc nằm yên\nKhông mở lòng một cách tuỳ tiện\nKhông để thứ không đáng làm phiền",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/VoDieuKien-Obito-11836727.mp3?st=qULnRM2rG4aIkk12btOxDQ&e=1730941483&a=1&p=0&r=21f8de9b7961594887ce91e17cce6bbb"),
+    Song(
+        title: "Đánh Đổi",
+        artistName: "Obito, MCK",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Tao đánh đổi màn đêm yên giấc\nViết những bài nhạc hay nhất cuộc đời\nDi sản là nguồn cảm hứng\nFan theo răm rắp nhạc tao thuộc lời\nTrên bàn tiệc của tiên và quỷ\nTao là thằng duy nhất được mời\nMọi thứ đổ dồn hết vào tao\nNhư kiểu tao là một ván cược hời\nTao là đứa con của mặt trăng\nMang năng lượng mặt trời\nCuộc đời xoay tao như trực thăng\nVẫn vượt lên như thể gặp thời\nTao không vứt đi bản chất tao\nNhư mấy thằng khác để ví được lời\nNếu mày cũng mặt nặng mài nhẹ\nVì không đồng ý thì thôi được rồi\nShout out cho anh Sea\nLời chúc phúc bay trên bầu trời\nEm mong anh hãy nói với mẹ\nCuộc sống con giờ đã đỡ cực rồi\nHai anh em đã đổ nước mắt\nNhiều câu chuyện về những người tồi\nSự đánh đổi này vẫn luôn đẹp\nNhư thể ngày xưa chơi cất nhà chòi\n**** it\nĐêm đông lạnh giữa trời Hà Nội\nFlow tao chảy cùng những niềm đau\nNhư thể đang châm thêm mực vào ngòi\nChuỗi hành trình cùng nhiều câu hỏi\nAi là cá còn ai là mồi\nMọi thứ đều luôn có mặt tối\nNhưng liệu mày có sẵn sàng đánh đổi\nNgắm nhìn cả thế giới từ xa\nDamn it's cold\nNếu mày hỏi tao ác hay thiện\nMan I don't know\nChắc đây vốn đã là\nCái giá cho bao lần đau\nSự đánh đổi này cho tao thấy\nMọi thứ đã không như ngày đầu\nNgắm nhìn cả thế giới từ xa\nDamn it's cold\nNếu mày hỏi tao ác hay thiện\nMan I don't know\nChắc đây vốn đã là\nCái giá cho bao lần đau\nSự đánh đổi này cho tao thấy\nMọi thứ đã không như ngày đầu\nIt's a fair trade\nTelling all the truth\nIt's a fair trade\nAin't none pussy in the way\nIt's a fair trade\n**** you if you fake it\nIt's a ****ing fair trade oh\n2020 và tao nổi như hiện tượng\nNhưng không chìm vào trong đấy\nĐể rồi chết như thằng ngu\nBa năm đánh đổi\nĐể tu thân trong hoạ đời\nRồi biết đâu là thật giả\nTâm tao nhàn như tiều phu\nĐảo mắt quan sát\nNhư diều hâu đang đi lượn\nIm lặng và cười nhếch\nVới drama và ruồi bu\n2023 lời tao bắn như cái máy\nMà còn *** trượt phát nào\nSự đánh đổi đó thằng ***\nTrò đời quăng tao vào địa ngục\nCho tao biết mặt trái của whole game\nCho tao bài hit, cho fame\nXong nó lấy đi tất cả sao bao đêm\nTao vẫn vươn từ dưới đáy đi lên\nBật và đòi lại bằng được no shame\nChiêm nghiệm và mài giũa thâu đêm\nGiờ tinh khiết và óng ánh như blue gem\nKhông tìm thấy tao\nTao bận đi tu luyện\nCâu chuyện của tao\nCó đủ để hay hơn tụi mày\nTu xong dù thành tiên\nHay là thành quỷ\nVẫn ẩn khỏi radar\nThân vẫn đóng lớp bụi dày\nRất nhiều thằng trẻ\nLà trường hợp giống như tao\nNhưng bị nghề này nó dập\nXong tâm lý ở dưới đáy\nTao thoát được tệ nạn\nThoát được cảnh vung dao\nTao đánh đổi tất cả\nĐể chân chạy đến được đây hoes\nTrên cao\nTao biết là tao\nVẫn đang chính là tao\nKhi mà chơi chán\nThì peace I’m out\nĐôi khi rất là cô đơn\nTao lấy hết sự cô đơn\nTao lấp vào trong bank account\nNhư là pacquiao manny\nPacquiao shadowbox trên nền vinahouse\nVẫn chưa thấy thằng nào nhanh hơn tao\nThác đổ thác đổ\nFlow tao dồn xuống như là K50\nỞ dưới toàn núi đồi núi đồi\nBỏ mẹ rồi úi dồi úi dồi\nCẩn thận không bị cuốn vào cuốn vào\nAnh là mỏ ối người muốn đào\nAnh về rồi cúi người xuống nào",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/DanhDoi-Obito-11836728.mp3?st=agDsY1Ru2fnZi9gaFQvNVQ&e=1730941408&a=1&p=0&r=be413a18a18a47a6aa1c2bfdc7831b8d"),
+    Song(
+        title: "Backstage Freestyle",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "This is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nLiệu thằng nào biết\nSau khi bước xuống sân khấu\nThằng đang đứng rap\nNó giấu gì ở đằng sau\nNăm học cấp hai\nGhế nhà trường nó dính máu\nNiềm vui về gia đình\nDần đang biến thành niềm đau\nMan I feel pain my heart feel shitty\nTao biến những khoảnh khắc\nTao sụp đổ cùng nước mắt kia thành vàng\nVỗ ngực tự hào đó là tao\nNhắm vào vấn đề\nLời tao nã như AK\nĐể diễn tả ra được hết\nNhững xúc mà tao đang\nTrải qua từng ngày\nVới thân xác tuổi 18\nHai năm trước lập thành tích\nCũng là xích mà tao mang\nMày khoe mấy tờ giấy\nMua mày nhiều vàng\nCòn tờ giấy tao lấy\nMua về sự an toàn\nĐằng sau ánh hào quang\nNơi góc tối tao cất giữ\nLà khu đất cấm biệt tích\nMấy thằng ngu còn làm càng\nSinh ra để làm sao man\nSáng đến cách mấy\nCũng phải trải qua cay đắng\nTao đếm từng bài học\nXem nó như sắp tài liệu\nNhỡ khi đụng chuyện\nCần thiết vào trong đầu tao ngay ngắn\nMày lấy được nhiều fame\nTiền bạc và ống kính\nNhưng sau ánh hào quang\nTim mày liệu có ngay thẳng\nTao nói ra điều này\nĐể chứng minh rằng\nThành công tao có được ngày hôm nay\nVốn không phải do may mắn\nKhông chơi bóng rổ\nNhưng tao ball like Lebron\nVua của bản thân homie\nÝ chí tao là hổ gầm lên\nXua những giọng nói\nXung quanh đầu tao đang cố\nKêu tao thua đi\nGửi đi lời thách thức\nCho những thằng muốn tao ngã\nTao vẫn đang xuất hiện như là oxy\nTao sẽ kéo gia đình tao\nĐi hết ra khỏi hood\nSống một cuộc đời thượng lưu\nYeah mày nói đi\nỪ thì tao là đàn ông\nĐàn ông cũng phải khóc\nEveryone know it\nỪ thì mày hay phán xét về cuộc sống\nBut you don't know *\nDù mày đưa tao tiền tỷ\nĐể đổi lấy linh hồn tao\nMan I said * it\nAi lấy đi mà xài\nTao vẫn chọn con tim\nVì tao kiếm nhiều hơn thế\nBitch I know it\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nWoah từ sân bay đến sảnh\nResort đến khách sạn\nTừ Roll Royce đến Mer baby\nĐặt chân đến thành phố\nKhông phải là quê nhà\nMang đến âm nhạc baby\nKhung cảnh lặp lại\nAgain and again\nNhưng cảm xúc vẫn vậy baby\nCảnh anh ngồi bên kính xe\nLàn gió bên cửa sổ\nNgẫm nghĩ về cuộc đời baby\nTao rap đến khan tiếng\nNước miếng bắn vào màn hình\nThay vì ngồi than khổ yeah\nTao nuốt hết buồn đau\nVẽ nó vào bên trong nhạc\nNgười ta nói tao năng nổ yeah\nTao cược cả cuộc đời\nVào canh bạc với quỷ dữ\nCó cả máu tao đang đổ yeah\nVóc dáng của thiên thần\nNhưng mà ruột gan tao có\nNó xám tro như đồ cổ yeah\nNên thứ tao cho đi\nChỉ nhạc là nhạc và nhạc\nNhưng thứ tao bỏ vào âm nhạc\nLà vàng kim cương\nLà vàng cho nhạc rap\nChỉ là vài tờ nháp\nNhưng là cả một câu chuyện ở đằng sau\nNên dù đứng trên sân khấu\nGương mặt của tao cười\nNhưng liệu đó có thật sự là tao\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/BackstageFreestyle-Obito-11836729.mp3?st=VvMYNWaJM1xhU4oxZpybXw&e=1730941493&a=1&p=0&r=89a51152ed1c04665f3a30b3348a75c3"),
+    Song(
+        title: "Tell the kids i love them",
+        artistName: "Obito, Shiki",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Và liệu em có nghe\nTình yêu đang vụn vỡ\nVà mất bao lâu\nĐể quên đi tổn thương\nDù là nhiều năm đã qua\nTrái tim chẳng thay đổi\nVà chỉ mong được bình yên sau này\nYeah và từ lần đó\nAnh chẳng còn nhớ nhung đầy vơi\nChẳng thân quen chẳng còn đau\nNhư đã từng yeah\nLife is better if you want to\nNếu em nhìn thật sâu\nVào trong đôi mắt\nEm có thể thấy rằng anh đang khóc\nAnh cũng nhiều lần gây tội\nVà cũng tiếc nuối vì chuyện công cốc\nAnh chạy theo tiếng đường phố\nLặp sai và sai cứ thế lao dốc\nAnh từng nghĩ rằng anh khôn\nCho đến khi đời bảo rằng anh ngốc\nAnh vẽ ra nhiều viễn cảnh\nNhưng anh không làm dù nó khiến anh mê\nAnh ao ước khi cần chạy\nThì việc anh *** chân vẫn là thực tế\nAnh nghĩ rằng nếu hung dữ\nThì những người khác sẽ thấy anh ghê\nNhưng đến khi được yêu thương\nAnh lại thích thú như một thằng hề\nAnh từng thích dùng bạo lực\nVì không thích thằng nào không tôn trọng anh\nĐến khi anh hiểu được ra\nAi không thích mình thì chỉ việc tránh\nAnh từng nói dối rất nhiều\nDù mấy chuyện đó không vì lợi danh\nĐến khi anh hiểu được ra\nHậu quả để lại không phải điều lành\nYeah anh không cao siêu như em nghĩ\nAnh từng là em là mày\nTừng là thằng ngu làm liều khi bí\nQuan trọng là khi nhận ra\nHành động tiếp theo của em là gì\nVì đồng tiền vốn đang có hôm nay\nKhông thể nào mai trở thành tiền tỉ\nAnh chỉ đơn giản là người làm nhạc\nLà thằng chạy theo đam mê\nVì biết cố gắng là một lối thoát\nĐã từng đâm đầu việc sai\nĐể biết rút ra mới là việc đúng\nNếu muốn yên bình trong ngày mai\nThì nay phải sống như ngày cuối cùng\nTìm một nơi để yên giấc\nSau tháng năm mệt nhoài\nVà để tâm hồn\nĐược hòa vào lời hát\nCó thể em ao ước giống như anh\nKhông muốn màu sắc cuộc đời\nChỉ pha vỏn vẹn giữa đen và trắng\nKhông muốn nhìn vào trong gương\nVì không thích thứ mình trở thành\nNhưng tất cả những cơn giông đó\nGiúp em trân trọng hơn khi bầu trời xanh\nAnh cảm ơn nếu mắt em sáng\nCảm ơn từng stream bài nhạc\nKhán giả nghe khi anh còn làm\nTrái tim anh vẫn nơi đây\nKhông hề âm mưu hay sinh ra kế\nAnh chỉ là một bằng chứng sống\nChứng minh câu nói\nKhông gì là không thể\nEm không cần cố để được như anh\nMỗi cây mỗi lá mỗi cành\nMỗi người mỗi chuyện\nMỗi nhà mỗi cảnh\nEm chỉ cần là chính em\nChạy theo tương lai em muốn trở thành\nDù đường đời em trải nhiều màu\nThì cũng chỉ tô đẹp thêm\nCho một bức tranh\nHãy lắng nghe những gì em muốn\nĐể thời gian sửa những điều em sai\nVì cuộc đời không hề gắt gỏng\nVới những đứa con đang muốn làm lại\nHãy sống thật là hạnh phúc\nĐưa bản thân đến một nơi cao\nBài này vẫn sẽ mãi ở đây\nĐể luôn nhắc nhở\nEm là một ngôi sao",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/TellTheKidsILoveThem-ObitoShikii-11836730.mp3?st=_hIeAUEndIv_MXkukTPLyQ&e=1730872460&a=1&p=0&r=f0b8cfc55795fcecdf442d990cee5ad8"),
+    Song(
+        title: "Ước mơ của Mẹ (interlude)",
+        artistName: "Obito",
+        albumName: "Đánh đổi",
+        duration: "3:30",
+        imgURL:
+            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
+        lyrics:
+            "Nè anh AloNèMẹ con hỏi mẹ cái này cái được không?Nói điNếu mà bây giờ kiểu gia đình mình lo xong hết kiểu chuyệnLo xong hết mấy cái vấn đề của gia đình,những cái khó khăn của gia đìnhThì cái lúc đó mẹ rảnh nèMẹ không còn phải lo,phải nghĩ gì nữa hếtThì cái chuyện đầu tiên mà mẹ làm thì mẹ sẽ làm cái gì?Mẹ cũng không biết cái gì luôn nữaĐầu tiên mẹ làm á hả?Dạ Đầu tiên mẹ làm làGiống bây giờ mẹ đi lên trên conMẹ ở chừng 5,10 bữa, nửa thángÀMẹ đi chơi,mẹ về ở với con cho đãRồi hết rồi phải không?Rồi bắt đầu cáiỞ nhà đợi con của mẹ hả?Mẹ Nếu mà thì thì nếu mà giả sử đi giả sử mấy cái chuyệnkiểu con nói với mẹkiểu vấn đề này kiaxong hếtrồi khó khăn cũng xong hếtnói chung mẹ không cần phải lo phải nghĩ gì đóthì cái điều đầu tiên mà mẹ nói với conlà mẹ nói cái gì?Điều đầu tiên mẹ muốn nói với conlà con biết mẹ muốn nói gì không?Mẹ cảm ơn conđồng hành với mẹvới batrong lúc gia đình khó khăn,con còn nhỏ, con mới lớn lên,mới có lập nghiệp được mà con không lo cho bản thân của conmà con còn lo ngược lại cho mẹcon chợi mẹ buồn,con lo lắng cho mẹrồi những lúc mà cầm tiền,đồng tiền của congiống như cầm cái đồng tiền của con,nó nặng lắm, con biết khôngnhưng mà con cứ lo cho mẹCon lo cho mẹ,con...con...là...mẹ cảm ơn con là con lớn lên, con không cóphụ lòng ba mẹ mà con locho mẹ, lo cho gia đình trong lúchoàn cảnh như vầy nè,con không có chạy theo những hàm muốn riêng biệtcủa con, con biết không?Mà con lo cho mẹcon bỏ hết những hàm muốntuổi trẻ của con,màcon làm, con dành ***, con gửi tiền vềcho mẹ, lo cho gia đìnhlà cho dù ít nhiều gìCái đành tiền đó nó lớn lao lắm,con hiểu không?Trong khoảng thời gian này nó lớn lao đó với mẹ dữ lắmVà mẹ thấy được giống như mẹ nuôi con mẹ thành công rồi đó, con hiểu không?Dạ,rồi,biết rồiRồi thôi, đợi con trai đi làm nhạc xong rồi con trai kiếm tiền về,con trai dẫn mẹ đi du lịch",
+        urlMedia:
+            "https://stream.nct.vn/Believe_Audio345/UocMoCuaMeInterlude-Obito-11836731.mp3?st=NjJ59vePZ2fwG0QyizSNmA&e=1730939939&a=1&p=0&r=d545f1552cd44ea822faed7f314c5eba"),
+    // Song(
+    //     title: "",
+    //     artistName: "Obito",
+    //     albumName: "Đánh đổi",
+    //     duration: "3:30",
+    //     imgURL: "",
+    //     lyrics: "",
+    //     urlMedia: ""),
+    // Song(
+    //     title: "",
+    //     artistName: "Obito",
+    //     albumName: "Đánh đổi",
+    //     duration: "3:30",
+    //     imgURL: "",
+    //     lyrics: "",
+    //     urlMedia: ""),
+    // Song(
+    //     title: "",
+    //     artistName: "Obito",
+    //     albumName: "Đánh đổi",
+    //     duration: "3:30",
+    //     imgURL: "",
+    //     lyrics: "",
+    //     urlMedia: ""),
+    Song(
         title: "Ghost",
         artistName: "Justin Bieber",
         duration: "3:48",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/0/08/Justin_Bieber_-_Justice.png",
-        albumName: ''),
+        albumName: '',
+        lyrics: '',
+        urlMedia: ''),
     Song(
         title: "Baby",
         artistName: "Justin Bieber",
         duration: "4:21",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYqS_oTFyhJqDDyXXr3uadK_TRkFcWLD3tcQ&s",
-        albumName: ''),
+        albumName: '',
+        lyrics: '',
+        urlMedia: ''),
     Song(
         title: "Yummy",
         artistName: "Justin Bieber",
         duration: "3:19",
         imgURL:
             "https://www.udiscovermusic.com/wp-content/uploads/2022/03/Justin-Bieber-GettyImages-1230371382.jpg",
-        albumName: ''),
-    Song(
-        title: "Shape of You",
-        artistName: "Ed Sheeran",
-        duration: "3:53",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Blank Space",
-        artistName: "Taylor Swift",
-        duration: "3:51",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Thank U, Next",
-        artistName: "Ariana Grande",
-        duration: "2:53",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Sorry",
-        artistName: "Justin Bieber",
-        duration: "3:20",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Bad Guy",
-        artistName: "Billie Eilish",
-        duration: "3:14",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Blinding Lights",
-        artistName: "The Weeknd",
-        duration: "3:20",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Circles",
-        artistName: "Post Malone",
-        duration: "3:35",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Poker Face",
-        artistName: "Lady Gaga",
-        duration: "3:57",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Firework",
-        artistName: "Katy Perry",
-        duration: "3:48",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Uptown Funk",
-        artistName: "Bruno Mars",
-        duration: "4:30",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Umbrella",
-        artistName: "Rihanna",
-        duration: "4:36",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Stitches",
-        artistName: "Shawn Mendes",
-        duration: "3:20",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Lose You to Love Me",
-        artistName: "Selena Gomez",
-        duration: "3:27",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Don't Start Now",
-        artistName: "Dua Lipa",
-        duration: "3:03",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Watermelon Sugar",
-        artistName: "Harry Styles",
-        duration: "2:54",
-        imgURL:
-            "https://media.pitchfork.com/photos/658d8c80f3c653a4dd7f73df/master/pass/Kendrick-Lamar-Mr-Morale-and-the-Big-Steppers.jpg",
-        albumName: ''),
-    Song(
-        title: "Midnight Sky",
-        artistName: "Miley Cyrus",
-        duration: "3:43",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Miley_Cyrus_-_Midnight_Sky.png/220px-Miley_Cyrus_-_Midnight_Sky.png",
-        albumName: ''),
-    Song(
-        title: "How Do You Sleep?",
-        artistName: "Sam Smith",
-        duration: "3:23",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Sam_Smith_-_How_Do_You_Sleep.png/220px-Sam_Smith_-_How_Do_You_Sleep.png",
-        albumName: ''),
-    Song(
-        title: "Truth Hurts",
-        artistName: "Lizzo",
-        duration: "2:54",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Lizzo_Truth_Hurts.png/220px-Lizzo_Truth_Hurts.png",
-        albumName: ''),
-    Song(
-        title: "HUMBLE.",
-        artistName: "Kendrick Lamar",
-        duration: "2:57",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Kendrick_Lamar_-_HUMBLE.png/220px-Kendrick_Lamar_-_HUMBLE.png",
-        albumName: ''),
-    Song(
-        title: "I Like It",
-        artistName: "Cardi B",
-        duration: "4:13",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Cardi_B_I_Like_It.png/220px-Cardi_B_I_Like_It.png",
-        albumName: ''),
-    Song(
-        title: "Say So",
-        artistName: "Doja Cat",
-        duration: "3:58",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Doja_Cat_Say_So.png/220px-Doja_Cat_Say_So.png",
-        albumName: ''),
-    Song(
-        title: "Old Town Road",
-        artistName: "Lil Nas X",
-        duration: "2:37",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Lil_Nas_X_-_Old_Town_Road.png/220px-Lil_Nas_X_-_Old_Town_Road.png",
-        albumName: ''),
-    Song(
-        title: "Good 4 U",
-        artistName: "Olivia Rodrigo",
-        duration: "2:58",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Olivia_Rodrigo_-_Good_4_U.png/220px-Olivia_Rodrigo_-_Good_4_U.png",
-        albumName: ''),
-    Song(
-        title: "SICKO MODE",
-        artistName: "Travis Scott",
-        duration: "5:12",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Travis_Scott_SICKO_MODE.png/220px-Travis_Scott_SICKO_MODE.png",
-        albumName: ''),
-    Song(
-        title: "Mi Gente",
-        artistName: "J Balvin",
-        duration: "3:06",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/e/ef/J_Balvin_Mi_Gente.png/220px-J_Balvin_Mi_Gente.png",
-        albumName: ''),
-    Song(
-        title: "Vete",
-        artistName: "Bad Bunny",
-        duration: "3:49",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/Bad_Bunny_Vete.png/220px-Bad_Bunny_Vete.png",
-        albumName: ''),
-    Song(
-        title: "Envolver",
-        artistName: "Anitta",
-        duration: "2:54",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/Anitta_Envolver.png/220px-Anitta_Envolver.png",
-        albumName: ''),
-    Song(
-        title: "Chandelier",
-        artistName: "Sia",
-        duration: "3:36",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Sia_-_Chandelier.png/220px-Sia_-_Chandelier.png",
-        albumName: ''),
+        albumName: '',
+        lyrics: '',
+        urlMedia: ''),
   ];
 
   static List<Album> albums = [

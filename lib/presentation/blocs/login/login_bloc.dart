@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sound_sphere/core/validators/validator.dart';
 import 'package:sound_sphere/data/res/user_repository_impl.dart';
 

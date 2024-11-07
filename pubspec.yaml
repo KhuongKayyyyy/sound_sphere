@@ -60,6 +60,10 @@ dependencies:
   shared_preferences: ^2.2.0
   flutter_secure_storage: ^9.2.2
 
+  # play music
+  just_audio: ^0.9.34
+
+
 
 
 
