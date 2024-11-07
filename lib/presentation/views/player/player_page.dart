@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
@@ -28,6 +29,7 @@ class _PlayerPageState extends State<PlayerPage> {
   final bool _isLoop = false;
   bool _isInfinity = false;
 
+  // handle menu state
   bool _isShowPlaylist = false;
   bool _isShowLyrics = false;
   bool _isInMenu = false;
@@ -36,8 +38,15 @@ class _PlayerPageState extends State<PlayerPage> {
   late Song currentSong;
   late int currentSongIndex;
 
+  // handle scrolling lyrics
+  final ScrollController _lyricsScrollController = ScrollController();
+  bool _isScrollingLyrics = false;
+
   @override
   void initState() {
+    super.initState();
+
+    // handle player state
     currentSongIndex = 0;
     currentSong = playlistSongs.elementAt(currentSongIndex);
     List<AudioSource> audioSources = playlistSongs
@@ -47,11 +56,21 @@ class _PlayerPageState extends State<PlayerPage> {
     final concatenatingAudioSource =
         ConcatenatingAudioSource(children: audioSources);
     _audioPlayer.setAudioSource(concatenatingAudioSource);
-
-    super.initState();
     _initializeAudio();
+
+    // handle scrolling lyrics
+    _lyricsScrollController.addListener(_onScroll);
   }
 
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    _lyricsScrollController.removeListener(_onScroll);
+    _lyricsScrollController.dispose();
+    super.dispose();
+  }
+
+  // handle player state
   void _moveToNextSong() async {
     try {
       await _audioPlayer.seekToNext();
@@ -72,8 +91,8 @@ class _PlayerPageState extends State<PlayerPage> {
 
   void _updateCurrentSong() {
     final newIndex = _audioPlayer.currentIndex;
-    if (newIndex != currentSongIndex) {
-      currentSongIndex = newIndex!;
+    if (newIndex != null && newIndex != currentSongIndex) {
+      currentSongIndex = newIndex;
       currentSong = playlistSongs[currentSongIndex];
       setState(() {});
     }
@@ -119,17 +138,29 @@ class _PlayerPageState extends State<PlayerPage> {
     }
   }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
   void _togglePlayPause() {
     if (_isPlaying) {
       _audioPlayer.pause();
     } else {
       _audioPlayer.play();
+    }
+  }
+
+  void _onScroll() {
+    if (_lyricsScrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      if (!_isScrollingLyrics) {
+        setState(() {
+          _isScrollingLyrics = true;
+        });
+      }
+    } else if (_lyricsScrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      if (_isScrollingLyrics) {
+        setState(() {
+          _isScrollingLyrics = false;
+        });
+      }
     }
   }
 
@@ -160,8 +191,10 @@ class _PlayerPageState extends State<PlayerPage> {
 
                 // Animated section for song info and playlist
                 AnimatedContainer(
-                  duration: const Duration(milliseconds: 400),
-                  height: 500, // Adjust heights here if necessary
+                  duration: const Duration(milliseconds: 300),
+                  height: _isScrollingLyrics
+                      ? MediaQuery.of(context).size.height - 85
+                      : 500, // Adjust heights here if necessary
                   child: Stack(
                     children: [
                       // Song Info with smoother fade-out effect
@@ -172,7 +205,7 @@ class _PlayerPageState extends State<PlayerPage> {
                             _isInMenu ? -MediaQuery.of(context).size.height : 0,
                         child: AnimatedOpacity(
                           opacity: _isInMenu ? 0.0 : 1.0,
-                          duration: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 700),
                           curve: Curves.easeInOut,
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height,
@@ -188,7 +221,7 @@ class _PlayerPageState extends State<PlayerPage> {
                         top: _isInMenu ? 0 : MediaQuery.of(context).size.height,
                         child: AnimatedOpacity(
                           opacity: _isInMenu ? 1.0 : 0.0,
-                          duration: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 700),
                           curve: Curves.easeInOut,
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height,
@@ -200,12 +233,26 @@ class _PlayerPageState extends State<PlayerPage> {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 30),
-                _buildSongPlayControl(),
               ],
             ),
           ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            bottom: !_isScrollingLyrics ? 30 : -150, // Adjust this as needed
+            left: 0,
+            right: 0,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: !_isScrollingLyrics
+                  ? 1.0
+                  : 0.0, // Fully visible when not scrolling lyrics
+              curve: Curves.easeInOut,
+              child: !_isScrollingLyrics
+                  ? _buildSongPlayControl()
+                  : Container(), // Hide when not needed
+            ),
+          )
         ],
       ),
     );
@@ -714,6 +761,7 @@ class _PlayerPageState extends State<PlayerPage> {
 
     Widget buildPlayetSongLyricsNoSync() {
       return SingleChildScrollView(
+        controller: _lyricsScrollController,
         child: SizedBox(
           width: double.infinity,
           child: Text(
@@ -738,10 +786,6 @@ class _PlayerPageState extends State<PlayerPage> {
           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
               child: buildSmallCurrentSong()),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-            child: buildPlaylistFunction(),
-          ),
           // playlist
           Expanded(
             child: AnimatedSwitcher(
@@ -753,6 +797,11 @@ class _PlayerPageState extends State<PlayerPage> {
                   ? Column(
                       key: const ValueKey('playlist'),
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: buildPlaylistFunction(),
+                        ),
                         Expanded(
                           child: buildPlayListSongList(),
                         ),
