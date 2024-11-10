@@ -18,6 +18,7 @@ class AppBarButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: AnimatedContainer(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -33,7 +34,6 @@ class AppBarButton extends StatelessWidget {
                 ]
               : [],
         ),
-        width: 80,
         height: 30,
         child: Center(
           child: Text(

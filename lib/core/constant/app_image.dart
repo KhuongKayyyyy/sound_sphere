@@ -7,4 +7,6 @@ class AppImage {
   static const login_background = 'assets/images/login_background.png';
   // ignore: constant_identifier_names
   static const sign_in_background = 'assets/images/sign_in_background.jpg';
+  static const String defaultEmojiAvatar =
+      'assets/images/default_emoji_avatar.gif';
 }

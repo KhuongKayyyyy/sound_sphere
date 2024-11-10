@@ -20,22 +20,22 @@ class AppBarSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           AppBarButton(
-            title: 'Home',
+            title: 'Listen Now',
             isActive: currentIndex == 0,
             onPressed: () => onTabSelected(0),
           ),
           AppBarButton(
-            title: 'Radio',
+            title: 'Shared',
             isActive: currentIndex == 1,
             onPressed: () => onTabSelected(1),
           ),
           AppBarButton(
-            title: 'Genres',
+            title: 'Playlists',
             isActive: currentIndex == 2,
             onPressed: () => onTabSelected(2),
           ),
           AppBarButton(
-            title: 'Charts',
+            title: 'Artists',
             isActive: currentIndex == 3,
             onPressed: () => onTabSelected(3),
           ),
