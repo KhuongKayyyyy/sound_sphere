@@ -3,6 +3,7 @@ import 'package:sound_sphere/presentation/views/main/for_you/components/for_you_
 import 'package:sound_sphere/presentation/views/main/for_you/components/listen_now_header.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/listen_now_notification.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/year_replay_button.dart';
+import 'package:sound_sphere/presentation/views/main/for_you/subpage/year_replay_bottom_modal.dart';
 
 class ListenNowPage extends StatefulWidget {
   const ListenNowPage({super.key});
@@ -67,7 +68,9 @@ class _ListenNowPageState extends State<ListenNowPage>
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: YearReplayButton(),
+                child: YearReplayButton(
+                  onPressed: () => showYearReplayBottomModal(context),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -77,6 +80,14 @@ class _ListenNowPageState extends State<ListenNowPage>
           ),
         ),
       ),
+    );
+  }
+
+  void showYearReplayBottomModal(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => YearReplayBottomModal(),
     );
   }
 }

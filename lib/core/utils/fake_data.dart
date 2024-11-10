@@ -154,171 +154,127 @@ class FakeData {
     Artist(
         name: "Billie Eilish",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Billie_Eilish_2019_MTV_International_Press_Photo_by_Matty_Vogel.jpg/800px-Billie_Eilish_2019_MTV_International_Press_Photo_by_Matty_Vogel.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
         name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/The_Weeknd_in_2018.png/800px-The_Weeknd_in_2018.png"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
         name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Post_Malone_Stavernfestivalen_2018_%28cropped%29.jpg/800px-Post_Malone_Stavernfestivalen_2018_%28cropped%29.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
         name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lady_Gaga_interview_2016.jpg/800px-Lady_Gaga_interview_2016.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
         name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Katy_Perry_in_2019.jpg/800px-Katy_Perry_in_2019.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
         name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Bruno_Mars_24K_Magic_World_Tour_%28cropped%29.jpg/800px-Bruno_Mars_24K_Magic_World_Tour_%28cropped%29.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Rihanna",
+        name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Rihanna_Fenty_2018.png/800px-Rihanna_Fenty_2018.png"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Shawn Mendes",
+        name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Shawn_Mendes_in_2019.jpg/800px-Shawn_Mendes_in_2019.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Selena Gomez",
+        name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Selena_Gomez_in_2020.jpg/800px-Selena_Gomez_in_2020.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Dua Lipa",
+        name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Dua_Lipa_in_2020.png/800px-Dua_Lipa_in_2020.png"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Harry Styles",
+        name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Harry_Styles_in_2020.jpg/800px-Harry_Styles_in_2020.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Miley Cyrus",
+        name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Miley_Cyrus_in_2019.jpg/800px-Miley_Cyrus_in_2019.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Sam Smith",
+        name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sam_Smith_Lollapalooza_2015.jpg/800px-Sam_Smith_Lollapalooza_2015.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Lizzo",
+        name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Lizzo_SXSW_2017_%28cropped%29.jpg/800px-Lizzo_SXSW_2017_%28cropped%29.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Kendrick Lamar",
+        name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Kendrick_Lamar_Wiki.jpg/800px-Kendrick_Lamar_Wiki.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Cardi B",
+        name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cardi_B_%40_The_Shrine_%2830283517807%29.jpg/800px-Cardi_B_%40_The_Shrine_%2830283517807%29.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Doja Cat",
+        name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Doja_Cat_2.jpg/800px-Doja_Cat_2.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Lil Nas X",
+        name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Lil_Nas_X_2019_by_Glenn_Francis.jpg/800px-Lil_Nas_X_2019_by_Glenn_Francis.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Olivia Rodrigo",
+        name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Olivia_Rodrigo_performing_in_2021.jpg/800px-Olivia_Rodrigo_performing_in_2021.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Travis Scott",
+        name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Travis_Scott_-_Openair_Frauenfeld_2019_11.jpg/800px-Travis_Scott_-_Openair_Frauenfeld_2019_11.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "J Balvin",
+        name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/J_Balvin_en_2019.jpg/800px-J_Balvin_en_2019.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Bad Bunny",
+        name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Bad_Bunny_2019_by_Glenn_Francis.jpg/800px-Bad_Bunny_2019_by_Glenn_Francis.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Anitta",
+        name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Anitta%2C_2018.jpg/800px-Anitta%2C_2018.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Sia",
+        name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Sia_at_ACL_Music_Festival_2016.jpg/800px-Sia_at_ACL_Music_Festival_2016.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "The Chainsmokers",
+        name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/The_Chainsmokers_Vega_2016.jpg/800px-The_Chainsmokers_Vega_2016.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Zayn Malik",
+        name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Zayn_Malik_Paris_Fashion_Week_Autumn_Winter_2020.jpg/800px-Zayn_Malik_Paris_Fashion_Week_Autumn_Winter_2020.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Lana Del Rey",
+        name: "The Weeknd",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Lana_Del_Rey_2017.png/800px-Lana_Del_Rey_2017.png"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Halsey",
+        name: "Post Malone",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Halsey_performing_in_2019_%28cropped%29.jpg/800px-Halsey_performing_in_2019_%28cropped%29.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Khalid",
+        name: "Lady Gaga",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Khalid_2017.jpg/800px-Khalid_2017.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "G-Eazy",
+        name: "Katy Perry",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/G-Eazy_2015.JPG/800px-G-Eazy_2015.JPG"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
     Artist(
-        name: "Normani",
+        name: "Bruno Mars",
         avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Normani_performing_2017.jpg/800px-Normani_performing_2017.jpg"),
-    Artist(
-        name: "Camila Cabello",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Camila_Cabello_Jingle_Ball_2019.jpg/800px-Camila_Cabello_Jingle_Ball_2019.jpg"),
-    Artist(
-        name: "Charlie Puth",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Charlie_Puth_2017.jpg/800px-Charlie_Puth_2017.jpg"),
-    Artist(
-        name: "John Legend",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/John_Legend_2019_by_Glenn_Francis.jpg/800px-John_Legend_2019_by_Glenn_Francis.jpg"),
-    Artist(
-        name: "Lorde",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Lorde_Melodrama_World_Tour_in_Lucca_2018.jpg/800px-Lorde_Melodrama_World_Tour_in_Lucca_2018.jpg"),
-    Artist(
-        name: "BTS",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/BTS_at_the_2019_Billboard_Music_Awards_02.png/800px-BTS_at_the_2019_Billboard_Music_Awards_02.png"),
-    Artist(
-        name: "BLACKPINK",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/BLACKPINK_in_your_area_concert_in_Taiwan_%28cropped%29.jpg/800px-BLACKPINK_in_your_area_concert_in_Taiwan_%28cropped%29.jpg"),
-    Artist(
-        name: "Kanye West",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Kanye_West_at_the_Met_Gala_in_2019.jpg/800px-Kanye_West_at_the_Met_Gala_in_2019.jpg"),
-    Artist(
-        name: "Eminem",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Eminem_at_SeriesFest_%28cropped%29.jpg/800px-Eminem_at_SeriesFest_%28cropped%29.jpg"),
-    Artist(
-        name: "Rita Ora",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Rita_Ora_performing_in_Los_Angeles_in_2018.jpg/800px-Rita_Ora_performing_in_Los_Angeles_in_2018.jpg"),
-    Artist(
-        name: "P!nk",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Pink_2019_by_Glenn_Francis.jpg/800px-Pink_2019_by_Glenn_Francis.jpg"),
-    Artist(
-        name: "Nicki Minaj",
-        avatarURL:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Nicki_Minaj_2013.jpg/800px-Nicki_Minaj_2013.jpg"),
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8E9WhB8gnifg712l-GWMPD9r1nZ-x3I2zzL598TbwbGccdYgnOK4i9IuEaRCovPFYW8&usqp=CAU"),
   ];
 
   static List<Genres> genres = [
