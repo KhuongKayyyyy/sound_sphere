@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
 
 class MainWrapper extends StatefulWidget {
@@ -20,9 +22,12 @@ class MainWrapper extends StatefulWidget {
 
 class _MainWrapperState extends State<MainWrapper>
     with SingleTickerProviderStateMixin {
-  bool _isPlaying = false; // Track play/pause state
   late AnimationController _scaleController;
   late Animation<double> _scaleAnimation;
+
+  final PlayerController _playerController = PlayerController();
+  bool _isPlaying = false; // Track play/pause state
+  Song? _currentSong;
 
   @override
   void initState() {
@@ -37,6 +42,39 @@ class _MainWrapperState extends State<MainWrapper>
         curve: Curves.bounceInOut,
       ),
     );
+
+    _playerController.setPlayerAudio();
+
+    // Listen for changes in the playback state
+    _playerController.audioPlayer.playerStateStream.listen((state) {
+      final isPlaying = state.playing;
+      if (mounted) {
+        setState(() {
+          _isPlaying = isPlaying;
+        });
+      }
+    });
+
+    _currentSong = _playerController.currentSong;
+  }
+
+  void _playMusic() async {
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
+    if (_isPlaying) {
+      await _playerController.audioPlayer.play();
+    } else {
+      await _playerController.audioPlayer.pause();
+    }
+  }
+
+  void _updateCurrentSong() {
+    _playerController.updateCurrentSong();
+    _playMusic();
+    setState(() {
+      _currentSong = _playerController.currentSong;
+    });
   }
 
   @override
@@ -50,19 +88,28 @@ class _MainWrapperState extends State<MainWrapper>
         initialLocation: index == widget.navigationShell.currentIndex);
   }
 
-  void _showBottomSheet(BuildContext context) async {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext builder) {
-        return const CupertinoPopupSurface(child: PlayerPage());
-      },
-    ).whenComplete(() async {
-      // Scale up the mini-player after modal is closed
-      await _scaleController.forward();
-      await Future.delayed(const Duration(milliseconds: 300));
-      _scaleController.reverse(); // Scale back to normal after a delay
-    });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      body: widget.navigationShell, // Use the navigation shell
+      bottomNavigationBar: SizedBox(
+        height: 140,
+        child: Stack(
+          children: [
+            Positioned(bottom: 0, child: _buildBottomNavigationBar()),
+            // Mini music player at the top of the bottom navigation bar
+            Positioned(
+              top: 0,
+              right: 0,
+              left: 0,
+              child: _buildMusicPlayer(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildMusicPlayer() {
@@ -107,7 +154,7 @@ class _MainWrapperState extends State<MainWrapper>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          FakeData.songs.first.imgURL,
+                          _currentSong!.imgURL,
                           height: 40,
                           fit: BoxFit.cover,
                         ),
@@ -120,11 +167,11 @@ class _MainWrapperState extends State<MainWrapper>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          FakeData.songs.first.title,
+                          _currentSong!.title,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          FakeData.songs.first.artistName,
+                          _currentSong!.artistName,
                           style: TextStyle(
                             color: AppColor.primaryColor,
                             fontWeight: FontWeight.bold,
@@ -138,7 +185,9 @@ class _MainWrapperState extends State<MainWrapper>
             ),
             // Mini player buttons
             InkWell(
-              onTap: _playMusic,
+              onTap: () {
+                _updateCurrentSong();
+              },
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 transitionBuilder: (Widget child, Animation<double> animation) {
@@ -170,34 +219,14 @@ class _MainWrapperState extends State<MainWrapper>
             ),
             const SizedBox(width: 10),
             InkWell(
+              onTap: () async {
+                _playerController.moveToNextSong();
+                _updateCurrentSong();
+              },
               child: Image.asset(
                 AppIcon.play_next,
                 height: 22,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      body: widget.navigationShell, // Use the navigation shell
-      bottomNavigationBar: SizedBox(
-        height: 140,
-        child: Stack(
-          children: [
-            Positioned(bottom: 0, child: _buildBottomNavigationBar()),
-            // Mini music player at the top of the bottom navigation bar
-            Positioned(
-              top: 0,
-              right: 0,
-              left: 0,
-              child: _buildMusicPlayer(),
             ),
           ],
         ),
@@ -323,9 +352,18 @@ class _MainWrapperState extends State<MainWrapper>
     }
   }
 
-  void _playMusic() {
-    setState(() {
-      _isPlaying = !_isPlaying;
+  void _showBottomSheet(BuildContext context) async {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext builder) {
+        return const CupertinoPopupSurface(child: PlayerPage());
+      },
+    ).whenComplete(() async {
+      // Scale up the mini-player after modal is closed
+      await _scaleController.forward();
+      await Future.delayed(const Duration(milliseconds: 300));
+      _scaleController.reverse(); // Scale back to normal after a delay
     });
   }
 }
