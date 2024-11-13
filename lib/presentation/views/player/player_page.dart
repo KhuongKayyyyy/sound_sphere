@@ -21,11 +21,8 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
   final AudioPlayer _audioPlayer = AudioPlayer();
-  Duration _currentPosition = Duration.zero;
-  Duration _totalDuration = Duration.zero;
 
   bool _isFavorite = false;
-  bool _isPlaying = false;
   bool _isShuffle = false;
   bool _isRepeat = false;
   final bool _isLoop = false;
@@ -36,9 +33,8 @@ class _PlayerPageState extends State<PlayerPage> {
   bool _isShowLyrics = false;
   bool _isInMenu = false;
 
-  static final List<Song> playlistSongs = List.from(FakeData.songs.take(10));
-  late Song currentSong;
-  late int currentSongIndex;
+  // late Song currentSong;
+  // late int currentSongIndex;
 
   // handle scrolling lyrics
   final ScrollController _lyricsScrollController = ScrollController();
@@ -47,20 +43,8 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   void initState() {
     super.initState();
-
-    // handle player state
-    currentSongIndex = 0;
-    currentSong = playlistSongs.elementAt(currentSongIndex);
-    List<AudioSource> audioSources = playlistSongs
-        .map((song) =>
-            AudioSource.uri(Uri.parse(song.urlMedia))) // Use the urlMedia field
-        .toList();
-    final concatenatingAudioSource =
-        ConcatenatingAudioSource(children: audioSources);
-    _audioPlayer.setAudioSource(concatenatingAudioSource);
-    _initializeAudio();
-
     // handle scrolling lyrics
+
     _lyricsScrollController.addListener(_onScroll);
   }
 
@@ -73,78 +57,14 @@ class _PlayerPageState extends State<PlayerPage> {
   }
 
   // handle player state
-  void _moveToNextSong() async {
-    try {
-      await _audioPlayer.seekToNext();
-    } catch (e) {
-      print("Error moving to the next song: $e");
-    }
-  }
 
 // To move to the previous song in the playlist
-  void _moveToPreviousSong() async {
-    try {
-      setState(() {});
-      await _audioPlayer.seekToPrevious();
-    } catch (e) {
-      print("Error moving to the previous song: $e");
-    }
-  }
-
-  void _updateCurrentSong() {
-    final newIndex = _audioPlayer.currentIndex;
-    if (newIndex != null && newIndex != currentSongIndex) {
-      currentSongIndex = newIndex;
-      currentSong = playlistSongs[currentSongIndex];
-      setState(() {});
-    }
-  }
-
-  Future<void> _initializeAudio() async {
-    try {
-      // Set the audio URL
-
-      // await _audioPlayer.setUrl(currentSong.urlMedia);
-
-      // Listen to position changes
-      _audioPlayer.positionStream.listen((position) {
-        setState(() {
-          _currentPosition = position;
-        });
-      });
-
-      // Listen to the duration of the audio file
-      _audioPlayer.durationStream.listen((duration) {
-        setState(() {
-          _totalDuration = duration ?? Duration.zero;
-        });
-      });
-
-      // Listen to playback state changes
-      _audioPlayer.playerStateStream.listen((state) {
-        setState(() {
-          _isPlaying = state.playing;
-        });
-      });
-      _audioPlayer.playerStateStream.listen((state) {
-        if (state.processingState == ProcessingState.completed) {
-          print("Song completed");
-          setState(() {
-            _moveToNextSong;
-          });
-        }
-      });
-      _audioPlayer.playbackEventStream.listen((e) => _updateCurrentSong());
-    } catch (e) {
-      print("Error loading audio: $e");
-    }
-  }
 
   void _togglePlayPause() {
-    if (_isPlaying) {
-      _audioPlayer.pause();
+    if (widget.playerController.isPlaying) {
+      widget.playerController.pause();
     } else {
-      _audioPlayer.play();
+      widget.playerController.play();
     }
   }
 
@@ -265,199 +185,231 @@ class _PlayerPageState extends State<PlayerPage> {
       key: const ValueKey('songInfo'),
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 70),
+          padding: const EdgeInsets.symmetric(vertical: 90),
           child: Center(
-            child: AnimatedScale(
-              scale: _isPlaying ? 1.3 : 1.0,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              child: CupertinoContextMenu(
-                actions: [
-                  CupertinoContextMenuAction(
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Go to Album',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(FakeData.albums[0].title,
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        const Spacer(),
-                        Image.asset(
-                          AppIcon.stack,
-                          scale: 20,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                      context.pushNamed(Routes.albumDetail, extra: "albumId");
-                    },
-                  ),
-                  CupertinoContextMenuAction(
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Go to Aritst',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(FakeData.artists.first.name,
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        const Spacer(),
-                        Image.asset(
-                          AppIcon.micro,
-                          scale: 20,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                      // Navigator.of(context).pop();
-                      context.pushNamed(Routes.artistDetail, extra: "artistId");
-                    },
-                  ),
-                  CupertinoContextMenuAction(
-                    child: const Text(
-                      'Share',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    boxShadow: _isPlaying
-                        ? [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              spreadRadius: 5,
-                            ),
-                          ]
-                        : [],
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      image: NetworkImage(currentSong.imgURL),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      // Favorite button
-                      Positioned(
-                        bottom: 10,
-                        left: 10,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withOpacity(0.7),
+            child: ValueListenableBuilder(
+              valueListenable: widget.playerController.isPlayingNotifier,
+              builder: (context, isPlaying, child) => AnimatedScale(
+                scale: isPlaying ? 1.3 : 1.0,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: CupertinoContextMenu(
+                  actions: [
+                    CupertinoContextMenuAction(
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Go to Album',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(FakeData.albums[0].title,
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.5),
+                                      fontWeight: FontWeight.bold)),
+                            ],
                           ),
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isFavorite = !_isFavorite;
-                                _showFavoriteSnackBar();
-                              });
-                            },
-                            icon: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              transitionBuilder:
-                                  (Widget child, Animation<double> animation) {
-                                return ScaleTransition(
-                                    scale: animation, child: child);
-                              },
-                              child: _isFavorite
-                                  ? Icon(
-                                      Icons.favorite,
-                                      color: AppColor.primaryColor,
-                                      key: const ValueKey('favorite'),
-                                    )
-                                  : const Icon(
-                                      Icons.favorite_outline_rounded,
-                                      color: Colors.white,
-                                      key: ValueKey('not_favorite'),
-                                    ),
-                            ),
-                            padding: EdgeInsets.zero,
+                          const Spacer(),
+                          Image.asset(
+                            AppIcon.stack,
+                            scale: 20,
+                            color: Colors.black.withOpacity(0.5),
                           ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        context.pushNamed(Routes.albumDetail, extra: "albumId");
+                      },
+                    ),
+                    CupertinoContextMenuAction(
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Go to Artist',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(FakeData.artists.first.name,
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.5),
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          const Spacer(),
+                          Image.asset(
+                            AppIcon.micro,
+                            scale: 20,
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        context.pushNamed(Routes.artistDetail,
+                            extra: "artistId");
+                      },
+                    ),
+                    CupertinoContextMenuAction(
+                      child: const Text(
+                        'Share',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                  child: ValueListenableBuilder(
+                    valueListenable:
+                        widget.playerController.currentSongNotifier,
+                    builder: (context, currentSong, child) => Container(
+                      height: 250,
+                      width: 250,
+                      decoration: BoxDecoration(
+                        boxShadow: isPlaying
+                            ? [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  spreadRadius: 5,
+                                ),
+                              ]
+                            : [],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Stack(
+                          children: [
+                            // Scaled image
+                            SizedBox(
+                              height: 250,
+                              width: 250,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: AnimatedBuilder(
+                                  animation: widget.playerController,
+                                  builder: (context, child) {
+                                    return Image.network(
+                                      widget.playerController
+                                          .getCurrentSong()
+                                          .imgURL,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            // Favorite button
+                            Positioned(
+                              bottom: 10,
+                              left: 10,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _isFavorite = !_isFavorite;
+                                      _showFavoriteSnackBar();
+                                    });
+                                  },
+                                  icon: AnimatedSwitcher(
+                                    duration: const Duration(milliseconds: 300),
+                                    transitionBuilder: (Widget child,
+                                        Animation<double> animation) {
+                                      return ScaleTransition(
+                                          scale: animation, child: child);
+                                    },
+                                    child: _isFavorite
+                                        ? Icon(
+                                            Icons.favorite,
+                                            color: AppColor.primaryColor,
+                                            key: const ValueKey('favorite'),
+                                          )
+                                        : const Icon(
+                                            Icons.favorite_outline_rounded,
+                                            color: Colors.white,
+                                            key: ValueKey('not_favorite'),
+                                          ),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                              ),
+                            ),
+                            // More button
+                            Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: CupertinoContextMenu(
+                                actions: [
+                                  CupertinoContextMenuAction(
+                                    child: const Text('Add to playlist'),
+                                    onPressed: () {},
+                                  ),
+                                  CupertinoContextMenuAction(
+                                    child: const Text('Share'),
+                                    onPressed: () {},
+                                  ),
+                                ],
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white.withOpacity(0.7),
+                                  ),
+                                  child: const Icon(
+                                    Icons.more_horiz_rounded,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      // More button
-                      Positioned(
-                        bottom: 10,
-                        right: 10,
-                        child: CupertinoContextMenu(
-                          actions: [
-                            CupertinoContextMenuAction(
-                              child: const Text('Add to playlist'),
-                              onPressed: () {},
-                            ),
-                            CupertinoContextMenuAction(
-                              child: const Text('Share'),
-                              onPressed: () {},
-                            ),
-                          ],
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.7),
-                            ),
-                            child: const Icon(
-                              Icons.more_horiz_rounded,
-                              color: Colors.white,
-                              size: 35,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-        // song name and artist name
         InkWell(
           onTap: () {
             _showPopupMenu();
           },
           child: Column(
             children: [
-              Text(
-                currentSong.title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              AnimatedBuilder(
+                animation: widget.playerController,
+                builder: (context, child) => Text(
+                  widget.playerController.getCurrentSong().title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                currentSong.artistName,
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+              AnimatedBuilder(
+                animation: widget.playerController,
+                builder: (context, child) => Text(
+                  widget.playerController.getCurrentSong().artistName,
+                  style: TextStyle(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -475,10 +427,13 @@ class _PlayerPageState extends State<PlayerPage> {
             width: 80,
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  currentSong.imgURL,
-                  fit: BoxFit.cover,
-                )),
+                child: AnimatedBuilder(
+                    animation: widget.playerController,
+                    builder: (context, child) {
+                      return Image.network(
+                          widget.playerController.getCurrentSong().imgURL,
+                          fit: BoxFit.cover);
+                    })),
           ),
           const SizedBox(width: 10),
           Column(
@@ -487,18 +442,23 @@ class _PlayerPageState extends State<PlayerPage> {
             children: [
               SizedBox(
                 width: 180,
-                child: Text(
-                  currentSong.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: AnimatedBuilder(
+                    animation: widget.playerController,
+                    builder: (context, child) {
+                      return Text(
+                        widget.playerController.getCurrentSong().title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      );
+                    }),
               ),
               Text(
-                currentSong.artistName,
+                widget.playerController.getCurrentSong().artistName,
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.5),
                   fontSize: 16,
@@ -660,14 +620,15 @@ class _PlayerPageState extends State<PlayerPage> {
         if (newIndex > oldIndex) {
           newIndex -= 1;
         }
-        final song = playlistSongs.removeAt(oldIndex);
-        playlistSongs.insert(newIndex, song);
+        final song =
+            widget.playerController.getPlaylistSongs().removeAt(oldIndex);
+        widget.playerController.getPlaylistSongs().insert(newIndex, song);
       });
     }
 
     void removeSong(Song song) {
       setState(() {
-        playlistSongs.remove(song);
+        widget.playerController.getPlaylistSongs().remove(song);
       });
     }
 
@@ -684,7 +645,7 @@ class _PlayerPageState extends State<PlayerPage> {
         shrinkWrap: true,
         buildDefaultDragHandles: false,
         children: [
-          for (var song in playlistSongs)
+          for (var song in widget.playerController.getPlaylistSongs())
             Dismissible(
               key: ValueKey(song.title),
               background: Container(
@@ -743,7 +704,9 @@ class _PlayerPageState extends State<PlayerPage> {
                       ),
                       const Spacer(),
                       ReorderableDragStartListener(
-                        index: playlistSongs.indexOf(song),
+                        index: widget.playerController
+                            .getPlaylistSongs()
+                            .indexOf(song),
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -765,16 +728,18 @@ class _PlayerPageState extends State<PlayerPage> {
       return SingleChildScrollView(
         controller: _lyricsScrollController,
         child: SizedBox(
-          width: double.infinity,
-          child: Text(
-            currentSong.lyrics,
-            style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
-                fontWeight: FontWeight.w900,
-                height: 1.5,
-                fontSize: 35),
-          ),
-        ),
+            width: double.infinity,
+            child: AnimatedBuilder(
+              animation: widget.playerController,
+              builder: (context, builder) => Text(
+                widget.playerController.getCurrentSong().lyrics,
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    fontWeight: FontWeight.w900,
+                    height: 1.5,
+                    fontSize: 35),
+              ),
+            )),
       );
     }
 
@@ -827,13 +792,6 @@ class _PlayerPageState extends State<PlayerPage> {
   Widget _buildSongPlayControl() {
     bool isSliding = false;
     List<Widget> buildSongDuration() {
-      String formatDuration(Duration duration) {
-        String twoDigits(int n) => n.toString().padLeft(2, '0');
-        String minutes = twoDigits(duration.inMinutes);
-        String seconds = twoDigits(duration.inSeconds.remainder(60));
-        return "$minutes:$seconds";
-      }
-
       return [
         SizedBox(
             width: double.infinity,
@@ -849,25 +807,32 @@ class _PlayerPageState extends State<PlayerPage> {
                   overlayShape: RoundSliderOverlayShape(
                       overlayRadius: isSliding ? 20.0 : 0),
                 ),
-                child: Slider(
-                  value: _currentPosition.inSeconds.toDouble(),
-                  max: _totalDuration.inSeconds.toDouble(),
-                  onChanged: (value) async {
-                    await _audioPlayer.seek(Duration(seconds: value.toInt()));
-                    setState(() {
-                      _currentPosition = Duration(seconds: value.toInt());
-                    });
-                  },
-                  onChangeStart: (value) {
-                    setState(() {
-                      isSliding = true; // Start scaling and color change
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    setState(() {
-                      isSliding = false; // End scaling and color change
-                    });
-                  },
+                child: AnimatedBuilder(
+                  animation: widget.playerController,
+                  builder: (context, child) => Slider(
+                    value: widget.playerController
+                        .getCurrentPosition()
+                        .inSeconds
+                        .toDouble(),
+                    max: widget.playerController
+                        .getTotalDuration()
+                        .inSeconds
+                        .toDouble(),
+                    onChanged: (value) async {
+                      widget.playerController
+                          .seekTo(Duration(seconds: value.toInt()));
+                    },
+                    onChangeStart: (value) {
+                      setState(() {
+                        isSliding = true; // Start scaling and color change
+                      });
+                    },
+                    onChangeEnd: (value) {
+                      setState(() {
+                        isSliding = false; // End scaling and color change
+                      });
+                    },
+                  ),
                 ),
               ),
             )),
@@ -875,19 +840,27 @@ class _PlayerPageState extends State<PlayerPage> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Row(
             children: [
-              Text(
-                formatDuration(_currentPosition),
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontWeight: FontWeight.bold),
-              ),
+              AnimatedBuilder(
+                  animation: widget.playerController,
+                  builder: (context, child) {
+                    return Text(
+                      widget.playerController.getCurrentPositionString(),
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontWeight: FontWeight.bold),
+                    );
+                  }),
               const Spacer(),
-              Text(
-                formatDuration(_totalDuration - _currentPosition),
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontWeight: FontWeight.bold),
-              ),
+              AnimatedBuilder(
+                  animation: widget.playerController,
+                  builder: (context, child) {
+                    return Text(
+                      widget.playerController.getRemainingDurationString(),
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontWeight: FontWeight.bold),
+                    );
+                  }),
             ],
           ),
         ),
@@ -903,9 +876,10 @@ class _PlayerPageState extends State<PlayerPage> {
             children: [
               InkWell(
                 onTap: () {
-                  setState(() {
-                    _moveToPreviousSong();
-                  });
+                  // setState(() {
+                  //   _moveToPreviousSong();
+                  // });
+                  widget.playerController.moveToPreviousSong();
                 },
                 child: Image.asset(
                   AppIcon.play_previous,
@@ -914,33 +888,53 @@ class _PlayerPageState extends State<PlayerPage> {
                 ),
               ),
               InkWell(
-                onTap: _togglePlayPause,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return ScaleTransition(scale: animation, child: child);
+                  onTap: () {
+                    _togglePlayPause();
                   },
-                  child: !_isPlaying
-                      ? Image.asset(
-                          AppIcon.play,
-                          key: const ValueKey('play'),
-                          scale: 15,
-                          color: Colors.white,
-                        )
-                      : Image.asset(
-                          AppIcon.pause,
-                          key: const ValueKey('pause'),
-                          scale: 15,
-                          color: Colors.white,
-                        ),
-                ),
-              ),
+                  child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        return ScaleTransition(scale: animation, child: child);
+                      },
+                      child: ValueListenableBuilder<bool>(
+                        valueListenable:
+                            widget.playerController.isPlayingNotifier,
+                        builder: (context, isPlaying, child) {
+                          return InkWell(
+                            onTap: () {
+                              _togglePlayPause();
+                            },
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder:
+                                  (Widget child, Animation<double> animation) {
+                                return ScaleTransition(
+                                    scale: animation, child: child);
+                              },
+                              child: !isPlaying
+                                  ? Image.asset(
+                                      AppIcon.play,
+                                      key: const ValueKey('play'),
+                                      scale: 15,
+                                      color: Colors.white,
+                                    )
+                                  : Image.asset(
+                                      AppIcon.pause,
+                                      key: const ValueKey('pause'),
+                                      scale: 15,
+                                      color: Colors.white,
+                                    ),
+                            ),
+                          );
+                        },
+                      ))),
               InkWell(
                 onTap: () {
-                  setState(() {
-                    _moveToNextSong();
-                  });
+                  // setState(() {
+                  //   _moveToNextSong();
+                  // });
+                  widget.playerController.moveToNextSong();
                 },
                 child: Image.asset(
                   AppIcon.play_next,
@@ -1068,7 +1062,7 @@ class _PlayerPageState extends State<PlayerPage> {
       child: Column(
         children: [
           ...buildSongDuration(),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           ...buildSongControl(),
           const SizedBox(height: 50),
           buildSongUltility(),
@@ -1079,14 +1073,14 @@ class _PlayerPageState extends State<PlayerPage> {
 
   List<Widget> _buildPlayerBackground() {
     return [
-      Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(currentSong.imgURL),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      AnimatedBuilder(
+          animation: widget.playerController,
+          builder: (context, child) => SizedBox(
+                height: MediaQuery.of(context).size.height - 300,
+                child: Image.network(
+                    widget.playerController.getCurrentSong().imgURL,
+                    fit: BoxFit.cover),
+              )),
       Positioned.fill(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10000, sigmaY: 10000),
@@ -1116,19 +1110,30 @@ class _PlayerPageState extends State<PlayerPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: 50,
-              width: 50,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(currentSong.imgURL, fit: BoxFit.cover),
-              ),
-            ),
+                height: 50,
+                width: 50,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: AnimatedBuilder(
+                      animation: widget.playerController,
+                      builder: (context, child) {
+                        return Image.network(
+                            widget.playerController.getCurrentSong().imgURL,
+                            fit: BoxFit.cover);
+                      }),
+                )),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(currentSong.title,
-                    style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold)),
+                AnimatedBuilder(
+                    animation: widget.playerController,
+                    builder: (context, child) {
+                      return Text(
+                          widget.playerController.getCurrentSong().title,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold));
+                    }),
                 Text("Loved",
                     style: TextStyle(
                       color: AppColor.primaryColor,

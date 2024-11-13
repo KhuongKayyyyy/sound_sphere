@@ -10,7 +10,6 @@ import 'package:sound_sphere/presentation/views/main/home/subpage/history_playli
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
-import 'package:sound_sphere/presentation/views/player/player_page.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
 

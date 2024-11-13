@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/components/bottom_navigation_bar.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/components/music_player.dart';
-import 'package:sound_sphere/presentation/views/player/player_page.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({
