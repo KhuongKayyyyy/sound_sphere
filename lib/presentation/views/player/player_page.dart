@@ -5,13 +5,15 @@ import 'package:flutter/rendering.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:go_router/go_router.dart';
 
 class PlayerPage extends StatefulWidget {
-  const PlayerPage({super.key});
+  PlayerController playerController;
+  PlayerPage({super.key, required this.playerController});
 
   @override
   State<PlayerPage> createState() => _PlayerPageState();

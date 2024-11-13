@@ -9,7 +9,7 @@ import 'package:sound_sphere/presentation/views/main/home/subpage/add_artist_pag
 import 'package:sound_sphere/presentation/views/main/home/subpage/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
-import 'package:sound_sphere/presentation/views/main_wrapper.dart';
+import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
@@ -55,12 +55,12 @@ class AppNavigation {
           builder: (context, state) {
             return const AddArtistPage();
           }),
-      GoRoute(
-          path: Routes.player,
-          name: Routes.player,
-          builder: (context, state) {
-            return const PlayerPage();
-          }),
+      // GoRoute(
+      //     path: Routes.player,
+      //     name: Routes.player,
+      //     builder: (context, state) {
+      //       return const PlayerPage();
+      //     }),
       // GoRoute(
       //     path: Routes.signup,
       //     name: Routes.signup,
