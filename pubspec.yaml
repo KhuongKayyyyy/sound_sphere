@@ -64,6 +64,8 @@ dependencies:
 
   # play music
   just_audio: ^0.9.34
+  audio_service: ^0.18.15
+
 
 
 

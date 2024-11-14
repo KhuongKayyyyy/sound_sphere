@@ -40,7 +40,7 @@ class _MainWrapperState extends State<MainWrapper>
       ),
     );
 
-    _playerController.setPlayerAudio(FakeData.songs.take(10).toList());
+    _playerController.setPlayerAudio(FakeData.wrxdieSong);
 
     // Listen for changes in the playback state
     _playerController.audioPlayer.playerStateStream.listen((state) {

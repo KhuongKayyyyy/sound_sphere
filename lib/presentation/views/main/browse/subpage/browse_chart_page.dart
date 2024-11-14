@@ -25,7 +25,7 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               child: Text("Chart",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
             ),
-            TopSongsSection(songList: FakeData.songs.take(9).toList()),
+            TopSongsSection(songList: FakeData.obitoSongs.take(9).toList()),
             const SizedBox(
               height: 20,
             ),
@@ -35,7 +35,7 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               padding: const EdgeInsets.only(left: 10),
               child: SongSection(
                   songSectionTitle: "Everyone talking about",
-                  songList: FakeData.songs.take(8).toList(),
+                  songList: FakeData.obitoSongs.take(8).toList(),
                   isExpandable: true),
             )
           ],

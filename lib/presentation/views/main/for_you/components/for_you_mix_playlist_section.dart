@@ -19,21 +19,24 @@ class ForYouMixPlaylistSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          _buildMixPlaylistCardBig("Daily Mix"),
-          const SizedBox(width: 10),
-          Column(
-            children: [
-              _buildMixPlaylistCardSmall("Chill Mix"),
-              const SizedBox(height: 10),
-              _buildMixPlaylistCardSmall("Followers Most Listened"),
-            ],
-          ),
-          const SizedBox(width: 10),
-          _buildMixPlaylistCardBig("Khuong's Mix"),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            const SizedBox(width: 10),
+            _buildMixPlaylistCardBig("Daily Mix"),
+            const SizedBox(width: 10),
+            Column(
+              children: [
+                _buildMixPlaylistCardSmall("Chill Mix"),
+                const SizedBox(height: 10),
+                _buildMixPlaylistCardSmall("Followers Most Listened"),
+              ],
+            ),
+            const SizedBox(width: 10),
+            _buildMixPlaylistCardBig("Khuong's Mix"),
+          ],
+        ),
       ),
     );
   }

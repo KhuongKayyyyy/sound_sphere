@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
-import 'package:sound_sphere/presentation/views/main_wrapper/components/navigation_icon.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
   final dynamic widget;

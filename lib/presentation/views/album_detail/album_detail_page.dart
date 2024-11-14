@@ -85,7 +85,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                       albums: FakeData.albums),
                   ArtistMusicSection(
                       title: "Featured on",
-                      songs: FakeData.songs.take(10).toList()),
+                      songs: FakeData.obitoSongs.take(10).toList()),
                   const SizedBox(height: 150),
                 ],
               ),

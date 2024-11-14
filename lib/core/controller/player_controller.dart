@@ -14,7 +14,7 @@ class PlayerController extends ChangeNotifier {
   List<Song> playlistSongs = [];
   late Song currentSong;
   final ValueNotifier<Song> currentSongNotifier =
-      ValueNotifier<Song>(FakeData.songs.first); // Add this notifier
+      ValueNotifier<Song>(FakeData.obitoSongs.first); // Add this notifier
 
   late int currentSongIndex;
 
@@ -99,6 +99,16 @@ class PlayerController extends ChangeNotifier {
 
   void moveToPreviousSong() async {
     await audioPlayer.seekToPrevious();
+    updateCurrentSong();
+  }
+
+  void jumpToSong(int songIndex) async {
+    if (songIndex < 0 || songIndex >= playlistSongs.length) {
+      // Index out of bounds
+      return;
+    }
+
+    await audioPlayer.seek(Duration.zero, index: songIndex);
     updateCurrentSong();
   }
 

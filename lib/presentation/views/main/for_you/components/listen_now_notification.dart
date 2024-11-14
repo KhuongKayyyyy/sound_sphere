@@ -48,7 +48,7 @@ class _ListenNowNotificationState extends State<ListenNowNotification> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  FakeData.songs.first.imgURL,
+                  FakeData.obitoSongs.first.imgURL,
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
@@ -67,7 +67,7 @@ class _ListenNowNotificationState extends State<ListenNowNotification> {
                       ),
                     ),
                     Text(
-                      FakeData.songs.first.title,
+                      FakeData.obitoSongs.first.title,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

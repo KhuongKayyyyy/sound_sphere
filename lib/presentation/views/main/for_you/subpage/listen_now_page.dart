@@ -55,7 +55,7 @@ class _ListenNowPageState extends State<ListenNowPage>
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                 child: ListenNowHeader(),
               ),
               if (_showNotification)
@@ -72,10 +72,7 @@ class _ListenNowPageState extends State<ListenNowPage>
                   onPressed: () => showYearReplayBottomModal(context),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ForYouMixPlaylistSection(),
-              ),
+              ForYouMixPlaylistSection(),
             ],
           ),
         ),

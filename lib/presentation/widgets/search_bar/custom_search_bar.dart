@@ -57,7 +57,7 @@ class CustomSearchBar extends StatelessWidget {
 
 class CustomSearchDelegate extends SearchDelegate {
   List<Artist> searchArist = FakeData.artists.take(5).toList();
-  List<Song> songList = FakeData.songs.take(5).toList();
+  List<Song> songList = FakeData.obitoSongs.take(5).toList();
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [

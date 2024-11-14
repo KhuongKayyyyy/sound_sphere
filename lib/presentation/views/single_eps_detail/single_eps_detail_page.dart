@@ -19,7 +19,7 @@ class SingleEPsDetailPage extends StatefulWidget {
 class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
-  Song tempSong = FakeData.songs.first;
+  Song tempSong = FakeData.obitoSongs.first;
   @override
   void initState() {
     super.initState();
@@ -68,7 +68,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   _buildAritstMusic("More by ${tempSong.artistName}",
                       albumList: FakeData.albums),
                   _buildAritstMusic("Featured on",
-                      songList: FakeData.songs.take(10).toList()),
+                      songList: FakeData.obitoSongs.take(10).toList()),
                   const SizedBox(
                     height: 150,
                   )
@@ -87,7 +87,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
       pinned: true,
       title: showAppBarTitle
           ? Text(
-              FakeData.songs.first.title,
+              FakeData.obitoSongs.first.title,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             )

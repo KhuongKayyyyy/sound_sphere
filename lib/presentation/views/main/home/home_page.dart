@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
           const PlaylistSection(playlistSectionTitle: "Top Playlists"),
           SongSection(
             songSectionTitle: "Today hits",
-            songList: FakeData.songs.take(10).toList(),
+            songList: FakeData.obitoSongs.take(10).toList(),
             isExpandable: true,
           ),
           const SizedBox(height: 10),
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 10),
           SongSection(
             songSectionTitle: "Son Tung MTP's fan like",
-            songList: FakeData.songs.take(10).toList(),
+            songList: FakeData.obitoSongs.take(10).toList(),
             isExpandable: false,
           ),
           const SizedBox(height: 10),

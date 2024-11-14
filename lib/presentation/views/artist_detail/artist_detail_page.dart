@@ -21,7 +21,7 @@ class ArtistDetailPage extends StatefulWidget {
 class _ArtistDetailPageState extends State<ArtistDetailPage> {
   // fake data for artist detail
   Artist tempArtist = FakeData.artists.first;
-  Song newSong = FakeData.songs[4];
+  Song newSong = FakeData.obitoSongs[4];
 
   ScrollController? _scrollController;
   bool showAppBar = false;
@@ -159,7 +159,7 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
                 // artist song and eps
                 ArtistMusic(
                     sectionName: "Single & EPs",
-                    songList: FakeData.songs.take(8).toList()),
+                    songList: FakeData.obitoSongs.take(8).toList()),
                 // artist playlist
                 ArtistMusic(
                     sectionName: "Artist Playlists",

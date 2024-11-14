@@ -49,7 +49,7 @@ class ArtistTopSong extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          FakeData.songs[index].imgURL,
+                          FakeData.obitoSongs[index].imgURL,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -62,7 +62,7 @@ class ArtistTopSong extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            FakeData.songs[index].title,
+                            FakeData.obitoSongs[index].title,
                             overflow: TextOverflow
                                 .ellipsis, // Prevent overflow in text
                             style: const TextStyle(

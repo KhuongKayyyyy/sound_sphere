@@ -22,7 +22,7 @@ class LibraryAppBar extends StatelessWidget {
       snap: true,
       pinned: true,
       toolbarHeight: 50,
-      expandedHeight: !showAppBarTitle ? 120 : 50,
+      expandedHeight: !showAppBarTitle ? 125 : 50,
       backgroundColor: Colors.white.withOpacity(0.9),
       centerTitle: true,
       title: showAppBarTitle
