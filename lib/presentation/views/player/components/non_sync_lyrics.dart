@@ -3,11 +3,11 @@ import 'package:sound_sphere/core/controller/player_controller.dart';
 
 class NonSyncLyrics extends StatefulWidget {
   ScrollController lyricsScrollController;
-  PlayerController playerController;
-  NonSyncLyrics(
-      {super.key,
-      required this.lyricsScrollController,
-      required this.playerController});
+  final PlayerController playerController = PlayerController();
+  NonSyncLyrics({
+    super.key,
+    required this.lyricsScrollController,
+  });
 
   @override
   State<NonSyncLyrics> createState() => _NonSyncLyricsState();

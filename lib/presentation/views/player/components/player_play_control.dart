@@ -3,8 +3,8 @@ import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
 class PlayerPlayControl extends StatefulWidget {
-  final PlayerController playerController;
-  const PlayerPlayControl({super.key, required this.playerController});
+  final PlayerController playerController = PlayerController();
+  PlayerPlayControl({super.key});
 
   @override
   State<PlayerPlayControl> createState() => _PlayerPlayControlState();

@@ -8,11 +8,10 @@ import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 
 class CurrentSong extends StatefulWidget {
-  PlayerController playerController;
+  final PlayerController playerController = PlayerController();
   bool isFavorite;
   bool _canShowSnackBar = true;
-  CurrentSong(
-      {super.key, required this.playerController, required this.isFavorite});
+  CurrentSong({super.key, required this.isFavorite});
 
   @override
   State<CurrentSong> createState() => _CurrentSongState();

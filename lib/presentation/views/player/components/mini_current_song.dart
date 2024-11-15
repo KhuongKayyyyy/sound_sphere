@@ -3,10 +3,9 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
 class MiniCurrentSong extends StatefulWidget {
-  final PlayerController playerController;
+  final PlayerController playerController = PlayerController();
   bool isFavorite;
-  MiniCurrentSong(
-      {super.key, required this.playerController, required this.isFavorite});
+  MiniCurrentSong({super.key, required this.isFavorite});
 
   @override
   State<MiniCurrentSong> createState() => _MiniCurrentSongState();

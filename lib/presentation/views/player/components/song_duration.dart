@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
 class SongDuration extends StatefulWidget {
-  PlayerController playerController;
+  PlayerController playerController = PlayerController();
   bool isSliding;
-  SongDuration(
-      {super.key, required this.playerController, required this.isSliding});
+  SongDuration({super.key, required this.isSliding});
 
   @override
   State<SongDuration> createState() => _SongDurationState();

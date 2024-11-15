@@ -159,10 +159,7 @@ class MusicPlayerWidget extends StatelessWidget {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext builder) {
-        return CupertinoPopupSurface(
-            child: PlayerPage(
-          playerController: playerController,
-        ));
+        return CupertinoPopupSurface(child: PlayerPage());
       },
     );
   }

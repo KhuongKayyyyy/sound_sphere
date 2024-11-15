@@ -19,7 +19,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
   bool _isShuffle = PlayerController().isShuffle;
   bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = PlayerController().isLoop;
-  bool _isInfinity = PlayerController().isInfinity;
+  // bool _isInfinity = PlayerController().isInfinity;
   bool _showHistory = false;
   @override
   Widget build(BuildContext context) {
@@ -95,14 +95,12 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
         InkWell(
           onTap: () {
             setState(() {
-              _isInfinity = !_isInfinity;
               widget.onInfinity();
-              PlayerController().isInfinity = _isInfinity;
             });
           },
           child: Container(
             padding: const EdgeInsets.all(5),
-            decoration: _isInfinity
+            decoration: PlayerController().isInfinity
                 ? BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white.withOpacity(0.7),
@@ -111,8 +109,9 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
             child: Image.asset(
               AppIcon.infinity,
               scale: 20,
-              color:
-                  !_isInfinity ? Colors.white : Colors.black.withOpacity(0.4),
+              color: !PlayerController().isInfinity
+                  ? Colors.white
+                  : Colors.black.withOpacity(0.4),
             ),
           ),
         ),
@@ -120,7 +119,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
           onTap: () {},
           child: Container(
             padding: const EdgeInsets.all(5),
-            decoration: _isInfinity
+            decoration: PlayerController().isInfinity
                 ? BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white.withOpacity(0.7),
@@ -129,8 +128,9 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
             child: Image.asset(
               AppIcon.infinity,
               scale: 20,
-              color:
-                  !_isInfinity ? Colors.white : Colors.black.withOpacity(0.4),
+              color: !PlayerController().isInfinity
+                  ? Colors.white
+                  : Colors.black.withOpacity(0.4),
             ),
           ),
         ),

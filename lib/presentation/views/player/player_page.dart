@@ -15,8 +15,8 @@ import 'package:sound_sphere/presentation/views/player/components/playlist_song_
 import 'package:sound_sphere/presentation/views/player/components/song_duration.dart';
 
 class PlayerPage extends StatefulWidget {
-  PlayerController playerController;
-  PlayerPage({super.key, required this.playerController});
+  PlayerController playerController = PlayerController();
+  PlayerPage({super.key});
 
   @override
   State<PlayerPage> createState() => _PlayerPageState();
@@ -27,7 +27,6 @@ class _PlayerPageState extends State<PlayerPage> {
   bool _isShuffle = PlayerController().isShuffle;
   bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = false;
-  bool _isInfinity = PlayerController().isInfinity;
 
   // handle menu state
   bool _isShowPlaylist = false;
@@ -169,9 +168,7 @@ class _PlayerPageState extends State<PlayerPage> {
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            child: CurrentSong(
-                                playerController: widget.playerController,
-                                isFavorite: _isFavorite),
+                            child: CurrentSong(isFavorite: _isFavorite),
                           ),
                         ),
                       ),
@@ -229,9 +226,7 @@ class _PlayerPageState extends State<PlayerPage> {
           // current song
           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: MiniCurrentSong(
-                  playerController: widget.playerController,
-                  isFavorite: _isFavorite)),
+              child: MiniCurrentSong(isFavorite: _isFavorite)),
           // playlist
           Expanded(
             child: AnimatedSwitcher(
@@ -249,7 +244,8 @@ class _PlayerPageState extends State<PlayerPage> {
                           child: PlaylistFunction(
                             onInfinity: () {
                               setState(() {
-                                _isInfinity = !_isInfinity;
+                                PlayerController().isInfinity =
+                                    !PlayerController().isInfinity;
                               });
                             },
                             onShuffle: () {
@@ -280,7 +276,7 @@ class _PlayerPageState extends State<PlayerPage> {
                                     return FadeTransition(
                                         opacity: animation, child: child);
                                   },
-                                  child: _isInfinity
+                                  child: PlayerController().isInfinity
                                       ? InfinitePlaylist(
                                           key: const ValueKey(
                                               'infinitePlaylist'))
@@ -299,8 +295,8 @@ class _PlayerPageState extends State<PlayerPage> {
                           key: const ValueKey('lyrics'),
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: NonSyncLyrics(
-                              lyricsScrollController: _lyricsScrollController,
-                              playerController: widget.playerController),
+                            lyricsScrollController: _lyricsScrollController,
+                          ),
                         )
                       : Container(), // Placeholder or fallback widget if neither is true
             ),
@@ -425,11 +421,10 @@ class _PlayerPageState extends State<PlayerPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          SongDuration(
-              playerController: widget.playerController, isSliding: isSliding),
+          SongDuration(isSliding: isSliding),
           const SizedBox(height: 30),
           // ...buildSongControl(),
-          PlayerPlayControl(playerController: widget.playerController),
+          PlayerPlayControl(),
           const SizedBox(height: 50),
           buildSongUltility(),
         ],
