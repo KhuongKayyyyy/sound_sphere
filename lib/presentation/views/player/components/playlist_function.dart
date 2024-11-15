@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
+// ignore: must_be_immutable
 class PlaylistFunction extends StatefulWidget {
   VoidCallback onInfinity;
   VoidCallback onShuffle;
@@ -16,10 +16,9 @@ class PlaylistFunction extends StatefulWidget {
 }
 
 class _PlaylistFunctionState extends State<PlaylistFunction> {
-  bool _isShuffle = PlayerController().isShuffle;
+  // bool _isShuffle = PlayerController().isShuffle;
   bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = PlayerController().isLoop;
-  // bool _isInfinity = PlayerController().isInfinity;
   bool _showHistory = false;
   @override
   Widget build(BuildContext context) {
@@ -43,16 +42,10 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
         const Spacer(),
         // Shuffle, Repeat, Infinity
         InkWell(
-          onTap: () {
-            // Handle shuffle action
-            setState(() {
-              _isShuffle = !_isShuffle;
-            });
-            widget.onShuffle();
-          },
+          onTap: () => widget.onShuffle(),
           child: Container(
             padding: const EdgeInsets.all(5),
-            decoration: _isShuffle
+            decoration: PlayerController().isShuffle
                 ? BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white.withOpacity(0.7),
@@ -61,7 +54,9 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
             child: Image.asset(
               AppIcon.shuffle,
               scale: 20,
-              color: !_isShuffle ? Colors.white : Colors.black.withOpacity(0.4),
+              color: !PlayerController().isShuffle
+                  ? Colors.white
+                  : Colors.black.withOpacity(0.4),
             ),
           ),
         ),
@@ -93,11 +88,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
         ),
         const SizedBox(width: 10),
         InkWell(
-          onTap: () {
-            setState(() {
-              widget.onInfinity();
-            });
-          },
+          onTap: () => widget.onInfinity(),
           child: Container(
             padding: const EdgeInsets.all(5),
             decoration: PlayerController().isInfinity
@@ -115,25 +106,25 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
             ),
           ),
         ),
-        InkWell(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.all(5),
-            decoration: PlayerController().isInfinity
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white.withOpacity(0.7),
-                  )
-                : null,
-            child: Image.asset(
-              AppIcon.infinity,
-              scale: 20,
-              color: !PlayerController().isInfinity
-                  ? Colors.white
-                  : Colors.black.withOpacity(0.4),
-            ),
-          ),
-        ),
+        // InkWell(
+        //   onTap: () {},
+        //   child: Container(
+        //     padding: const EdgeInsets.all(5),
+        //     decoration: PlayerController().isInfinity
+        //         ? BoxDecoration(
+        //             borderRadius: BorderRadius.circular(10),
+        //             color: Colors.white.withOpacity(0.7),
+        //           )
+        //         : null,
+        //     child: Image.asset(
+        //       AppIcon.infinity,
+        //       scale: 20,
+        //       color: !PlayerController().isInfinity
+        //           ? Colors.white
+        //           : Colors.black.withOpacity(0.4),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

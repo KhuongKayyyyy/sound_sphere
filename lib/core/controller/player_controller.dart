@@ -52,8 +52,6 @@ class PlayerController extends ChangeNotifier {
 
   /// Shuffle the playlist
   Future<void> shufflePlaylist() async {
-    // _isShuffle = !_isShuffle;
-    isShuffle = !isShuffle;
     await audioPlayer.setShuffleModeEnabled(isShuffle);
 
     if (isShuffle) {

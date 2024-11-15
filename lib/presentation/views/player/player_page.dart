@@ -24,7 +24,6 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
   bool _isFavorite = false;
-  bool _isShuffle = PlayerController().isShuffle;
   bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = false;
 
@@ -250,7 +249,8 @@ class _PlayerPageState extends State<PlayerPage> {
                             },
                             onShuffle: () {
                               setState(() {
-                                _isShuffle = !_isShuffle;
+                                PlayerController().isShuffle =
+                                    !PlayerController().isShuffle;
                               });
                               widget.playerController.shufflePlaylist();
                             },
@@ -261,7 +261,7 @@ class _PlayerPageState extends State<PlayerPage> {
                             child: Column(
                               children: [
                                 PlaylistSonglist(
-                                  songList: _isShuffle
+                                  songList: PlayerController().isShuffle
                                       ? widget.playerController
                                           .getShuffledPlaylistSongs()
                                       : widget.playerController
