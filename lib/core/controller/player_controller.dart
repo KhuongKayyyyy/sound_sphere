@@ -24,6 +24,11 @@ class PlayerController extends ChangeNotifier {
   late Song currentSong;
   final ValueNotifier<Song> currentSongNotifier =
       ValueNotifier<Song>(FakeData.obitoSongs.first);
+  ValueNotifier<int> currentSongIndexNotifier = ValueNotifier<int>(0);
+
+  void setCurrentSongIndex(int index) {
+    currentSongIndexNotifier.value = index;
+  }
 
   late int currentSongIndex;
 

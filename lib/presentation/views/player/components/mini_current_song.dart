@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/presentation/widgets/text/auto_scroll_text.dart';
 
 class MiniCurrentSong extends StatefulWidget {
   final PlayerController playerController = PlayerController();
@@ -34,35 +35,60 @@ class _MiniCurrentSongState extends State<MiniCurrentSong> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: 180,
-              child: AnimatedBuilder(
-                  animation: widget.playerController,
-                  builder: (context, child) {
-                    return Text(
-                      widget.playerController.getCurrentSong().title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    );
-                  }),
+            AnimatedBuilder(
+              animation: widget.playerController,
+              builder: (context, child) {
+                final text = widget.playerController.currentSong.title;
+                final textStyle = TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                );
+                final textPainter = TextPainter(
+                  text: TextSpan(text: text, style: textStyle),
+                  maxLines: 1,
+                  textDirection: TextDirection.ltr,
+                )..layout(maxWidth: 180);
+
+                return textPainter.didExceedMaxLines
+                    ? AutoScrollingText(
+                        text: text,
+                        width: 180,
+                        textStyle: textStyle,
+                      )
+                    : Text(
+                        text,
+                        style: textStyle,
+                      );
+              },
             ),
-            SizedBox(
-              width: 180,
-              child: Text(
-                widget.playerController.getCurrentSong().artistName,
-                style: TextStyle(
+            AnimatedBuilder(
+              animation: widget.playerController,
+              builder: (context, child) {
+                final text =
+                    "From ${widget.playerController.currentSong.artistName}";
+                final textStyle = TextStyle(
                   color: Colors.white.withOpacity(0.5),
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
+                );
+                final textPainter = TextPainter(
+                  text: TextSpan(text: text, style: textStyle),
+                  maxLines: 1,
+                  textDirection: TextDirection.ltr,
+                )..layout(maxWidth: 180);
+
+                return textPainter.didExceedMaxLines
+                    ? AutoScrollingText(
+                        text: text,
+                        width: 180,
+                        textStyle: textStyle,
+                      )
+                    : Text(
+                        text,
+                        style: textStyle,
+                      );
+              },
             ),
           ],
         ),

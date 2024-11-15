@@ -41,7 +41,7 @@ class _InfinitePlaylistState extends State<InfinitePlaylist> {
                   ],
                 ),
                 Text(
-                  "Similar music will kepp playing",
+                  "Similar music will keep playing",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontWeight: FontWeight.bold,

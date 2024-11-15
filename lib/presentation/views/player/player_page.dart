@@ -5,7 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
+import 'package:sound_sphere/presentation/views/player/components/history_playlist_player.dart';
 import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';
 import 'package:sound_sphere/presentation/views/player/components/mini_current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/non_sync_lyrics.dart';
@@ -24,7 +26,6 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
   bool _isFavorite = false;
-  bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = false;
 
   // handle menu state
@@ -38,7 +39,7 @@ class _PlayerPageState extends State<PlayerPage> {
 
   // handle scrolling playlists
   final ScrollController _playlistScrollController = ScrollController();
-  bool _showHistoryPlaylist = false;
+  bool _showHistoryPlaylist = true;
 
   @override
   void initState() {
@@ -241,6 +242,7 @@ class _PlayerPageState extends State<PlayerPage> {
                           padding: const EdgeInsets.only(
                               left: 20, right: 20, bottom: 10),
                           child: PlaylistFunction(
+                            showHistory: _showHistoryPlaylist,
                             onInfinity: () {
                               setState(() {
                                 PlayerController().isInfinity =
@@ -254,20 +256,33 @@ class _PlayerPageState extends State<PlayerPage> {
                               });
                               widget.playerController.shufflePlaylist();
                             },
+                            onShowHistory: () => setState(() {
+                              _showHistoryPlaylist = !_showHistoryPlaylist;
+                            }),
                           ),
                         ),
                         Expanded(
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                PlaylistSonglist(
-                                  songList: PlayerController().isShuffle
-                                      ? widget.playerController
-                                          .getShuffledPlaylistSongs()
-                                      : widget.playerController
-                                          .getPlaylistSongs(),
-                                  isInfinitePlaylist: false,
-                                  scrollController: _playlistScrollController,
+                                AnimatedCrossFade(
+                                  duration: const Duration(milliseconds: 700),
+                                  firstChild: HistoryPlaylistPlayer(
+                                    key: const ValueKey("HistoryPlaylist"),
+                                  ),
+                                  secondChild: PlaylistSonglist(
+                                    key: const ValueKey("PlaylistSonglist"),
+                                    songList: PlayerController().isShuffle
+                                        ? widget.playerController
+                                            .getShuffledPlaylistSongs()
+                                        : widget.playerController
+                                            .getPlaylistSongs(),
+                                    isInfinitePlaylist: false,
+                                    scrollController: _playlistScrollController,
+                                  ),
+                                  crossFadeState: !_showHistoryPlaylist
+                                      ? CrossFadeState.showFirst
+                                      : CrossFadeState.showSecond,
                                 ),
                                 AnimatedSwitcher(
                                   duration: const Duration(milliseconds: 500),
