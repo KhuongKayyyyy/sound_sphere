@@ -2,20 +2,16 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/models/song.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
+import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';
 import 'package:sound_sphere/presentation/views/player/components/mini_current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/non_sync_lyrics.dart';
 import 'package:sound_sphere/presentation/views/player/components/player_play_control.dart';
 import 'package:sound_sphere/presentation/views/player/components/playlist_function.dart';
-import 'package:sound_sphere/presentation/views/player/components/playlist_songlist.dart';
+import 'package:sound_sphere/presentation/views/player/components/playlist_song_list.dart';
 import 'package:sound_sphere/presentation/views/player/components/song_duration.dart';
 
 class PlayerPage extends StatefulWidget {
@@ -27,39 +23,58 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  final AudioPlayer _audioPlayer = AudioPlayer();
-
   bool _isFavorite = false;
-  bool _isShuffle = false;
-  bool _isRepeat = false;
+  bool _isShuffle = PlayerController().isShuffle;
+  bool _isRepeat = PlayerController().isRepeat;
   final bool _isLoop = false;
-  bool _isInfinity = false;
+  bool _isInfinity = PlayerController().isInfinity;
 
   // handle menu state
   bool _isShowPlaylist = false;
   bool _isShowLyrics = false;
   bool _isInMenu = false;
 
-  // late Song currentSong;
-  // late int currentSongIndex;
-
   // handle scrolling lyrics
   final ScrollController _lyricsScrollController = ScrollController();
   bool _isScrollingLyrics = false;
 
+  // handle scrolling playlists
+  final ScrollController _playlistScrollController = ScrollController();
+  bool _showHistoryPlaylist = false;
+
   @override
   void initState() {
     super.initState();
-    // handle scrolling lyrics
-
+    // _loadState();
     _lyricsScrollController.addListener(_onScroll);
+    _playlistScrollController.addListener(_onPlaylistScroll);
+  }
+
+  Future<void> _loadState() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (mounted) {
+      setState(() {
+        _isShowLyrics = prefs.getBool('isShowLyric') ?? false;
+        _isShowPlaylist = prefs.getBool('isShowPlaylist') ?? false;
+      });
+    }
+  }
+
+  Future<void> _saveState() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isShowLyric', _isShowLyrics);
+    await prefs.setBool('isShowPlaylist', _isShowPlaylist);
   }
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
+    // _saveState();
     _lyricsScrollController.removeListener(_onScroll);
     _lyricsScrollController.dispose();
+
+    _playlistScrollController.removeListener(_onPlaylistScroll);
+    _playlistScrollController.dispose();
+
     super.dispose();
   }
 
@@ -78,6 +93,32 @@ class _PlayerPageState extends State<PlayerPage> {
         setState(() {
           _isScrollingLyrics = false;
         });
+      }
+    }
+  }
+
+  void _onPlaylistScroll() {
+    print('Scroll position: ${_playlistScrollController.position.pixels}');
+    print(
+        'Scroll direction: ${_playlistScrollController.position.userScrollDirection}');
+
+    if (_isInMenu && _isShowPlaylist) {
+      if (_playlistScrollController.position.pixels <= 10 &&
+          _playlistScrollController.position.userScrollDirection ==
+              ScrollDirection.forward) {
+        print('Showing history playlist');
+        setState(() {
+          _showHistoryPlaylist = true;
+        });
+      }
+      if (_playlistScrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        print('Hiding history playlist');
+        if (_showHistoryPlaylist) {
+          setState(() {
+            _showHistoryPlaylist = false;
+          });
+        }
       }
     }
   }
@@ -205,11 +246,50 @@ class _PlayerPageState extends State<PlayerPage> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 20, right: 20, bottom: 10),
-                          child: PlaylistFunction(),
+                          child: PlaylistFunction(
+                            onInfinity: () {
+                              setState(() {
+                                _isInfinity = !_isInfinity;
+                              });
+                            },
+                            onShuffle: () {
+                              setState(() {
+                                _isShuffle = !_isShuffle;
+                              });
+                              widget.playerController.shufflePlaylist();
+                            },
+                          ),
                         ),
                         Expanded(
-                          child: PlaylistSonglist(
-                              playerController: widget.playerController),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                PlaylistSonglist(
+                                  songList: _isShuffle
+                                      ? widget.playerController
+                                          .getShuffledPlaylistSongs()
+                                      : widget.playerController
+                                          .getPlaylistSongs(),
+                                  isInfinitePlaylist: false,
+                                  scrollController: _playlistScrollController,
+                                ),
+                                AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 500),
+                                  transitionBuilder: (Widget child,
+                                      Animation<double> animation) {
+                                    return FadeTransition(
+                                        opacity: animation, child: child);
+                                  },
+                                  child: _isInfinity
+                                      ? InfinitePlaylist(
+                                          key: const ValueKey(
+                                              'infinitePlaylist'))
+                                      : Container(key: const ValueKey('empty')),
+                                ),
+                                const SizedBox(height: 50),
+                              ],
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 350),
                       ],

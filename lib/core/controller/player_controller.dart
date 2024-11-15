@@ -11,22 +11,26 @@ class PlayerController extends ChangeNotifier {
   PlayerController._internal();
 
   bool _isPlaying = false;
+  bool isShuffle = false; // Add shuffle state
+  bool isRepeat = false;
+  bool isLoop = false;
+  bool isInfinity = false;
+  // bool _showHistory = false;
+
+  bool get isPlaying => _isPlaying;
+  // set showHistory(bool value) => _showHistory = value;
+
   List<Song> playlistSongs = [];
   late Song currentSong;
   final ValueNotifier<Song> currentSongNotifier =
-      ValueNotifier<Song>(FakeData.obitoSongs.first); // Add this notifier
+      ValueNotifier<Song>(FakeData.obitoSongs.first);
 
   late int currentSongIndex;
 
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration.zero;
 
-  bool get isPlaying => _isPlaying;
   final ValueNotifier<bool> isPlayingNotifier = ValueNotifier(false);
-
-  Duration get currentPosition => _currentPosition;
-  Duration get totalDuration => _totalDuration;
-  Duration get remainingDuration => _totalDuration - _currentPosition;
 
   void setPlayerAudio(List<Song> songs) {
     if (songs.isEmpty) return;
@@ -38,11 +42,31 @@ class PlayerController extends ChangeNotifier {
     List<AudioSource> audioSources = playlistSongs
         .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
         .toList();
-    final concatenatingAudioSource =
-        ConcatenatingAudioSource(children: audioSources);
+
+    final concatenatingAudioSource = ConcatenatingAudioSource(
+        children: audioSources, useLazyPreparation: true);
     audioPlayer.setAudioSource(concatenatingAudioSource);
 
     initializeAudio();
+  }
+
+  /// Shuffle the playlist
+  Future<void> shufflePlaylist() async {
+    // _isShuffle = !_isShuffle;
+    isShuffle = !isShuffle;
+    await audioPlayer.setShuffleModeEnabled(isShuffle);
+
+    if (isShuffle) {
+      await audioPlayer.shuffle();
+    }
+
+    notifyListeners();
+  }
+
+  List<Song> getShuffledPlaylistSongs() {
+    final shuffledList = List<Song>.from(playlistSongs);
+    shuffledList.shuffle();
+    return shuffledList;
   }
 
   void initializeAudio() async {
@@ -54,19 +78,16 @@ class PlayerController extends ChangeNotifier {
       }
     });
 
-    // Listen to position changes
     audioPlayer.positionStream.listen((position) {
       _currentPosition = position;
       notifyListeners();
     });
 
-    // Listen to duration changes
     audioPlayer.durationStream.listen((duration) {
       _totalDuration = duration ?? Duration.zero;
       notifyListeners();
     });
 
-    // Listen to playback state changes
     audioPlayer.playerStateStream.listen((state) {
       _isPlaying = state.playing;
       notifyListeners();
@@ -81,7 +102,6 @@ class PlayerController extends ChangeNotifier {
     audioPlayer.play();
     _isPlaying = true;
     isPlayingNotifier.value = true;
-
     notifyListeners();
   }
 
@@ -104,7 +124,6 @@ class PlayerController extends ChangeNotifier {
 
   void jumpToSong(int songIndex) async {
     if (songIndex < 0 || songIndex >= playlistSongs.length) {
-      // Index out of bounds
       return;
     }
 
@@ -142,22 +161,18 @@ class PlayerController extends ChangeNotifier {
     return _totalDuration;
   }
 
-  /// Get the formatted string of the current position like "2:15"
   String getCurrentPositionString() {
     return _formatDuration(_currentPosition);
   }
 
-  /// Get the formatted string of the total duration like "3:45"
   String getTotalDurationString() {
     return _formatDuration(_totalDuration);
   }
 
-  /// Get the formatted string of the remaining duration like "1:30"
   String getRemainingDurationString() {
-    return _formatDuration(remainingDuration);
+    return _formatDuration(_totalDuration - _currentPosition);
   }
 
-  /// Helper function to format Duration as "mm:ss"
   String _formatDuration(Duration duration) {
     final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');

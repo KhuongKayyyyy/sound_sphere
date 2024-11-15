@@ -1,18 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/controller/player_controller.dart';
 
 class PlaylistFunction extends StatefulWidget {
-  const PlaylistFunction({super.key});
+  VoidCallback onInfinity;
+  VoidCallback onShuffle;
+  final PlayerController playerController = PlayerController();
+
+  PlaylistFunction(
+      {super.key, required this.onInfinity, required this.onShuffle});
 
   @override
   State<PlaylistFunction> createState() => _PlaylistFunctionState();
 }
 
 class _PlaylistFunctionState extends State<PlaylistFunction> {
-  bool _isShuffle = false;
-  bool _isRepeat = false;
-  final bool _isLoop = false;
-  bool _isInfinity = false;
+  bool _isShuffle = PlayerController().isShuffle;
+  bool _isRepeat = PlayerController().isRepeat;
+  final bool _isLoop = PlayerController().isLoop;
+  bool _isInfinity = PlayerController().isInfinity;
+  bool _showHistory = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,7 +33,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
                     fontSize: 20)),
-            Text("From SoundSphere",
+            Text("From ${widget.playerController.currentSong.artistName}",
                 style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontWeight: FontWeight.bold,
@@ -40,6 +48,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
             setState(() {
               _isShuffle = !_isShuffle;
             });
+            widget.onShuffle();
           },
           child: Container(
             padding: const EdgeInsets.all(5),
@@ -84,9 +93,13 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
         ),
         const SizedBox(width: 10),
         InkWell(
-          onTap: () => setState(() {
-            _isInfinity = !_isInfinity;
-          }),
+          onTap: () {
+            setState(() {
+              _isInfinity = !_isInfinity;
+              widget.onInfinity();
+              PlayerController().isInfinity = _isInfinity;
+            });
+          },
           child: Container(
             padding: const EdgeInsets.all(5),
             decoration: _isInfinity
@@ -102,7 +115,25 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
                   !_isInfinity ? Colors.white : Colors.black.withOpacity(0.4),
             ),
           ),
-        )
+        ),
+        InkWell(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.all(5),
+            decoration: _isInfinity
+                ? BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white.withOpacity(0.7),
+                  )
+                : null,
+            child: Image.asset(
+              AppIcon.infinity,
+              scale: 20,
+              color:
+                  !_isInfinity ? Colors.white : Colors.black.withOpacity(0.4),
+            ),
+          ),
+        ),
       ],
     );
   }

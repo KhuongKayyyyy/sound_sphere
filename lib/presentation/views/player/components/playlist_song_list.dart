@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/data/models/song.dart';
 
+// ignore: must_be_immutable
 class PlaylistSonglist extends StatefulWidget {
-  PlayerController playerController;
-  PlaylistSonglist({super.key, required this.playerController});
+  PlayerController playerController = PlayerController();
+  List<Song> songList;
+  bool isInfinitePlaylist;
+  ScrollController? scrollController;
+  PlaylistSonglist(
+      {super.key,
+      required this.songList,
+      this.scrollController,
+      required this.isInfinitePlaylist});
 
   @override
   State<PlaylistSonglist> createState() => _PlaylistSonglistState();
@@ -14,6 +22,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
+      scrollController: widget.scrollController,
       proxyDecorator: (Widget child, int index, Animation<double> animation) {
         return Material(
           color: Colors.black.withOpacity(0.2),
@@ -21,11 +30,11 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
         );
       },
       onReorder: onReorder,
-      physics: const BouncingScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       buildDefaultDragHandles: false,
       children: [
-        for (var song in widget.playerController.getPlaylistSongs())
+        for (var song in widget.songList)
           Dismissible(
             key: ValueKey(song.title),
             direction: DismissDirection.endToStart,
@@ -84,9 +93,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                     ),
                     const Spacer(),
                     ReorderableDragStartListener(
-                      index: widget.playerController
-                          .getPlaylistSongs()
-                          .indexOf(song),
+                      index: widget.songList.indexOf(song),
                       child: IconButton(
                         onPressed: () {},
                         icon: Icon(
@@ -109,15 +116,20 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
       if (newIndex > oldIndex) {
         newIndex -= 1;
       }
-      final song =
-          widget.playerController.getPlaylistSongs().removeAt(oldIndex);
-      widget.playerController.getPlaylistSongs().insert(newIndex, song);
+      final song = widget.songList.removeAt(oldIndex);
+      widget.songList.insert(newIndex, song);
+      if (!widget.isInfinitePlaylist) {
+        PlayerController().setPlayerAudio(widget.songList);
+      }
     });
   }
 
   void removeSong(Song song) {
     setState(() {
-      widget.playerController.getPlaylistSongs().remove(song);
+      widget.songList.remove(song);
     });
+    if (!widget.isInfinitePlaylist) {
+      PlayerController().setPlayerAudio(widget.songList);
+    }
   }
 }
