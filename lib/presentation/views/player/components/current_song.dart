@@ -7,6 +7,7 @@ import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 
+// ignore: must_be_immutable
 class CurrentSong extends StatefulWidget {
   final PlayerController playerController = PlayerController();
   bool isFavorite;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/player/components/playlist_song_list.dart';
+import 'package:sound_sphere/presentation/views/player/components/infinite_playlist_song_list.dart';
 
 class InfinitePlaylist extends StatefulWidget {
   const InfinitePlaylist({super.key});
@@ -51,9 +51,9 @@ class _InfinitePlaylistState extends State<InfinitePlaylist> {
               ],
             ),
           ),
-          PlaylistSonglist(
+          InfinitePlaylistSongList(
             songList: FakeData.obitoSongs,
-            isInfinitePlaylist: true,
+            scrollController: null,
           ),
         ],
       ),

@@ -106,15 +106,6 @@ class _HomePageState extends State<HomePage> {
                         CupertinoIcons.person,
                         color: AppColor.primaryColor,
                       ))
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.circular(100),
-                  //   child: Image.network(
-                  //     FakeData.user.avatarURL,
-                  //     fit: BoxFit.cover,
-                  //     width: 40,
-                  //     height: 40,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -156,6 +147,13 @@ class _HomePageState extends State<HomePage> {
             songSectionTitle: "Today hits",
             songList: FakeData.obitoSongs.take(10).toList(),
             isExpandable: true,
+            onPressed: () => context.pushNamed(
+              Routes.extendGridView,
+              extra: {
+                'songs': FakeData.obitoSongs.take(10).toList(),
+                'title': "Today hits",
+              },
+            ),
           ),
           const SizedBox(height: 10),
           const PlaylistSection(playlistSectionTitle: "Made for you"),

@@ -5,7 +5,7 @@ import 'package:sound_sphere/data/models/genres.dart';
 
 class LibraryGenreItem extends StatelessWidget {
   final Genres genre;
-  LibraryGenreItem({super.key, required this.genre});
+  const LibraryGenreItem({super.key, required this.genre});
 
   // Generates a random color
   Color _getRandomColor() {

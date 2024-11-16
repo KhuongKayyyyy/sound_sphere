@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -30,10 +31,14 @@ class UserRepositoryImpl {
         email: email.trim(),
         password: password,
       );
-      print("Successfully signed in with email and password");
+      if (kDebugMode) {
+        print("Successfully signed in with email and password");
+      }
       return userCredential;
     } catch (e) {
-      print("Error signing in with email and password: $e");
+      if (kDebugMode) {
+        print("Error signing in with email and password: $e");
+      }
       return null;
     }
   }
@@ -45,9 +50,13 @@ class UserRepositoryImpl {
         email: email.trim(),
         password: password,
       );
-      print("Successfully created user with email and password");
+      if (kDebugMode) {
+        print("Successfully created user with email and password");
+      }
     } catch (e) {
-      print("Error creating user with email and password: $e");
+      if (kDebugMode) {
+        print("Error creating user with email and password: $e");
+      }
     }
   }
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
+import 'package:sound_sphere/presentation/views/extended_view/all_song_grid.dart';
+import 'package:sound_sphere/presentation/views/extended_view/all_song_list.dart';
 import 'package:sound_sphere/presentation/views/main/browse/browse_page.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/for_you_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/subpage/add_artist_page.dart';
@@ -112,6 +115,19 @@ class AppNavigation {
               songId: songId,
             );
           },
+        ),
+        GoRoute(
+          path: Routes.extendGridView,
+          name: Routes.extendGridView,
+          builder: (context, state) {
+            final extras = state.extra as Map<String, dynamic>;
+            final songList = extras['songs'] as List<Song>;
+            final title = extras['title'] as String;
+            return AllSongGrid(
+              songs: songList,
+              title: title,
+            );
+          },
         )
       ],
     );
@@ -125,6 +141,19 @@ class AppNavigation {
           path: Routes.browse,
           name: Routes.browse,
           builder: (context, state) => const BrowsePage(),
+        ),
+        GoRoute(
+          path: Routes.extendListView,
+          name: Routes.extendListView,
+          builder: (context, state) {
+            final extras = state.extra as Map<String, dynamic>;
+            final songList = extras['songs'] as List<Song>;
+            final title = extras['title'] as String;
+            return AllSongList(
+              songs: songList,
+              title: title,
+            );
+          },
         )
       ],
     );

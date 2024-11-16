@@ -8,12 +8,12 @@ class NavigationIconWidget extends StatelessWidget {
   final Function(int) onTap;
 
   const NavigationIconWidget({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.index,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

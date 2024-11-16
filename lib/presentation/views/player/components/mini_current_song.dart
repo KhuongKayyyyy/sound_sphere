@@ -3,6 +3,7 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/presentation/widgets/text/auto_scroll_text.dart';
 
+// ignore: must_be_immutable
 class MiniCurrentSong extends StatefulWidget {
   final PlayerController playerController = PlayerController();
   bool isFavorite;

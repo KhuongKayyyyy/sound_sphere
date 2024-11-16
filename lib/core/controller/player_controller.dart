@@ -21,14 +21,19 @@ class PlayerController extends ChangeNotifier {
   // set showHistory(bool value) => _showHistory = value;
 
   List<Song> playlistSongs = [];
+  List<Song> historySongs = [];
+  List<Song> infiniteSongs = FakeData.obitoSongs;
   late Song currentSong;
   final ValueNotifier<Song> currentSongNotifier =
       ValueNotifier<Song>(FakeData.obitoSongs.first);
-  ValueNotifier<int> currentSongIndexNotifier = ValueNotifier<int>(0);
+  final ValueNotifier<List<Song>> infiniteSongsNotifier =
+      ValueNotifier<List<Song>>(FakeData.obitoSongs);
 
-  void setCurrentSongIndex(int index) {
-    currentSongIndexNotifier.value = index;
-  }
+  // ValueNotifier<int> currentSongIndexNotifier = ValueNotifier<int>(0);
+
+  // void setCurrentSongIndex(int index) {
+  //   currentSongIndexNotifier.value = index;
+  // }
 
   late int currentSongIndex;
 
@@ -180,5 +185,22 @@ class PlayerController extends ChangeNotifier {
     final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '$minutes:$seconds';
+  }
+
+  // Method to update infiniteSongs
+  void updateInfiniteSongs(List<Song> newSongs) {
+    infiniteSongsNotifier.value = newSongs;
+    notifyListeners(); // Notify listeners about the change
+  }
+
+  // You can also provide methods to manipulate the infiniteSongs
+  void addSongToInfinite(Song song) {
+    infiniteSongs.add(song);
+    updateInfiniteSongs(infiniteSongs);
+  }
+
+  void removeSongFromInfinite(Song song) {
+    infiniteSongs.remove(song);
+    updateInfiniteSongs(infiniteSongs);
   }
 }

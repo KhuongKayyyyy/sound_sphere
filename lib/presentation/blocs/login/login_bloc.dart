@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sound_sphere/core/validators/validator.dart';
 import 'package:sound_sphere/data/res/user_repository_impl.dart';
 
@@ -23,7 +23,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   void onTransition(Transition<LoginEvent, LoginState> transition) {
     super.onTransition(transition);
-    print(transition);
+    if (kDebugMode) {
+      print(transition);
+    }
   }
 
   FutureOr<void> _onEmailChanged(

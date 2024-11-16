@@ -115,6 +115,7 @@ class SongItem extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 5),
                         Text(
                           song.title,
                           style: const TextStyle(fontWeight: FontWeight.w600),

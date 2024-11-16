@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
+// ignore: must_be_immutable
 class NonSyncLyrics extends StatefulWidget {
   ScrollController lyricsScrollController;
   final PlayerController playerController = PlayerController();

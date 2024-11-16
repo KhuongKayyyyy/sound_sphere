@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_song_item.dart';
+import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 
 // ignore: must_be_immutable
 class TopSongsSection extends StatelessWidget {
@@ -22,18 +26,29 @@ class TopSongsSection extends StatelessWidget {
                 colors: [Theme.of(context).primaryColor, Colors.purple],
                 tileMode: TileMode.mirror,
               ).createShader(bounds),
-              child: const Row(
-                children: [
-                  Text(
-                    "Top Songs",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  SizedBox(width: 10),
-                  Icon(CupertinoIcons.forward, color: Colors.white),
-                ],
+              child: InkWell(
+                onTap: () {
+                  context.pushNamed(
+                    Routes.extendListView,
+                    extra: {
+                      'songs': FakeData.obitoSongs,
+                      'title': "Top Songs",
+                    },
+                  );
+                },
+                child: const Row(
+                  children: [
+                    Text(
+                      "Top Songs",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(CupertinoIcons.forward, color: Colors.white),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/for_you_app_bar.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/subpage/listen_now_page.dart';
-import 'package:sound_sphere/presentation/widgets/app_bar_button.dart';
 
 class ForYouPage extends StatefulWidget {
   const ForYouPage({super.key});

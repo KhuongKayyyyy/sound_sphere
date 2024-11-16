@@ -1,21 +1,28 @@
+import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    print('onEvent: $event');
+    if (kDebugMode) {
+      print('onEvent: $event');
+    }
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    print('onTransition: $transition');
+    if (kDebugMode) {
+      print('onTransition: $transition');
+    }
   }
 
   @override
   void onError(BlocBase bloc, Object? error, StackTrace stackTrace) {
     super.onError(bloc, error!, stackTrace);
-    print('onError: $error, $stackTrace');
+    if (kDebugMode) {
+      print('onError: $error, $stackTrace');
+    }
   }
 }

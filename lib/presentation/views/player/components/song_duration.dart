@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 
+// ignore: must_be_immutable
 class SongDuration extends StatefulWidget {
-  PlayerController playerController = PlayerController();
+  final PlayerController playerController = PlayerController();
   bool isSliding;
   SongDuration({super.key, required this.isSliding});
 

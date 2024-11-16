@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/radio.dart';
 
+// ignore: must_be_immutable
 class RadioStationItem extends StatelessWidget {
   RadioStation radioStation;
 

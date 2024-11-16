@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/city_chart_section.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/daily_top_100_section.dart';
+import 'package:sound_sphere/presentation/views/main/browse/components/top_100_playlist_item.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_songs_section.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/song_section.dart';
 
@@ -36,8 +39,14 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               child: SongSection(
                   songSectionTitle: "Everyone talking about",
                   songList: FakeData.obitoSongs.take(8).toList(),
-                  isExpandable: true),
-            )
+                  isExpandable: true,
+                  onPressed: () {
+                    context.pushNamed(Routes.extendGridView, extra: {
+                      "songs": FakeData.obitoSongs.take(8).toList(),
+                      "title": "Everyone talking about"
+                    });
+                  }),
+            ),
           ],
         ),
       ),

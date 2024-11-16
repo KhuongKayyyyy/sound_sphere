@@ -4,6 +4,7 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
 import 'package:sound_sphere/data/models/album.dart';
+import 'package:flutter/foundation.dart';
 
 class AlbumDetailPopup extends StatefulWidget {
   final Album album;
@@ -500,7 +501,9 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
         const SizedBox(width: 80, child: Text("Tags")),
         InkWell(
           onTap: () {
-            print("Add tag");
+            if (kDebugMode) {
+              print("Add tag");
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(5),

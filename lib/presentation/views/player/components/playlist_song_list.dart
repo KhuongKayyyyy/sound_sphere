@@ -6,14 +6,12 @@ import 'package:sound_sphere/data/models/song.dart';
 class PlaylistSonglist extends StatefulWidget {
   PlayerController playerController = PlayerController();
   List<Song> songList;
-  bool isInfinitePlaylist;
   ScrollController? scrollController;
 
   PlaylistSonglist({
     super.key,
     required this.songList,
     this.scrollController,
-    required this.isInfinitePlaylist,
   });
 
   @override
@@ -136,9 +134,6 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
       }
       final song = widget.songList.removeAt(oldIndex);
       widget.songList.insert(newIndex, song);
-      if (!widget.isInfinitePlaylist) {
-        widget.playerController.setPlayerAudio(widget.songList);
-      }
     });
   }
 
@@ -146,9 +141,5 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
     setState(() {
       widget.songList.remove(song);
     });
-
-    if (!widget.isInfinitePlaylist) {
-      widget.playerController.setPlayerAudio(widget.songList);
-    }
   }
 }

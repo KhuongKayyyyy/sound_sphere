@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 
+// ignore: must_be_immutable
 class PlayerUltility extends StatefulWidget {
   bool isShowLyric;
   bool isShowPlaylist;

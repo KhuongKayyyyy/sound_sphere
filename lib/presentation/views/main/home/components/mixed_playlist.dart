@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/widgets/artist/artist_name_item.dart';
 import 'package:sound_sphere/presentation/widgets/main_play_button.dart';
+import 'package:flutter/foundation.dart';
 
 class MixedPlaylistSmall extends StatelessWidget {
   final Color primaryColor = const Color(0xffcfffea);
@@ -110,7 +111,9 @@ class MixedPlaylistSmall extends StatelessWidget {
                     right: 20,
                     child: MainPlayButton(
                       onPressed: () {
-                        print("Mixed playlist tapped");
+                        if (kDebugMode) {
+                          print("Mixed playlist tapped");
+                        }
                       },
                     ),
                   )

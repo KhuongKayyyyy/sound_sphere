@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/add_music_success_dialog.dart';
 
 // ignore: must_be_immutable
 class TopSongItem extends StatefulWidget {
@@ -97,6 +98,11 @@ class _TopSongItemState extends State<TopSongItem> {
                 setState(() {
                   isAdded = !isAdded;
                 });
+                if (isAdded) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => const AddMusicSuccessfulyDialog());
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.all(5),

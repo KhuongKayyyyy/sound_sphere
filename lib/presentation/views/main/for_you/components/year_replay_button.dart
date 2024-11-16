@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class YearReplayButton extends StatelessWidget {
   VoidCallback? onPressed;
   final Color backgroundColor = Color.fromRGBO(247, 243, 235, 1);

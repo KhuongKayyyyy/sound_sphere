@@ -29,7 +29,6 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<String> getToken() {
-    // TODO: implement getToken
     throw UnimplementedError();
   }
 

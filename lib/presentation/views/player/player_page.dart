@@ -1,11 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/presentation/views/main/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/history_playlist_player.dart';
 import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';
@@ -17,7 +16,7 @@ import 'package:sound_sphere/presentation/views/player/components/playlist_song_
 import 'package:sound_sphere/presentation/views/player/components/song_duration.dart';
 
 class PlayerPage extends StatefulWidget {
-  PlayerController playerController = PlayerController();
+  final PlayerController playerController = PlayerController();
   PlayerPage({super.key});
 
   @override
@@ -97,22 +96,30 @@ class _PlayerPageState extends State<PlayerPage> {
   }
 
   void _onPlaylistScroll() {
-    print('Scroll position: ${_playlistScrollController.position.pixels}');
-    print(
-        'Scroll direction: ${_playlistScrollController.position.userScrollDirection}');
+    if (kDebugMode) {
+      print('Scroll position: ${_playlistScrollController.position.pixels}');
+    }
+    if (kDebugMode) {
+      print(
+          'Scroll direction: ${_playlistScrollController.position.userScrollDirection}');
+    }
 
     if (_isInMenu && _isShowPlaylist) {
       if (_playlistScrollController.position.pixels <= 10 &&
           _playlistScrollController.position.userScrollDirection ==
               ScrollDirection.forward) {
-        print('Showing history playlist');
+        if (kDebugMode) {
+          print('Showing history playlist');
+        }
         setState(() {
           _showHistoryPlaylist = true;
         });
       }
       if (_playlistScrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
-        print('Hiding history playlist');
+        if (kDebugMode) {
+          print('Hiding history playlist');
+        }
         if (_showHistoryPlaylist) {
           setState(() {
             _showHistoryPlaylist = false;
@@ -277,7 +284,6 @@ class _PlayerPageState extends State<PlayerPage> {
                                             .getShuffledPlaylistSongs()
                                         : widget.playerController
                                             .getPlaylistSongs(),
-                                    isInfinitePlaylist: false,
                                     scrollController: _playlistScrollController,
                                   ),
                                   crossFadeState: !_showHistoryPlaylist

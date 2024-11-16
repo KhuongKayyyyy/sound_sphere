@@ -22,4 +22,8 @@ class Routes {
   // no player routes
   static const String addArtist = '/add-artist';
   static const String player = '/player';
+
+  // extended view routes
+  static const String extendGridView = '/extend-grid-view';
+  static const String extendListView = '/extend-list-view';
 }

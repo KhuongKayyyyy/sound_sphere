@@ -12,6 +12,7 @@ import 'package:sound_sphere/presentation/views/authentication/components/sign_u
 import 'package:sound_sphere/presentation/views/authentication/components/wave_background.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -197,7 +198,9 @@ class _LoginPageState extends State<LoginPage>
                               context.pop();
                               context.goNamed(Routes.home);
                               userRepository.isSignedIn().then((isSignedIn) {
-                                print(isSignedIn);
+                                if (kDebugMode) {
+                                  print(isSignedIn);
+                                }
                               });
                               setState(() {
                                 isSignedIn = true;
