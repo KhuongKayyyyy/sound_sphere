@@ -7,7 +7,8 @@ import 'package:sound_sphere/presentation/widgets/text/auto_scroll_text.dart';
 class MiniCurrentSong extends StatefulWidget {
   final PlayerController playerController = PlayerController();
   bool isFavorite;
-  MiniCurrentSong({super.key, required this.isFavorite});
+  VoidCallback? onImageTap;
+  MiniCurrentSong({super.key, required this.isFavorite, this.onImageTap});
 
   @override
   State<MiniCurrentSong> createState() => _MiniCurrentSongState();
@@ -23,13 +24,19 @@ class _MiniCurrentSongState extends State<MiniCurrentSong> {
           width: 80,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: AnimatedBuilder(
-                  animation: widget.playerController,
-                  builder: (context, child) {
-                    return Image.network(
-                        widget.playerController.getCurrentSong().imgURL,
-                        fit: BoxFit.cover);
-                  })),
+              child: InkWell(
+                onTap: widget.onImageTap,
+                child: AnimatedBuilder(
+                    animation: widget.playerController,
+                    builder: (context, child) {
+                      return Hero(
+                        tag: "songImage",
+                        child: Image.network(
+                            widget.playerController.getCurrentSong().imgURL,
+                            fit: BoxFit.cover),
+                      );
+                    }),
+              )),
         ),
         const SizedBox(width: 10),
         Column(

@@ -63,10 +63,13 @@ class MusicPlayerWidget extends StatelessWidget {
                         child: AnimatedBuilder(
                             animation: playerController,
                             builder: (context, child) {
-                              return Image.network(
-                                playerController.getCurrentSong().imgURL,
-                                height: 40,
-                                fit: BoxFit.cover,
+                              return Hero(
+                                tag: "songImage",
+                                child: Image.network(
+                                  playerController.getCurrentSong().imgURL,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
                               );
                             }),
                       ),

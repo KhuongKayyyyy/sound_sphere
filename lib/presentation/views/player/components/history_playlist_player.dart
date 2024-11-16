@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
 
@@ -25,28 +26,31 @@ class HistoryPlayerSongItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          song.imgURL,
-          width: 50,
-          height: 50,
-          fit: BoxFit.cover,
+    return InkWell(
+      onTap: () => PlayerController().setPlayerAudio([song]),
+      child: ListTile(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            song.imgURL,
+            width: 50,
+            height: 50,
+            fit: BoxFit.cover,
+          ),
         ),
+        title: Text(
+          song.title,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          song.artistName,
+          style: TextStyle(color: Colors.white),
+        ),
+        // trailing: IconButton(
+        //   icon: Icon(Icons.more_vert),
+        //   onPressed: () {},
+        // ),
       ),
-      title: Text(
-        song.title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        song.artistName,
-        style: TextStyle(color: Colors.white),
-      ),
-      // trailing: IconButton(
-      //   icon: Icon(Icons.more_vert),
-      //   onPressed: () {},
-      // ),
     );
   }
 }

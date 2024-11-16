@@ -233,7 +233,14 @@ class _PlayerPageState extends State<PlayerPage> {
           // current song
           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              child: MiniCurrentSong(isFavorite: _isFavorite)),
+              child: MiniCurrentSong(
+                isFavorite: _isFavorite,
+                onImageTap: () => setState(() {
+                  _isInMenu = false;
+                  _isShowLyrics = false;
+                  _isShowPlaylist = false;
+                }),
+              )),
           // playlist
           Expanded(
             child: AnimatedSwitcher(
@@ -279,11 +286,11 @@ class _PlayerPageState extends State<PlayerPage> {
                                   ),
                                   secondChild: PlaylistSonglist(
                                     key: const ValueKey("PlaylistSonglist"),
-                                    songList: PlayerController().isShuffle
-                                        ? widget.playerController
-                                            .getShuffledPlaylistSongs()
-                                        : widget.playerController
-                                            .getPlaylistSongs(),
+                                    // songList: PlayerController().isShuffle
+                                    //     ? widget.playerController
+                                    //         .getShuffledPlaylistSongs()
+                                    //     : widget.playerController
+                                    //         .getPlaylistSongs(),
                                     scrollController: _playlistScrollController,
                                   ),
                                   crossFadeState: !_showHistoryPlaylist

@@ -170,7 +170,6 @@ class PlayerController extends ChangeNotifier {
     await audioPlayer.seek(Duration.zero, index: currentSongIndex + 1);
     updateCurrentSong();
     isPlayingInfinity = true;
-    print(isPlayingInfinity);
   }
 
   void moveToPreviousSong() async {
@@ -251,4 +250,60 @@ class PlayerController extends ChangeNotifier {
     infiniteSongs.remove(song);
     updateInfiniteSongs(infiniteSongs);
   }
+
+  void removeSong(Song song) async {
+    // Remove the song from the playlist
+    playlistSongs.remove(song);
+
+    // If the song is in the infinite list, remove it as well
+    if (infiniteSongs.contains(song)) {
+      infiniteSongs.remove(song);
+    }
+
+    // Rebuild the audio sources list
+    List<AudioSource> audioSources = playlistSongs
+        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
+        .toList();
+
+    // Set the new concatenating audio source
+    await audioPlayer.setAudioSource(
+      ConcatenatingAudioSource(
+        children: audioSources,
+        useLazyPreparation: true,
+      ),
+      initialIndex: currentSongIndex, // Retain the current song index
+      initialPosition: _currentPosition, // Retain the current position
+    );
+
+    // Notify listeners after removal
+    notifyListeners();
+  }
+
+  /// Method to update the playlist order after a reorder operation
+  // Future<void> updatePlaylistOrder(int oldIndex, int newIndex) async {
+  //   if (oldIndex < newIndex) {
+  //     newIndex -= 1;
+  //   }
+  //   // Move the song in the playlist
+  //   final Song song = playlistSongs.removeAt(oldIndex);
+  //   playlistSongs.insert(newIndex, song);
+
+  //   // Rebuild the audio sources list with the updated playlist order
+  //   List<AudioSource> audioSources = playlistSongs
+  //       .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
+  //       .toList();
+
+  //   // Set the new concatenating audio source
+  //   await audioPlayer.setAudioSource(
+  //     ConcatenatingAudioSource(
+  //       children: audioSources,
+  //       useLazyPreparation: true,
+  //     ),
+  //     initialIndex: newIndex, // Set the new song index after reordering
+  //     initialPosition: Duration.zero, // Start from the beginning of the song
+  //   );
+
+  //   // Notify listeners to update UI or state
+  //   notifyListeners();
+  // }
 }

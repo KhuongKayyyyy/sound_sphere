@@ -4,13 +4,12 @@ import 'package:sound_sphere/data/models/song.dart';
 
 // ignore: must_be_immutable
 class PlaylistSonglist extends StatefulWidget {
-  PlayerController playerController = PlayerController();
-  List<Song> songList;
+  // List<Song> songList;
   ScrollController? scrollController;
 
   PlaylistSonglist({
     super.key,
-    required this.songList,
+    // required this.songList,
     this.scrollController,
   });
 
@@ -24,7 +23,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
     return Column(
       children: [
         AnimatedBuilder(
-          animation: widget.playerController,
+          animation: PlayerController(),
           builder: (context, child) => ReorderableListView(
             scrollController: widget.scrollController,
             proxyDecorator:
@@ -40,14 +39,15 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
             buildDefaultDragHandles: false,
             children: [
               // Only show songs after the current index
-              for (var i = PlayerController().currentSongIndex + 1;
-                  i < widget.songList.length;
+              for (var i = PlayerController().currentSongIndex;
+                  i < PlayerController().playlistSongs.length;
                   i++)
                 Dismissible(
-                  key: ValueKey(widget.songList[i].title),
+                  key: ValueKey(PlayerController().playlistSongs[i]),
                   direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
-                    removeSong(widget.songList[i]);
+                    PlayerController()
+                        .removeSong(PlayerController().playlistSongs[i]);
                   },
                   background: Container(
                     alignment: Alignment.centerRight,
@@ -60,7 +60,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      widget.playerController.jumpToSong(i);
+                      PlayerController().jumpToSong(i);
                     },
                     child: Material(
                       color: Colors.transparent,
@@ -78,7 +78,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  widget.songList[i].imgURL,
+                                  PlayerController().playlistSongs[i].imgURL,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -88,14 +88,16 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.songList[i].title,
+                                  PlayerController().playlistSongs[i].title,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
                                 Text(
-                                  widget.songList[i].artistName,
+                                  PlayerController()
+                                      .playlistSongs[i]
+                                      .artistName,
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(0.5),
                                     fontWeight: FontWeight.bold,
@@ -127,19 +129,14 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
     );
   }
 
-  void onReorder(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      final song = widget.songList.removeAt(oldIndex);
-      widget.songList.insert(newIndex, song);
-    });
+  void onReorder(int oldIndex, int newIndex) async {
+    // await PlayerController().updatePlaylistOrder(oldIndex, newIndex);
   }
 
   void removeSong(Song song) {
     setState(() {
-      widget.songList.remove(song);
+      // widget.songList.remove(song);
+      PlayerController().playlistSongs.remove(song);
     });
   }
 }

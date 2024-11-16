@@ -124,108 +124,30 @@ class _CurrentSongState extends State<CurrentSong> {
                       ),
                       child: Material(
                         color: Colors.transparent,
-                        child: Stack(
-                          children: [
+                        child:
                             // Scaled image
                             SizedBox(
-                              height: 250,
-                              width: 250,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: AnimatedBuilder(
-                                  animation: widget.playerController,
-                                  builder: (context, child) {
-                                    return Image.network(
-                                      widget.playerController
-                                          .getCurrentSong()
-                                          .imgURL,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                ),
-                              ),
+                          height: 250,
+                          width: 250,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: AnimatedBuilder(
+                              animation: widget.playerController,
+                              builder: (context, child) {
+                                return Hero(
+                                  tag: "songImage",
+                                  child: Image.network(
+                                    widget.playerController
+                                        .getCurrentSong()
+                                        .imgURL,
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              },
                             ),
-                            // Favorite button
-                            Positioned(
-                              bottom: 10,
-                              left: 10,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white.withOpacity(0.7),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    if (widget._canShowSnackBar) {
-                                      setState(() {
-                                        widget.isFavorite = !widget.isFavorite;
-                                        _showFavoriteSnackBar();
-                                        widget._canShowSnackBar = false;
-                                      });
-                                      Future.delayed(
-                                          const Duration(seconds: 10), () {
-                                        widget._canShowSnackBar = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        widget.isFavorite = !widget.isFavorite;
-                                      });
-                                    }
-                                  },
-                                  icon: AnimatedSwitcher(
-                                    duration: const Duration(milliseconds: 300),
-                                    transitionBuilder: (Widget child,
-                                        Animation<double> animation) {
-                                      return ScaleTransition(
-                                          scale: animation, child: child);
-                                    },
-                                    child: widget.isFavorite
-                                        ? Icon(
-                                            Icons.favorite,
-                                            color: AppColor.primaryColor,
-                                            key: const ValueKey('favorite'),
-                                          )
-                                        : const Icon(
-                                            Icons.favorite_outline_rounded,
-                                            color: Colors.white,
-                                            key: ValueKey('not_favorite'),
-                                          ),
-                                  ),
-                                  padding: EdgeInsets.zero,
-                                ),
-                              ),
-                            ),
-                            // More button
-                            Positioned(
-                              bottom: 10,
-                              right: 10,
-                              child: CupertinoContextMenu(
-                                actions: [
-                                  CupertinoContextMenuAction(
-                                    child: const Text('Add to playlist'),
-                                    onPressed: () {},
-                                  ),
-                                  CupertinoContextMenuAction(
-                                    child: const Text('Share'),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white.withOpacity(0.7),
-                                  ),
-                                  child: const Icon(
-                                    Icons.more_horiz_rounded,
-                                    color: Colors.white,
-                                    size: 35,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
+                        // Favorite button
                       ),
                     ),
                   ),
@@ -238,31 +160,102 @@ class _CurrentSongState extends State<CurrentSong> {
           onTap: () {
             _showPopupMenu();
           },
-          child: Column(
-            children: [
-              AnimatedBuilder(
-                animation: widget.playerController,
-                builder: (context, child) => Text(
-                  widget.playerController.getCurrentSong().title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AnimatedBuilder(
+                      animation: widget.playerController,
+                      builder: (context, child) => Text(
+                        widget.playerController.getCurrentSong().title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    AnimatedBuilder(
+                      animation: widget.playerController,
+                      builder: (context, child) => Text(
+                        widget.playerController.getCurrentSong().artistName,
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.7),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      if (widget._canShowSnackBar) {
+                        setState(() {
+                          widget.isFavorite = !widget.isFavorite;
+                          _showFavoriteSnackBar();
+                          widget._canShowSnackBar = false;
+                        });
+                        Future.delayed(const Duration(seconds: 10), () {
+                          widget._canShowSnackBar = true;
+                        });
+                      } else {
+                        setState(() {
+                          widget.isFavorite = !widget.isFavorite;
+                        });
+                      }
+                    },
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        return ScaleTransition(
+                          scale: animation,
+                          alignment: Alignment.center,
+                          child: child,
+                        );
+                      },
+                      child: widget.isFavorite
+                          ? Icon(
+                              Icons.favorite,
+                              size: 25,
+                              color: AppColor.primaryColor,
+                              key: const ValueKey('favorite'),
+                            )
+                          : const Icon(
+                              size: 25,
+                              Icons.favorite_outline_rounded,
+                              color: Colors.white,
+                              key: ValueKey('not_favorite'),
+                            ),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              AnimatedBuilder(
-                animation: widget.playerController,
-                builder: (context, child) => Text(
-                  widget.playerController.getCurrentSong().artistName,
-                  style: TextStyle(
-                      color: Colors.white.withOpacity(0.7),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                const SizedBox(width: 10),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                  child: const Icon(
+                    Icons.more_horiz_rounded,
+                    color: Colors.white,
+                    size: 25,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
