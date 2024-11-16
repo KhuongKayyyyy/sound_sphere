@@ -16,6 +16,8 @@ class PlayerController extends ChangeNotifier {
   bool isLoop = false;
   bool isInfinity = false;
   // bool _showHistory = false;
+  bool isPlayingAlbum = true;
+  bool isPlayingInfinity = false;
 
   bool get isPlaying => _isPlaying;
   // set showHistory(bool value) => _showHistory = value;
@@ -121,8 +123,54 @@ class PlayerController extends ChangeNotifier {
   }
 
   void moveToNextSong() async {
-    await audioPlayer.seekToNext();
+    // Check if we reached the end of the current playlist
+    if (currentSongIndex >= playlistSongs.length - 1) {
+      // If infinity mode is on, play the song from the infinite playlist
+      if (isInfinity) {
+        playNextFromInfinitePlaylist();
+      } else if (isRepeat) {
+        // If repeat mode is enabled, start the playlist from the beginning
+        // await jumpToSong(0);
+      } else {
+        // Stop playback if no mode is active
+        await audioPlayer.pause();
+        _isPlaying = false;
+        isPlayingNotifier.value = false;
+      }
+    } else {
+      // Move to the next song in the current playlist
+      await audioPlayer.seekToNext();
+      updateCurrentSong();
+    }
+  }
+
+  /// Play the next song from the infinite playlist
+  void playNextFromInfinitePlaylist() async {
+    if (infiniteSongs.isEmpty) return;
+
+    // Append the entire infinite playlist to the current playlist
+    playlistSongs.addAll(infiniteSongs);
+
+    // Create a new audio source list with both current and infinite playlist songs
+    List<AudioSource> audioSources = playlistSongs
+        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
+        .toList();
+
+    // Set the new concatenating audio source
+    await audioPlayer.setAudioSource(
+      ConcatenatingAudioSource(
+        children: audioSources,
+        useLazyPreparation: true,
+      ),
+      initialIndex: currentSongIndex + 1, // Start from the next song
+      initialPosition: Duration.zero,
+    );
+
+    // Move to the next song (first song from the infinite playlist)
+    await audioPlayer.seek(Duration.zero, index: currentSongIndex + 1);
     updateCurrentSong();
+    isPlayingInfinity = true;
+    print(isPlayingInfinity);
   }
 
   void moveToPreviousSong() async {

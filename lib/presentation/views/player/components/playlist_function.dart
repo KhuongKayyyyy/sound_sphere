@@ -70,8 +70,9 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
               AnimatedBuilder(
                 animation: widget.playerController,
                 builder: (context, child) {
-                  final text =
-                      "From ${widget.playerController.currentSong.artistName}";
+                  final text = !PlayerController().isPlayingInfinity
+                      ? "From ${widget.playerController.currentSong.artistName}"
+                      : "Autoplaying similar songs";
                   final textStyle = TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontSize: 16,
@@ -109,52 +110,60 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
               ? Row(
                   key: const ValueKey('controls'),
                   children: [
-                    InkWell(
-                      onTap: () => widget.onShuffle(),
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: PlayerController().isShuffle
-                            ? BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white.withOpacity(0.7),
-                              )
-                            : null,
-                        child: Image.asset(
-                          AppIcon.shuffle,
-                          scale: 20,
-                          color: !PlayerController().isShuffle
-                              ? Colors.white
-                              : Colors.black.withOpacity(0.4),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    InkWell(
-                      onTap: () => setState(() {
-                        _isRepeat = !_isRepeat;
-                      }),
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: _isRepeat || _isLoop
-                            ? BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white.withOpacity(0.7),
-                              )
-                            : null,
-                        child: !_isRepeat
-                            ? Image.asset(
-                                AppIcon.repeat,
-                                scale: 20,
-                                color: Colors.white,
-                              )
-                            : Image.asset(
-                                AppIcon.repeat_once,
-                                scale: 20,
-                                color: Colors.white,
+                    PlayerController().isPlayingAlbum
+                        ? Row(
+                            children: [
+                              InkWell(
+                                onTap: () => widget.onShuffle(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: PlayerController().isShuffle
+                                      ? BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.white.withOpacity(0.7),
+                                        )
+                                      : null,
+                                  child: Image.asset(
+                                    AppIcon.shuffle,
+                                    scale: 20,
+                                    color: !PlayerController().isShuffle
+                                        ? Colors.white
+                                        : Colors.black.withOpacity(0.4),
+                                  ),
+                                ),
                               ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
+                              const SizedBox(width: 10),
+                              InkWell(
+                                onTap: () => setState(() {
+                                  _isRepeat = !_isRepeat;
+                                }),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: _isRepeat || _isLoop
+                                      ? BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.white.withOpacity(0.7),
+                                        )
+                                      : null,
+                                  child: !_isRepeat
+                                      ? Image.asset(
+                                          AppIcon.repeat,
+                                          scale: 20,
+                                          color: Colors.white,
+                                        )
+                                      : Image.asset(
+                                          AppIcon.repeat_once,
+                                          scale: 20,
+                                          color: Colors.white,
+                                        ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          )
+                        : Container(),
                     InkWell(
                       onTap: () => widget.onInfinity(),
                       child: Container(

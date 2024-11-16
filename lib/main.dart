@@ -33,7 +33,7 @@ void configLoading() {
     ..loadingStyle = EasyLoadingStyle.custom
     ..backgroundColor = Colors.white
     ..textColor = Colors.black
-    ..maskType = EasyLoadingMaskType.black; // Ensures overlay is above modals
+    ..maskType = EasyLoadingMaskType.black;
 }
 
 class MyApp extends StatelessWidget {

@@ -5,7 +5,6 @@ import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_song_item.dart';
-import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 
 // ignore: must_be_immutable
 class TopSongsSection extends StatelessWidget {
