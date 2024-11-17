@@ -6,6 +6,7 @@ import 'package:sound_sphere/data/models/song.dart';
 class PlayerController extends ChangeNotifier {
   static final PlayerController _instance = PlayerController._internal();
   final AudioPlayer audioPlayer = AudioPlayer();
+  ConcatenatingAudioSource? concatenatingAudioSource;
 
   factory PlayerController() => _instance;
   PlayerController._internal();
@@ -55,28 +56,30 @@ class PlayerController extends ChangeNotifier {
         .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
         .toList();
 
-    final concatenatingAudioSource = ConcatenatingAudioSource(
-        children: audioSources, useLazyPreparation: true);
-    audioPlayer.setAudioSource(concatenatingAudioSource);
+    concatenatingAudioSource = ConcatenatingAudioSource(
+      children: audioSources,
+      useLazyPreparation: true,
+    );
+    audioPlayer.setAudioSource(concatenatingAudioSource!);
 
     initializeAudio();
   }
 
-  /// Shuffle the playlist
-  Future<void> shufflePlaylist() async {
-    await audioPlayer.setShuffleModeEnabled(isShuffle);
+  Future<void> updateAudioSource() async {
+    List<AudioSource> audioSources = playlistSongs
+        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
+        .toList();
 
-    if (isShuffle) {
-      await audioPlayer.shuffle();
-    }
+    concatenatingAudioSource = ConcatenatingAudioSource(
+      children: audioSources,
+      useLazyPreparation: true,
+    );
 
-    notifyListeners();
-  }
-
-  List<Song> getShuffledPlaylistSongs() {
-    final shuffledList = List<Song>.from(playlistSongs);
-    shuffledList.shuffle();
-    return shuffledList;
+    await audioPlayer.setAudioSource(
+      concatenatingAudioSource!,
+      initialIndex: currentSongIndex,
+      initialPosition: Duration.zero,
+    );
   }
 
   void initializeAudio() async {
@@ -130,7 +133,7 @@ class PlayerController extends ChangeNotifier {
         playNextFromInfinitePlaylist();
       } else if (isRepeat) {
         // If repeat mode is enabled, start the playlist from the beginning
-        // await jumpToSong(0);
+        jumpToSong(0);
       } else {
         // Stop playback if no mode is active
         await audioPlayer.pause();
@@ -140,40 +143,14 @@ class PlayerController extends ChangeNotifier {
     } else {
       // Move to the next song in the current playlist
       await audioPlayer.seekToNext();
+      await updateAudioSource(); // Add this line
       updateCurrentSong();
     }
   }
 
-  /// Play the next song from the infinite playlist
-  void playNextFromInfinitePlaylist() async {
-    if (infiniteSongs.isEmpty) return;
-
-    // Append the entire infinite playlist to the current playlist
-    playlistSongs.addAll(infiniteSongs);
-
-    // Create a new audio source list with both current and infinite playlist songs
-    List<AudioSource> audioSources = playlistSongs
-        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
-        .toList();
-
-    // Set the new concatenating audio source
-    await audioPlayer.setAudioSource(
-      ConcatenatingAudioSource(
-        children: audioSources,
-        useLazyPreparation: true,
-      ),
-      initialIndex: currentSongIndex + 1, // Start from the next song
-      initialPosition: Duration.zero,
-    );
-
-    // Move to the next song (first song from the infinite playlist)
-    await audioPlayer.seek(Duration.zero, index: currentSongIndex + 1);
-    updateCurrentSong();
-    isPlayingInfinity = true;
-  }
-
   void moveToPreviousSong() async {
     await audioPlayer.seekToPrevious();
+    await updateAudioSource(); // Add this line
     updateCurrentSong();
   }
 
@@ -183,6 +160,7 @@ class PlayerController extends ChangeNotifier {
     }
 
     await audioPlayer.seek(Duration.zero, index: songIndex);
+    await updateAudioSource();
     updateCurrentSong();
   }
 
@@ -194,6 +172,32 @@ class PlayerController extends ChangeNotifier {
       currentSongNotifier.value = currentSong;
       notifyListeners();
     }
+  }
+
+  void removeSong(Song song) async {
+    final index = playlistSongs.indexOf(song);
+    if (index == -1) return; // Song not found
+
+    // Remove the song from the playlist
+    playlistSongs.removeAt(index);
+
+    // If the song is in the infinite list, remove it as well
+    if (infiniteSongs.contains(song)) {
+      infiniteSongs.remove(song);
+    }
+
+    // Remove the audio source directly without resetting the player
+    await concatenatingAudioSource?.removeAt(index);
+
+    // If the current song is removed, move to the next song
+    if (currentSongIndex == index) {
+      if (currentSongIndex >= playlistSongs.length) {
+        currentSongIndex = 0;
+      }
+      updateCurrentSong();
+    }
+
+    notifyListeners();
   }
 
   void seekTo(Duration position) {
@@ -234,6 +238,51 @@ class PlayerController extends ChangeNotifier {
     return '$minutes:$seconds';
   }
 
+  /// Shuffle the playlist
+  Future<void> shufflePlaylist() async {
+    await audioPlayer.setShuffleModeEnabled(isShuffle);
+
+    if (isShuffle) {
+      await audioPlayer.shuffle();
+    }
+
+    notifyListeners();
+  }
+
+  List<Song> getShuffledPlaylistSongs() {
+    final shuffledList = List<Song>.from(playlistSongs);
+    shuffledList.shuffle();
+    return shuffledList;
+  }
+
+  /// Play the next song from the infinite playlist
+  void playNextFromInfinitePlaylist() async {
+    if (infiniteSongs.isEmpty) return;
+
+    // Append the entire infinite playlist to the current playlist
+    playlistSongs.addAll(infiniteSongs);
+
+    // Create a new audio source list with both current and infinite playlist songs
+    List<AudioSource> audioSources = playlistSongs
+        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
+        .toList();
+
+    // Set the new concatenating audio source
+    await audioPlayer.setAudioSource(
+      ConcatenatingAudioSource(
+        children: audioSources,
+        useLazyPreparation: true,
+      ),
+      initialIndex: currentSongIndex + 1, // Start from the next song
+      initialPosition: Duration.zero,
+    );
+
+    // Move to the next song (first song from the infinite playlist)
+    await audioPlayer.seek(Duration.zero, index: currentSongIndex + 1);
+    updateCurrentSong();
+    isPlayingInfinity = true;
+  }
+
   // Method to update infiniteSongs
   void updateInfiniteSongs(List<Song> newSongs) {
     infiniteSongsNotifier.value = newSongs;
@@ -251,59 +300,20 @@ class PlayerController extends ChangeNotifier {
     updateInfiniteSongs(infiniteSongs);
   }
 
-  void removeSong(Song song) async {
-    // Remove the song from the playlist
-    playlistSongs.remove(song);
-
-    // If the song is in the infinite list, remove it as well
-    if (infiniteSongs.contains(song)) {
-      infiniteSongs.remove(song);
+  /// Method to update the playlist order after a reorder operation
+  Future<void> updatePlaylistOrder(int oldIndex, int newIndex) async {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
     }
 
-    // Rebuild the audio sources list
-    List<AudioSource> audioSources = playlistSongs
-        .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
-        .toList();
+    // Move the song in the playlist
+    final Song song = playlistSongs.removeAt(oldIndex);
+    playlistSongs.insert(newIndex, song);
 
-    // Set the new concatenating audio source
-    await audioPlayer.setAudioSource(
-      ConcatenatingAudioSource(
-        children: audioSources,
-        useLazyPreparation: true,
-      ),
-      initialIndex: currentSongIndex, // Retain the current song index
-      initialPosition: _currentPosition, // Retain the current position
-    );
+    // Update the ConcatenatingAudioSource order
+    await concatenatingAudioSource?.move(oldIndex, newIndex);
 
-    // Notify listeners after removal
+    // Notify listeners to update UI
     notifyListeners();
   }
-
-  /// Method to update the playlist order after a reorder operation
-  // Future<void> updatePlaylistOrder(int oldIndex, int newIndex) async {
-  //   if (oldIndex < newIndex) {
-  //     newIndex -= 1;
-  //   }
-  //   // Move the song in the playlist
-  //   final Song song = playlistSongs.removeAt(oldIndex);
-  //   playlistSongs.insert(newIndex, song);
-
-  //   // Rebuild the audio sources list with the updated playlist order
-  //   List<AudioSource> audioSources = playlistSongs
-  //       .map((song) => AudioSource.uri(Uri.parse(song.urlMedia)))
-  //       .toList();
-
-  //   // Set the new concatenating audio source
-  //   await audioPlayer.setAudioSource(
-  //     ConcatenatingAudioSource(
-  //       children: audioSources,
-  //       useLazyPreparation: true,
-  //     ),
-  //     initialIndex: newIndex, // Set the new song index after reordering
-  //     initialPosition: Duration.zero, // Start from the beginning of the song
-  //   );
-
-  //   // Notify listeners to update UI or state
-  //   notifyListeners();
-  // }
 }

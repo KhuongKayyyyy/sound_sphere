@@ -2,6 +2,7 @@ import 'package:sound_sphere/data/models/app_user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
 import 'package:sound_sphere/data/models/radio.dart';
+import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
@@ -16,6 +17,125 @@ class FakeData {
   List<Song> parseSongs(List<dynamic> jsonList) {
     return jsonList.map((json) => Song.fromJson(json)).toList();
   }
+
+  static List<SearchCategory> searchCategory = [
+    SearchCategory(
+        name: "SoundSphere Music Live",
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4M1UzKpmdpmBuA9GT1f-vTmdwm64u4RNtGA&s"),
+    SearchCategory(
+        name: "Vietnamese Music",
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrH7labPAP-FcsZQFXpdeXF_BRrYluKuKd4w&s"),
+    SearchCategory(
+        name: "K-Pop",
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeeCMPJmpq8ufdWx96rNfsfqMxrnRX0GHZ1A&s"),
+    SearchCategory(
+        name: "Pop",
+        imageUrl:
+            "https://variety.com/wp-content/uploads/2020/01/taylor-swift-variety-cover-5-16x9-1000.jpg?w=1000&h=563&crop=1"),
+    SearchCategory(
+        name: "Charts",
+        imageUrl:
+            "https://media.gq.com/photos/56bb8a91b89407780bd7d454/16:9/w_2560%2Cc_limit/bieber-16-9-longform.jpg"),
+    SearchCategory(
+        name: "Hits",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Spatial Audio",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Live Music",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "DJ Mixes",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Essential",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Classical",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Acoustic",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Sleep",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Chill",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Feeling Blue",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Focus",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Romance",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Party",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Wellbeing",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Fitness",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "2010s",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "'90s",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "'80s",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Hip-Hop/Rap",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Rock",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Dance",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Electronic",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Country",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+    SearchCategory(
+        name: "Jazz",
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
+  ];
 
   List<Map<String, dynamic>> theWrxdiesSongJson = [
     {

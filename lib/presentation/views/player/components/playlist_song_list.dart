@@ -131,6 +131,15 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
 
   void onReorder(int oldIndex, int newIndex) async {
     // await PlayerController().updatePlaylistOrder(oldIndex, newIndex);
+    setState(() {
+      // if (oldIndex + 1 < newIndex + 1) {
+      //   newIndex -= 1;
+      // }
+      // final item = PlayerController().playlistSongs.removeAt(oldIndex + 1);
+      // PlayerController().playlistSongs.insert(newIndex + 1, item);
+      // PlayerController().updateAudioSource();
+      PlayerController().updatePlaylistOrder(oldIndex, newIndex);
+    });
   }
 
   void removeSong(Song song) {
