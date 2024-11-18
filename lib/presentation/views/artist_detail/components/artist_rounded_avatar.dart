@@ -22,7 +22,7 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
           children: [
@@ -57,6 +57,7 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
               )
           ],
         ),
+        const SizedBox(height: 10),
         Text(
           widget.artist.name,
           style: const TextStyle(fontWeight: FontWeight.bold),

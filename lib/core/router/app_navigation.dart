@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/song.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
@@ -12,6 +13,8 @@ import 'package:sound_sphere/presentation/views/main/home/subpage/add_artist_pag
 import 'package:sound_sphere/presentation/views/main/home/subpage/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
+import 'package:sound_sphere/presentation/views/main/search/components/into_search.dart';
+import 'package:sound_sphere/presentation/views/main/search/components/search_category_detail.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
@@ -193,7 +196,41 @@ class AppNavigation {
           path: Routes.search,
           name: Routes.search,
           builder: (context, state) => const SearchPage(),
-        )
+        ),
+        GoRoute(
+          path: Routes.intoSearch,
+          name: Routes.intoSearch,
+          builder: (context, state) => const IntoSearch(),
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: const IntoSearch(),
+              transitionDuration: const Duration(milliseconds: 200),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                // Slide transition from bottom
+                const begin = Offset(0.0, 1.0); // Starts from bottom
+                const end = Offset.zero;
+                const curve = Curves.easeInOut;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(position: offsetAnimation, child: child);
+              },
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.searchCategoryDetail,
+          name: Routes.searchCategoryDetail,
+          builder: (context, state) {
+            final category = state.extra as SearchCategory;
+            return SearchCategoryDetail(
+              category: category,
+            );
+          },
+        ),
       ],
     );
   }

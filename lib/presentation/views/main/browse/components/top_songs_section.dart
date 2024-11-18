@@ -8,8 +8,10 @@ import 'package:sound_sphere/presentation/views/main/browse/components/top_song_
 
 // ignore: must_be_immutable
 class TopSongsSection extends StatelessWidget {
+  bool isBlackTitle;
   List<Song> songList;
-  TopSongsSection({super.key, required this.songList});
+  TopSongsSection(
+      {super.key, required this.songList, required this.isBlackTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class TopSongsSection extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20),
             child: ShaderMask(
               shaderCallback: (bounds) => LinearGradient(
-                colors: [Theme.of(context).primaryColor, Colors.purple],
+                colors: !isBlackTitle
+                    ? [Theme.of(context).primaryColor, Colors.purple]
+                    : [Colors.black, Colors.black],
                 tileMode: TileMode.mirror,
               ).createShader(bounds),
               child: InkWell(

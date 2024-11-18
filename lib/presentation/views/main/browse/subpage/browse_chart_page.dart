@@ -27,7 +27,10 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               child: Text("Chart",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
             ),
-            TopSongsSection(songList: FakeData.obitoSongs.take(9).toList()),
+            TopSongsSection(
+              songList: FakeData.obitoSongs.take(9).toList(),
+              isBlackTitle: false,
+            ),
             const SizedBox(
               height: 20,
             ),

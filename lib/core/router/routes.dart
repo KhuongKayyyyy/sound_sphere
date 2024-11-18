@@ -12,7 +12,8 @@ class Routes {
   static const String artistDetail = '/artist-detail';
   static const String playlistDetail = '/playlist-detail';
   static const String songDetail = '/song-detail';
-
+  static const String intoSearch = '/into-search';
+  static const String searchCategoryDetail = '/search-category-detail';
   // onboarding routes
 
   // auth routes
