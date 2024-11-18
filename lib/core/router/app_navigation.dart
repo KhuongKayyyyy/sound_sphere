@@ -14,7 +14,8 @@ import 'package:sound_sphere/presentation/views/main/home/subpage/history_playli
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/into_search.dart';
-import 'package:sound_sphere/presentation/views/main/search/components/search_category_detail.dart';
+import 'package:sound_sphere/presentation/views/main/search/subpage/artist_we_love_page.dart';
+import 'package:sound_sphere/presentation/views/main/search/subpage/search_category_detail.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
@@ -231,6 +232,12 @@ class AppNavigation {
             );
           },
         ),
+        GoRoute(
+            path: Routes.extendArtistList,
+            name: Routes.extendArtistList,
+            builder: (context, state) {
+              return ArtistWeLovePage();
+            })
       ],
     );
   }

@@ -24,6 +24,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white.withOpacity(0.8),
         leading: InkWell(
           onTap: () => context.pop(),
           child: Icon(
