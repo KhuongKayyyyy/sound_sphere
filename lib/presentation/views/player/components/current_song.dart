@@ -129,21 +129,21 @@ class _CurrentSongState extends State<CurrentSong> {
                             SizedBox(
                           height: 250,
                           width: 250,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: AnimatedBuilder(
-                              animation: widget.playerController,
-                              builder: (context, child) {
-                                return Hero(
-                                  tag: "songImage",
-                                  child: Image.network(
+                          child: Hero(
+                            tag: "currentSongImage",
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: AnimatedBuilder(
+                                animation: widget.playerController,
+                                builder: (context, child) {
+                                  return Image.network(
                                     widget.playerController
                                         .getCurrentSong()
                                         .imgURL,
                                     fit: BoxFit.cover,
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -242,16 +242,19 @@ class _CurrentSongState extends State<CurrentSong> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.7),
-                  ),
-                  child: const Icon(
-                    Icons.more_horiz_rounded,
-                    color: Colors.white,
-                    size: 25,
+                InkWell(
+                  onTap: () => context.pop(),
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                    child: const Icon(
+                      Icons.more_horiz_rounded,
+                      color: Colors.white,
+                      size: 25,
+                    ),
                   ),
                 ),
               ],

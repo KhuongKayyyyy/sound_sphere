@@ -1,27 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/router/routes.dart';
+
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
 
-class MusicPlayerWidget extends StatelessWidget {
-  final Animation<double> scaleAnimation;
+class MusicPlayerWidget extends StatefulWidget {
   final VoidCallback playMusic;
   final bool isPlaying;
   final PlayerController playerController;
 
-  const MusicPlayerWidget(
-      {super.key,
-      required this.scaleAnimation,
-      required this.playMusic,
-      required this.isPlaying,
-      required this.playerController});
+  const MusicPlayerWidget({
+    super.key,
+    required this.playMusic,
+    required this.isPlaying,
+    required this.playerController,
+  });
+
+  @override
+  State<MusicPlayerWidget> createState() => _MusicPlayerWidgetState();
+}
+
+class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+  bool isPlayerPageOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize the animation controller
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    // Define the scale animation
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ScaleTransition(
-      scale: scaleAnimation,
+      scale: _scaleAnimation,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
@@ -43,7 +80,16 @@ class MusicPlayerWidget extends StatelessWidget {
             // Mini player song information
             Expanded(
               child: InkWell(
-                onTap: () => showBottomSheetWidget(context),
+                onTap: () {
+                  print(
+                      GoRouter.of(context).routerDelegate.currentConfiguration);
+                  context.pushNamed(Routes.player);
+                },
+                // onTap: () => showBottomSheetWidget(context),
+                // onTap: () => Navigator.push(
+                //   context,
+                //   CupertinoPageRoute(builder: (context) => PlayerPage()),
+                // ),
                 child: Row(
                   children: [
                     Container(
@@ -58,20 +104,21 @@ class MusicPlayerWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: AnimatedBuilder(
-                            animation: playerController,
+                      child: Hero(
+                        tag: 'currentSongImage',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: AnimatedBuilder(
+                            animation: widget.playerController,
                             builder: (context, child) {
-                              return Hero(
-                                tag: "songImage",
-                                child: Image.network(
-                                  playerController.getCurrentSong().imgURL,
-                                  height: 40,
-                                  fit: BoxFit.cover,
-                                ),
+                              return Image.network(
+                                widget.playerController.getCurrentSong().imgURL,
+                                height: 40,
+                                fit: BoxFit.cover,
                               );
-                            }),
+                            },
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -81,26 +128,30 @@ class MusicPlayerWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AnimatedBuilder(
-                            animation: playerController,
-                            builder: (context, child) {
-                              return Text(
-                                playerController.getCurrentSong().title,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            }),
+                          animation: widget.playerController,
+                          builder: (context, child) {
+                            return Text(
+                              widget.playerController.getCurrentSong().title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          },
+                        ),
                         AnimatedBuilder(
-                            animation: playerController,
-                            builder: (context, child) {
-                              return Text(
-                                playerController.getCurrentSong().artistName,
-                                style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            }),
+                          animation: widget.playerController,
+                          builder: (context, child) {
+                            return Text(
+                              widget.playerController
+                                  .getCurrentSong()
+                                  .artistName,
+                              style: TextStyle(
+                                color: AppColor.primaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ],
@@ -110,7 +161,7 @@ class MusicPlayerWidget extends StatelessWidget {
             // Mini player buttons
             InkWell(
               onTap: () {
-                playMusic();
+                widget.playMusic();
               },
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
@@ -128,7 +179,7 @@ class MusicPlayerWidget extends StatelessWidget {
                     ),
                   );
                 },
-                child: !isPlaying
+                child: !widget.isPlaying
                     ? Image.asset(
                         AppIcon.play,
                         height: 20,
@@ -144,7 +195,7 @@ class MusicPlayerWidget extends StatelessWidget {
             const SizedBox(width: 10),
             InkWell(
               onTap: () async {
-                playerController.moveToNextSong();
+                widget.playerController.moveToNextSong();
               },
               child: Image.asset(
                 AppIcon.play_next,
@@ -158,12 +209,26 @@ class MusicPlayerWidget extends StatelessWidget {
   }
 
   void showBottomSheetWidget(BuildContext context) {
+    isPlayerPageOpen = true;
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext builder) {
         return CupertinoPopupSurface(child: PlayerPage());
       },
-    );
+    ).then((value) {
+      // This callback is triggered when the bottom sheet is closed.
+      setState(() {
+        isPlayerPageOpen = false;
+        _triggerZoomAnimation();
+      });
+    });
+  }
+
+  void _triggerZoomAnimation() {
+    _animationController.forward().then((_) {
+      _animationController.reverse();
+    });
   }
 }

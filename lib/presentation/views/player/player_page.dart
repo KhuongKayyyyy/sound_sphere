@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/history_playlist_player.dart';
 import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';
@@ -14,6 +16,7 @@ import 'package:sound_sphere/presentation/views/player/components/player_play_co
 import 'package:sound_sphere/presentation/views/player/components/playlist_function.dart';
 import 'package:sound_sphere/presentation/views/player/components/playlist_song_list.dart';
 import 'package:sound_sphere/presentation/views/player/components/song_duration.dart';
+import 'package:sound_sphere/presentation/views/player/components/synced_lyric.dart';
 
 class PlayerPage extends StatefulWidget {
   final PlayerController playerController = PlayerController();
@@ -132,7 +135,6 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           // Background image
@@ -175,7 +177,16 @@ class _PlayerPageState extends State<PlayerPage> {
                           child: SizedBox(
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            child: CurrentSong(isFavorite: _isFavorite),
+                            // child: CurrentSong(isFavorite: _isFavorite),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              // child: Hero(
+                              //   tag: "currentSongImage",
+                              //   child: Image.network(
+                              //       PlayerController().getCurrentSong().imgURL),
+                              // ),
+                              child: CurrentSong(isFavorite: _isFavorite),
+                            ),
                           ),
                         ),
                       ),
@@ -322,10 +333,22 @@ class _PlayerPageState extends State<PlayerPage> {
                       ? Padding(
                           key: const ValueKey('lyrics'),
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: NonSyncLyrics(
-                            lyricsScrollController: _lyricsScrollController,
-                          ),
-                        )
+                          // child: NonSyncLyrics(
+                          //   lyricsScrollController: _lyricsScrollController,
+                          // ),
+                          child: PlayerController().getCurrentSong().title ==
+                                  "Shape Of You"
+                              ? Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: SyncedLyric(
+                                    lyricsScrollController:
+                                        _lyricsScrollController,
+                                  ),
+                                )
+                              : NonSyncLyrics(
+                                  lyricsScrollController:
+                                      _lyricsScrollController,
+                                ))
                       : Container(), // Placeholder or fallback widget if neither is true
             ),
           ),

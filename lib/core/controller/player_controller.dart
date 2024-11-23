@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/lyrics.dart';
 import 'package:sound_sphere/data/models/song.dart';
 
 class PlayerController extends ChangeNotifier {
@@ -10,6 +14,52 @@ class PlayerController extends ChangeNotifier {
 
   factory PlayerController() => _instance;
   PlayerController._internal();
+
+  StreamSubscription? lyricSyncSubscription;
+
+  /// Sync lyrics and scroll to the appropriate position
+  void syncLyrics({
+    required List<Lyric> lyrics,
+    required ItemScrollController itemScrollController,
+  }) {
+    // Hủy đăng ký trước đó nếu có
+    lyricSyncSubscription?.cancel();
+
+    // Lắng nghe luồng vị trí từ trình phát nhạc
+    lyricSyncSubscription = audioPlayer.positionStream.listen((duration) {
+      DateTime dt = DateTime(1970, 1, 1).copyWith(
+        hour: duration.inHours,
+        minute: duration.inMinutes.remainder(60),
+        second: duration.inSeconds.remainder(60),
+      );
+
+      for (int index = 0; index < lyrics.length; index++) {
+        // Tìm dòng lời bài hát hiện tại dựa trên thời gian
+        if (lyrics[index].timeStamp.isAfter(dt)) {
+          // Cuộn để đảm bảo mục này ở đầu danh sách
+          itemScrollController.scrollTo(
+            index: index, // Không cần trừ đi bất kỳ giá trị nào
+            duration: const Duration(milliseconds: 1500),
+            alignment: 0.0, // Giữ mục ở đầu danh sách
+          );
+          break;
+        }
+      }
+    });
+  }
+
+  /// Cancel lyric syncing
+  void cancelLyricSync() {
+    lyricSyncSubscription?.cancel();
+    lyricSyncSubscription = null;
+  }
+
+  @override
+  void dispose() {
+    // Ensure to cancel the subscription when disposing
+    lyricSyncSubscription?.cancel();
+    super.dispose();
+  }
 
   bool _isPlaying = false;
   bool isShuffle = false; // Add shuffle state

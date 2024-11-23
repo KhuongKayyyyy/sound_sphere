@@ -18,6 +18,7 @@ import 'package:sound_sphere/presentation/views/main/search/subpage/artist_we_lo
 import 'package:sound_sphere/presentation/views/main/search/subpage/search_category_detail.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
+import 'package:sound_sphere/presentation/views/player/player_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
 
 class AppNavigation {
@@ -61,12 +62,29 @@ class AppNavigation {
           builder: (context, state) {
             return const AddArtistPage();
           }),
-      // GoRoute(
-      //     path: Routes.player,
-      //     name: Routes.player,
-      //     builder: (context, state) {
-      //       return const PlayerPage();
-      //     }),
+      GoRoute(
+          path: Routes.player,
+          name: Routes.player,
+          builder: (context, state) => PlayerPage(),
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: PlayerPage(),
+              transitionDuration: const Duration(milliseconds: 500),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                // Slide transition from bottom
+                const begin = Offset(0.0, 1.0); // Starts from bottom
+                const end = Offset.zero;
+                const curve = Curves.easeInOut;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(position: offsetAnimation, child: child);
+              },
+            );
+          }),
       // GoRoute(
       //     path: Routes.signup,
       //     name: Routes.signup,

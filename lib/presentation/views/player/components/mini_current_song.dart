@@ -29,12 +29,9 @@ class _MiniCurrentSongState extends State<MiniCurrentSong> {
                 child: AnimatedBuilder(
                     animation: widget.playerController,
                     builder: (context, child) {
-                      return Hero(
-                        tag: "songImage",
-                        child: Image.network(
-                            widget.playerController.getCurrentSong().imgURL,
-                            fit: BoxFit.cover),
-                      );
+                      return Image.network(
+                          widget.playerController.getCurrentSong().imgURL,
+                          fit: BoxFit.cover);
                     }),
               )),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
 class ArtistWeLoveItem extends StatelessWidget {

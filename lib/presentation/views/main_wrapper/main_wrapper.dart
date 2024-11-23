@@ -20,7 +20,6 @@ class MainWrapper extends StatefulWidget {
 class _MainWrapperState extends State<MainWrapper>
     with SingleTickerProviderStateMixin {
   late AnimationController _scaleController;
-  late Animation<double> _scaleAnimation;
 
   final PlayerController _playerController = PlayerController();
   bool _isPlaying = false; // Track play/pause state
@@ -31,12 +30,6 @@ class _MainWrapperState extends State<MainWrapper>
     _scaleController = AnimationController(
       duration: const Duration(milliseconds: 200),
       vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1, end: 1.05).animate(
-      CurvedAnimation(
-        parent: _scaleController,
-        curve: Curves.bounceInOut,
-      ),
     );
 
     _playerController.setPlayerAudio(FakeData.wrxdieSong.take(10).toList());
@@ -87,7 +80,6 @@ class _MainWrapperState extends State<MainWrapper>
               right: 0,
               left: 0,
               child: MusicPlayerWidget(
-                  scaleAnimation: _scaleAnimation,
                   playMusic: _playMusic,
                   isPlaying: _isPlaying,
                   playerController: _playerController),

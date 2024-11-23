@@ -53,6 +53,5 @@ class _AppSearchBarState extends State<AppSearchBar> {
         ),
       ),
     );
-    ;
   }
 }
