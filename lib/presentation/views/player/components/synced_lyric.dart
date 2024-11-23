@@ -72,14 +72,22 @@ class _SyncedLyricState extends State<SyncedLyric> {
               );
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  lyrics![index].words,
-                  style: TextStyle(
-                    color: lyrics![index].timeStamp.isAfter(dt)
-                        ? Colors.white.withOpacity(0.3)
-                        : Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
+                child: InkWell(
+                  onTap: () => PlayerController().seekTo(Duration(
+                    hours: lyrics![index].timeStamp.hour,
+                    minutes: lyrics![index].timeStamp.minute,
+                    seconds: lyrics![index].timeStamp.second,
+                    milliseconds: lyrics![index].timeStamp.millisecond,
+                  )),
+                  child: Text(
+                    lyrics![index].words,
+                    style: TextStyle(
+                      color: lyrics![index].timeStamp.isAfter(dt)
+                          ? Colors.white.withOpacity(0.3)
+                          : Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
               );
