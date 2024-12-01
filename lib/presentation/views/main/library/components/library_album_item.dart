@@ -63,7 +63,7 @@ class LibraryAlbumItem extends StatelessWidget {
         const SizedBox(height: 5),
         Text(
           overflow: TextOverflow.ellipsis,
-          album.artistName,
+          album.aritst,
           style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,

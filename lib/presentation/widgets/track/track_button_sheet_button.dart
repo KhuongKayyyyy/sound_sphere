@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
-class TrackBottomSheetButton extends StatelessWidget {
+class TrackBottomSheetButton extends StatefulWidget {
   final String buttonText;
   final bool isLiked;
+  final Function()? onPressed;
 
   const TrackBottomSheetButton(
-      {super.key, required this.buttonText, required this.isLiked});
+      {super.key,
+      required this.buttonText,
+      required this.isLiked,
+      this.onPressed});
 
+  @override
+  State<TrackBottomSheetButton> createState() => _TrackBottomSheetButtonState();
+}
+
+class _TrackBottomSheetButtonState extends State<TrackBottomSheetButton> {
   @override
   Widget build(BuildContext context) {
     // Determine the icon based on the button text
     IconData getIcon() {
-      switch (buttonText.toLowerCase()) {
+      switch (widget.buttonText.toLowerCase()) {
         case 'like':
-          return isLiked ? Icons.favorite : Icons.favorite_border;
+          return widget.isLiked ? Icons.favorite : Icons.favorite_border;
         case 'share':
           return Icons.share;
         case 'download':
@@ -23,6 +32,8 @@ class TrackBottomSheetButton extends StatelessWidget {
           return Icons.person;
         case 'about track':
           return Icons.info_outline_rounded;
+        case 'add to playlist':
+          return Icons.playlist_add;
         default:
           return Icons.help; // Default icon if the text doesn't match
       }
@@ -42,18 +53,19 @@ class TrackBottomSheetButton extends StatelessWidget {
             const SizedBox(width: 10),
             Icon(
               getIcon(),
-              color: isLiked && buttonText.toLowerCase() == 'like'
+              color: widget.isLiked && widget.buttonText.toLowerCase() == 'like'
                   ? AppColor.primaryColor
                   : Colors.black,
             ),
             const SizedBox(width: 8),
-            Text(buttonText),
+            Text(widget.buttonText),
             const Spacer(),
           ],
         ),
       ),
       onTap: () {
         // Handle button press
+        widget.onPressed?.call();
       },
     );
   }

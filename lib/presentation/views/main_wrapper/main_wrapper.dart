@@ -32,7 +32,7 @@ class _MainWrapperState extends State<MainWrapper>
       vsync: this,
     );
 
-    _playerController.setPlayerAudio(FakeData.wrxdieSong.take(10).toList());
+    _playerController.setPlayerAudio(FakeData.obitoSongs);
 
     // Listen for changes in the playback state
     _playerController.audioPlayer.playerStateStream.listen((state) {

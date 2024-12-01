@@ -182,7 +182,7 @@ class _CurrentSongState extends State<CurrentSong> {
                     AnimatedBuilder(
                       animation: widget.playerController,
                       builder: (context, child) => Text(
-                        widget.playerController.getCurrentSong().artistName,
+                        widget.playerController.getCurrentSong().artist,
                         style: TextStyle(
                             color: Colors.white.withOpacity(0.7),
                             fontSize: 18,

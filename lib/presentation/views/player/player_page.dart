@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/history_playlist_player.dart';
 import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';

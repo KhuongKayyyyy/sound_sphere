@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class SearchSongItem extends StatefulWidget {
-  final Song song;
+  final Track song;
   const SearchSongItem({super.key, required this.song});
 
   @override
@@ -41,7 +41,7 @@ class _SearchSongItemState extends State<SearchSongItem> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        widget.song.artistName,
+                        widget.song.artist,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 14,

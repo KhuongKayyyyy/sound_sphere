@@ -61,6 +61,7 @@ class ArtistTopSong extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Spacer(),
                           Text(
                             FakeData.obitoSongs[index].title,
                             overflow: TextOverflow

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/res/user_repository_impl.dart';
-import 'package:sound_sphere/presentation/blocs/bloc/register_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/register/register_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_form.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_header.dart';

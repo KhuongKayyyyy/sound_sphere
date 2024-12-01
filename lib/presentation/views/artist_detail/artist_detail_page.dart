@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_music.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_song.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song.dart';
@@ -21,7 +21,7 @@ class ArtistDetailPage extends StatefulWidget {
 class _ArtistDetailPageState extends State<ArtistDetailPage> {
   // fake data for artist detail
   Artist tempArtist = FakeData.artists.first;
-  Song newSong = FakeData.obitoSongs[4];
+  Track newSong = FakeData.obitoSongs[4];
 
   ScrollController? _scrollController;
   bool showAppBar = false;

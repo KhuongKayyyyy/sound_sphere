@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_rounded_avatar.dart';
 
 class ArtistWeLoveSection extends StatelessWidget {
-  const ArtistWeLoveSection({super.key});
+  final List<Artist> artists;
+  const ArtistWeLoveSection({super.key, required this.artists});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class ArtistWeLoveSection extends StatelessWidget {
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: ArtistRoundedAvatar(
-                artist: FakeData.artists.elementAt(index),
+                artist: artists.elementAt(index),
                 isLike: false,
                 onTap: () {},
               ),

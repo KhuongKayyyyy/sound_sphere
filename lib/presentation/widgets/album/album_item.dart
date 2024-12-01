@@ -28,7 +28,7 @@ class AlbumItem extends StatelessWidget {
           album.title,
         ),
         Text(
-          album.artistName,
+          album.aritst,
           style: TextStyle(color: AppColor.inkGreyDark),
         )
       ],

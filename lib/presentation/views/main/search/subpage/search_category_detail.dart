@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_songs_section.dart';
-import 'package:sound_sphere/presentation/views/main/home/components/song_section.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/media_section.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/artist_we_love_section.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/new_release_item.dart';
 
@@ -20,6 +24,19 @@ class SearchCategoryDetail extends StatefulWidget {
 }
 
 class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
+  late final ArtistBloc artistBloc;
+  late final AlbumBloc albumBloc;
+  @override
+  void initState() {
+    artistBloc = ArtistBloc();
+    artistBloc.add(
+        FetchArtistsEvent(1, ApiConfig.DEFAULT_LIMIT, ArtistApi.nameAndAvatar));
+
+    albumBloc = AlbumBloc();
+    albumBloc.add(FetchAlbumsPreviewEvent(1));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +94,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                     return Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: NewReleaseItem(album: item));
-                  } else if (item is Song) {
+                  } else if (item is Track) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: NewReleaseItem(song: item),
@@ -89,8 +106,8 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 },
               ),
             ),
-            SongSection(
-              songSectionTitle: "Playlist",
+            MediaSection(
+              mediaSectionTitle: "Playlist",
               songList: FakeData.obitoSongs.take(10).toList(),
               isExpandable: true,
               onPressed: () => context.pushNamed(
@@ -101,8 +118,8 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 },
               ),
             ),
-            SongSection(
-              songSectionTitle: "New Release",
+            MediaSection(
+              mediaSectionTitle: "New Release",
               songList: FakeData.obitoSongs.take(10).toList(),
               isExpandable: true,
               onPressed: () => context.pushNamed(
@@ -113,8 +130,8 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 },
               ),
             ),
-            SongSection(
-              songSectionTitle: "Vietnamese Music In Spatial Audio",
+            MediaSection(
+              mediaSectionTitle: "Vietnamese Music In Spatial Audio",
               songList: FakeData.obitoSongs.take(10).toList(),
               isExpandable: true,
               onPressed: () => context.pushNamed(
@@ -125,8 +142,8 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 },
               ),
             ),
-            SongSection(
-              songSectionTitle: "International Collaboration",
+            MediaSection(
+              mediaSectionTitle: "International Collaboration",
               songList: FakeData.obitoSongs.take(10).toList(),
               isExpandable: true,
               onPressed: () => context.pushNamed(
@@ -141,25 +158,72 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
               songList: FakeData.obitoSongs.take(9).toList(),
               isBlackTitle: true,
             ),
-            SongSection(
-              songSectionTitle: "Essential Albums",
-              songList: FakeData.obitoSongs.take(10).toList(),
-              isExpandable: true,
-              onPressed: () => context.pushNamed(
-                Routes.extendGridView,
-                extra: {
-                  'songs': FakeData.wrxdieSong.take(10).toList(),
-                  'title': "Essental Albums",
-                },
-              ),
-            ),
-            ArtistWeLoveSection(),
+            _buildEssentialAlbumSection(),
+            // TextButton(
+            //     onPressed: () async {
+            //       // AlbumRepository.fetchAlbumWithPreviewInformation(
+            //       //     "title image_url artist");
+            //       ArtistRepository.fetchArtists(1);
+            //     },
+            //     child: Text("test ")),
+            _buildArtistWeLoveSection(),
             const SizedBox(
               height: 150,
             )
           ],
         ),
       ),
+    );
+  }
+
+  BlocBuilder<AlbumBloc, AlbumState> _buildEssentialAlbumSection() {
+    return BlocBuilder<AlbumBloc, AlbumState>(
+      bloc: albumBloc,
+      builder: (context, albumState) {
+        if (albumState is AlbumPreviewLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (albumState is AlbumPreviewLoaded) {
+          return MediaSection(
+            mediaSectionTitle: "Essential Albums",
+            albumList: albumState.albums,
+            isExpandable: true,
+            onPressed: () => context.pushNamed(
+              Routes.extendGridView,
+              extra: {
+                'songs': albumState.albums,
+                'title': "Essental Albums",
+              },
+            ),
+          );
+        } else if (albumState is AlbumPreviewError) {
+          return Center(
+            child: Text(albumState.message),
+          );
+        }
+        return const Text("did not add event");
+      },
+    );
+  }
+
+  BlocBuilder<ArtistBloc, ArtistState> _buildArtistWeLoveSection() {
+    return BlocBuilder<ArtistBloc, ArtistState>(
+      bloc: artistBloc,
+      builder: (context, artistState) {
+        if (artistState is ArtistLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (artistState is ArtistLoaded) {
+          return ArtistWeLoveSection(artists: artistState.artists);
+        } else if (artistState is ArtistError) {
+          return Center(
+            child: Text(artistState.message),
+          );
+        }
+        return const Text("did not add event");
+      },
     );
   }
 }

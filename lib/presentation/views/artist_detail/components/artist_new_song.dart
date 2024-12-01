@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 // ignore: must_be_immutable
 class ArtistNewSong extends StatelessWidget {
-  Song newSong;
+  Track newSong;
   ArtistNewSong({super.key, required this.newSong});
 
   @override

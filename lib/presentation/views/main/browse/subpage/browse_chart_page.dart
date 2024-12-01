@@ -5,7 +5,7 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/city_chart_section.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/daily_top_100_section.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_songs_section.dart';
-import 'package:sound_sphere/presentation/views/main/home/components/song_section.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/media_section.dart';
 
 class BrowseChartPage extends StatefulWidget {
   const BrowseChartPage({super.key});
@@ -38,8 +38,8 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
             CityChartSection(),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: SongSection(
-                  songSectionTitle: "Everyone talking about",
+              child: MediaSection(
+                  mediaSectionTitle: "Everyone talking about",
                   songList: FakeData.obitoSongs.take(8).toList(),
                   isExpandable: true,
                   onPressed: () {

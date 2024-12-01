@@ -108,7 +108,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
                         fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                   Text(
-                    "By ${widget.album.artistName}",
+                    "By ${widget.album.aritst}",
                     style: TextStyle(
                       color: AppColor.primaryColor,
                       fontSize: 15,
@@ -376,7 +376,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
               ),
             ),
             Text(
-              widget.album.artistName,
+              widget.album.aritst,
               style: TextStyle(
                 fontSize: 14,
                 color: AppColor.primaryColor,
@@ -437,7 +437,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
   Widget _buildDetailsContent() {
     return Column(
       children: [
-        _buildDetailRow("Artist", widget.album.artistName),
+        _buildDetailRow("Artist", widget.album.aritst),
         _buildDetailRow("Album", widget.album.title),
         _buildDetailRow("Genre", widget.album.genre.name),
         _buildDetailRow("Year", widget.album.releaseDate),

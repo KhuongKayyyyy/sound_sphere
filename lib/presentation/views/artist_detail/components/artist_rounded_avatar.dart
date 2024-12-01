@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +35,7 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
-                    widget.artist.avatarURL,
+                    FakeData.artists.first.avatarURL,
                     fit: BoxFit.cover,
                   ),
                 ),

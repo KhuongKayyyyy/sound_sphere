@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_grid.dart';
@@ -69,7 +69,7 @@ class AppNavigation {
           pageBuilder: (context, state) {
             return CustomTransitionPage(
               child: PlayerPage(),
-              transitionDuration: const Duration(milliseconds: 500),
+              transitionDuration: const Duration(milliseconds: 200),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 // Slide transition from bottom
@@ -143,7 +143,7 @@ class AppNavigation {
           name: Routes.extendGridView,
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;
-            final songList = extras['songs'] as List<Song>;
+            final songList = extras['songs'] as List<Track>;
             final title = extras['title'] as String;
             return AllSongGrid(
               songs: songList,
@@ -169,7 +169,7 @@ class AppNavigation {
           name: Routes.extendListView,
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;
-            final songList = extras['songs'] as List<Song>;
+            final songList = extras['songs'] as List<Track>;
             final title = extras['title'] as String;
             return AllSongList(
               songs: songList,

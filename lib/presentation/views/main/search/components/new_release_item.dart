@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class NewReleaseItem extends StatelessWidget {
   final Album? album;
-  final Song? song;
+  final Track? song;
   const NewReleaseItem({super.key, this.album, this.song});
 
   @override
@@ -29,7 +29,7 @@ class NewReleaseItem extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Text(
-          album != null ? album!.artistName : song!.artistName,
+          album != null ? album!.aritst : song!.artist,
           style: const TextStyle(
             color: Colors.grey,
             fontSize: 18,

@@ -1,21 +1,25 @@
-import 'song.dart';
+import 'track.dart';
 import 'genres.dart'; // Assuming the Genres class is defined here
 
 class Album {
+  final String? id;
   final String title;
-  final String artistName;
+  final String aritst;
   final Genres genre;
-  final List<Song> songs;
+  final List<Track> songs;
   final String imgURL;
   final String releaseDate;
+  final String? type;
 
   Album({
+    this.id,
     required this.title,
-    required this.artistName,
+    required this.aritst,
     required this.genre,
     required this.songs,
     required this.imgURL,
     required this.releaseDate,
+    this.type,
   });
 
   /// Method to calculate the total album duration in hours and minutes
@@ -23,7 +27,7 @@ class Album {
     int totalSeconds = 0;
 
     for (var song in songs) {
-      totalSeconds += _convertDurationToSeconds(song.duration);
+      totalSeconds += _convertDurationToSeconds(song.duration ?? '0:00');
     }
 
     return _formatDuration(totalSeconds);
@@ -55,5 +59,33 @@ class Album {
       durationString += "$minutes minute${minutes > 1 ? 's' : ''}";
     }
     return durationString.trim(); // Return the final formatted string
+  }
+
+  /// Factory constructor to create an Album instance from a JSON map
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      id: json['_id'] ?? "id",
+      title: json['title'] ?? "Unknown Album",
+      aritst: json['creator']['name'] ?? "Unknown Artist",
+      genre: Genres(name: "temp", imgURL: "temp"),
+      songs: [],
+      imgURL: json['image_url'] ?? "https://via.placeholder.com/150",
+      releaseDate: json['release_date'] ?? "Unknown Date",
+      // type: json['type'],
+      type: json['type'] ?? "Unknown Type",
+    );
+  }
+
+  /// Method to convert an Album instance to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'artist': aritst,
+      'genre': "",
+      'songs': songs.map((song) => song.toJson()).toList(),
+      'imgURL': imgURL,
+      'releaseDate': releaseDate,
+    };
   }
 }

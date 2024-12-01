@@ -71,7 +71,7 @@ class _MiniCurrentSongState extends State<MiniCurrentSong> {
               animation: widget.playerController,
               builder: (context, child) {
                 final text =
-                    "From ${widget.playerController.currentSong.artistName}";
+                    "From ${widget.playerController.currentSong.artist}";
                 final textStyle = TextStyle(
                   color: Colors.white.withOpacity(0.5),
                   fontSize: 16,

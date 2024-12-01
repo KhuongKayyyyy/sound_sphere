@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/for_you_app_bar.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/subpage/listen_now_page.dart';
+import 'package:sound_sphere/presentation/views/main/for_you/subpage/shared_with_you_page.dart';
 
 class ForYouPage extends StatefulWidget {
   const ForYouPage({super.key});
@@ -46,6 +47,7 @@ class _ForYouPageState extends State<ForYouPage> {
             onTabSelected: (index) => setState(() => _currentIndex = index),
           ),
           if (_currentIndex == 0) const ListenNowPage(),
+          if (_currentIndex == 1) const SharedWithYouPage(),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.white,

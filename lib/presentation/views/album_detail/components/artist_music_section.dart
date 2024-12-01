@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
-import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
+import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
 
 class ArtistMusicSection extends StatelessWidget {
   final String title;
-  final List<Song>? songs;
+  final List<Track>? songs;
   final List<Album>? albums;
 
   const ArtistMusicSection(
@@ -37,7 +37,7 @@ class ArtistMusicSection extends StatelessWidget {
               itemCount: songs!.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: SongItem(song: songs![index]),
+                child: MediaItem(song: songs![index]),
               ),
             ),
           ),

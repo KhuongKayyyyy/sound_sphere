@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
 class AlbumSongList extends StatelessWidget {
-  final List<Song> songs;
+  final List<Track> songs;
 
   const AlbumSongList({super.key, required this.songs});
 

@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/res/track_repository.dart';
+import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/best_album_section.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/history_playlist_button.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/mixed_playlist.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/playlist_section.dart';
-import 'package:sound_sphere/presentation/views/main/home/components/song_section.dart';
+import 'package:sound_sphere/presentation/views/main/home/components/media_section.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,12 +24,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late TrackBloc recommendTrackBloc;
+  late TrackBloc hitTrackBloc;
   ScrollController? _scrollController; // Nullable scroll controller
   bool showAvatar = true;
 
   @override
   void initState() {
     super.initState();
+    recommendTrackBloc = TrackBloc();
+    recommendTrackBloc
+        .add(const FetchTracksEvent(1, 10, TrackApi.previewTrack));
+    hitTrackBloc = TrackBloc();
+    hitTrackBloc.add(const FetchTracksEvent(2, 10, TrackApi.previewTrack));
+
     _scrollController = ScrollController();
     _scrollController!
         .addListener(_onScroll); // Add listener to scroll controller
@@ -95,9 +107,6 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.black),
                     ),
                   ),
-                  // if (isExpanded &&
-                  //
-                  //   showAvatar) // Only show avatar when expanded
                   IconButton(
                       onPressed: () {
                         _showLoginModal();
@@ -143,26 +152,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           const SizedBox(height: 20),
           const PlaylistSection(playlistSectionTitle: "Top Playlists"),
-          SongSection(
-            songSectionTitle: "Today hits",
-            songList: FakeData.obitoSongs.take(10).toList(),
-            isExpandable: true,
-            onPressed: () => context.pushNamed(
-              Routes.extendGridView,
-              extra: {
-                'songs': FakeData.obitoSongs.take(10).toList(),
-                'title': "Today hits",
-              },
-            ),
-          ),
+          _buildMediaSection(hitTrackBloc, "Top songs"),
           const SizedBox(height: 10),
           const PlaylistSection(playlistSectionTitle: "Made for you"),
           const SizedBox(height: 10),
-          SongSection(
-            songSectionTitle: "Son Tung MTP's fan like",
-            songList: FakeData.obitoSongs.take(10).toList(),
-            isExpandable: false,
-          ),
+          _buildMediaSection(recommendTrackBloc, "Son Tung MTP's hits"),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -174,6 +168,38 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 150),
         ],
       ),
+    );
+  }
+
+  BlocBuilder<TrackBloc, TrackState> _buildMediaSection(
+      TrackBloc trackBloc, String title) {
+    return BlocBuilder<TrackBloc, TrackState>(
+      bloc: trackBloc,
+      builder: (context, trackState) {
+        if (trackState is TrackLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (trackState is TrackLoaded) {
+          return MediaSection(
+            mediaSectionTitle: title,
+            songList: trackState.tracks,
+            isExpandable: true,
+            onPressed: () => context.pushNamed(
+              Routes.extendGridView,
+              extra: {
+                'songs': trackState.tracks,
+                'title': title,
+              },
+            ),
+          );
+        } else if (trackState is TrackError) {
+          return Center(
+            child: Text(trackState.message),
+          );
+        }
+        return const SizedBox(
+          child: Text("No event added"),
+        );
+      },
     );
   }
 

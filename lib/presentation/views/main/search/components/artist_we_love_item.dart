@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
 class ArtistWeLoveItem extends StatelessWidget {
@@ -16,7 +17,7 @@ class ArtistWeLoveItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: Image.network(
-                  artist.avatarURL,
+                  FakeData.artists.first.avatarURL,
                   height: 70,
                   width: 70,
                   fit: BoxFit.cover,
@@ -26,12 +27,14 @@ class ArtistWeLoveItem extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Text(
-                      artist.name,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 20),
+                    Expanded(
+                      child: Text(
+                        artist.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 20),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const Spacer(),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.arrow_forward_ios_rounded),

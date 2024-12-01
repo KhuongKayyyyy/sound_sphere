@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
-import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
+import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
 
 // ignore: must_be_immutable
 class ArtistMusic extends StatelessWidget {
   String sectionName;
-  List<Song>? songList;
+  List<Track>? songList;
   List<Album>? albumList;
   ArtistMusic(
       {super.key, required this.sectionName, this.songList, this.albumList});
@@ -47,7 +47,7 @@ class ArtistMusic extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: SongItem(song: songList![index]));
+                    child: MediaItem(song: songList![index]));
               },
             ),
           ),

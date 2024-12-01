@@ -71,7 +71,7 @@ class _PlaylistFunctionState extends State<PlaylistFunction> {
                 animation: widget.playerController,
                 builder: (context, child) {
                   final text = !PlayerController().isPlayingInfinity
-                      ? "From ${widget.playerController.currentSong.artistName}"
+                      ? "From ${widget.playerController.currentSong.artist}"
                       : "Autoplaying similar songs";
                   final textStyle = TextStyle(
                     color: Colors.white.withOpacity(0.5),

@@ -18,7 +18,7 @@ class AlbumBriefInfo extends StatelessWidget {
                 style: const TextStyle(color: Colors.grey)),
             Text(
                 "${tempAlbum.songs.length} songs, ${tempAlbum.getAlbumDuration()}"),
-            Text("© ${tempAlbum.artistName} ${tempAlbum.releaseDate}"),
+            Text("© ${tempAlbum.aritst} ${tempAlbum.releaseDate}"),
           ],
         ),
       ),

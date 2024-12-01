@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/widgets/artist/artist_searched_item.dart';
 
 // ignore: must_be_immutable
@@ -57,7 +57,7 @@ class CustomSearchBar extends StatelessWidget {
 
 class CustomSearchDelegate extends SearchDelegate {
   List<Artist> searchArist = FakeData.artists.take(5).toList();
-  List<Song> songList = FakeData.obitoSongs.take(5).toList();
+  List<Track> songList = FakeData.obitoSongs.take(5).toList();
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [

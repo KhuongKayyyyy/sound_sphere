@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class HistoryPlaylistPlayer extends StatelessWidget {
   const HistoryPlaylistPlayer({super.key});
@@ -21,7 +21,7 @@ class HistoryPlaylistPlayer extends StatelessWidget {
 }
 
 class HistoryPlayerSongItem extends StatelessWidget {
-  final Song song;
+  final Track song;
   const HistoryPlayerSongItem({super.key, required this.song});
 
   @override
@@ -43,7 +43,7 @@ class HistoryPlayerSongItem extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          song.artistName,
+          song.artist,
           style: TextStyle(color: Colors.white),
         ),
         // trailing: IconButton(

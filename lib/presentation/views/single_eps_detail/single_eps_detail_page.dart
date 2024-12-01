@@ -4,9 +4,9 @@ import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
-import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
+import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
 
 // ignore: must_be_immutable
 class SingleEPsDetailPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class SingleEPsDetailPage extends StatefulWidget {
 class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
-  Song tempSong = FakeData.obitoSongs.first;
+  Track tempSong = FakeData.obitoSongs.first;
   @override
   void initState() {
     super.initState();
@@ -66,7 +66,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  _buildAritstMusic("More by ${tempSong.artistName}",
+                  _buildAritstMusic("More by ${tempSong.artist}",
                       albumList: FakeData.albums),
                   _buildAritstMusic("Featured on",
                       songList: FakeData.obitoSongs.take(10).toList()),
@@ -95,39 +95,36 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
           : null,
       centerTitle: true,
       actions: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite_border),
-          ),
-        ),
+        _buildAppBarIcon(Icons.favorite_outline_rounded, () {}),
         const SizedBox(
           width: 10,
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_horiz_rounded),
-          ),
-        ),
+        _buildAppBarIcon(Icons.more_horiz_rounded, () {}),
         const SizedBox(
           width: 10,
         ),
       ],
-      // flexibleSpace: FlexibleSpaceBar(
-      //   background: Image.network(
-      //     'https://via.placeholder.com/150',
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
+    );
+  }
+
+  Widget _buildAppBarIcon(IconData icon, Function() onTap) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.1),
+        shape: BoxShape.circle,
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            padding: const EdgeInsets.all(5),
+            child: Icon(
+              icon,
+              size: 20,
+            )),
+      ),
     );
   }
 
@@ -164,7 +161,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            tempSong.artistName,
+            tempSong.artist,
             style: TextStyle(
                 fontSize: 20,
                 color: AppColor.primaryColor,
@@ -186,75 +183,50 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     return SliverToBoxAdapter(
       child: Row(
         children: [
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                PlayerController().setPlayerAudio([tempSong]);
-                PlayerController().isPlayingAlbum = false;
-              },
-              child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppIcon.play,
-                      scale: 30,
-                      color: AppColor.primaryColor,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Play",
-                      style: TextStyle(
-                          color: AppColor.primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AppIcon.shuffle,
-                    scale: 30,
-                    color: AppColor.primaryColor,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Shuffle",
-                    style: TextStyle(
-                        color: AppColor.primaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-          )
+          _buildPlayButton(AppIcon.play, "Play", () {
+            PlayerController().setPlayerAudio([tempSong]);
+            PlayerController().isPlayingAlbum = false;
+          }),
+          _buildPlayButton(AppIcon.shuffle, "Shuffle", () {}),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPlayButton(String icon, String text, Function() onTap) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                icon,
+                scale: 30,
+                color: AppColor.primaryColor,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                    color: AppColor.primaryColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -265,43 +237,43 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "${index + 1}",
-                      style: TextStyle(
-                          color: AppColor.primaryColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      tempSong.title,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.more_horiz_rounded),
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.black.withOpacity(0.2),
-                  thickness: 1,
-                ),
-              ],
-            );
+            return _buildSongItem(index);
           },
           childCount: 1,
         ),
       ),
     );
+  }
+
+  Widget _buildSongItem(int index) {
+    return Column(children: [
+      Row(
+        children: [
+          Text(
+            "${index + 1}",
+            style: TextStyle(
+                color: AppColor.primaryColor,
+                fontWeight: FontWeight.w500,
+                fontSize: 16),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            tempSong.title,
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_horiz_rounded),
+          ),
+        ],
+      ),
+      Divider(
+        color: Colors.black.withOpacity(0.2),
+        thickness: 1,
+      )
+    ]);
   }
 
   Widget _buildSingleBriefInfo() {
@@ -326,7 +298,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   color: Colors.grey[400]),
             ),
             Text(
-              "© ${tempSong.artistName} 2019",
+              "© ${tempSong.artist} 2019",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -339,7 +311,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   }
 
   Widget _buildAritstMusic(String sectionName,
-      {List<Song>? songList, List<Album>? albumList}) {
+      {List<Track>? songList, List<Album>? albumList}) {
     return Column(
       children: [
         Padding(
@@ -373,7 +345,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: SongItem(song: songList[index]));
+                    child: MediaItem(song: songList[index]));
               },
             ),
           ),

@@ -5,7 +5,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/lyrics.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class PlayerController extends ChangeNotifier {
   static final PlayerController _instance = PlayerController._internal();
@@ -73,14 +73,14 @@ class PlayerController extends ChangeNotifier {
   bool get isPlaying => _isPlaying;
   // set showHistory(bool value) => _showHistory = value;
 
-  List<Song> playlistSongs = [];
-  List<Song> historySongs = [];
-  List<Song> infiniteSongs = FakeData.obitoSongs;
-  late Song currentSong;
-  final ValueNotifier<Song> currentSongNotifier =
-      ValueNotifier<Song>(FakeData.obitoSongs.first);
-  final ValueNotifier<List<Song>> infiniteSongsNotifier =
-      ValueNotifier<List<Song>>(FakeData.obitoSongs);
+  List<Track> playlistSongs = [];
+  List<Track> historySongs = [];
+  List<Track> infiniteSongs = FakeData.obitoSongs;
+  late Track currentSong;
+  final ValueNotifier<Track> currentSongNotifier =
+      ValueNotifier<Track>(FakeData.obitoSongs.first);
+  final ValueNotifier<List<Track>> infiniteSongsNotifier =
+      ValueNotifier<List<Track>>(FakeData.obitoSongs);
 
   // ValueNotifier<int> currentSongIndexNotifier = ValueNotifier<int>(0);
 
@@ -95,7 +95,7 @@ class PlayerController extends ChangeNotifier {
 
   final ValueNotifier<bool> isPlayingNotifier = ValueNotifier(false);
 
-  void setPlayerAudio(List<Song> songs) {
+  void setPlayerAudio(List<Track> songs) {
     if (songs.isEmpty) return;
 
     playlistSongs = songs;
@@ -224,7 +224,7 @@ class PlayerController extends ChangeNotifier {
     }
   }
 
-  void removeSong(Song song) async {
+  void removeSong(Track song) async {
     final index = playlistSongs.indexOf(song);
     if (index == -1) return; // Song not found
 
@@ -254,11 +254,11 @@ class PlayerController extends ChangeNotifier {
     audioPlayer.seek(position);
   }
 
-  Song getCurrentSong() {
+  Track getCurrentSong() {
     return currentSong;
   }
 
-  List<Song> getPlaylistSongs() {
+  List<Track> getPlaylistSongs() {
     return playlistSongs;
   }
 
@@ -299,8 +299,8 @@ class PlayerController extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Song> getShuffledPlaylistSongs() {
-    final shuffledList = List<Song>.from(playlistSongs);
+  List<Track> getShuffledPlaylistSongs() {
+    final shuffledList = List<Track>.from(playlistSongs);
     shuffledList.shuffle();
     return shuffledList;
   }
@@ -334,18 +334,18 @@ class PlayerController extends ChangeNotifier {
   }
 
   // Method to update infiniteSongs
-  void updateInfiniteSongs(List<Song> newSongs) {
+  void updateInfiniteSongs(List<Track> newSongs) {
     infiniteSongsNotifier.value = newSongs;
     notifyListeners(); // Notify listeners about the change
   }
 
   // You can also provide methods to manipulate the infiniteSongs
-  void addSongToInfinite(Song song) {
+  void addSongToInfinite(Track song) {
     infiniteSongs.add(song);
     updateInfiniteSongs(infiniteSongs);
   }
 
-  void removeSongFromInfinite(Song song) {
+  void removeSongFromInfinite(Track song) {
     infiniteSongs.remove(song);
     updateInfiniteSongs(infiniteSongs);
   }
@@ -357,7 +357,7 @@ class PlayerController extends ChangeNotifier {
     }
 
     // Move the song in the playlist
-    final Song song = playlistSongs.removeAt(oldIndex);
+    final Track song = playlistSongs.removeAt(oldIndex);
     playlistSongs.insert(newIndex, song);
 
     // Update the ConcatenatingAudioSource order

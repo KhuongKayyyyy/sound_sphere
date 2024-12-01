@@ -27,11 +27,13 @@ class AlbumDetailAppBar extends StatelessWidget {
       leadingWidth: 120,
       leading: Row(
         children: [
+          const SizedBox(width: 10),
           _buildCircleIcon(
             context: context,
             icon: Icons.arrow_back,
             onPressed: () => Navigator.pop(context),
           ),
+          const SizedBox(width: 10),
           _buildCircleIcon(
             context: context,
             icon: Icons.info,
@@ -51,6 +53,7 @@ class AlbumDetailAppBar extends StatelessWidget {
           icon: Icons.more_horiz_rounded,
           onPressed: () {},
         ),
+        const SizedBox(width: 10),
       ],
       flexibleSpace: FlexibleSpaceBar(
         title: showAppBarTitle
@@ -76,10 +79,13 @@ class AlbumDetailAppBar extends StatelessWidget {
         shape: BoxShape.circle,
         color: Colors.black.withOpacity(0.1),
       ),
-      child: IconButton(
-        icon: Icon(icon),
-        color: appBarIconColor,
-        onPressed: onPressed,
+      padding: const EdgeInsets.all(3),
+      child: InkWell(
+        onTap: onPressed,
+        child: Icon(
+          icon,
+          color: appBarIconColor,
+        ),
       ),
     );
   }
@@ -109,7 +115,7 @@ class AlbumDetailAppBar extends StatelessWidget {
               context.pushNamed(Routes.artistDetail, extra: 'artistId');
             },
             child: Text(
-              tempAlbum.artistName,
+              tempAlbum.aritst,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

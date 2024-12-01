@@ -47,6 +47,14 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
         curve: Curves.easeInOut,
       ),
     );
+
+    // Add a listener for navigation pop event
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final didPop = ModalRoute.of(context)?.isCurrent ?? false;
+      if (didPop) {
+        _triggerZoomAnimation();
+      }
+    });
   }
 
   @override
@@ -85,11 +93,6 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
                       GoRouter.of(context).routerDelegate.currentConfiguration);
                   context.pushNamed(Routes.player);
                 },
-                // onTap: () => showBottomSheetWidget(context),
-                // onTap: () => Navigator.push(
-                //   context,
-                //   CupertinoPageRoute(builder: (context) => PlayerPage()),
-                // ),
                 child: Row(
                   children: [
                     Container(
@@ -142,9 +145,7 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
                           animation: widget.playerController,
                           builder: (context, child) {
                             return Text(
-                              widget.playerController
-                                  .getCurrentSong()
-                                  .artistName,
+                              widget.playerController.getCurrentSong().artist,
                               style: TextStyle(
                                 color: AppColor.primaryColor,
                                 fontWeight: FontWeight.bold,

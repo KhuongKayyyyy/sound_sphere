@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 // ignore: must_be_immutable
 class PlaylistSonglist extends StatefulWidget {
@@ -95,9 +95,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                                   ),
                                 ),
                                 Text(
-                                  PlayerController()
-                                      .playlistSongs[i]
-                                      .artistName,
+                                  PlayerController().playlistSongs[i].artist,
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(0.5),
                                     fontWeight: FontWeight.bold,
@@ -142,7 +140,7 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
     });
   }
 
-  void removeSong(Song song) {
+  void removeSong(Track song) {
     setState(() {
       // widget.songList.remove(song);
       PlayerController().playlistSongs.remove(song);

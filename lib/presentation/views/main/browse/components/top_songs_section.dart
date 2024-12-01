@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_song_item.dart';
 
 // ignore: must_be_immutable
 class TopSongsSection extends StatelessWidget {
   bool isBlackTitle;
-  List<Song> songList;
+  List<Track> songList;
   TopSongsSection(
       {super.key, required this.songList, required this.isBlackTitle});
 

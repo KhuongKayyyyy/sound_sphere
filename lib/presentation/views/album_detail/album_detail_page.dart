@@ -81,7 +81,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
                 children: [
                   const SizedBox(height: 20),
                   ArtistMusicSection(
-                      title: "More by ${tempAlbum.artistName}",
+                      title: "More by ${tempAlbum.aritst}",
                       albums: FakeData.albums),
                   ArtistMusicSection(
                       title: "Featured on",

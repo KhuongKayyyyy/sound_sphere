@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/data/models/song.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 // ignore: must_be_immutable
 class InfinitePlaylistSongList extends StatefulWidget {
@@ -10,7 +10,7 @@ class InfinitePlaylistSongList extends StatefulWidget {
   InfinitePlaylistSongList({
     super.key,
     required this.scrollController,
-    required List<Song> songList,
+    required List<Track> songList,
   });
 
   @override
@@ -21,7 +21,7 @@ class InfinitePlaylistSongList extends StatefulWidget {
 class _InfinitePlaylistSongListState extends State<InfinitePlaylistSongList> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<Song>>(
+    return ValueListenableBuilder<List<Track>>(
       valueListenable: widget.playerController.infiniteSongsNotifier,
       builder: (context, songList, child) {
         return Column(
@@ -94,7 +94,7 @@ class _InfinitePlaylistSongListState extends State<InfinitePlaylistSongList> {
                                     ),
                                   ),
                                   Text(
-                                    songList[i].artistName,
+                                    songList[i].artist,
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(0.5),
                                       fontWeight: FontWeight.bold,
@@ -141,7 +141,7 @@ class _InfinitePlaylistSongListState extends State<InfinitePlaylistSongList> {
     });
   }
 
-  void removeSong(Song song) {
+  void removeSong(Track song) {
     widget.playerController.removeSongFromInfinite(song);
   }
 }

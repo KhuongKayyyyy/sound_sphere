@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/data/models/song.dart';
-import 'package:sound_sphere/presentation/widgets/song/song_item.dart';
+import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
 
 class AllTopChart extends StatefulWidget {
-  final List<Song> songs;
+  final List<Track> songs;
   final String title;
   const AllTopChart({super.key, required this.songs, required this.title});
 
@@ -27,7 +27,7 @@ class _AllTopChartState extends State<AllTopChart> {
         ),
         itemCount: widget.songs.length,
         itemBuilder: (context, index) {
-          return SongItem(
+          return MediaItem(
             song: widget.songs.elementAt(index),
           );
         },
