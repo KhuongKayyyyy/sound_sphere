@@ -9,16 +9,46 @@ sealed class TrackState extends Equatable {
 
 final class TrackInitial extends TrackState {}
 
-class TrackLoading extends TrackState {}
+class TracksLoading extends TrackState {}
 
-class TrackLoaded extends TrackState {
+class TracksLoaded extends TrackState {
   final List<Track> tracks;
 
-  const TrackLoaded(this.tracks);
+  const TracksLoaded(this.tracks);
 }
 
-class TrackError extends TrackState {
+class TracksError extends TrackState {
   final String message;
 
-  const TrackError(this.message);
+  const TracksError(this.message);
 }
+
+class TrackDetailLoaded extends TrackState {
+  final Track track;
+  final String artistName;
+  final List<Track> trackByArtist;
+
+  const TrackDetailLoaded(this.track, this.artistName, this.trackByArtist);
+}
+
+class TrackDetailError extends TrackState {
+  final String message;
+
+  const TrackDetailError(this.message);
+}
+
+class TrackDetailLoading extends TrackState {}
+
+class TrackByArtistLoaded extends TrackState {
+  final List<Track> tracks;
+
+  const TrackByArtistLoaded(this.tracks);
+}
+
+class TrackByArtistError extends TrackState {
+  final String message;
+
+  const TrackByArtistError(this.message);
+}
+
+class TrackByArtistLoading extends TrackState {}

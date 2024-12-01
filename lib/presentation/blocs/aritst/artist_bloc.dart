@@ -12,17 +12,29 @@ class ArtistBloc extends Bloc<ArtistEvent, ArtistState> {
       // TODO: implement event handler
     });
     on<FetchArtistsEvent>(_onFetchArtistsEvent);
+    on<FetchArtistNameEvent>(_onFetchArtistNameEvent);
   }
 
   Future<void> _onFetchArtistsEvent(
       FetchArtistsEvent event, Emitter<ArtistState> emit) async {
     emit(ArtistLoading());
     try {
-      final artists = await ArtistRepository.fetchArtists(
+      final artists = await ArtistRepository.getArtists(
           event.page, event.limit, event.select);
-      emit(ArtistLoaded(artists));
+      emit(ArtistsLoaded(artists));
     } catch (e) {
-      emit(ArtistError(e.toString()));
+      emit(ArtistsError(e.toString()));
+    }
+  }
+
+  Future<void> _onFetchArtistNameEvent(
+      FetchArtistNameEvent event, Emitter<ArtistState> emit) async {
+    emit(ArtistNameLoading());
+    try {
+      final artistName = await ArtistRepository.getArtistName(event.id);
+      emit(ArtistNameLoaded(artistName));
+    } catch (e) {
+      emit(ArtistNameError(e.toString()));
     }
   }
 }

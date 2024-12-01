@@ -9,6 +9,11 @@ class Artist {
     required this.avatarURL,
   });
 
+  Artist.defaultArtist()
+      : id = null,
+        name = 'Unknown Artist',
+        avatarURL = 'default_avatar_url';
+
   factory Artist.fromJson(Map<String, dynamic> json) {
     return Artist(
       id: json['_id'],

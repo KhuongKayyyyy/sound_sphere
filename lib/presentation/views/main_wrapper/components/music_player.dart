@@ -133,10 +133,14 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
                         AnimatedBuilder(
                           animation: widget.playerController,
                           builder: (context, child) {
-                            return Text(
-                              widget.playerController.getCurrentSong().title,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Text(
+                                widget.playerController.getCurrentSong().title,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             );
                           },
@@ -144,11 +148,15 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
                         AnimatedBuilder(
                           animation: widget.playerController,
                           builder: (context, child) {
-                            return Text(
-                              widget.playerController.getCurrentSong().artist,
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontWeight: FontWeight.bold,
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 20,
+                              child: Text(
+                                widget.playerController.getCurrentSong().artist,
+                                style: TextStyle(
+                                  color: AppColor.primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             );
                           },

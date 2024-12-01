@@ -132,9 +132,9 @@ class AppNavigation {
           path: Routes.songDetail,
           name: Routes.songDetail,
           builder: (context, state) {
-            final songId = state.extra as String;
+            final track = state.extra as Track;
             return SingleEPsDetailPage(
-              songId: songId,
+              track: track,
             );
           },
         ),

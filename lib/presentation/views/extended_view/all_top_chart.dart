@@ -28,7 +28,7 @@ class _AllTopChartState extends State<AllTopChart> {
         itemCount: widget.songs.length,
         itemBuilder: (context, index) {
           return MediaItem(
-            song: widget.songs.elementAt(index),
+            track: widget.songs.elementAt(index),
           );
         },
       ),

@@ -5,7 +5,6 @@ import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
@@ -176,9 +175,9 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<TrackBloc, TrackState>(
       bloc: trackBloc,
       builder: (context, trackState) {
-        if (trackState is TrackLoading) {
+        if (trackState is TracksLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (trackState is TrackLoaded) {
+        } else if (trackState is TracksLoaded) {
           return MediaSection(
             mediaSectionTitle: title,
             songList: trackState.tracks,
@@ -191,7 +190,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           );
-        } else if (trackState is TrackError) {
+        } else if (trackState is TracksError) {
           return Center(
             child: Text(trackState.message),
           );

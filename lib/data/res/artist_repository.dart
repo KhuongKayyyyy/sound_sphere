@@ -6,7 +6,7 @@ import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
 class ArtistRepository {
-  static Future<List<Artist>> fetchArtists(
+  static Future<List<Artist>> getArtists(
       int page, int limit, String select) async {
     var client = HttpClient();
     List<Artist> artists = [];
@@ -41,4 +41,56 @@ class ArtistRepository {
     }
     return artists;
   }
+
+  static Future<String> getArtistName(String id) async {
+    var client = HttpClient();
+    String artistName = '';
+    try {
+      var request = await client.postUrl(Uri.parse(ArtistApi.artistById(id)));
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": "name",
+      }));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.ok) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata'] is Map<String, dynamic>) {
+          artistName = decodedJson['metadata']['name'];
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      client.close();
+    }
+    return artistName;
+  }
+
+  // static Future<Artist> getArtistById(String id) async {
+  //   var client = HttpClient();
+  //   Artist artist = Artist.defaultArtist();
+  //   try {
+  //     var request = await client.postUrl(Uri.parse(ArtistApi.artistById(id)));
+  //     request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+  //     request.write(jsonEncode({
+  //       "select": ArtistApi.nameAndAvatar,
+  //     }));
+  //     var response = await request.close();
+  //     if (response.statusCode == HttpStatus.ok) {
+  //       var responseBody = await response.transform(utf8.decoder).join();
+  //       var decodedJson = jsonDecode(responseBody);
+  //       if (decodedJson is Map<String, dynamic> &&
+  //           decodedJson['metadata'] is Map<String, dynamic>) {
+  //         artist = Artist.fromJson(decodedJson['metadata']);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //   } finally {
+  //     client.close();
+  //   }
+  //   return artist;
+  // }
 }

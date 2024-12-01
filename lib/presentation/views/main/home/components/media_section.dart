@@ -59,7 +59,7 @@ class MediaSection extends StatelessWidget {
                 Track song = songList!.elementAt(index);
                 return Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: MediaItem(song: song),
+                  child: MediaItem(track: song),
                 );
               },
             ),

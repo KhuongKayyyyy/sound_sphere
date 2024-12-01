@@ -17,3 +17,21 @@ class FetchArtistsEvent extends ArtistEvent {
   @override
   List<Object?> get props => [page, limit, select];
 }
+
+class FetchArtistByIdEvent extends ArtistEvent {
+  final String id;
+
+  const FetchArtistByIdEvent(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}
+
+class FetchArtistNameEvent extends ArtistEvent {
+  final String id;
+
+  const FetchArtistNameEvent(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}

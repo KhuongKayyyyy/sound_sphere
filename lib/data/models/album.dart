@@ -27,7 +27,7 @@ class Album {
     int totalSeconds = 0;
 
     for (var song in songs) {
-      totalSeconds += _convertDurationToSeconds(song.duration ?? '0:00');
+      totalSeconds += _convertDurationToSeconds(song.duration);
     }
 
     return _formatDuration(totalSeconds);

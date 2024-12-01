@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
+import 'package:sound_sphere/core/error/app_error.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
@@ -31,14 +33,27 @@ class _AllSongListState extends State<AllSongList> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
-      body: ListView.builder(
-        itemCount: widget.songs.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child:
-                TrackItem(song: widget.songs.elementAt(index), isLiked: false),
-          );
+      body: BlocBuilder<TrackBloc, TrackState>(
+        bloc: trackBloc,
+        builder: (context, trackState) {
+          if (trackState is TracksLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (trackState is TracksLoaded) {
+            return ListView.builder(
+              itemCount: trackState.tracks.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: TrackItem(
+                      song: trackState.tracks.elementAt(index), isLiked: false),
+                );
+              },
+            );
+          } else if (trackState is TracksError) {
+            return Text(trackState.message);
+          }
+          return Text(AppError.noAddEvent);
         },
       ),
     );

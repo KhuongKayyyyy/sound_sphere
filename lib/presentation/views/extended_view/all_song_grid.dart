@@ -28,7 +28,7 @@ class _AllSongGridState extends State<AllSongGrid> {
         itemCount: widget.songs.length,
         itemBuilder: (context, index) {
           return MediaItem(
-            song: widget.songs.elementAt(index),
+            track: widget.songs.elementAt(index),
           );
         },
       ),

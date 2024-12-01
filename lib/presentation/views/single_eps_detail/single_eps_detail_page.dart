@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/data/res/track_repository.dart';
+import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
+import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 // ignore: must_be_immutable
 class SingleEPsDetailPage extends StatefulWidget {
-  String songId;
-  SingleEPsDetailPage({super.key, required this.songId});
+  // String songId;
+  Track track;
+  SingleEPsDetailPage({super.key, required this.track});
 
   @override
   State<SingleEPsDetailPage> createState() => _SingleEPsDetailPageState();
@@ -20,12 +26,19 @@ class SingleEPsDetailPage extends StatefulWidget {
 class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
-  Track tempSong = FakeData.obitoSongs.first;
+  String artistName = '';
+  List<Track> recommendTracks = [];
+
+  late TrackBloc trackBloc;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
+
+    trackBloc = TrackBloc();
+    trackBloc.add(FetchTrackDetail(widget.track.id!));
+    // trackBloc.add(FetchTrack)
   }
 
   @override
@@ -50,36 +63,65 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          _buildSingleDetailAppBar(),
-          _buildSingleDetailSection(),
-          _buildPlaySection(),
-          _buildSingleSongList(),
-          _buildSingleBriefInfo(),
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.grey[100],
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _buildAritstMusic("More by ${tempSong.artist}",
-                      albumList: FakeData.albums),
-                  _buildAritstMusic("Featured on",
-                      songList: FakeData.obitoSongs.take(10).toList()),
-                  const SizedBox(
-                    height: 150,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: BlocBuilder<TrackBloc, TrackState>(
+        bloc: trackBloc,
+        builder: (context, state) {
+          if (state is TrackDetailLoaded) {
+            widget.track = state.track;
+            artistName = state.artistName;
+            recommendTracks = state.trackByArtist;
+            return CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                _buildSingleDetailAppBar(),
+                _buildSingleDetailSection(),
+                _buildPlaySection(),
+                _buildSingleSongList(),
+                _buildSingleBriefInfo(),
+                _buildRecommendationSection(),
+              ],
+            );
+          } else if (state is TrackDetailError) {
+            return Center(
+              child: Text(state.message),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
+  }
+
+  SliverToBoxAdapter _buildRecommendationSection() {
+    return SliverToBoxAdapter(
+      child: Container(
+        color: Colors.grey[100],
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            _buildAritstMusic("More by $artistName", songList: recommendTracks),
+            _buildAritstMusic("Feature on", albumList: FakeData.albums),
+            const SizedBox(
+              height: 150,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildSingleSongList() {
+    return SliverToBoxAdapter(
+        child: TrackItem(
+      song: widget.track,
+      isLiked: false,
+      index: 1,
+    ));
   }
 
   Widget _buildSingleDetailAppBar() {
@@ -88,7 +130,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
       pinned: true,
       title: showAppBarTitle
           ? Text(
-              FakeData.obitoSongs.first.title,
+              widget.track.title,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             )
@@ -148,7 +190,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                tempSong.imgURL,
+                widget.track.imgURL,
                 fit: BoxFit.cover,
               ),
             ),
@@ -157,18 +199,18 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             height: 10,
           ),
           Text(
-            "${tempSong.title}- Single",
+            "${widget.track.title}- Single",
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            tempSong.artist,
+            artistName,
             style: TextStyle(
                 fontSize: 20,
                 color: AppColor.primaryColor,
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            "Hip hop · 2021 · Lossless",
+            "${widget.track.getGenresAsString()} · ${Helpers.getYearFromReleaseDate(widget.track.releaseDate!)} · Lossless",
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -184,10 +226,12 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
       child: Row(
         children: [
           _buildPlayButton(AppIcon.play, "Play", () {
-            PlayerController().setPlayerAudio([tempSong]);
+            PlayerController().setPlayerAudio([widget.track]);
             PlayerController().isPlayingAlbum = false;
           }),
-          _buildPlayButton(AppIcon.shuffle, "Shuffle", () {}),
+          _buildPlayButton(AppIcon.shuffle, "Shuffle", () {
+            TrackRepository.getTrackOfArtist(widget.track.artist);
+          }),
         ],
       ),
     );
@@ -231,51 +275,6 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     );
   }
 
-  Widget _buildSingleSongList() {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            return _buildSongItem(index);
-          },
-          childCount: 1,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSongItem(int index) {
-    return Column(children: [
-      Row(
-        children: [
-          Text(
-            "${index + 1}",
-            style: TextStyle(
-                color: AppColor.primaryColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 16),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            tempSong.title,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_horiz_rounded),
-          ),
-        ],
-      ),
-      Divider(
-        color: Colors.black.withOpacity(0.2),
-        thickness: 1,
-      )
-    ]);
-  }
-
   Widget _buildSingleBriefInfo() {
     return SliverToBoxAdapter(
       child: Padding(
@@ -284,7 +283,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "2019",
+              Helpers.formatDate(widget.track.releaseDate!),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -298,7 +297,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   color: Colors.grey[400]),
             ),
             Text(
-              "© ${tempSong.artist} 2019",
+              "© $artistName ${Helpers.getYearFromReleaseDate(widget.track.releaseDate!)} ${widget.track.albumName}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -345,7 +344,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: MediaItem(song: songList[index]));
+                    child: MediaItem(track: songList[index]));
               },
             ),
           ),

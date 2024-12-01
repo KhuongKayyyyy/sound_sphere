@@ -37,7 +37,7 @@ class ArtistMusicSection extends StatelessWidget {
               itemCount: songs!.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: MediaItem(song: songs![index]),
+                child: MediaItem(track: songs![index]),
               ),
             ),
           ),

@@ -32,11 +32,11 @@ class _ArtistWeLovePageState extends State<ArtistWeLovePage> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (artistState is ArtistError) {
+        } else if (artistState is ArtistsError) {
           return Center(
             child: Text(artistState.message),
           );
-        } else if (artistState is ArtistLoaded) {
+        } else if (artistState is ArtistsLoaded) {
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(

@@ -187,14 +187,8 @@ class _PlayerPageState extends State<PlayerPage> {
                             child: SizedBox(
                               height: MediaQuery.of(context).size.height,
                               width: MediaQuery.of(context).size.width,
-                              // child: CurrentSong(isFavorite: _isFavorite),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                // child: Hero(
-                                //   tag: "currentSongImage",
-                                //   child: Image.network(
-                                //       PlayerController().getCurrentSong().imgURL),
-                                // ),
                                 child: CurrentSong(isFavorite: _isFavorite),
                               ),
                             ),

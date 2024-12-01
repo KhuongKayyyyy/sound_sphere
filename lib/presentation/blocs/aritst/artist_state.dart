@@ -11,14 +11,42 @@ final class ArtistInitial extends ArtistState {}
 
 class ArtistLoading extends ArtistState {}
 
-class ArtistLoaded extends ArtistState {
+class ArtistsLoaded extends ArtistState {
   final List<Artist> artists;
 
-  const ArtistLoaded(this.artists);
+  const ArtistsLoaded(this.artists);
 }
 
-class ArtistError extends ArtistState {
+class ArtistsError extends ArtistState {
   final String message;
 
-  const ArtistError(this.message);
+  const ArtistsError(this.message);
 }
+
+class ArtistNameLoaded extends ArtistState {
+  final String artistName;
+
+  const ArtistNameLoaded(this.artistName);
+}
+
+class ArtistByIdLoaded extends ArtistState {
+  final Artist artist;
+
+  const ArtistByIdLoaded(this.artist);
+}
+
+class ArtistByIdError extends ArtistState {
+  final String message;
+
+  const ArtistByIdError(this.message);
+}
+
+class ArtistNameError extends ArtistState {
+  final String message;
+
+  const ArtistNameError(this.message);
+}
+
+class ArtistByIdLoading extends ArtistState {}
+
+class ArtistNameLoading extends ArtistState {}
