@@ -25,10 +25,9 @@ class TracksError extends TrackState {
 
 class TrackDetailLoaded extends TrackState {
   final Track track;
-  final String artistName;
   final List<Track> trackByArtist;
 
-  const TrackDetailLoaded(this.track, this.artistName, this.trackByArtist);
+  const TrackDetailLoaded(this.track, this.trackByArtist);
 }
 
 class TrackDetailError extends TrackState {

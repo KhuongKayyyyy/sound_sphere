@@ -19,7 +19,7 @@ class ArtistItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: CachedNetworkImage(
-          imageUrl: artist.avatarURL,
+          imageUrl: artist.avatarURL!,
           fit: BoxFit.cover,
         ),
       ),

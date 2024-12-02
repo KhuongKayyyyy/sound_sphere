@@ -73,7 +73,7 @@ class _TopSongItemState extends State<TopSongItem> {
                     color: Colors.black),
               ),
               Text(
-                widget.song.artist,
+                widget.song.artist.name!,
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_app_bar.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_brief_info.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_detail_popup.dart';
@@ -19,16 +22,20 @@ class AlbumDetailPage extends StatefulWidget {
 }
 
 class _AlbumDetailPageState extends State<AlbumDetailPage> {
-  Album tempAlbum = FakeData.albums.first;
+  Album album = FakeData.albums.first;
   ScrollController? _scrollController;
   bool showAppBarTitle = false;
   Color appBarIconColor = Colors.white;
 
+  late AlbumBloc albumBloc;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController!.addListener(_onScroll);
+
+    albumBloc = AlbumBloc();
+    albumBloc.add(FetchAlbumDetailEvent(widget.albumId));
   }
 
   @override
@@ -53,7 +60,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
       builder: (BuildContext builder) {
         return CupertinoPopupSurface(
           child: AlbumDetailPopup(
-            album: tempAlbum,
+            album: album,
           ),
         );
       },
@@ -63,35 +70,45 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          AlbumDetailAppBar(
-            tempAlbum: tempAlbum,
-            showAppBarTitle: showAppBarTitle,
-            appBarIconColor: appBarIconColor,
-            showCupertinoBottomSheet: _showCupertinoBottomSheet,
-          ),
-          AlbumSongList(songs: tempAlbum.songs),
-          AlbumBriefInfo(tempAlbum: tempAlbum),
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.grey[100],
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  ArtistMusicSection(
-                      title: "More by ${tempAlbum.aritst}",
-                      albums: FakeData.albums),
-                  ArtistMusicSection(
-                      title: "Featured on",
-                      songs: FakeData.obitoSongs.take(10).toList()),
-                  const SizedBox(height: 150),
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: BlocBuilder<AlbumBloc, AlbumState>(
+        bloc: albumBloc,
+        builder: (context, albumState) {
+          if (albumState is AlbumDetailLoaded) {
+            album = albumState.album;
+            return CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                AlbumDetailAppBar(
+                  album: album,
+                  showAppBarTitle: showAppBarTitle,
+                  appBarIconColor: appBarIconColor,
+                  showCupertinoBottomSheet: _showCupertinoBottomSheet,
+                ),
+                AlbumSongList(tracks: album.tracks),
+                AlbumBriefInfo(album: album),
+                SliverToBoxAdapter(
+                  child: Container(
+                    color: Colors.grey[100],
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        ArtistMusicSection(
+                            title: "More by ${album.aritst}",
+                            albums: FakeData.albums),
+                        ArtistMusicSection(
+                            title: "Featured on",
+                            songs: FakeData.obitoSongs.take(10).toList()),
+                        const SizedBox(height: 150),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

@@ -43,7 +43,7 @@ class HistoryPlayerSongItem extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          song.artist,
+          song.artist.name!,
           style: TextStyle(color: Colors.white),
         ),
         // trailing: IconButton(

@@ -3,17 +3,18 @@ import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class AlbumDetailAppBar extends StatelessWidget {
-  final Album tempAlbum;
+  final Album album;
   final bool showAppBarTitle;
   final Color appBarIconColor;
   final void Function(BuildContext) showCupertinoBottomSheet;
 
   const AlbumDetailAppBar({
     super.key,
-    required this.tempAlbum,
+    required this.album,
     required this.showAppBarTitle,
     required this.appBarIconColor,
     required this.showCupertinoBottomSheet,
@@ -58,7 +59,7 @@ class AlbumDetailAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: showAppBarTitle
             ? Text(
-                tempAlbum.title,
+                album.title,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.black),
               )
@@ -94,7 +95,7 @@ class AlbumDetailAppBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(tempAlbum.imgURL),
+          image: NetworkImage(album.imgURL),
           fit: BoxFit.cover,
         ),
       ),
@@ -102,7 +103,7 @@ class AlbumDetailAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            tempAlbum.title,
+            album.title,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -115,7 +116,7 @@ class AlbumDetailAppBar extends StatelessWidget {
               context.pushNamed(Routes.artistDetail, extra: 'artistId');
             },
             child: Text(
-              tempAlbum.aritst,
+              album.aritst,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -139,7 +140,7 @@ class AlbumDetailAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${tempAlbum.genre.name} · ${tempAlbum.releaseDate}",
+                "${album.genre.name[0].toUpperCase()}${album.genre.name.substring(1)} · ${Helpers.getYearFromReleaseDate(album.releaseDate)}",
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

@@ -95,7 +95,10 @@ class _PlaylistSonglistState extends State<PlaylistSonglist> {
                                   ),
                                 ),
                                 Text(
-                                  PlayerController().playlistSongs[i].artist,
+                                  PlayerController()
+                                      .playlistSongs[i]
+                                      .artist
+                                      .name!,
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(0.5),
                                     fontWeight: FontWeight.bold,

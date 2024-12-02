@@ -76,7 +76,7 @@ class _CurrentSongState extends State<CurrentSong> {
                                 'Go to Artist',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(FakeData.artists.first.name,
+                              Text(FakeData.artists.first.name!,
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.5),
                                       fontWeight: FontWeight.bold)),
@@ -213,7 +213,10 @@ class _CurrentSongState extends State<CurrentSong> {
                         AnimatedBuilder(
                           animation: widget.playerController,
                           builder: (context, child) => Text(
-                            widget.playerController.getCurrentSong().artist,
+                            widget.playerController
+                                .getCurrentSong()
+                                .artist
+                                .name!,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.7),
                               fontSize: 18,

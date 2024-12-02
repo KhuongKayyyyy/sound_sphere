@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
@@ -122,9 +123,9 @@ class AppNavigation {
           path: Routes.artistDetail,
           name: Routes.artistDetail,
           builder: (context, state) {
-            final artistId = state.extra as String;
+            final artist = state.extra as Artist;
             return ArtistDetailPage(
-              artistId: artistId,
+              artist: artist,
             );
           },
         ),

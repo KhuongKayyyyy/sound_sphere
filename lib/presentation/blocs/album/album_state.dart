@@ -28,3 +28,22 @@ final class AlbumPreviewLoaded extends AlbumState {
   @override
   List<Object> get props => [albums];
 }
+
+final class AlbumDetailLoading extends AlbumState {}
+
+final class AlbumDetailError extends AlbumState {
+  final String message;
+
+  const AlbumDetailError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+final class AlbumDetailLoaded extends AlbumState {
+  final Album album;
+  const AlbumDetailLoaded(this.album);
+
+  @override
+  List<Object> get props => [album];
+}

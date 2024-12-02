@@ -515,7 +515,7 @@ class FakeData {
   static List<Track> obitoSongs = [
     Track(
         title: "Shape Of You",
-        artist: "Ed Sharaan",
+        artist: Artist.defaultArtist(),
         albumName: "+-x/",
         duration: "",
         imgURL:
@@ -525,7 +525,7 @@ class FakeData {
             "https://stream.nct.vn/Warner_Audio39/ShapeOfYou-EdSheeran-6448581.mp3?st=N5THxUw4o_I-mm_RKhIrWQ&e=1732110284&a=1&p=0&r=a3702adeee3a9be4090d41d0b323583c&t=1731510634985"),
     Track(
         title: "Đầu đường xó chợ",
-        artist: "Obito, Lăng LD",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:41",
         imgURL:
@@ -536,7 +536,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/DauDuongXoCho-Obito-11836720.mp3?st=UZXn7SFNYKW6jLCrvHdH2w&e=1730940483&a=1&p=0&r=4a25d3ccf74387bf4ec1dd6aba4d0e1c"),
     Track(
         title: "Biên Giới Long Bình",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -547,7 +547,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/BienGioiLongBinh-Obito-11836721.mp3?st=JU3Tz_zgIhP6j2XEIb2vZQ&e=1730872705&a=1&p=0&r=40bc0bbb44f75652e74b9f74d70ea85d"),
     Track(
         title: "16",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -558,7 +558,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/16-Obito-11836722.mp3?st=hvwVuVSedw9_OSZBFgPUkA&e=1730941456&a=1&p=0&r=7e5eea6f1af4fb2c1c03367b79c6ce47"),
     Track(
         title: "Sài Gòn ơi",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -569,7 +569,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/SaiGonOi-Obito-11836723.mp3?st=y51o9x0jRFZce6uYriRd-Q&e=1730896233&a=1&p=0&r=209d155f38ece3be722e7eac81b938ac"),
     Track(
         title: "Trốn Chạy",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -580,7 +580,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/TronChay-Obito-11836724.mp3?st=4iskjvq9LGjKzexQ8GeOcg&e=1730941467&a=1&p=0&r=4659e255b7dea9de38652b51fb63ab71"),
     Track(
         title: "Cất cánh (interlude)",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -590,7 +590,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/CatCanhInterlude-Obito-11836725.mp3?st=PyngbhDxU408JT7BQwYweA&e=1730941472&a=1&p=0&r=1f6f6862be768dd4c956d0208f162a7b"),
     Track(
         title: "Hà Nội",
-        artist: "Obito VSTRA",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -601,7 +601,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/HaNoi-Obito-11836726.mp3?st=ymr6zD6Z6RoSpFft5dAfYQ&e=1730935954&a=1&p=0&r=6e396336ce1420af4ae3678531138da5"),
     Track(
         title: "Vô Điều Kiện",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -612,7 +612,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/VoDieuKien-Obito-11836727.mp3?st=qULnRM2rG4aIkk12btOxDQ&e=1730941483&a=1&p=0&r=21f8de9b7961594887ce91e17cce6bbb"),
     Track(
         title: "Đánh Đổi",
-        artist: "Obito, MCK",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -623,7 +623,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/DanhDoi-Obito-11836728.mp3?st=agDsY1Ru2fnZi9gaFQvNVQ&e=1730941408&a=1&p=0&r=be413a18a18a47a6aa1c2bfdc7831b8d"),
     Track(
         title: "Backstage Freestyle",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -634,7 +634,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/BackstageFreestyle-Obito-11836729.mp3?st=VvMYNWaJM1xhU4oxZpybXw&e=1730941493&a=1&p=0&r=89a51152ed1c04665f3a30b3348a75c3"),
     Track(
         title: "Tell the kids i love them",
-        artist: "Obito, Shiki",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -645,7 +645,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/TellTheKidsILoveThem-ObitoShikii-11836730.mp3?st=_hIeAUEndIv_MXkukTPLyQ&e=1730872460&a=1&p=0&r=f0b8cfc55795fcecdf442d990cee5ad8"),
     Track(
         title: "Ước mơ của Mẹ (interlude)",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -656,7 +656,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/UocMoCuaMeInterlude-Obito-11836731.mp3?st=NjJ59vePZ2fwG0QyizSNmA&e=1730939939&a=1&p=0&r=d545f1552cd44ea822faed7f314c5eba"),
     Track(
         title: "Con kể Ba nghe",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -667,7 +667,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/ConKeBaNghe-Obito-11836732.mp3?st=W5NWLS1Dey7U1fiI6zNTbA&e=1730914745&a=1&p=0&r=de5273be10d84991d1c6f083f08c4dde"),
     Track(
         title: "Champion",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -678,7 +678,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/Champion-Obito-11836733.mp3?st=ZFqS5Ol3ahQS2T72lX994Q&e=1730941515&a=1&p=0&r=fe6e91e6190d68e3f5cdb1902d30ea81"),
     Track(
         title: "Chưa Xong",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -689,7 +689,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/ChuaXong-Obito-11836734.mp3?st=m5Ly-YAX39vBPrV1LVkPUA&e=1730941521&a=1&p=0&r=c85d81fbda4e91f9bd177ddaec678af5"),
     Track(
         title: "Tự sự",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -700,7 +700,7 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/TuSu-Obito-11836735.mp3?st=EM8VbPPC3-lSPyY6XSMEBQ&e=1730936648&a=1&p=0&r=a8958b686d6b6a614146e859a819182e"),
     Track(
         title: "Outro",
-        artist: "Obito",
+        artist: Artist.defaultArtist(),
         albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
@@ -708,37 +708,6 @@ class FakeData {
         lyrics: "",
         urlMedia:
             "https://stream.nct.vn/Believe_Audio345/Outro-Obito-11836736.mp3?st=EwkFVlqkJEjnEIF8Mg-Jsw&e=1730941531&a=1&p=0&r=2032318f2fc5f8b5e72b1a42dac3145f"),
-    // Song(
-    //     title: 'Ca Khúc Cuối',
-    //     artistName: 'Wxrdie',
-    //     albumName: 'The Wxrdies',
-    //     duration: '3:00',
-    //     imgURL:
-    //         'https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg',
-    //     lyrics:
-    //         '- Hiện chưa có lời bài hát nào cho Ca Khúc Cuối do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.',
-    //     urlMedia:
-    //         'https://stream.nct.vn/Unv_Audio539/CaKhucCuoi-Wxrdie-16696442.mp3?st=Ax2On0CKvPXqg_OfbhlM2w&e=1732107706&a=1&p=0&r=3335999d3edc5e6adb775316278a211d'),
-    // Song(
-    //     title: 'Thèn Chóa',
-    //     artistName: 'Wxrdie & KayC',
-    //     albumName: 'The Wxrdies',
-    //     duration: '3:00',
-    //     imgURL:
-    //         'https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg',
-    //     lyrics:
-    //         '- Hiện chưa có lời bài hát nào cho Ca Khúc Cuối do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.',
-    //     urlMedia: ''),
-    // Song(
-    //     title: '',
-    //     artistName: 'Wxrdie',
-    //     albumName: 'The Wxrdies',
-    //     duration: '3:00',
-    //     imgURL:
-    //         'https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg',
-    //     lyrics:
-    //         '- Hiện chưa có lời bài hát nào cho Ca Khúc Cuối do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.',
-    //     urlMedia: ''),
   ];
 
   static List<String> chrismastPlaylistImg = [
@@ -1091,7 +1060,7 @@ class FakeData {
         releaseDate: "2024",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-        songs: wrxdieSong),
+        tracks: wrxdieSong),
     Album(
         title: "Đánh đổi",
         aritst: "Travis Scott",
@@ -1099,7 +1068,7 @@ class FakeData {
         releaseDate: "2023",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        songs: obitoSongs),
+        tracks: obitoSongs),
     Album(
         title: "Lemonade",
         aritst: "Beyoncé",
@@ -1107,7 +1076,7 @@ class FakeData {
         releaseDate: "2016-04-23",
         imgURL:
             "https://aimm.edu/hubfs/Blog%20Images/Top%2010%20Album%20Covers%20of%202017/Tyler%20the%20Creator-%20Flower%20boy.jpg",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Scorpion",
@@ -1116,7 +1085,7 @@ class FakeData {
         releaseDate: "2018-06-29",
         imgURL:
             "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Divide",
@@ -1125,7 +1094,7 @@ class FakeData {
         releaseDate: "2017-03-03",
         imgURL:
             "https://www.billboard.com/wp-content/uploads/2023/07/SZA-SOS-album-art-billboard-1240.jpg?w=800",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "1989",
@@ -1134,7 +1103,7 @@ class FakeData {
         releaseDate: "2014-10-27",
         imgURL:
             "https://images.prismic.io/milanote/df7eeb83a07162b45ac2e882cac055de9411054a_cover.jpg?auto=compress,format",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Thank U, Next",
@@ -1143,7 +1112,7 @@ class FakeData {
         releaseDate: "2019-02-08",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Ariana_Grande_-_Thank_U%2C_Next.png/220px-Ariana_Grande_-_Thank_U%2C_Next.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Purpose",
@@ -1152,7 +1121,7 @@ class FakeData {
         releaseDate: "2015-11-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Justin_Bieber_-_Purpose.png/220px-Justin_Bieber_-_Purpose.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "When We All Fall Asleep, Where Do We Go?",
@@ -1161,7 +1130,7 @@ class FakeData {
         releaseDate: "2019-03-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png/220px-Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "After Hours",
@@ -1170,7 +1139,7 @@ class FakeData {
         releaseDate: "2020-03-20",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Hollywood's Bleeding",
@@ -1179,7 +1148,7 @@ class FakeData {
         releaseDate: "2019-09-06",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Post_Malone_-_Hollywood%27s_Bleeding.png/220px-Post_Malone_-_Hollywood%27s_Bleeding.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "The Fame",
@@ -1188,7 +1157,7 @@ class FakeData {
         releaseDate: "2008-10-28",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Lady_Gaga_The_Fame.png/220px-Lady_Gaga_The_Fame.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Teenage Dream",
@@ -1197,7 +1166,7 @@ class FakeData {
         releaseDate: "2010-08-24",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Katy_Perry_Teenage_Dream.png/220px-Katy_Perry_Teenage_Dream.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Uptown Special",
@@ -1206,7 +1175,7 @@ class FakeData {
         releaseDate: "2015-01-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/Mark_Ronson_Uptown_Special.png/220px-Mark_Ronson_Uptown_Special.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Good Girl Gone Bad",
@@ -1215,7 +1184,7 @@ class FakeData {
         releaseDate: "2007-05-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Rihanna_-_Good_Girl_Gone_Bad.png/220px-Rihanna_-_Good_Girl_Gone_Bad.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Handwritten",
@@ -1224,7 +1193,7 @@ class FakeData {
         releaseDate: "2015-04-14",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Shawn_Mendes_Handwritten.png/220px-Shawn_Mendes_Handwritten.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Rare",
@@ -1233,7 +1202,7 @@ class FakeData {
         releaseDate: "2020-01-10",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Selena_Gomez_-_Rare.png/220px-Selena_Gomez_-_Rare.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Future Nostalgia",
@@ -1242,7 +1211,7 @@ class FakeData {
         releaseDate: "2020-03-27",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Dua_Lipa_-_Future_Nostalgia.png/220px-Dua_Lipa_-_Future_Nostalgia.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Fine Line",
@@ -1251,7 +1220,7 @@ class FakeData {
         releaseDate: "2019-12-13",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Harry_Styles_Fine_Line.png/220px-Harry_Styles_Fine_Line.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Plastic Hearts",
@@ -1260,7 +1229,7 @@ class FakeData {
         releaseDate: "2020-11-27",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Miley_Cyrus_Plastic_Hearts.png/220px-Miley_Cyrus_Plastic_Hearts.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Love Goes",
@@ -1269,7 +1238,7 @@ class FakeData {
         releaseDate: "2020-10-30",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sam_Smith_-_Love_Goes.png/220px-Sam_Smith_-_Love_Goes.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Cuz I Love You",
@@ -1278,7 +1247,7 @@ class FakeData {
         releaseDate: "2019-04-19",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Lizzo_-_Cuz_I_Love_You.png/220px-Lizzo_-_Cuz_I_Love_You.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "DAMN.",
@@ -1287,7 +1256,7 @@ class FakeData {
         releaseDate: "2017-04-14",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Kendrick_Lamar_-_DAMN.png/220px-Kendrick_Lamar_-_DAMN.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Invasion of Privacy",
@@ -1296,7 +1265,7 @@ class FakeData {
         releaseDate: "2018-04-06",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Cardi_B_Invasion_of_Privacy.png/220px-Cardi_B_Invasion_of_Privacy.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Hot Pink",
@@ -1305,7 +1274,7 @@ class FakeData {
         releaseDate: "2019-11-07",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Doja_Cat_Hot_Pink.png/220px-Doja_Cat_Hot_Pink.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "7",
@@ -1314,7 +1283,7 @@ class FakeData {
         releaseDate: "2019-06-21",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Lil_Nas_X_7.png/220px-Lil_Nas_X_7.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "SOUR",
@@ -1323,7 +1292,7 @@ class FakeData {
         releaseDate: "2021-05-21",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Olivia_Rodrigo_-_SOUR.png/220px-Olivia_Rodrigo_-_SOUR.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "ASTROWORLD",
@@ -1332,7 +1301,7 @@ class FakeData {
         releaseDate: "2018-08-03",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/ASTROWORLD.jpg/220px-ASTROWORLD.jpg",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Vivir Mi Vida",
@@ -1341,7 +1310,7 @@ class FakeData {
         releaseDate: "2013-07-23",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Marc_Anthony_-_Vivir_Mi_Vida.png/220px-Marc_Anthony_-_Vivir_Mi_Vida.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "K.O.",
@@ -1350,7 +1319,7 @@ class FakeData {
         releaseDate: "2019-08-30",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/3/32/J_Balvin_K.O.png/220px-J_Balvin_K.O.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "YHLQMDLG",
@@ -1359,7 +1328,7 @@ class FakeData {
         releaseDate: "2020-02-29",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Bad_Bunny_-_YHLQMDLG.png/220px-Bad_Bunny_-_YHLQMDLG.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Versions of Me",
@@ -1368,7 +1337,7 @@ class FakeData {
         releaseDate: "2022-04-22",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Anitta_Versions_of_Me.png/220px-Anitta_Versions_of_Me.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "1000 Forms of Fear",
@@ -1377,7 +1346,7 @@ class FakeData {
         releaseDate: "2014-07-04",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Sia_1000_Forms_of_Fear.png/220px-Sia_1000_Forms_of_Fear.png",
-        songs: [] // Add songs specific to this album
+        tracks: [] // Add songs specific to this album
         ),
   ];
 }

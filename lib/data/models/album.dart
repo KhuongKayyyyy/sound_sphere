@@ -6,7 +6,7 @@ class Album {
   final String title;
   final String aritst;
   final Genres genre;
-  final List<Track> songs;
+  List<Track> tracks;
   final String imgURL;
   final String releaseDate;
   final String? type;
@@ -16,17 +16,33 @@ class Album {
     required this.title,
     required this.aritst,
     required this.genre,
-    required this.songs,
+    required this.tracks,
     required this.imgURL,
     required this.releaseDate,
     this.type,
   });
+  @override
+  String toString() {
+    return 'Album{id: $id, title: $title, artist: $aritst, genre: ${genre.name}, songs: ${tracks.length}, imgURL: $imgURL, releaseDate: $releaseDate, type: $type}';
+  }
+
+  // Default constructor
+  Album.defaultAlbum()
+      : id = null,
+        title = "Unknown Album",
+        aritst = "Unknown Artist",
+        genre = Genres(
+            name: "Unknown Genre", imgURL: "https://via.placeholder.com/150"),
+        tracks = [],
+        imgURL = "https://via.placeholder.com/150",
+        releaseDate = "Unknown Date",
+        type = "Unknown Type";
 
   /// Method to calculate the total album duration in hours and minutes
   String getAlbumDuration() {
     int totalSeconds = 0;
 
-    for (var song in songs) {
+    for (var song in tracks) {
       totalSeconds += _convertDurationToSeconds(song.duration);
     }
 
@@ -63,15 +79,23 @@ class Album {
 
   /// Factory constructor to create an Album instance from a JSON map
   factory Album.fromJson(Map<String, dynamic> json) {
+    var creator = json['creator'] as Map<String, dynamic>?;
+
     return Album(
       id: json['_id'] ?? "id",
       title: json['title'] ?? "Unknown Album",
-      aritst: json['creator']['name'] ?? "Unknown Artist",
-      genre: Genres(name: "temp", imgURL: "temp"),
-      songs: [],
+      aritst: creator?['name'] ?? "Unknown Artist",
+      genre: (creator != null &&
+              creator['genres'] is List &&
+              (creator['genres'] as List).isNotEmpty)
+          ? Genres(
+              name: (creator['genres'] as List).first ?? "No Genre",
+              imgURL: "temp", // Provide the correct image URL if available
+            )
+          : Genres(name: "No Genre", imgURL: "temp"),
+      tracks: [], // Populate the list of songs if needed
       imgURL: json['image_url'] ?? "https://via.placeholder.com/150",
       releaseDate: json['release_date'] ?? "Unknown Date",
-      // type: json['type'],
       type: json['type'] ?? "Unknown Type",
     );
   }
@@ -83,7 +107,7 @@ class Album {
       'title': title,
       'artist': aritst,
       'genre': "",
-      'songs': songs.map((song) => song.toJson()).toList(),
+      'songs': tracks.map((song) => song.toJson()).toList(),
       'imgURL': imgURL,
       'releaseDate': releaseDate,
     };

@@ -41,7 +41,7 @@ class _SearchSongItemState extends State<SearchSongItem> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        widget.song.artist,
+                        widget.song.artist.name!,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 14,

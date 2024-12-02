@@ -24,7 +24,7 @@ class LibraryArtistItem extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
-              artist.avatarURL,
+              artist.avatarURL!,
               width: 180,
               height: 180,
               fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class LibraryArtistItem extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     bottom: 10), // Optional padding to adjust text position
                 child: Text(
-                  artist.name,
+                  artist.name!,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

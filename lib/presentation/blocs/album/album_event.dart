@@ -15,3 +15,12 @@ class FetchAlbumsPreviewEvent extends AlbumEvent {
   @override
   List<Object> get props => [page];
 }
+
+class FetchAlbumDetailEvent extends AlbumEvent {
+  final String albumId;
+
+  const FetchAlbumDetailEvent(this.albumId);
+
+  @override
+  List<Object> get props => [albumId];
+}

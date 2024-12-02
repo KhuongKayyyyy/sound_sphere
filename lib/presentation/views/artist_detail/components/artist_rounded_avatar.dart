@@ -35,7 +35,7 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
-                    FakeData.artists.first.avatarURL,
+                    FakeData.artists.first.avatarURL!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -60,7 +60,7 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
         ),
         const SizedBox(height: 10),
         Text(
-          widget.artist.name,
+          widget.artist.name!,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ],

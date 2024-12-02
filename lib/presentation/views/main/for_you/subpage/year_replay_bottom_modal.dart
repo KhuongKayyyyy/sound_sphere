@@ -94,7 +94,7 @@ class YearReplayBottomModal extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Image.network(
-                artist.avatarURL,
+                artist.avatarURL!,
                 height: 130,
                 width: 130,
                 fit: BoxFit.cover,
@@ -133,7 +133,7 @@ class YearReplayBottomModal extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          artist.name,
+          artist.name!,
           style: TextStyle(
             color: AppColor.primaryColor,
             fontWeight: FontWeight.w500,

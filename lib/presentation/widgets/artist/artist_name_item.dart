@@ -22,7 +22,7 @@ class ArtistNameItem extends StatelessWidget {
         color: isBlackText ? Colors.white : Colors.black,
       ),
       child: Text(
-        artist.name,
+        artist.name!,
         style: textStyle,
       ),
     );

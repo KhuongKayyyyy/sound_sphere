@@ -94,7 +94,7 @@ class _InfinitePlaylistSongListState extends State<InfinitePlaylistSongList> {
                                     ),
                                   ),
                                   Text(
-                                    songList[i].artist,
+                                    songList[i].artist.name!,
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(0.5),
                                       fontWeight: FontWeight.bold,

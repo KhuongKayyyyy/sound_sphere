@@ -17,7 +17,7 @@ class ArtistWeLoveItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: Image.network(
-                  FakeData.artists.first.avatarURL,
+                  FakeData.artists.first.avatarURL!,
                   height: 70,
                   width: 70,
                   fit: BoxFit.cover,
@@ -29,7 +29,7 @@ class ArtistWeLoveItem extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        artist.name,
+                        artist.name!,
                         style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 20),
                         overflow: TextOverflow.ellipsis,

@@ -1,12 +1,12 @@
 class Artist {
   final String? id;
-  final String name;
-  final String avatarURL;
+  final String? name;
+  final String? avatarURL;
 
   Artist({
     this.id,
-    required this.name,
-    required this.avatarURL,
+    this.name,
+    this.avatarURL,
   });
 
   Artist.defaultArtist()
@@ -28,5 +28,10 @@ class Artist {
       'name': name,
       'avatar_url': avatarURL,
     };
+  }
+
+  @override
+  String toString() {
+    return 'Artist{id: $id, name: $name, avatarURL: $avatarURL}';
   }
 }

@@ -17,7 +17,7 @@ class ArtistSearchItem extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(
-              imageUrl: artist.avatarURL,
+              imageUrl: artist.avatarURL!,
               fit: BoxFit.cover,
             ),
           ),
@@ -26,7 +26,7 @@ class ArtistSearchItem extends StatelessWidget {
           width: 10,
         ),
         Text(
-          artist.name,
+          artist.name!,
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         const Spacer(),

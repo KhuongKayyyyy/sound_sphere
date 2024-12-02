@@ -14,7 +14,9 @@ class ArtistApi {
 
 class AlbumApi {
   static const String albums = '${ApiConfig.BASE_URL}/albums/';
-  static String albumById(String id) => '${ApiConfig.BASE_URL}/album/$id';
+  static String albumByArtistId(String id) =>
+      '${ApiConfig.BASE_URL}/albums/artist/$id';
+  static String albumById(String id) => '${ApiConfig.BASE_URL}/albums/$id';
 }
 
 class TrackApi {
@@ -22,6 +24,8 @@ class TrackApi {
   static String trackById(String id) => '${ApiConfig.BASE_URL}/tracks/$id';
   static String trackOfArtist(String artistId) =>
       '${ApiConfig.BASE_URL}/tracks/artist/$artistId';
+  static String trackOfAlbum(String albumId) =>
+      '${ApiConfig.BASE_URL}/tracks/album/$albumId';
   // selection
   static const String previewTrack = 'title image_url url_media creator';
   static const String fullTrack =

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_rounded_avatar.dart';
 
 class SimilarArtistSection extends StatelessWidget {
-  const SimilarArtistSection({super.key});
+  final List<Artist> similarArtists;
+  const SimilarArtistSection({super.key, required this.similarArtists});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class SimilarArtistSection extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: ArtistRoundedAvatar(
-                    artist: FakeData.artists[index],
+                    artist: similarArtists[index],
                     isLike: false,
                     onTap: () {
                       context.pushNamed(Routes.artistDetail, extra: "");

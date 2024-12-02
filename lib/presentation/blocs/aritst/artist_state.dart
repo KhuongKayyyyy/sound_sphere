@@ -29,16 +29,19 @@ class ArtistNameLoaded extends ArtistState {
   const ArtistNameLoaded(this.artistName);
 }
 
-class ArtistByIdLoaded extends ArtistState {
+class ArtistDetailByIdLoaded extends ArtistState {
   final Artist artist;
-
-  const ArtistByIdLoaded(this.artist);
+  final List<Track> trackOfArtist;
+  final List<Album> albumOfArtist;
+  final List<Artist> relatedArtists;
+  const ArtistDetailByIdLoaded(
+      this.artist, this.trackOfArtist, this.albumOfArtist, this.relatedArtists);
 }
 
-class ArtistByIdError extends ArtistState {
+class ArtistDetailByIdError extends ArtistState {
   final String message;
 
-  const ArtistByIdError(this.message);
+  const ArtistDetailByIdError(this.message);
 }
 
 class ArtistNameError extends ArtistState {

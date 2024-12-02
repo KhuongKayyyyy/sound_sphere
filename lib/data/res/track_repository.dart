@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/data/models/track.dart';
@@ -55,6 +56,7 @@ class TrackRepository {
       request.write(jsonEncode({
         "select": TrackApi.fullTrack,
         "isPopulateCreator": true,
+        "isPopulateCollaborators": true
       }));
       var response = await request.close();
       if (response.statusCode == HttpStatus.created) {
@@ -84,6 +86,7 @@ class TrackRepository {
       request.write(jsonEncode({
         "select": TrackApi.previewTrack,
         "isPopulateCreator": true,
+        "isPopulateCollaborators": true
       }));
 
       var response = await request.close();
@@ -110,6 +113,51 @@ class TrackRepository {
     } finally {
       client.close();
     }
+    return tracks;
+  }
+
+  static Future<List<Track>> getTrackOfAlbum(String albumId) async {
+    var client = HttpClient();
+    List<Track> tracks = [];
+    try {
+      // Encode query parameters
+      var url = Uri.parse(TrackApi.trackOfAlbum(albumId));
+      var request = await client.postUrl(url);
+
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": TrackApi.previewTrack,
+        "isPopulateCreator": true,
+        "isPopulateCollaborators": true,
+        "album": albumId
+      }));
+
+      var response = await request.close();
+
+      if (response.statusCode == HttpStatus.created) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata']['data'] is List) {
+          List metadata = decodedJson['metadata']['data'];
+
+          for (var trackJson in metadata) {
+            tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
+          }
+        } else {
+          log('Unexpected response format: $decodedJson' as num);
+        }
+      } else {
+        print('Failed to fetch data. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      client.close();
+    }
+    // Logger.Red.log(tracks.length);
+    print(tracks.length);
     return tracks;
   }
 }

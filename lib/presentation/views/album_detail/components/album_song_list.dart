@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/data/models/track.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 class AlbumSongList extends StatelessWidget {
-  final List<Track> songs;
+  final List<Track> tracks;
 
-  const AlbumSongList({super.key, required this.songs});
+  const AlbumSongList({super.key, required this.tracks});
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +14,11 @@ class AlbumSongList extends StatelessWidget {
         (context, index) {
           return Column(
             children: [
-              ListTile(
-                leading: Text("${index + 1}",
-                    style: TextStyle(color: AppColor.primaryColor)),
-                title: Text(songs[index].title),
-                trailing: IconButton(
-                    icon: const Icon(Icons.more_horiz), onPressed: () {}),
-              ),
-              Divider(color: Colors.black.withOpacity(0.2)),
+              TrackItem(index: index + 1, song: tracks[index], isLiked: false)
             ],
           );
         },
-        childCount: songs.length,
+        childCount: tracks.length,
       ),
     );
   }

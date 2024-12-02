@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/data/models/track.dart';
-import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
 // ignore: must_be_immutable
@@ -21,12 +19,9 @@ class TrackItem extends StatefulWidget {
 }
 
 class _TrackItemState extends State<TrackItem> {
-  late ArtistBloc artistBloc;
   @override
   void initState() {
     super.initState();
-    artistBloc = ArtistBloc();
-    artistBloc.add(FetchArtistNameEvent(widget.song.artist));
   }
 
   @override
@@ -139,21 +134,10 @@ class _TrackItemState extends State<TrackItem> {
             ),
           ),
           const SizedBox(height: 5),
-          BlocBuilder<ArtistBloc, ArtistState>(
-            bloc: artistBloc,
-            builder: (context, artistState) {
-              if (artistState is ArtistNameLoaded) {
-                return Expanded(
-                  child: Text(
-                    artistState.artistName,
-                    style: TextStyle(color: AppColor.inkGreyDark),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
+          Text(
+            widget.song.artist.name!,
+            style: TextStyle(color: AppColor.inkGreyDark),
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       );
@@ -290,7 +274,7 @@ class _TrackItemState extends State<TrackItem> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    Text(widget.song.artist,
+                                    Text(widget.song.artist.name!,
                                         style: TextStyle(
                                           color: AppColor.inkGrey,
                                         )),

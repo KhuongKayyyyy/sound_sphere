@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 
 class MediaItem extends StatefulWidget {
   final Track? track;
@@ -20,13 +18,9 @@ class MediaItem extends StatefulWidget {
 }
 
 class _MediaItemState extends State<MediaItem> {
-  late ArtistBloc artistBloc;
-
   @override
   void initState() {
     super.initState();
-    artistBloc = ArtistBloc();
-    artistBloc.add(FetchArtistNameEvent(widget.track!.artist));
   }
 
   @override
@@ -126,7 +120,8 @@ class _MediaItemState extends State<MediaItem> {
               child: InkWell(
                 onTap: () {
                   // Navigator.of(context).popUntil((route) => route.isFirst);
-                  context.pushNamed(Routes.songDetail, extra: "songId");
+                  context.pushNamed(Routes.albumDetail,
+                      extra: widget.album!.id);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,30 +217,13 @@ class _MediaItemState extends State<MediaItem> {
                       style: const TextStyle(fontWeight: FontWeight.w600),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    BlocBuilder<ArtistBloc, ArtistState>(
-                      bloc: artistBloc,
-                      builder: (context, artistState) {
-                        if (artistState is ArtistNameLoaded) {
-                          return Text(
-                            artistState.artistName,
-                            style: TextStyle(
-                              color: AppColor.inkGreyDark,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        } else {
-                          return const Text('No artist');
-                        }
-                        // return Text(
-                        //   widget.track!.artist,
-                        //   style: TextStyle(
-                        //     color: AppColor.inkGreyDark,
-                        //     fontWeight: FontWeight.w600,
-                        //   ),
-                        //   overflow: TextOverflow.ellipsis,
-                        // );
-                      },
+                    Text(
+                      widget.track!.artist.name!,
+                      style: TextStyle(
+                        color: AppColor.inkGreyDark,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

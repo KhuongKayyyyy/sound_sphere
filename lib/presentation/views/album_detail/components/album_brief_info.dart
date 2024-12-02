@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class AlbumBriefInfo extends StatelessWidget {
-  final Album tempAlbum;
+  final Album album;
 
-  const AlbumBriefInfo({super.key, required this.tempAlbum});
+  const AlbumBriefInfo({super.key, required this.album});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,11 @@ class AlbumBriefInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(tempAlbum.releaseDate,
+            Text(Helpers.formatDate(album.releaseDate),
                 style: const TextStyle(color: Colors.grey)),
+            Text("${album.tracks.length} songs, ${album.getAlbumDuration()}"),
             Text(
-                "${tempAlbum.songs.length} songs, ${tempAlbum.getAlbumDuration()}"),
-            Text("© ${tempAlbum.aritst} ${tempAlbum.releaseDate}"),
+                "© ${album.aritst} ${Helpers.getYearFromReleaseDate(album.releaseDate)}"),
           ],
         ),
       ),

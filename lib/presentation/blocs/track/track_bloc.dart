@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sound_sphere/data/models/track.dart';
-import 'package:sound_sphere/data/res/artist_repository.dart';
 import 'package:sound_sphere/data/res/track_repository.dart';
 
 part 'track_event.dart';
@@ -32,10 +31,9 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
     emit(TrackDetailLoading());
     try {
       final track = await TrackRepository.getTrackById(event.id);
-      final artistName = await ArtistRepository.getArtistName(track.artist);
       final trackByArtist =
-          await TrackRepository.getTrackOfArtist(track.artist);
-      emit(TrackDetailLoaded(track, artistName, trackByArtist));
+          await TrackRepository.getTrackOfArtist(track.artist.id!);
+      emit(TrackDetailLoaded(track, trackByArtist));
     } catch (e) {
       emit(TrackDetailError(e.toString()));
     }

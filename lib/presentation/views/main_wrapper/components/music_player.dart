@@ -152,7 +152,10 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
                               width: MediaQuery.of(context).size.width * 0.5,
                               height: 20,
                               child: Text(
-                                widget.playerController.getCurrentSong().artist,
+                                widget.playerController
+                                    .getCurrentSong()
+                                    .artist
+                                    .name!,
                                 style: TextStyle(
                                   color: AppColor.primaryColor,
                                   fontWeight: FontWeight.bold,

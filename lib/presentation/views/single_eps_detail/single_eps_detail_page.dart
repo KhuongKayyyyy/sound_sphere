@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
@@ -26,8 +28,8 @@ class SingleEPsDetailPage extends StatefulWidget {
 class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
-  String artistName = '';
   List<Track> recommendTracks = [];
+  String _duration = "Fetching duration...";
 
   late TrackBloc trackBloc;
   @override
@@ -38,7 +40,8 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
 
     trackBloc = TrackBloc();
     trackBloc.add(FetchTrackDetail(widget.track.id!));
-    // trackBloc.add(FetchTrack)
+
+    fetchDuration();
   }
 
   @override
@@ -46,6 +49,13 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> fetchDuration() async {
+    await widget.track.fetchDuration();
+    setState(() {
+      _duration = widget.track.duration;
+    });
   }
 
   void _onScroll() {
@@ -68,7 +78,6 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
         builder: (context, state) {
           if (state is TrackDetailLoaded) {
             widget.track = state.track;
-            artistName = state.artistName;
             recommendTracks = state.trackByArtist;
             return CustomScrollView(
               controller: _scrollController,
@@ -104,7 +113,8 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             const SizedBox(
               height: 20,
             ),
-            _buildAritstMusic("More by $artistName", songList: recommendTracks),
+            _buildAritstMusic("More by ${widget.track.artist.name}",
+                songList: recommendTracks),
             _buildAritstMusic("Feature on", albumList: FakeData.albums),
             const SizedBox(
               height: 150,
@@ -202,12 +212,21 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             "${widget.track.title}- Single",
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Text(
-            artistName,
-            style: TextStyle(
-                fontSize: 20,
-                color: AppColor.primaryColor,
-                fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: () {
+              context.pushNamed(Routes.artistDetail,
+                  extra: widget.track.artist);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                widget.track.getArtistsAsString(),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: AppColor.primaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           Text(
             "${widget.track.getGenresAsString()} · ${Helpers.getYearFromReleaseDate(widget.track.releaseDate!)} · Lossless",
@@ -230,7 +249,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             PlayerController().isPlayingAlbum = false;
           }),
           _buildPlayButton(AppIcon.shuffle, "Shuffle", () {
-            TrackRepository.getTrackOfArtist(widget.track.artist);
+            TrackRepository.getTrackOfArtist(widget.track.artist.name!);
           }),
         ],
       ),
@@ -297,7 +316,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   color: Colors.grey[400]),
             ),
             Text(
-              "© $artistName ${Helpers.getYearFromReleaseDate(widget.track.releaseDate!)} ${widget.track.albumName}",
+              "© ${widget.track.getArtistsAsString()} ${Helpers.getYearFromReleaseDate(widget.track.releaseDate!)} ${widget.track.albumName}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -342,9 +361,13 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
               scrollDirection: Axis.horizontal,
               itemCount: songList.length,
               itemBuilder: (context, index) {
-                return Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: MediaItem(track: songList[index]));
+                if (songList[index].id == widget.track.id) {
+                  return const SizedBox();
+                } else {
+                  return Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: MediaItem(track: songList[index]));
+                }
               },
             ),
           ),

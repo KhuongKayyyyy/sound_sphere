@@ -68,29 +68,30 @@ class ArtistRepository {
     return artistName;
   }
 
-  // static Future<Artist> getArtistById(String id) async {
-  //   var client = HttpClient();
-  //   Artist artist = Artist.defaultArtist();
-  //   try {
-  //     var request = await client.postUrl(Uri.parse(ArtistApi.artistById(id)));
-  //     request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
-  //     request.write(jsonEncode({
-  //       "select": ArtistApi.nameAndAvatar,
-  //     }));
-  //     var response = await request.close();
-  //     if (response.statusCode == HttpStatus.ok) {
-  //       var responseBody = await response.transform(utf8.decoder).join();
-  //       var decodedJson = jsonDecode(responseBody);
-  //       if (decodedJson is Map<String, dynamic> &&
-  //           decodedJson['metadata'] is Map<String, dynamic>) {
-  //         artist = Artist.fromJson(decodedJson['metadata']);
-  //       }
-  //     }
-  //   } catch (e) {
-  //     log(e.toString());
-  //   } finally {
-  //     client.close();
-  //   }
-  //   return artist;
-  // }
+  static Future<Artist> getArtistById(String id) async {
+    var client = HttpClient();
+    Artist artist = Artist.defaultArtist();
+    try {
+      var request = await client.postUrl(Uri.parse(ArtistApi.artistById(id)));
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": ArtistApi.nameAndAvatar,
+      }));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.ok) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata'] is Map<String, dynamic>) {
+          artist = Artist.fromJson(decodedJson['metadata']);
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      client.close();
+    }
+    print(artist.name);
+    return artist;
+  }
 }

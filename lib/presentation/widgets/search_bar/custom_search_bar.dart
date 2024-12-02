@@ -84,7 +84,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<Artist> matchQuery = [];
     for (var artist in searchArist) {
-      if (artist.name.toLowerCase().contains(query.toLowerCase())) {
+      if (artist.name!.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(artist);
       }
     }
@@ -121,7 +121,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     List<Artist> matchQuery = [];
     for (var artist in searchArist) {
-      if (artist.name.toLowerCase().contains(query.toLowerCase())) {
+      if (artist.name!.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(artist);
       }
     }
