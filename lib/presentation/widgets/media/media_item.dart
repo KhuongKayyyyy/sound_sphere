@@ -148,7 +148,7 @@ class _MediaItemState extends State<MediaItem> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      widget.album!.aritst,
+                      widget.album!.aritst.name!,
                       style: TextStyle(
                         color: AppColor.inkGreyDark,
                         fontWeight: FontWeight.w600,
@@ -192,7 +192,7 @@ class _MediaItemState extends State<MediaItem> {
               child: InkWell(
                 onTap: () {
                   // Navigator.of(context).popUntil((route) => route.isFirst);
-                  context.pushNamed(Routes.songDetail, extra: widget.track);
+                  context.pushNamed(Routes.songDetail, extra: widget.track!.id);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

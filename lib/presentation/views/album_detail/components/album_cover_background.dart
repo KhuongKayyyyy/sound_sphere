@@ -28,7 +28,7 @@ class AlbumCoverBackground extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 25)),
           const SizedBox(height: 10),
-          Text(tempAlbum.aritst,
+          Text(tempAlbum.aritst.name!,
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

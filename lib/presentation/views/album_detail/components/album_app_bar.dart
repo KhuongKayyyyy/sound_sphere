@@ -58,10 +58,15 @@ class AlbumDetailAppBar extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         title: showAppBarTitle
-            ? Text(
-                album.title,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.black),
+            ? SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Text(
+                  album.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                ),
               )
             : null,
         centerTitle: true,
@@ -102,21 +107,26 @@ class AlbumDetailAppBar extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            album.title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              album.title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           const SizedBox(height: 10),
           InkWell(
             onTap: () {
-              context.pushNamed(Routes.artistDetail, extra: 'artistId');
+              context.pushNamed(Routes.artistDetail, extra: album.aritst);
             },
             child: Text(
-              album.aritst,
+              album.aritst.name!,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

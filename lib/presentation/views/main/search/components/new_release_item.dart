@@ -29,7 +29,7 @@ class NewReleaseItem extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Text(
-          album != null ? album!.aritst : song!.artist.name!,
+          album != null ? album!.aritst.name! : song!.artist.name!,
           style: const TextStyle(
             color: Colors.grey,
             fontSize: 18,

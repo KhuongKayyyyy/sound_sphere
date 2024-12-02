@@ -133,9 +133,9 @@ class AppNavigation {
           path: Routes.songDetail,
           name: Routes.songDetail,
           builder: (context, state) {
-            final track = state.extra as Track;
+            final trackId = state.extra as String;
             return SingleEPsDetailPage(
-              track: track,
+              trackId: trackId,
             );
           },
         ),

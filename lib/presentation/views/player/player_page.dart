@@ -50,21 +50,21 @@ class _PlayerPageState extends State<PlayerPage> {
     _playlistScrollController.addListener(_onPlaylistScroll);
   }
 
-  Future<void> _loadState() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (mounted) {
-      setState(() {
-        _isShowLyrics = prefs.getBool('isShowLyric') ?? false;
-        _isShowPlaylist = prefs.getBool('isShowPlaylist') ?? false;
-      });
-    }
-  }
+  // Future<void> _loadState() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   if (mounted) {
+  //     setState(() {
+  //       _isShowLyrics = prefs.getBool('isShowLyric') ?? false;
+  //       _isShowPlaylist = prefs.getBool('isShowPlaylist') ?? false;
+  //     });
+  //   }
+  // }
 
-  Future<void> _saveState() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isShowLyric', _isShowLyrics);
-    await prefs.setBool('isShowPlaylist', _isShowPlaylist);
-  }
+  // Future<void> _saveState() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('isShowLyric', _isShowLyrics);
+  //   await prefs.setBool('isShowPlaylist', _isShowPlaylist);
+  // }
 
   @override
   void dispose() {

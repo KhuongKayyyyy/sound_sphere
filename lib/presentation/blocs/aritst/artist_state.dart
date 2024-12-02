@@ -32,10 +32,17 @@ class ArtistNameLoaded extends ArtistState {
 class ArtistDetailByIdLoaded extends ArtistState {
   final Artist artist;
   final List<Track> trackOfArtist;
+  final List<Track> topTracksOfArtist;
   final List<Album> albumOfArtist;
   final List<Artist> relatedArtists;
+  final Album latestAlbum;
   const ArtistDetailByIdLoaded(
-      this.artist, this.trackOfArtist, this.albumOfArtist, this.relatedArtists);
+      this.artist,
+      this.trackOfArtist,
+      this.topTracksOfArtist,
+      this.albumOfArtist,
+      this.relatedArtists,
+      this.latestAlbum);
 }
 
 class ArtistDetailByIdError extends ArtistState {

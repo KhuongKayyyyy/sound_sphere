@@ -1,5 +1,7 @@
 class ApiConfig {
+  // ignore: constant_identifier_names
   static const String BASE_URL = 'http://127.0.0.1:8080/api/v1';
+  // ignore: non_constant_identifier_names
   static final int DEFAULT_LIMIT = 10;
 }
 
@@ -17,6 +19,14 @@ class AlbumApi {
   static String albumByArtistId(String id) =>
       '${ApiConfig.BASE_URL}/albums/artist/$id';
   static String albumById(String id) => '${ApiConfig.BASE_URL}/albums/$id';
+
+  static String latestAlbumByArtistId(String id) =>
+      '${ApiConfig.BASE_URL}/albums/latest/artist/$id';
+
+  // selection
+
+  static const String previewAlbum =
+      'title image_url creator type release_date';
 }
 
 class TrackApi {
@@ -26,6 +36,8 @@ class TrackApi {
       '${ApiConfig.BASE_URL}/tracks/artist/$artistId';
   static String trackOfAlbum(String albumId) =>
       '${ApiConfig.BASE_URL}/tracks/album/$albumId';
+  static String topTrackOfArtist(String artistId) =>
+      '${ApiConfig.BASE_URL}/tracks/top/artist/$artistId';
   // selection
   static const String previewTrack = 'title image_url url_media creator';
   static const String fullTrack =

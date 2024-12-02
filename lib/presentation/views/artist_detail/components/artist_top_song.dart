@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 class ArtistTopSong extends StatelessWidget {
-  const ArtistTopSong({super.key});
+  final List<Track> topSongs;
+  const ArtistTopSong({super.key, required this.topSongs});
 
   @override
   Widget build(BuildContext context) {
@@ -28,69 +30,25 @@ class ArtistTopSong extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 350,
-          width: double.infinity,
-          child: GridView.builder(
-            scrollDirection: Axis.horizontal,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              mainAxisSpacing: 10,
-              mainAxisExtent: 330,
+          height: 250,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, top: 10),
+            child: GridView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                mainAxisExtent: 300,
+              ),
+              itemCount: topSongs.length,
+              itemBuilder: (context, index) {
+                return TrackItem(
+                  song: topSongs[index],
+                  isLiked: false,
+                  isSliable: false,
+                );
+              },
             ),
-            itemCount: 8,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.only(left: 20),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      height: 70,
-                      width: 70,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          FakeData.obitoSongs[index].imgURL,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                        width: 10), // Add spacing between image and text
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(),
-                          Text(
-                            FakeData.obitoSongs[index].title,
-                            overflow: TextOverflow
-                                .ellipsis, // Prevent overflow in text
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "${FakeData.albums[index].title}·${FakeData.albums[index].releaseDate}",
-                            overflow: TextOverflow
-                                .ellipsis, // Prevent overflow in text
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Divider(
-                            color: Colors.grey[200],
-                            height: 30,
-                          )
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.more_horiz))
-                  ],
-                ),
-              );
-            },
           ),
         )
       ],

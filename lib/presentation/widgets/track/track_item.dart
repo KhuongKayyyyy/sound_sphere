@@ -11,8 +11,14 @@ import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_butto
 class TrackItem extends StatefulWidget {
   Track song;
   bool isLiked;
+  bool? isSliable;
   int? index;
-  TrackItem({super.key, required this.song, required this.isLiked, this.index});
+  TrackItem(
+      {super.key,
+      required this.song,
+      required this.isLiked,
+      this.index,
+      this.isSliable});
 
   @override
   State<TrackItem> createState() => _TrackItemState();
@@ -28,17 +34,26 @@ class _TrackItemState extends State<TrackItem> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Slidable(
-          startActionPane: handleAddToCurrentPlaylist(),
-          endActionPane: handleAddToLibrary(),
-          child: InkWell(
-            onTap: () {
-              PlayerController().setPlayerAudio([widget.song]);
-              PlayerController().play();
-            },
-            child: _buildTrackInfo(context),
-          ),
-        ),
+        widget.isSliable == false
+            ? InkWell(
+                onTap: () {
+                  PlayerController().setPlayerAudio([widget.song]);
+                  PlayerController().play();
+                },
+                child: _buildTrackInfo(context),
+              )
+            : Slidable(
+                key: Key(widget.song.id.toString()),
+                startActionPane: handleAddToCurrentPlaylist(),
+                endActionPane: handleAddToLibrary(),
+                child: InkWell(
+                  onTap: () {
+                    PlayerController().setPlayerAudio([widget.song]);
+                    PlayerController().play();
+                  },
+                  child: _buildTrackInfo(context),
+                ),
+              ),
         // Divider
         // Padding(
         //   padding: const EdgeInsets.only(left: 80),
@@ -76,22 +91,36 @@ class _TrackItemState extends State<TrackItem> {
     return ActionPane(
       motion: const ScrollMotion(),
       children: [
-        SizedBox(
-          width: 80,
-          child: SlidableAction(
-            onPressed: (BuildContext context) {},
-            backgroundColor: Colors.purple,
-            icon: CupertinoIcons.square_fill_line_vertical_square,
-          ),
+        SlidableAction(
+          onPressed: (BuildContext context) {
+            print("Added to current playlist");
+          },
+          foregroundColor: AppColor.primaryColor,
+          icon: CupertinoIcons.square_fill_line_vertical_square,
         ),
-        SizedBox(
-          width: 80,
-          child: SlidableAction(
-            onPressed: (BuildContext context) {},
-            backgroundColor: Colors.yellow,
-            icon: CupertinoIcons.square_line_vertical_square_fill,
-          ),
+        SlidableAction(
+          onPressed: (BuildContext context) {
+            print("Added to new playlist");
+          },
+          foregroundColor: AppColor.primaryColor,
+          icon: CupertinoIcons.square_line_vertical_square_fill,
         ),
+        // SizedBox(
+        //   width: 80,
+        //   child: SlidableAction(
+        //     onPressed: (BuildContext context) {},
+        //     backgroundColor: Colors.purple,
+        //     icon: CupertinoIcons.square_fill_line_vertical_square,
+        //   ),
+        // ),
+        // SizedBox(
+        //   width: 80,
+        //   child: SlidableAction(
+        //     onPressed: (BuildContext context) {},
+        //     backgroundColor: Colors.yellow,
+        //     icon: CupertinoIcons.square_line_vertical_square_fill,
+        //   ),
+        // ),
       ],
     );
   }

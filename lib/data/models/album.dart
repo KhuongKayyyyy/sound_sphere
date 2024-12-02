@@ -1,10 +1,12 @@
+import 'package:sound_sphere/data/models/artist.dart';
+
 import 'track.dart';
 import 'genres.dart'; // Assuming the Genres class is defined here
 
 class Album {
   final String? id;
   final String title;
-  final String aritst;
+  final Artist aritst;
   final Genres genre;
   List<Track> tracks;
   final String imgURL;
@@ -30,7 +32,7 @@ class Album {
   Album.defaultAlbum()
       : id = null,
         title = "Unknown Album",
-        aritst = "Unknown Artist",
+        aritst = Artist.defaultArtist(),
         genre = Genres(
             name: "Unknown Genre", imgURL: "https://via.placeholder.com/150"),
         tracks = [],
@@ -79,12 +81,20 @@ class Album {
 
   /// Factory constructor to create an Album instance from a JSON map
   factory Album.fromJson(Map<String, dynamic> json) {
-    var creator = json['creator'] as Map<String, dynamic>?;
+    var creator = json['creator'] as Map<String, dynamic>? ?? json['creator'];
+
+    String artistId = json['creator']?['_id'] ?? 'no artist id';
+    String artistName = json['creator']?['name'] ?? 'no artist name';
+    String artistAvatar = json['creator']?['avatar_url'] ?? 'no artist avatar';
 
     return Album(
       id: json['_id'] ?? "id",
       title: json['title'] ?? "Unknown Album",
-      aritst: creator?['name'] ?? "Unknown Artist",
+      aritst: Artist(
+        id: artistId,
+        name: artistName,
+        avatarURL: artistAvatar,
+      ),
       genre: (creator != null &&
               creator['genres'] is List &&
               (creator['genres'] as List).isNotEmpty)

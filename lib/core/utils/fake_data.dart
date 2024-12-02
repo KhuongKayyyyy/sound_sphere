@@ -1055,7 +1055,7 @@ class FakeData {
   static List<Album> albums = [
     Album(
         title: "The Wrxdies",
-        aritst: "Wrxdie",
+        aritst: Artist.defaultArtist(),
         genre: genres[2],
         releaseDate: "2024",
         imgURL:
@@ -1063,7 +1063,7 @@ class FakeData {
         tracks: wrxdieSong),
     Album(
         title: "Đánh đổi",
-        aritst: "Travis Scott",
+        aritst: Artist.defaultArtist(),
         genre: genres[2],
         releaseDate: "2023",
         imgURL:
@@ -1071,7 +1071,7 @@ class FakeData {
         tracks: obitoSongs),
     Album(
         title: "Lemonade",
-        aritst: "Beyoncé",
+        aritst: Artist.defaultArtist(),
         genre: genres[2],
         releaseDate: "2016-04-23",
         imgURL:
@@ -1080,7 +1080,7 @@ class FakeData {
         ),
     Album(
         title: "Scorpion",
-        aritst: "Drake",
+        aritst: Artist.defaultArtist(),
         genre: genres[2],
         releaseDate: "2018-06-29",
         imgURL:
@@ -1089,7 +1089,7 @@ class FakeData {
         ),
     Album(
         title: "Divide",
-        aritst: "Ed Sheeran",
+        aritst: Artist.defaultArtist(),
         genre: genres[0],
         releaseDate: "2017-03-03",
         imgURL:
@@ -1098,7 +1098,7 @@ class FakeData {
         ),
     Album(
         title: "1989",
-        aritst: "Taylor Swift",
+        aritst: Artist.defaultArtist(),
         genre: genres[0],
         releaseDate: "2014-10-27",
         imgURL:
@@ -1107,245 +1107,20 @@ class FakeData {
         ),
     Album(
         title: "Thank U, Next",
-        aritst: "Ariana Grande",
+        aritst: Artist.defaultArtist(),
         genre: genres[0],
         releaseDate: "2019-02-08",
         imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Ariana_Grande_-_Thank_U%2C_Next.png/220px-Ariana_Grande_-_Thank_U%2C_Next.png",
+            "https://aimm.edu/hubfs/Blog%20Images/Top%2010%20Album%20Covers%20of%202017/Tyler%20the%20Creator-%20Flower%20boy.jpg",
         tracks: [] // Add songs specific to this album
         ),
     Album(
         title: "Purpose",
-        aritst: "Justin Bieber",
+        aritst: Artist.defaultArtist(),
         genre: genres[0],
         releaseDate: "2015-11-13",
         imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/Justin_Bieber_-_Purpose.png/220px-Justin_Bieber_-_Purpose.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "When We All Fall Asleep, Where Do We Go?",
-        aritst: "Billie Eilish",
-        genre: genres[0],
-        releaseDate: "2019-03-29",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png/220px-Billie_Eilish_-_When_We_All_Fall_Asleep%2C_Where_Do_We_Go%3F.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "After Hours",
-        aritst: "The Weeknd",
-        genre: genres[0],
-        releaseDate: "2020-03-20",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Hollywood's Bleeding",
-        aritst: "Post Malone",
-        genre: genres[0],
-        releaseDate: "2019-09-06",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Post_Malone_-_Hollywood%27s_Bleeding.png/220px-Post_Malone_-_Hollywood%27s_Bleeding.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "The Fame",
-        aritst: "Lady Gaga",
-        genre: genres[0],
-        releaseDate: "2008-10-28",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Lady_Gaga_The_Fame.png/220px-Lady_Gaga_The_Fame.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Teenage Dream",
-        aritst: "Katy Perry",
-        genre: genres[0],
-        releaseDate: "2010-08-24",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Katy_Perry_Teenage_Dream.png/220px-Katy_Perry_Teenage_Dream.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Uptown Special",
-        aritst: "Mark Ronson",
-        genre: genres[0],
-        releaseDate: "2015-01-13",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/Mark_Ronson_Uptown_Special.png/220px-Mark_Ronson_Uptown_Special.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Good Girl Gone Bad",
-        aritst: "Rihanna",
-        genre: genres[0],
-        releaseDate: "2007-05-29",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Rihanna_-_Good_Girl_Gone_Bad.png/220px-Rihanna_-_Good_Girl_Gone_Bad.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Handwritten",
-        aritst: "Shawn Mendes",
-        genre: genres[0],
-        releaseDate: "2015-04-14",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Shawn_Mendes_Handwritten.png/220px-Shawn_Mendes_Handwritten.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Rare",
-        aritst: "Selena Gomez",
-        genre: genres[0],
-        releaseDate: "2020-01-10",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Selena_Gomez_-_Rare.png/220px-Selena_Gomez_-_Rare.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Future Nostalgia",
-        aritst: "Dua Lipa",
-        genre: genres[0],
-        releaseDate: "2020-03-27",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Dua_Lipa_-_Future_Nostalgia.png/220px-Dua_Lipa_-_Future_Nostalgia.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Fine Line",
-        aritst: "Harry Styles",
-        genre: genres[0],
-        releaseDate: "2019-12-13",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Harry_Styles_Fine_Line.png/220px-Harry_Styles_Fine_Line.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Plastic Hearts",
-        aritst: "Miley Cyrus",
-        genre: genres[0],
-        releaseDate: "2020-11-27",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Miley_Cyrus_Plastic_Hearts.png/220px-Miley_Cyrus_Plastic_Hearts.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Love Goes",
-        aritst: "Sam Smith",
-        genre: genres[0],
-        releaseDate: "2020-10-30",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sam_Smith_-_Love_Goes.png/220px-Sam_Smith_-_Love_Goes.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Cuz I Love You",
-        aritst: "Lizzo",
-        genre: genres[0],
-        releaseDate: "2019-04-19",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Lizzo_-_Cuz_I_Love_You.png/220px-Lizzo_-_Cuz_I_Love_You.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "DAMN.",
-        aritst: "Kendrick Lamar",
-        genre: genres[2],
-        releaseDate: "2017-04-14",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Kendrick_Lamar_-_DAMN.png/220px-Kendrick_Lamar_-_DAMN.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Invasion of Privacy",
-        aritst: "Cardi B",
-        genre: genres[2],
-        releaseDate: "2018-04-06",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Cardi_B_Invasion_of_Privacy.png/220px-Cardi_B_Invasion_of_Privacy.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Hot Pink",
-        aritst: "Doja Cat",
-        genre: genres[2],
-        releaseDate: "2019-11-07",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Doja_Cat_Hot_Pink.png/220px-Doja_Cat_Hot_Pink.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "7",
-        aritst: "Lil Nas X",
-        genre: genres[2],
-        releaseDate: "2019-06-21",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Lil_Nas_X_7.png/220px-Lil_Nas_X_7.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "SOUR",
-        aritst: "Olivia Rodrigo",
-        genre: genres[0],
-        releaseDate: "2021-05-21",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Olivia_Rodrigo_-_SOUR.png/220px-Olivia_Rodrigo_-_SOUR.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "ASTROWORLD",
-        aritst: "Travis Scott",
-        genre: genres[2],
-        releaseDate: "2018-08-03",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/ASTROWORLD.jpg/220px-ASTROWORLD.jpg",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Vivir Mi Vida",
-        aritst: "Marc Anthony",
-        genre: genres[6],
-        releaseDate: "2013-07-23",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Marc_Anthony_-_Vivir_Mi_Vida.png/220px-Marc_Anthony_-_Vivir_Mi_Vida.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "K.O.",
-        aritst: "J Balvin",
-        genre: genres[6],
-        releaseDate: "2019-08-30",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/3/32/J_Balvin_K.O.png/220px-J_Balvin_K.O.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "YHLQMDLG",
-        aritst: "Bad Bunny",
-        genre: genres[6],
-        releaseDate: "2020-02-29",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Bad_Bunny_-_YHLQMDLG.png/220px-Bad_Bunny_-_YHLQMDLG.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "Versions of Me",
-        aritst: "Anitta",
-        genre: genres[6],
-        releaseDate: "2022-04-22",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Anitta_Versions_of_Me.png/220px-Anitta_Versions_of_Me.png",
-        tracks: [] // Add songs specific to this album
-        ),
-    Album(
-        title: "1000 Forms of Fear",
-        aritst: "Sia",
-        genre: genres[0],
-        releaseDate: "2014-07-04",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Sia_1000_Forms_of_Fear.png/220px-Sia_1000_Forms_of_Fear.png",
+            "https://aimm.edu/hubfs/Blog%20Images/Top%2010%20Album%20Covers%20of%202017/Tyler%20the%20Creator-%20Flower%20boy.jpg",
         tracks: [] // Add songs specific to this album
         ),
   ];

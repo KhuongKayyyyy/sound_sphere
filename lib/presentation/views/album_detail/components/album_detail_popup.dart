@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
+import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:flutter/foundation.dart';
 
@@ -102,10 +103,13 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.album.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: Text(
+                      widget.album.title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
                   ),
                   Text(
                     "By ${widget.album.aritst}",
@@ -116,7 +120,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "${widget.album.genre.name} · ${widget.album.releaseDate}",
+                    "${widget.album.genre.name[0].toUpperCase()}${widget.album.genre.name.substring(1)} · ${Helpers.formatDate(widget.album.releaseDate)}",
                     style: TextStyle(
                         fontWeight: FontWeight.w500, color: Colors.grey[500]),
                   ),
@@ -368,15 +372,19 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.album.title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Text(
+                widget.album.title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Text(
-              widget.album.aritst,
+              widget.album.aritst.name!,
               style: TextStyle(
                 fontSize: 14,
                 color: AppColor.primaryColor,
@@ -437,7 +445,7 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
   Widget _buildDetailsContent() {
     return Column(
       children: [
-        _buildDetailRow("Artist", widget.album.aritst),
+        _buildDetailRow("Artist", widget.album.aritst.name!),
         _buildDetailRow("Album", widget.album.title),
         _buildDetailRow("Genre", widget.album.genre.name),
         _buildDetailRow("Year", widget.album.releaseDate),
@@ -463,9 +471,13 @@ class _AlbumDetailPopupState extends State<AlbumDetailPopup> {
         children: [
           Text(label),
           const Spacer(),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.6,
+            child: Text(
+              // overflow: TextOverflow.ellipsis,
+              value,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),

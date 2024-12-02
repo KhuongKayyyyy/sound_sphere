@@ -6,13 +6,14 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/data/res/album_repository.dart';
+import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_music.dart';
-import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_song.dart';
+import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_album.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/similar_artist_section.dart';
 
-// ignore: must_be_immutable
 class ArtistDetailPage extends StatefulWidget {
   final Artist artist;
   const ArtistDetailPage({super.key, required this.artist});
@@ -22,21 +23,15 @@ class ArtistDetailPage extends StatefulWidget {
 }
 
 class _ArtistDetailPageState extends State<ArtistDetailPage> {
-  // fake data for artist detail
   Artist artist = Artist.defaultArtist();
   Track newSong = FakeData.obitoSongs[4];
 
   ScrollController? _scrollController;
   bool showAppBar = false;
 
-  // bool showBackButton = true;
   Color appBarIconColor = Colors.white;
-
   late ArtistBloc artistBloc;
 
-  List<Track> trackOfArtist = [];
-  List<Album> albumOfArtist = [];
-  List<Artist> relatedArtists = [];
   @override
   void initState() {
     super.initState();
@@ -55,34 +50,19 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
   }
 
   void _onScroll() {
-    if (_scrollController!.offset > 200 && !showAppBar) {
-      setState(() {
-        showAppBar = true;
-      });
-    } else if (_scrollController!.offset <= 200 && showAppBar) {
-      setState(() {
-        showAppBar = false;
-      });
-    }
+    if (_scrollController!.hasClients) {
+      double offset = _scrollController!.offset;
+      if (offset > 240 && !showAppBar) {
+        setState(() {
+          showAppBar = true;
+        });
+      } else if (offset <= 240 && showAppBar) {
+        setState(() {
+          showAppBar = false;
+        });
+      }
 
-    // if (_scrollController!.offset > 150 && !showAppBar) {
-    //   setState(() {
-    //     showBackButton = false;
-    //   });
-    // } else if (_scrollController!.offset <= 150 && showAppBar) {
-    //   setState(() {
-    //     showBackButton = true;
-    //   });
-    // }
-    // Change icon color based on scroll position
-    if (_scrollController!.offset > 200) {
-      setState(() {
-        appBarIconColor = AppColor.primaryColor; // Change to primary color
-      });
-    } else {
-      setState(() {
-        appBarIconColor = Colors.white; // Change back to white
-      });
+      appBarIconColor = offset > 200 ? AppColor.primaryColor : Colors.white;
     }
   }
 
@@ -93,106 +73,100 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
       builder: (context, artistState) {
         if (artistState is ArtistDetailByIdLoaded) {
           artist = artistState.artist;
-          trackOfArtist = artistState.trackOfArtist;
-          albumOfArtist = artistState.albumOfArtist;
-          relatedArtists = artistState.relatedArtists;
+          List<Track> trackOfArtist = artistState.trackOfArtist;
+          List<Track> topTrackOfArtist = artistState.topTracksOfArtist;
+          List<Album> albumOfArtist = artistState.albumOfArtist;
+          List<Artist> relatedArtists = artistState.relatedArtists;
+          Album latestAlbum = artistState.latestAlbum;
+
           return Scaffold(
-            appBar: showAppBar
-                ? AppBar(
-                    title: Text(
-                      artist.name!,
-                      style: const TextStyle(
+            body: Stack(
+              children: [
+                CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    _buildAppBar(context),
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          ArtistNewAlbum(
+                            album: latestAlbum,
+                          ),
+                          ArtistTopSong(
+                            topSongs: topTrackOfArtist.length > 8
+                                ? topTrackOfArtist.take(8).toList()
+                                : topTrackOfArtist,
+                          ),
+                          const SizedBox(height: 10),
+                          if (albumOfArtist.isNotEmpty)
+                            ArtistMusic(
+                                sectionName: "Albums",
+                                albumList: albumOfArtist),
+                          ArtistMusic(
+                              sectionName: "Single & EPs",
+                              songList: trackOfArtist),
+                          const SizedBox(height: 10),
+                          ArtistMusic(
+                              sectionName: "Artist Playlists",
+                              albumList: FakeData.albums.take(8).toList()),
+                          SimilarArtistSection(
+                            similarArtists: relatedArtists,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                if (showAppBar)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: AppBar(
+                      centerTitle: true,
+                      title: Text(
+                        artist.name!,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                          color: Colors.black,
+                        ),
+                      ),
+                      actions: [
+                        // IconButton(
+                        //   icon: const Icon(Icons.search),
+                        //   onPressed: () {},
+                        // ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              padding: const EdgeInsets.all(3),
+                              child: Icon(Icons.star_outline_rounded)),
+                        ),
+                        const SizedBox(width: 15),
+                        InkWell(
+                          onTap: () {
+                            TrackRepository.getTopTrackOfArtist(artist.id!);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              padding: const EdgeInsets.all(3),
+                              child: Icon(Icons.more_horiz)),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                      backgroundColor: Colors.white.withOpacity(0.9),
+                      elevation: 0,
+                      iconTheme: IconThemeData(color: appBarIconColor),
                     ),
-                    backgroundColor: Colors.white.withOpacity(0.5),
-                    iconTheme: IconThemeData(color: appBarIconColor),
-                  )
-                : null,
-            body: CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                SliverAppBar(
-                    expandedHeight: 300,
-                    flexibleSpace: !showAppBar
-                        ? Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(artist.avatarURL!),
-                                    fit: BoxFit.cover)),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        artist.name!,
-                                        style: const TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                      const Spacer(),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: AppColor.primaryColor,
-                                        ),
-                                        child: IconButton(
-                                          icon: const Icon(Icons.play_arrow),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            GoRouter.of(context).go('/player');
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                )
-                              ],
-                            ),
-                          )
-                        : null),
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      // new song
-                      ArtistNewSong(newSong: newSong),
-                      // top songs
-                      const ArtistTopSong(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      // artist albums
-                      if (albumOfArtist.isNotEmpty)
-                        ArtistMusic(
-                            sectionName: "Albums",
-                            albumList: FakeData.albums.take(8).toList()),
-                      // artist song and eps
-                      ArtistMusic(
-                          sectionName: "Single & EPs", songList: trackOfArtist),
-                      // artist playlist
-                      ArtistMusic(
-                          sectionName: "Artist Playlists",
-                          albumList: FakeData.albums.take(8).toList()),
-
-                      // similar artist
-                      SimilarArtistSection(
-                        similarArtists: relatedArtists,
-                      ),
-                    ],
                   ),
-                )
               ],
             ),
           );
@@ -210,6 +184,79 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
           );
         }
       },
+    );
+  }
+
+  SliverAppBar _buildAppBar(BuildContext context) {
+    return SliverAppBar(
+      expandedHeight: 300,
+      pinned: true, // Keeps the AppBar visible when scrolling
+      flexibleSpace: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return FlexibleSpaceBar(
+            centerTitle: true,
+            background: Stack(
+              fit: StackFit.expand,
+              children: [
+                // Background image
+                Image.network(
+                  artist.avatarURL!,
+                  fit: BoxFit.cover,
+                ),
+                // Gradient overlay to darken the background
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.6),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                ),
+                // Artist name and play button
+                Positioned(
+                  bottom: 20, // Position from bottom
+                  left: 20, // Position from left
+                  right: 20, // Position from right
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          artist.name!,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.primaryColor,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.play_arrow),
+                          color: Colors.white,
+                          onPressed: () {
+                            GoRouter.of(context).go('/player');
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -50,11 +50,15 @@ class ArtistBloc extends Bloc<ArtistEvent, ArtistState> {
     try {
       final artist = await ArtistRepository.getArtistById(event.id);
       final trackOfArtist = await TrackRepository.getTrackOfArtist(event.id);
+      final topTracksOfArtist =
+          await TrackRepository.getTopTrackOfArtist(event.id);
       final albumOfArtist = await AlbumRepository.getAlbumOfArtist(event.id);
       final relatedArtists = await ArtistRepository.getArtists(
           1, ApiConfig.DEFAULT_LIMIT, ArtistApi.nameAndAvatar);
-      emit(ArtistDetailByIdLoaded(
-          artist, trackOfArtist, albumOfArtist, relatedArtists));
+      final latestAlbum =
+          await AlbumRepository.getLatestAlbumByArtistId(event.id);
+      emit(ArtistDetailByIdLoaded(artist, trackOfArtist, topTracksOfArtist,
+          albumOfArtist, relatedArtists, latestAlbum));
     } catch (e) {
       emit(ArtistDetailByIdError(e.toString()));
     }

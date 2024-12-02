@@ -50,7 +50,8 @@ class SimilarArtistSection extends StatelessWidget {
                     artist: similarArtists[index],
                     isLike: false,
                     onTap: () {
-                      context.pushNamed(Routes.artistDetail, extra: "");
+                      context.pushNamed(Routes.artistDetail,
+                          extra: similarArtists[index]);
                     },
                   ),
                 );

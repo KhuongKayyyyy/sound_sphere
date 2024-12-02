@@ -52,15 +52,15 @@ class AlbumRepository {
     List<Album> albums = [];
     try {
       // Encode query parameters
-      var url = Uri.parse(AlbumApi.albums);
+      var url = Uri.parse(AlbumApi.albumByArtistId(id));
       var request = await client.postUrl(url);
 
       // Add headers and body
       request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
-      // request.write(jsonEncode({
-      //   // "select": "title creator image_url type",
-      //   // 'isPopulateCreator': true
-      // }));
+      request.write(jsonEncode({
+        "select": "title creator image_url type",
+        "isPopulateCreator": true
+      }));
 
       var response = await request.close();
 
@@ -82,6 +82,7 @@ class AlbumRepository {
     } finally {
       client.close();
     }
+    print(albums.length);
     return albums;
   }
 
@@ -98,6 +99,34 @@ class AlbumRepository {
       if (response.statusCode == HttpStatus.ok) {
         var responseBody = await response.transform(utf8.decoder).join();
         var decodedJson = jsonDecode(responseBody)['metadata'];
+        if (decodedJson is Map<String, dynamic>) {
+          album = Album.fromJson(decodedJson);
+        }
+      }
+    } catch (e) {
+      Logger.Red.log('Error: $e');
+    } finally {
+      client.close();
+    }
+    return album;
+  }
+
+  static Future<Album> getLatestAlbumByArtistId(String id) async {
+    var client = HttpClient();
+    Album album = Album.defaultAlbum();
+    try {
+      var url = Uri.parse(AlbumApi.latestAlbumByArtistId(id));
+      var request = await client.postUrl(url);
+
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode(
+          {"select": AlbumApi.previewAlbum, 'isPopulateCreator': true}));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.ok) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        // print(responseBody);
+        var decodedJson = jsonDecode(responseBody)['metadata'];
+        print(decodedJson);
         if (decodedJson is Map<String, dynamic>) {
           album = Album.fromJson(decodedJson);
         }
