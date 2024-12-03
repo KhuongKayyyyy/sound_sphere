@@ -1,10 +1,13 @@
+import 'dart:async'; // Import the Timer class
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
@@ -25,12 +28,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late TrackBloc recommendTrackBloc;
   late TrackBloc hitTrackBloc;
-  ScrollController? _scrollController; // Nullable scroll controller
+  ScrollController? _scrollController;
   bool showAvatar = true;
+  bool _showSkeleton = true; // State to control the skeleton visibility
 
   @override
   void initState() {
     super.initState();
+
+    Timer(const Duration(microseconds: 1500), () {
+      setState(() {
+        _showSkeleton = false;
+      });
+    });
+
     recommendTrackBloc = TrackBloc();
     recommendTrackBloc
         .add(const FetchTracksEvent(1, 10, TrackApi.previewTrack));
@@ -38,8 +49,7 @@ class _HomePageState extends State<HomePage> {
     hitTrackBloc.add(const FetchTracksEvent(2, 10, TrackApi.previewTrack));
 
     _scrollController = ScrollController();
-    _scrollController!
-        .addListener(_onScroll); // Add listener to scroll controller
+    _scrollController!.addListener(_onScroll);
   }
 
   @override
@@ -50,7 +60,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onScroll() {
-    // Check the scroll offset and hide avatar when collapsed
     if (_scrollController!.offset >= 50 && showAvatar) {
       setState(() {
         showAvatar = false;
@@ -66,13 +75,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        controller: _scrollController, // Attach ScrollController
+        controller: _scrollController,
         slivers: [
-          // app bar
           _buildHomePageAppBar(),
-          // app utility section
           _buildAppUltilitySection(),
-          // recommended music section
+          SliverToBoxAdapter(
+            child: TextButton(
+              onPressed: () {
+                TrackRepository.getTopTrackByPlay();
+              },
+              child: const Text("Test"),
+            ),
+          ),
           _buildReccommendedMusicSection(),
         ],
       ),
@@ -101,19 +115,19 @@ class _HomePageState extends State<HomePage> {
                           isExpanded ? TextAlign.start : TextAlign.center,
                       'Listen now',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: isExpanded ? 24.0 : 16.0,
-                          color: Colors.black),
+                        fontWeight: FontWeight.bold,
+                        fontSize: isExpanded ? 24.0 : 16.0,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                   IconButton(
-                      onPressed: () {
-                        _showLoginModal();
-                      },
-                      icon: Icon(
-                        CupertinoIcons.person,
-                        color: AppColor.primaryColor,
-                      ))
+                    onPressed: _showLoginModal,
+                    icon: Icon(
+                      CupertinoIcons.person,
+                      color: AppColor.primaryColor,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -125,7 +139,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildAppUltilitySection() {
     return SliverToBoxAdapter(
-      child: Container(
+      child: Skeletonizer(
+        enabled: _showSkeleton,
+        child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
@@ -141,31 +157,42 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
               const MixedPlaylistSmall(),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildReccommendedMusicSection() {
     return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          const PlaylistSection(playlistSectionTitle: "Top Playlists"),
-          _buildMediaSection(hitTrackBloc, "Top songs"),
-          const SizedBox(height: 10),
-          const PlaylistSection(playlistSectionTitle: "Made for you"),
-          const SizedBox(height: 10),
-          _buildMediaSection(recommendTrackBloc, "Son Tung MTP's hits"),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: BestAlbumSection(
-              onPressed: () => context.pushNamed(Routes.albumDetail,
-                  extra: "6747e52700a1fcb7eb635fbb"),
+      child: Skeletonizer(
+        enabled: _showSkeleton,
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Skeletonizer(
+              enabled: _showSkeleton, // Control skeleton visibility
+              child:
+                  const PlaylistSection(playlistSectionTitle: "Top Playlists"),
             ),
-          ),
-          const SizedBox(height: 150),
-        ],
+            _buildMediaSection(hitTrackBloc, "Top songs"),
+            const SizedBox(height: 10),
+            const PlaylistSection(playlistSectionTitle: "Made for you"),
+            const SizedBox(height: 10),
+            _buildMediaSection(recommendTrackBloc, "Son Tung MTP's hits"),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: BestAlbumSection(
+                onPressed: () => context.pushNamed(
+                  Routes.albumDetail,
+                  extra: "6747e52700a1fcb7eb635fbb",
+                ),
+              ),
+            ),
+            const SizedBox(height: 150),
+          ],
+        ),
       ),
     );
   }
@@ -176,7 +203,21 @@ class _HomePageState extends State<HomePage> {
       bloc: trackBloc,
       builder: (context, trackState) {
         if (trackState is TracksLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Skeletonizer(
+            enabled: _showSkeleton, // Control skeleton visibility
+            child: MediaSection(
+              mediaSectionTitle: title,
+              songList: FakeData.obitoSongs.take(5).toList(),
+              isExpandable: true,
+              onPressed: () => context.pushNamed(
+                Routes.extendGridView,
+                extra: {
+                  'songs': FakeData.obitoSongs,
+                  'title': title,
+                },
+              ),
+            ),
+          );
         } else if (trackState is TracksLoaded) {
           return MediaSection(
             mediaSectionTitle: title,
@@ -195,19 +236,17 @@ class _HomePageState extends State<HomePage> {
             child: Text(trackState.message),
           );
         }
-        return const SizedBox(
-          child: Text("No event added"),
-        );
+        return const SizedBox(child: Text("No event added"));
       },
     );
   }
 
   void _showLoginModal() {
-    // Show login modal
     showModalBottomSheet(
-        context: context,
-        useRootNavigator: true,
-        isScrollControlled: true, // Make the modal fullscreen
-        builder: (context) => const LoginPage());
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      builder: (context) => const LoginPage(),
+    );
   }
 }

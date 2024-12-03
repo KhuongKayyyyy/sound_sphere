@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/app_search_bar.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/search_by_category.dart';
@@ -15,11 +18,18 @@ class _SearchPageState extends State<SearchPage> {
   ScrollController? _scrollController;
   bool hideAppBarTitle = false;
 
+  bool showSkeleton = true;
+
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController!.addListener(_onScroll);
+    Timer(const Duration(milliseconds: 1500), () {
+      setState(() {
+        showSkeleton = false;
+      });
+    });
   }
 
   @override
@@ -61,11 +71,15 @@ class _SearchPageState extends State<SearchPage> {
         ),
         // Main content
         SliverToBoxAdapter(
-          child: SizedBox(
-            height: 2800,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SearchByCategory(),
+          child: Skeletonizer(
+            enabled: showSkeleton,
+            enableSwitchAnimation: true,
+            child: SizedBox(
+              height: 2800,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SearchByCategory(),
+              ),
             ),
           ),
         ),

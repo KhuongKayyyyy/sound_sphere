@@ -355,6 +355,8 @@ class _PlayerPageState extends State<PlayerPage> {
                               : NonSyncLyrics(
                                   lyricsScrollController:
                                       _lyricsScrollController,
+                                  trackId:
+                                      PlayerController().getCurrentSong().id!,
                                 ))
                       : Container(), // Placeholder or fallback widget if neither is true
             ),

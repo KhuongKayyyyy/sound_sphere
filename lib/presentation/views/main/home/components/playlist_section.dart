@@ -23,7 +23,7 @@ class PlaylistSection extends StatelessWidget {
           height: 10,
         ),
         SizedBox(
-          height: 250, // Constrain height of ListView to avoid infinite layout
+          height: MediaQuery.of(context).size.height * 0.3,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 3,

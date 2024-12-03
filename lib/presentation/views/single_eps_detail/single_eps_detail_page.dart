@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
@@ -30,6 +33,8 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   List<Track> recommendTracks = [];
   String _duration = "Fetching duration...";
 
+  bool showSkeleton = true;
+
   Track track = Track.defaultTrack();
   late TrackBloc trackBloc;
   @override
@@ -40,8 +45,13 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
 
     trackBloc = TrackBloc();
     trackBloc.add(FetchTrackDetail(widget.trackId));
-
     // fetchDuration();
+
+    Timer(const Duration(seconds: 1), () {
+      setState(() {
+        showSkeleton = false;
+      });
+    });
   }
 
   @override
@@ -79,28 +89,34 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
           if (state is TrackDetailLoaded) {
             track = state.track;
             recommendTracks = state.trackByArtist;
-            return CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                _buildSingleDetailAppBar(),
-                _buildSingleDetailSection(),
-                _buildPlaySection(),
-                _buildSingleSongList(),
-                _buildSingleBriefInfo(),
-                _buildRecommendationSection(),
-              ],
-            );
+            return _buildSingleDetailPage();
           } else if (state is TrackDetailError) {
             return Center(
               child: Text(state.message),
             );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+          } else if (state is TrackDetailLoading) {
+            return Skeletonizer(
+              enableSwitchAnimation: true,
+              child: _buildSingleDetailPage(),
             );
           }
+          return const SizedBox();
         },
       ),
+    );
+  }
+
+  CustomScrollView _buildSingleDetailPage() {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        _buildSingleDetailAppBar(),
+        _buildSingleDetailSection(),
+        _buildPlaySection(),
+        _buildSingleSongList(),
+        _buildSingleBriefInfo(),
+        _buildRecommendationSection(),
+      ],
     );
   }
 
@@ -208,9 +224,12 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            "${track.title}- Single",
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "${track.title}- Single",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
           InkWell(
             onTap: () {

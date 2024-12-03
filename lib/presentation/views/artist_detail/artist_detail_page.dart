@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
@@ -79,97 +80,8 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
           List<Artist> relatedArtists = artistState.relatedArtists;
           Album latestAlbum = artistState.latestAlbum;
 
-          return Scaffold(
-            body: Stack(
-              children: [
-                CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    _buildAppBar(context),
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          ArtistNewAlbum(
-                            album: latestAlbum,
-                          ),
-                          ArtistTopSong(
-                            topSongs: topTrackOfArtist.length > 8
-                                ? topTrackOfArtist.take(8).toList()
-                                : topTrackOfArtist,
-                          ),
-                          const SizedBox(height: 10),
-                          if (albumOfArtist.isNotEmpty)
-                            ArtistMusic(
-                                sectionName: "Albums",
-                                albumList: albumOfArtist),
-                          ArtistMusic(
-                              sectionName: "Single & EPs",
-                              songList: trackOfArtist),
-                          const SizedBox(height: 10),
-                          ArtistMusic(
-                              sectionName: "Artist Playlists",
-                              albumList: FakeData.albums.take(8).toList()),
-                          SimilarArtistSection(
-                            similarArtists: relatedArtists,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                if (showAppBar)
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: AppBar(
-                      centerTitle: true,
-                      title: Text(
-                        artist.name!,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      actions: [
-                        // IconButton(
-                        //   icon: const Icon(Icons.search),
-                        //   onPressed: () {},
-                        // ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: const EdgeInsets.all(3),
-                              child: Icon(Icons.star_outline_rounded)),
-                        ),
-                        const SizedBox(width: 15),
-                        InkWell(
-                          onTap: () {
-                            TrackRepository.getTopTrackOfArtist(artist.id!);
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: const EdgeInsets.all(3),
-                              child: Icon(Icons.more_horiz)),
-                        ),
-                        const SizedBox(width: 10),
-                      ],
-                      backgroundColor: Colors.white.withOpacity(0.9),
-                      elevation: 0,
-                      iconTheme: IconThemeData(color: appBarIconColor),
-                    ),
-                  ),
-              ],
-            ),
-          );
+          return _buildArtistDetail(context, latestAlbum, topTrackOfArtist,
+              albumOfArtist, trackOfArtist, relatedArtists);
         } else if (artistState is ArtistDetailByIdError) {
           return Scaffold(
             body: Center(
@@ -177,13 +89,126 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
             ),
           );
         } else {
-          return Scaffold(
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Skeletonizer(
+              enableSwitchAnimation: true,
+              child: _buildArtistDetail(
+                  context,
+                  FakeData.albums.first,
+                  FakeData.obitoSongs,
+                  FakeData.albums,
+                  FakeData.obitoSongs,
+                  FakeData.artists));
         }
       },
+    );
+  }
+
+  Scaffold _buildArtistDetail(
+      BuildContext context,
+      Album latestAlbum,
+      List<Track> topTrackOfArtist,
+      List<Album> albumOfArtist,
+      List<Track> trackOfArtist,
+      List<Artist> relatedArtists) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              _buildAppBar(context),
+              _buildPageBody(latestAlbum, topTrackOfArtist, albumOfArtist,
+                  trackOfArtist, relatedArtists)
+            ],
+          ),
+          if (showAppBar) _buildPinAppBar(),
+        ],
+      ),
+    );
+  }
+
+  Positioned _buildPinAppBar() {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: AppBar(
+        centerTitle: true,
+        title: Text(
+          artist.name!,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          // IconButton(
+          //   icon: const Icon(Icons.search),
+          //   onPressed: () {},
+          // ),
+          InkWell(
+            onTap: () {},
+            child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(3),
+                child: Icon(Icons.star_outline_rounded)),
+          ),
+          const SizedBox(width: 15),
+          InkWell(
+            onTap: () {
+              TrackRepository.getTopTrackOfArtist(artist.id!);
+            },
+            child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(3),
+                child: Icon(Icons.more_horiz)),
+          ),
+          const SizedBox(width: 10),
+        ],
+        backgroundColor: Colors.white.withOpacity(0.9),
+        elevation: 0,
+        iconTheme: IconThemeData(color: appBarIconColor),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildPageBody(
+      Album latestAlbum,
+      List<Track> topTrackOfArtist,
+      List<Album> albumOfArtist,
+      List<Track> trackOfArtist,
+      List<Artist> relatedArtists) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          ArtistNewAlbum(
+            album: latestAlbum,
+          ),
+          ArtistTopSong(
+            topSongs: topTrackOfArtist.length > 8
+                ? topTrackOfArtist.take(8).toList()
+                : topTrackOfArtist,
+          ),
+          const SizedBox(height: 10),
+          if (albumOfArtist.isNotEmpty)
+            ArtistMusic(sectionName: "Albums", albumList: albumOfArtist),
+          ArtistMusic(sectionName: "Single & EPs", songList: trackOfArtist),
+          const SizedBox(height: 10),
+          ArtistMusic(
+              sectionName: "Artist Playlists",
+              albumList: FakeData.albums.take(8).toList()),
+          SimilarArtistSection(
+            similarArtists: relatedArtists,
+          ),
+        ],
+      ),
     );
   }
 

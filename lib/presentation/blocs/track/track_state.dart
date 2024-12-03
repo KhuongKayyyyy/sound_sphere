@@ -51,3 +51,31 @@ class TrackByArtistError extends TrackState {
 }
 
 class TrackByArtistLoading extends TrackState {}
+
+class TrackLyricsLoaded extends TrackState {
+  final String lyrics;
+
+  const TrackLyricsLoaded(this.lyrics);
+}
+
+class TrackLyricsError extends TrackState {
+  final String message;
+
+  const TrackLyricsError(this.message);
+}
+
+class TrackLyricsLoading extends TrackState {}
+
+class TopTrackLoaded extends TrackState {
+  final List<Track> tracks;
+
+  const TopTrackLoaded(this.tracks);
+}
+
+class TopTrackError extends TrackState {
+  final String message;
+
+  const TopTrackError(this.message);
+}
+
+class TopTrackLoading extends TrackState {}

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
@@ -15,6 +17,8 @@ class CityTopSongsItem extends StatelessWidget {
       onTap: () => context.pushNamed(Routes.extendListView, extra: {
         "title": "Top 25 $cityName",
         "songs": FakeData.obitoSongs,
+        "page": Random().nextInt(9) + 1,
+        "limit": 25,
       }),
       child: Container(
         decoration: BoxDecoration(

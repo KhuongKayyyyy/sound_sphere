@@ -39,10 +39,16 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.extendListView, extra: {
-        "title": widget.mixedPlaylistTitle,
-        "songs": FakeData.obitoSongs,
-      }),
+      onTap: () {
+        final Random random = Random();
+        final int page = random.nextInt(11) + 1;
+        context.pushNamed(Routes.extendListView, extra: {
+          "title": widget.mixedPlaylistTitle,
+          "songs": FakeData.obitoSongs,
+          "page": page,
+          "limit": 20,
+        });
+      },
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
@@ -51,7 +57,8 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
           ),
           borderRadius: BorderRadius.circular(18),
         ),
-        width: 170, // Constrain the size of the AnimatedBackground
+        // width: 170, // Constrain the size of the AnimatedBackground
+        width: MediaQuery.of(context).size.width * 0.65,
         child: AnimatedBackground(
           vsync: this,
           behaviour: RandomParticleBehaviour(
@@ -85,7 +92,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
                         widget.mixedPlaylistTitle,
                         style: TextStyle(
                           color: particleColor,
-                          fontSize: 20,
+                          fontSize: 36,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -93,7 +100,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
                         "Mix!",
                         style: TextStyle(
                           color: particleColor,
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -116,6 +123,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
                       getAllArtistNames(widget.artistList),
                       style: const TextStyle(
                         color: Colors.white,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

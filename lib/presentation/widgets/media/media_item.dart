@@ -19,11 +19,6 @@ class MediaItem extends StatefulWidget {
 
 class _MediaItemState extends State<MediaItem> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return CupertinoContextMenu.builder(
       actions: [
@@ -33,9 +28,6 @@ class _MediaItemState extends State<MediaItem> {
           },
           trailingIcon: CupertinoIcons.play_arrow,
           child: const Text('Play'),
-        ),
-        const Divider(
-          color: Colors.transparent,
         ),
         CupertinoContextMenuAction(
           trailingIcon: CupertinoIcons.add,
@@ -51,9 +43,6 @@ class _MediaItemState extends State<MediaItem> {
             context.pushNamed(Routes.songDetail, extra: "songId");
           },
         ),
-        const Divider(
-          color: Colors.transparent,
-        ),
         CupertinoContextMenuAction(
           trailingIcon: CupertinoIcons.star,
           child: const Text('Add to Favorite'),
@@ -68,9 +57,6 @@ class _MediaItemState extends State<MediaItem> {
             context.pushNamed(Routes.songDetail, extra: "songId");
           },
         ),
-        const Divider(
-          color: Colors.transparent,
-        ),
         CupertinoContextMenuAction(
           trailingIcon: CupertinoIcons.share,
           child: const Text('Share song'),
@@ -80,159 +66,83 @@ class _MediaItemState extends State<MediaItem> {
         ),
       ],
       builder: (BuildContext context, Animation<double> animation) {
-        // Determine if the context menu is open
         final bool isMenuOpen = animation.value > 0;
-        if (widget.track != null) {
-          return buildTrackItem(isMenuOpen, animation, context);
-        }
-        if (widget.album != null) {
-          return _buildAlbumItem(isMenuOpen, animation, context);
-        }
-        return const SizedBox();
+        return ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.4,
+          ),
+          child: _buildMediaItem(isMenuOpen, animation, context),
+        );
       },
     );
   }
 
-  Column _buildAlbumItem(
+  Widget _buildMediaItem(
       bool isMenuOpen, Animation<double> animation, BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min, // Add this line to prevent overflow
-      children: [
-        if (isMenuOpen) const SizedBox(height: 80),
-        ScaleTransition(
-          scale: Tween<double>(begin: 1.0, end: 1.8).animate(
-            // Adjusted scaling factor
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isMenuOpen) const SizedBox(height: 20),
+          ScaleTransition(
+            scale: Tween<double>(begin: 1.0, end: 1.8).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeInOut,
+              ),
             ),
-          ),
-          child: Container(
-            height: 200,
-            width: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.all(5),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  // Navigator.of(context).popUntil((route) => route.isFirst);
-                  context.pushNamed(Routes.albumDetail,
-                      extra: widget.album!.id);
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              padding: const EdgeInsets.all(5),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    context.pushNamed(Routes.songDetail,
+                        extra: widget.track?.id ?? widget.album?.id);
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
                         child: CachedNetworkImage(
-                          imageUrl: widget.album!.imgURL,
+                          imageUrl: widget.track?.imgURL ??
+                              widget.album?.imgURL ??
+                              '',
                           fit: BoxFit.cover,
+                          height: MediaQuery.of(context).size.height * 0.19,
+                          width: MediaQuery.of(context).size.width * 0.42,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      widget.album!.type == "single"
-                          ? "${widget.album!.title} - Single"
-                          : widget.album!.title,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      widget.album!.aritst.name!,
-                      style: TextStyle(
-                        color: AppColor.inkGreyDark,
-                        fontWeight: FontWeight.w600,
+                      const SizedBox(height: 5),
+                      Text(
+                        widget.track?.title ?? widget.album?.title ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                  ],
+                      Text(
+                        widget.track?.artist.name ??
+                            widget.album?.aritst.name ??
+                            '',
+                        style: TextStyle(
+                          color: AppColor.inkGreyDark,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        if (isMenuOpen) const SizedBox(height: 80),
-      ],
-    );
-  }
-
-  Column buildTrackItem(
-      bool isMenuOpen, Animation<double> animation, BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min, // Add this line to prevent overflow
-      children: [
-        if (isMenuOpen) const SizedBox(height: 80),
-        ScaleTransition(
-          scale: Tween<double>(begin: 1.0, end: 1.8).animate(
-            // Adjusted scaling factor
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOut,
-            ),
-          ),
-          child: Container(
-            height: 200,
-            width: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.all(5),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  // Navigator.of(context).popUntil((route) => route.isFirst);
-                  context.pushNamed(Routes.songDetail, extra: widget.track!.id);
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.track!.imgURL,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      widget.track!.title,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      widget.track!.artist.name!,
-                      style: TextStyle(
-                        color: AppColor.inkGreyDark,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        if (isMenuOpen) const SizedBox(height: 80),
-      ],
+          if (isMenuOpen) const SizedBox(height: 80),
+        ],
+      ),
     );
   }
 }

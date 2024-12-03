@@ -172,9 +172,13 @@ class AppNavigation {
             final extras = state.extra as Map<String, dynamic>;
             final songList = extras['songs'] as List<Track>;
             final title = extras['title'] as String;
+            final page = extras['page'] as int;
+            final limit = extras['limit'] as int;
             return AllSongList(
               songs: songList,
               title: title,
+              page: page,
+              limit: limit,
             );
           },
         )

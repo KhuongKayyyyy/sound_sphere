@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/for_you_mix_playlist_section.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/listen_now_header.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/components/listen_now_notification.dart';
@@ -18,6 +21,8 @@ class _ListenNowPageState extends State<ListenNowPage>
   late AnimationController _controller;
   late Animation<Offset> _bounceAnimation;
 
+  bool _showSkeleton = true;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +35,12 @@ class _ListenNowPageState extends State<ListenNowPage>
       begin: const Offset(0, 0),
       end: const Offset(0, -0.05),
     ).chain(CurveTween(curve: Curves.bounceOut)).animate(_controller);
+
+    Timer(const Duration(microseconds: 1500), () {
+      setState(() {
+        _showSkeleton = false;
+      });
+    });
   }
 
   void _removeNotification() {
@@ -49,31 +60,34 @@ class _ListenNowPageState extends State<ListenNowPage>
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SingleChildScrollView(
-        child: SlideTransition(
-          position: _bounceAnimation,
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-                child: ListenNowHeader(),
-              ),
-              if (_showNotification)
+        child: Skeletonizer(
+          enabled: _showSkeleton,
+          child: SlideTransition(
+            position: _bounceAnimation,
+            child: Column(
+              children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ListenNowNotification(
-                    onDismiss: _removeNotification,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                  child: ListenNowHeader(),
+                ),
+                if (_showNotification)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ListenNowNotification(
+                      onDismiss: _removeNotification,
+                    ),
+                  ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: YearReplayButton(
+                    onPressed: () => showYearReplayBottomModal(context),
                   ),
                 ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: YearReplayButton(
-                  onPressed: () => showYearReplayBottomModal(context),
-                ),
-              ),
-              ForYouMixPlaylistSection(),
-            ],
+                ForYouMixPlaylistSection(),
+              ],
+            ),
           ),
         ),
       ),

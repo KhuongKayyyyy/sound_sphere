@@ -42,4 +42,5 @@ class TrackApi {
   static const String previewTrack = 'title image_url url_media creator';
   static const String fullTrack =
       'title genre release_date image_url url_media';
+  static const String trackLyric = "lyric";
 }

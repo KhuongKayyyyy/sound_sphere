@@ -82,7 +82,6 @@ class AlbumRepository {
     } finally {
       client.close();
     }
-    print(albums.length);
     return albums;
   }
 
@@ -126,7 +125,6 @@ class AlbumRepository {
         var responseBody = await response.transform(utf8.decoder).join();
         // print(responseBody);
         var decodedJson = jsonDecode(responseBody)['metadata'];
-        print(decodedJson);
         if (decodedJson is Map<String, dynamic>) {
           album = Album.fromJson(decodedJson);
         }

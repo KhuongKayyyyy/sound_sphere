@@ -12,13 +12,14 @@ class Top100PlaylistItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Generate a random color for the location text, which will be reused in the gradient for "1"
     final Color locationColor = _randomColor();
     return InkWell(
       onTap: () {
         context.pushNamed(Routes.extendListView, extra: {
           "title": "Top 100 $location",
           "songs": FakeData.wrxdieSong,
+          "page": Random().nextInt(4) + 1, // Random page from 1 to 4
+          "limit": 50,
         });
       },
       child: SizedBox(

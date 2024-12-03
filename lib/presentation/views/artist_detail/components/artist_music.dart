@@ -40,14 +40,15 @@ class ArtistMusic extends StatelessWidget {
         ),
         if (songList != null)
           SizedBox(
-            height: 200,
+            height: MediaQuery.of(context).size.height * 0.25,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: songList?.length,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: MediaItem(track: songList![index]));
+                  padding: EdgeInsets.only(left: index == 0 ? 20 : 10),
+                  child: MediaItem(track: songList![index]),
+                );
               },
             ),
           ),

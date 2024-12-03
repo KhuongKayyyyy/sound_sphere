@@ -32,3 +32,13 @@ class FetchTracksByArtistEvent extends TrackEvent {
   @override
   List<Object> get props => [artistId];
 }
+
+class FetchTrackLyrics extends TrackEvent {
+  final String id;
+  const FetchTrackLyrics(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
+class FetchTopTrack extends TrackEvent {}

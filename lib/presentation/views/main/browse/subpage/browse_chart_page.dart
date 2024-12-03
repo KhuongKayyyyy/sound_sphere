@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/city_chart_section.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/daily_top_100_section.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_songs_section.dart';
@@ -15,6 +20,23 @@ class BrowseChartPage extends StatefulWidget {
 }
 
 class _BrowseChartPageState extends State<BrowseChartPage> {
+  late TrackBloc trackBloc;
+
+  bool _showSkeleton = true;
+
+  @override
+  void initState() {
+    super.initState();
+    trackBloc = TrackBloc();
+    trackBloc.add(FetchTopTrack());
+
+    Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        _showSkeleton = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -27,9 +49,25 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               child: Text("Chart",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
             ),
-            TopSongsSection(
-              songList: FakeData.obitoSongs.take(9).toList(),
-              isBlackTitle: false,
+            BlocBuilder<TrackBloc, TrackState>(
+              bloc: trackBloc,
+              builder: (context, trackState) {
+                if (trackState is TopTrackLoading) {
+                  return Skeletonizer(
+                      child: TopSongsSection(
+                    songList: FakeData.obitoSongs.take(8).toList(),
+                    isBlackTitle: false,
+                  ));
+                } else if (trackState is TopTrackError) {
+                  return Center(child: Text(trackState.message));
+                } else if (trackState is TopTrackLoaded) {
+                  return TopSongsSection(
+                    songList: trackState.tracks,
+                    isBlackTitle: false,
+                  );
+                }
+                return const SizedBox();
+              },
             ),
             const SizedBox(
               height: 20,

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_app_bar.dart';
@@ -18,11 +21,19 @@ class _LibraryPageState extends State<LibraryPage> {
   late final ScrollController _scrollController;
   double previousScrollOffset = 0.0;
 
+  bool _showSkeleton = true;
+
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
+
+    Timer(const Duration(seconds: 2), () {
+      setState(() {
+        _showSkeleton = false;
+      });
+    });
   }
 
   @override
@@ -78,7 +89,10 @@ class _LibraryPageState extends State<LibraryPage> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        return LibraryAlbumItem(album: FakeData.albums[index]);
+                        return Skeletonizer(
+                            enabled: _showSkeleton,
+                            child: LibraryAlbumItem(
+                                album: FakeData.albums[index]));
                       },
                       childCount: FakeData.albums.length,
                     ),
@@ -94,8 +108,11 @@ class _LibraryPageState extends State<LibraryPage> {
                       (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: LibraryArtistItem(
-                              artist: FakeData.artists[index]),
+                          child: Skeletonizer(
+                            enabled: _showSkeleton,
+                            child: LibraryArtistItem(
+                                artist: FakeData.artists[index]),
+                          ),
                         );
                       },
                       childCount: FakeData.artists.length,
@@ -103,15 +120,18 @@ class _LibraryPageState extends State<LibraryPage> {
                   );
                 default:
                   return SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        LibraryGenreList(
-                            genres: FakeData.genres.take(3).toList()),
-                        LibraryGenreList(
-                            genres: FakeData.genres.skip(3).take(5).toList()),
-                        LibraryGenreList(
-                            genres: FakeData.genres.skip(8).toList())
-                      ],
+                    child: Skeletonizer(
+                      enabled: _showSkeleton,
+                      child: Column(
+                        children: [
+                          LibraryGenreList(
+                              genres: FakeData.genres.take(3).toList()),
+                          LibraryGenreList(
+                              genres: FakeData.genres.skip(3).take(5).toList()),
+                          LibraryGenreList(
+                              genres: FakeData.genres.skip(8).toList())
+                        ],
+                      ),
                     ),
                   );
               }

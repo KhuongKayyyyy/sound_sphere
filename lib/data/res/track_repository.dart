@@ -200,4 +200,130 @@ class TrackRepository {
     }
     return tracks;
   }
+
+  static Future<List<Track>> getTrackByGenre(String genre) async {
+    var client = HttpClient();
+    List<Track> tracks = [];
+    try {
+      // Encode query parameters
+      var url = Uri.parse(TrackApi.tracks);
+      var request = await client.postUrl(url);
+
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": TrackApi.previewTrack,
+        "isPopulateCreator": true,
+        "isPopulateCollaborators": true,
+        "genre": genre
+      }));
+
+      var response = await request.close();
+
+      if (response.statusCode == HttpStatus.created) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata']['data'] is List) {
+          List metadata = decodedJson['metadata']['data'];
+
+          for (var trackJson in metadata) {
+            tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
+          }
+        } else {
+          print('Unexpected response format: $decodedJson');
+        }
+      } else {
+        print('Failed to fetch data. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      client.close();
+    }
+    return tracks;
+  }
+
+  static Future<String> getTrackLyric(String trackId) async {
+    var client = HttpClient();
+    String lyric = '';
+
+    try {
+      var url = Uri.parse(TrackApi.trackById(trackId));
+      var request = await client.postUrl(url);
+
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": TrackApi.trackLyric,
+      }));
+
+      var response = await request.close();
+
+      if (response.statusCode == HttpStatus.ok ||
+          response.statusCode == HttpStatus.created) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata'] is Map<String, dynamic>) {
+          var metadata = decodedJson['metadata'];
+          lyric = metadata['lyric'] ?? 'No lyric available';
+        } else {
+          print('Unexpected response format: $decodedJson');
+        }
+      } else {
+        print('Failed to fetch data. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      client.close();
+    }
+    return lyric;
+  }
+
+  static Future<List<Track>> getTopTrackByPlay() async {
+    var client = HttpClient();
+    List<Track> tracks = [];
+    try {
+      // Encode query parameters
+      var url = Uri.parse(TrackApi.tracks);
+      var request = await client.postUrl(url);
+
+      request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+      request.write(jsonEncode({
+        "select": TrackApi.previewTrack,
+        "isPopulateCreator": true,
+        "isPopulateCollaborators": true,
+        "sort": "-total_play",
+        "limit": 20
+      }));
+
+      var response = await request.close();
+
+      if (response.statusCode == HttpStatus.created) {
+        var responseBody = await response.transform(utf8.decoder).join();
+        var decodedJson = jsonDecode(responseBody);
+
+        if (decodedJson is Map<String, dynamic> &&
+            decodedJson['metadata']['data'] is List) {
+          List metadata = decodedJson['metadata']['data'];
+
+          for (var trackJson in metadata) {
+            tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
+          }
+        } else {
+          print('Unexpected response format: $decodedJson');
+        }
+      } else {
+        print('Failed to fetch data. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      client.close();
+    }
+    print(tracks.length);
+    return tracks;
+  }
 }
