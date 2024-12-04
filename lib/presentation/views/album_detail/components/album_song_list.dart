@@ -14,7 +14,7 @@ class AlbumSongList extends StatelessWidget {
         (context, index) {
           return Column(
             children: [
-              TrackItem(index: index + 1, song: tracks[index], isLiked: false)
+              TrackItem(index: index + 1, track: tracks[index], isLiked: false)
             ],
           );
         },

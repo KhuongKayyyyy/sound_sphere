@@ -144,7 +144,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   SliverToBoxAdapter _buildSingleSongList() {
     return SliverToBoxAdapter(
         child: TrackItem(
-      song: track,
+      track: track,
       isLiked: false,
       index: 1,
     ));
@@ -334,7 +334,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   color: Colors.grey[400]),
             ),
             Text(
-              "© ${track.getArtistsAsString()} ${Helpers.getYearFromReleaseDate(track.releaseDate!)} ${track.albumName}",
+              "© ${track.getArtistsAsString()} ${Helpers.getYearFromReleaseDate(track.releaseDate!)} ${track.album}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -374,7 +374,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
         ),
         if (songList != null)
           SizedBox(
-            height: 200,
+            height: MediaQuery.of(context).size.height * 0.25,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: songList.length,

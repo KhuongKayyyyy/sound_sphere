@@ -12,7 +12,8 @@ class Artist {
   Artist.defaultArtist()
       : id = null,
         name = 'Unknown Artist',
-        avatarURL = 'default_avatar_url';
+        avatarURL =
+            'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
   factory Artist.fromJson(Map<String, dynamic> json) {
     return Artist(

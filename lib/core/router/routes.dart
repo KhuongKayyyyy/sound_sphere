@@ -28,4 +28,7 @@ class Routes {
   static const String extendGridView = '/extend-grid-view';
   static const String extendListView = '/extend-list-view';
   static const String extendArtistList = '/extend-artist-list';
+
+  // add_in view
+  static const String creditPage = '/credit-page';
 }

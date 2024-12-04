@@ -9,4 +9,9 @@ class AppImage {
   static const sign_in_background = 'assets/images/sign_in_background.jpg';
   static const String defaultEmojiAvatar =
       'assets/images/default_emoji_avatar.gif';
+
+  static const String airdrop = 'assets/images/airdrop.png';
+  static const String facebook_share = 'assets/images/facebook_share.png';
+  static const String instagram = 'assets/images/instagram.png';
+  static const String message = 'assets/images/message.png';
 }

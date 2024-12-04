@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/components/bottom_navigation_bar.dart';
 import 'package:sound_sphere/presentation/views/main_wrapper/components/music_player.dart';
+import 'package:sound_sphere/presentation/widgets/context/track_item_context_menu.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({
@@ -79,10 +81,24 @@ class _MainWrapperState extends State<MainWrapper>
               top: 0,
               right: 0,
               left: 0,
-              child: MusicPlayerWidget(
-                  playMusic: _playMusic,
-                  isPlaying: _isPlaying,
-                  playerController: _playerController),
+              child: CupertinoContextMenu.builder(
+                builder: (context, animation) {
+                  if (animation.value < CupertinoContextMenu.animationOpensAt) {
+                    return MusicPlayerWidget(
+                        playMusic: _playMusic,
+                        isPlaying: _isPlaying,
+                        playerController: _playerController);
+                  }
+                  return TrackItemContextMenu(
+                      track: PlayerController().getCurrentSong());
+                },
+                actions: [
+                  CupertinoContextMenuAction(
+                    child: const Text('Play'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
           ],
         ),

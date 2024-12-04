@@ -4,6 +4,7 @@ import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/views/add_in/credit_page.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_grid.dart';
@@ -35,6 +36,8 @@ class AppNavigation {
       GlobalKey<NavigatorState>(debugLabel: 'libraryNavigator');
   static final GlobalKey<NavigatorState> _searchNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'searchNavigator');
+  static final GlobalKey<NavigatorState> _addInNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'addInNavigator');
 
   static final GoRouter router = GoRouter(
       initialLocation: Routes.home,
@@ -51,6 +54,7 @@ class AppNavigation {
           _buildForYouBranch(),
           _buildLibraryBranch(),
           _buildSearchBranch(),
+          _buildAddInBranch(),
         ]);
   }
 
@@ -260,6 +264,22 @@ class AppNavigation {
             name: Routes.extendArtistList,
             builder: (context, state) {
               return ArtistWeLovePage();
+            })
+      ],
+    );
+  }
+
+  static StatefulShellBranch _buildAddInBranch() {
+    return StatefulShellBranch(
+      navigatorKey: _addInNavigatorKey,
+      routes: [
+        GoRoute(
+            path: Routes.creditPage,
+            name: Routes.creditPage,
+            builder: (context, state) {
+              final extras = state.extra as Map<String, dynamic>;
+              final track = extras['track'] as Track;
+              return CreditPage(track: track);
             })
       ],
     );

@@ -13,9 +13,7 @@ part 'artist_state.dart';
 
 class ArtistBloc extends Bloc<ArtistEvent, ArtistState> {
   ArtistBloc() : super(ArtistInitial()) {
-    on<ArtistEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<ArtistEvent>((event, emit) {});
     on<FetchArtistsEvent>(_onFetchArtistsEvent);
     on<FetchArtistNameByIdEvent>(_onFetchArtistNameEvent);
     on<FetchArtistDetailByIdEvent>(_onFetchArtistByIdEvent);

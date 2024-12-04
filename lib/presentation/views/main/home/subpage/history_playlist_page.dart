@@ -101,7 +101,7 @@ class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   bool isLiked = index % 2 == 0; // Logic to set isLiked
-                  return TrackItem(song: songList[index], isLiked: isLiked);
+                  return TrackItem(track: songList[index], isLiked: isLiked);
                 },
                 childCount: songList.length,
               ),

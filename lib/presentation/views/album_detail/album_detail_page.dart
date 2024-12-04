@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_app_bar.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_brief_info.dart';
@@ -75,41 +75,45 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
         builder: (context, albumState) {
           if (albumState is AlbumDetailLoaded) {
             album = albumState.album;
-            return CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                AlbumDetailAppBar(
-                  album: album,
-                  showAppBarTitle: showAppBarTitle,
-                  appBarIconColor: appBarIconColor,
-                  showCupertinoBottomSheet: _showCupertinoBottomSheet,
-                ),
-                AlbumSongList(tracks: album.tracks),
-                AlbumBriefInfo(album: album),
-                SliverToBoxAdapter(
-                  child: Container(
-                    color: Colors.grey[100],
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 20),
-                        ArtistMusicSection(
-                            title: "More by ${album.aritst.name}",
-                            albums: FakeData.albums),
-                        ArtistMusicSection(
-                            title: "Featured on",
-                            songs: FakeData.obitoSongs.take(10).toList()),
-                        const SizedBox(height: 150),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
+            return _buildAlbumDetailPage();
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return Skeletonizer(child: _buildAlbumDetailPage());
           }
         },
       ),
+    );
+  }
+
+  CustomScrollView _buildAlbumDetailPage() {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        AlbumDetailAppBar(
+          album: album,
+          showAppBarTitle: showAppBarTitle,
+          appBarIconColor: appBarIconColor,
+          showCupertinoBottomSheet: _showCupertinoBottomSheet,
+        ),
+        AlbumSongList(tracks: album.tracks),
+        AlbumBriefInfo(album: album),
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.grey[100],
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                ArtistMusicSection(
+                    title: "More by ${album.aritst.name}",
+                    albums: FakeData.albums),
+                ArtistMusicSection(
+                    title: "Featured on",
+                    songs: FakeData.obitoSongs.take(10).toList()),
+                const SizedBox(height: 150),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

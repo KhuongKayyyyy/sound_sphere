@@ -10,7 +10,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   TrackBloc() : super(TrackInitial()) {
     on<TrackEvent>((event, emit) {});
     on<FetchTracksEvent>(_onFetchTracksEvent);
-    on<FetchTrackDetail>(_onFetchTrackByIdEvent);
+    on<FetchTrackDetail>(_onFetchTrackDetailByIdEvent);
     on<FetchTracksByArtistEvent>(_onFetchTracksByArtistEvent);
     on<FetchTrackLyrics>(_onFetchTrackLyrics);
     on<FetchTopTrack>(_onFetchTopTrack);
@@ -29,11 +29,11 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
     }
   }
 
-  Future<void> _onFetchTrackByIdEvent(
+  Future<void> _onFetchTrackDetailByIdEvent(
       FetchTrackDetail event, Emitter<TrackState> emit) async {
     emit(TrackDetailLoading());
     try {
-      final track = await TrackRepository.getTrackById(event.id);
+      final track = await TrackRepository.getTrackDetailById(event.id);
       final trackByArtist =
           await TrackRepository.getTrackOfArtist(track.artist.id!);
       emit(TrackDetailLoaded(track, trackByArtist));

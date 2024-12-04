@@ -55,10 +55,9 @@ class _AllSongListState extends State<AllSongList> {
                 itemCount: FakeData.obitoSongs.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TrackItem(
-                      song: FakeData.obitoSongs.elementAt(index),
+                      track: FakeData.obitoSongs.elementAt(index),
                       isLiked: false,
                     ),
                   );
@@ -70,10 +69,9 @@ class _AllSongListState extends State<AllSongList> {
               itemCount: trackState.tracks.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: TrackItem(
-                    song: trackState.tracks.elementAt(index),
+                    track: trackState.tracks.elementAt(index),
                     isLiked: false,
                   ),
                 );

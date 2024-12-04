@@ -45,7 +45,7 @@ class TrackRepository {
     return tracks;
   }
 
-  static Future<Track> getTrackById(String id) async {
+  static Future<Track> getTrackDetailById(String id) async {
     var client = HttpClient();
     Track track = Track.defaultTrack();
     try {
@@ -55,6 +55,7 @@ class TrackRepository {
       request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
       request.write(jsonEncode({
         "select": TrackApi.fullTrack,
+        "isPopulateAlbum": true,
         "isPopulateCreator": true,
         "isPopulateCollaborators": true
       }));

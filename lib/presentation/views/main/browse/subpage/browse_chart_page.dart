@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -22,19 +20,11 @@ class BrowseChartPage extends StatefulWidget {
 class _BrowseChartPageState extends State<BrowseChartPage> {
   late TrackBloc trackBloc;
 
-  bool _showSkeleton = true;
-
   @override
   void initState() {
     super.initState();
     trackBloc = TrackBloc();
     trackBloc.add(FetchTopTrack());
-
-    Timer(const Duration(milliseconds: 500), () {
-      setState(() {
-        _showSkeleton = false;
-      });
-    });
   }
 
   @override

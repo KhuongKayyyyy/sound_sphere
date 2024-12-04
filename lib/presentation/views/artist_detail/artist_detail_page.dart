@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,13 +8,13 @@ import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/track.dart';
-import 'package:sound_sphere/data/res/album_repository.dart';
 import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_music.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_album.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/similar_artist_section.dart';
+import 'package:sound_sphere/presentation/widgets/context/media_item_context_menu.dart';
 
 class ArtistDetailPage extends StatefulWidget {
   final Artist artist;
@@ -188,8 +189,23 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          ArtistNewAlbum(
-            album: latestAlbum,
+          CupertinoContextMenu.builder(
+            builder: (context, animation) {
+              if (animation.value < CupertinoContextMenu.animationOpensAt) {
+                return ArtistNewAlbum(
+                  album: latestAlbum,
+                );
+              }
+              return MediaItemContextMenu(
+                album: latestAlbum,
+              );
+            },
+            actions: [
+              CupertinoContextMenuAction(
+                child: const Text('Add to playlist'),
+                onPressed: () {},
+              ),
+            ],
           ),
           ArtistTopSong(
             topSongs: topTrackOfArtist.length > 8

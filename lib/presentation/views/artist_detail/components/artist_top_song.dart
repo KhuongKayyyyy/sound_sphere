@@ -30,20 +30,20 @@ class ArtistTopSong extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 250,
+          height: MediaQuery.of(context).size.height * 0.42,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, top: 10),
             child: GridView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                mainAxisExtent: 300,
+                mainAxisExtent: MediaQuery.of(context).size.height * 0.38,
               ),
               itemCount: topSongs.length,
               itemBuilder: (context, index) {
                 return TrackItem(
-                  song: topSongs[index],
+                  track: topSongs[index],
                   isLiked: false,
                   isSliable: false,
                 );

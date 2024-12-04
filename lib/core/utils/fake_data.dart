@@ -516,7 +516,7 @@ class FakeData {
     Track(
         title: "Shape Of You",
         artist: Artist.defaultArtist(),
-        albumName: "+-x/",
+        album: Album.defaultAlbum(),
         duration: "",
         imgURL:
             "https://upload.wikimedia.org/wikipedia/vi/a/a3/Shape_of_You_cover.jpg",
@@ -526,7 +526,7 @@ class FakeData {
     Track(
         title: "Đầu đường xó chợ",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:41",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -537,7 +537,7 @@ class FakeData {
     Track(
         title: "Biên Giới Long Bình",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://cdnphoto.dantri.com.vn/dwOovse6dSoNOrSDXyRAmQt9LZ0=/thumb_w/1020/2024/07/31/obito-rapper-26-1722417901486.jpg",
@@ -548,7 +548,7 @@ class FakeData {
     Track(
         title: "16",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -558,8 +558,8 @@ class FakeData {
             "https://stream.nct.vn/Believe_Audio345/16-Obito-11836722.mp3?st=hvwVuVSedw9_OSZBFgPUkA&e=1730941456&a=1&p=0&r=7e5eea6f1af4fb2c1c03367b79c6ce47"),
     Track(
         title: "Sài Gòn ơi",
+        album: Album.defaultAlbum(),
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -570,7 +570,7 @@ class FakeData {
     Track(
         title: "Trốn Chạy",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -581,7 +581,7 @@ class FakeData {
     Track(
         title: "Cất cánh (interlude)",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -591,7 +591,7 @@ class FakeData {
     Track(
         title: "Hà Nội",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -602,7 +602,7 @@ class FakeData {
     Track(
         title: "Vô Điều Kiện",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -613,7 +613,7 @@ class FakeData {
     Track(
         title: "Đánh Đổi",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -624,7 +624,7 @@ class FakeData {
     Track(
         title: "Backstage Freestyle",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -635,7 +635,7 @@ class FakeData {
     Track(
         title: "Tell the kids i love them",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -646,7 +646,7 @@ class FakeData {
     Track(
         title: "Ước mơ của Mẹ (interlude)",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -657,7 +657,7 @@ class FakeData {
     Track(
         title: "Con kể Ba nghe",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -668,7 +668,7 @@ class FakeData {
     Track(
         title: "Champion",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -679,7 +679,7 @@ class FakeData {
     Track(
         title: "Chưa Xong",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -690,7 +690,7 @@ class FakeData {
     Track(
         title: "Tự sự",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
@@ -701,7 +701,7 @@ class FakeData {
     Track(
         title: "Outro",
         artist: Artist.defaultArtist(),
-        albumName: "Đánh đổi",
+        album: Album.defaultAlbum(),
         duration: "3:30",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",

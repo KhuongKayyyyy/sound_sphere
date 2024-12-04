@@ -65,156 +65,165 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scaleAnimation,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 3,
-            ),
-          ],
-        ),
-        height: 60,
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Mini player song information
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  print(
-                      GoRouter.of(context).routerDelegate.currentConfiguration);
-                  context.pushNamed(Routes.player);
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 10,
-                            spreadRadius: 3,
+    return Material(
+      color: Colors.transparent,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          height: MediaQuery.of(context).size.height * 0.07,
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Mini player song information
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    print(GoRouter.of(context)
+                        .routerDelegate
+                        .currentConfiguration);
+                    context.pushNamed(Routes.player);
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 10,
+                              spreadRadius: 3,
+                            ),
+                          ],
+                        ),
+                        child: Hero(
+                          tag: 'currentSongImage',
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: AnimatedBuilder(
+                              animation: widget.playerController,
+                              builder: (context, child) {
+                                return Image.network(
+                                  widget.playerController
+                                      .getCurrentSong()
+                                      .imgURL,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                      child: Hero(
-                        tag: 'currentSongImage',
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: AnimatedBuilder(
+                      const SizedBox(width: 10),
+                      // Mini player text
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedBuilder(
                             animation: widget.playerController,
                             builder: (context, child) {
-                              return Image.network(
-                                widget.playerController.getCurrentSong().imgURL,
-                                height: 40,
-                                fit: BoxFit.cover,
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Text(
+                                  widget.playerController
+                                      .getCurrentSong()
+                                      .title,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               );
                             },
                           ),
-                        ),
+                          AnimatedBuilder(
+                            animation: widget.playerController,
+                            builder: (context, child) {
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height: 20,
+                                child: Text(
+                                  widget.playerController
+                                      .getCurrentSong()
+                                      .artist
+                                      .name!,
+                                  style: TextStyle(
+                                    color: AppColor.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    // Mini player text
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedBuilder(
-                          animation: widget.playerController,
-                          builder: (context, child) {
-                            return SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: Text(
-                                widget.playerController.getCurrentSong().title,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          },
-                        ),
-                        AnimatedBuilder(
-                          animation: widget.playerController,
-                          builder: (context, child) {
-                            return SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              height: 20,
-                              child: Text(
-                                widget.playerController
-                                    .getCurrentSong()
-                                    .artist
-                                    .name!,
-                                style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            // Mini player buttons
-            InkWell(
-              onTap: () {
-                widget.playMusic();
-              },
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: ScaleTransition(
-                      scale: Tween<double>(begin: 0.7, end: 1.0).animate(
-                        CurvedAnimation(
-                          parent: animation,
-                          curve: Curves.easeInOut,
-                        ),
-                      ),
-                      child: child,
-                    ),
-                  );
+              // Mini player buttons
+              InkWell(
+                onTap: () {
+                  widget.playMusic();
                 },
-                child: !widget.isPlaying
-                    ? Image.asset(
-                        AppIcon.play,
-                        height: 20,
-                        key: const ValueKey('playIcon'),
-                      )
-                    : const Icon(
-                        Icons.pause_rounded,
-                        size: 30,
-                        key: ValueKey('pauseIcon'),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: ScaleTransition(
+                        scale: Tween<double>(begin: 0.7, end: 1.0).animate(
+                          CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeInOut,
+                          ),
+                        ),
+                        child: child,
                       ),
+                    );
+                  },
+                  child: !widget.isPlaying
+                      ? Image.asset(
+                          AppIcon.play,
+                          height: 20,
+                          key: const ValueKey('playIcon'),
+                        )
+                      : const Icon(
+                          Icons.pause_rounded,
+                          size: 30,
+                          key: ValueKey('pauseIcon'),
+                        ),
+                ),
               ),
-            ),
-            const SizedBox(width: 10),
-            InkWell(
-              onTap: () async {
-                widget.playerController.moveToNextSong();
-              },
-              child: Image.asset(
-                AppIcon.play_next,
-                height: 22,
+              const SizedBox(width: 15),
+              InkWell(
+                onTap: () async {
+                  widget.playerController.moveToNextSong();
+                },
+                child: Image.asset(
+                  AppIcon.play_next,
+                  height: 22,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

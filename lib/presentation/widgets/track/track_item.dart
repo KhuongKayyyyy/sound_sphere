@@ -5,17 +5,19 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/widgets/context/track_item_context_menu.dart';
+import 'package:sound_sphere/presentation/widgets/context/track_context_menu_action.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
 // ignore: must_be_immutable
 class TrackItem extends StatefulWidget {
-  Track song;
+  Track track;
   bool isLiked;
   bool? isSliable;
   int? index;
   TrackItem(
       {super.key,
-      required this.song,
+      required this.track,
       required this.isLiked,
       this.index,
       this.isSliable});
@@ -35,23 +37,28 @@ class _TrackItemState extends State<TrackItem> {
     return Column(
       children: [
         widget.isSliable == false
-            ? InkWell(
-                onTap: () {
-                  PlayerController().setPlayerAudio([widget.song]);
-                  PlayerController().play();
-                },
-                child: _buildTrackInfo(context),
-              )
-            : Slidable(
-                key: Key(widget.song.id.toString()),
-                startActionPane: handleAddToCurrentPlaylist(),
-                endActionPane: handleAddToLibrary(),
+            ? Material(
+                child: _buildTrackItemWithContextMenu(
                 child: InkWell(
                   onTap: () {
-                    PlayerController().setPlayerAudio([widget.song]);
+                    PlayerController().setPlayerAudio([widget.track]);
                     PlayerController().play();
                   },
                   child: _buildTrackInfo(context),
+                ),
+              ))
+            : _buildTrackItemWithContextMenu(
+                child: Slidable(
+                  key: Key(widget.track.id.toString()),
+                  startActionPane: handleAddToCurrentPlaylist(),
+                  endActionPane: handleAddToLibrary(),
+                  child: InkWell(
+                    onTap: () {
+                      PlayerController().setPlayerAudio([widget.track]);
+                      PlayerController().play();
+                    },
+                    child: _buildTrackInfo(context),
+                  ),
                 ),
               ),
         // Divider
@@ -64,6 +71,27 @@ class _TrackItemState extends State<TrackItem> {
         //   ),
         // ),
       ],
+    );
+  }
+
+  Widget _buildTrackItemWithContextMenu({required Widget child}) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: CupertinoContextMenu.builder(
+        actions: [
+          TrackContextMenuAction(
+            track: widget.track,
+          )
+        ],
+        builder: (context, animation) {
+          if (animation.value < CupertinoContextMenu.animationOpensAt) {
+            return Material(
+              child: child,
+            );
+          }
+          return TrackItemContextMenu(track: widget.track);
+        },
+      ),
     );
   }
 
@@ -128,8 +156,8 @@ class _TrackItemState extends State<TrackItem> {
   Container _buildTrackInfo(BuildContext context) {
     Widget buildTrackImageOrIndex() {
       return SizedBox(
-        height: 60,
-        width: 60,
+        height: MediaQuery.of(context).size.height * 0.08,
+        width: MediaQuery.of(context).size.height * 0.08,
         child: widget.index != null
             ? Center(
                 child: Text(
@@ -141,7 +169,7 @@ class _TrackItemState extends State<TrackItem> {
             : ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
-                  imageUrl: widget.song.imgURL,
+                  imageUrl: widget.track.imgURL,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -156,7 +184,7 @@ class _TrackItemState extends State<TrackItem> {
           SizedBox(
             width: 170,
             child: Text(
-              widget.song.title,
+              widget.track.title,
               style: const TextStyle(fontWeight: FontWeight.w600),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
@@ -164,7 +192,7 @@ class _TrackItemState extends State<TrackItem> {
           ),
           const SizedBox(height: 5),
           Text(
-            widget.song.artist.name!,
+            widget.track.artist.name!,
             style: TextStyle(color: AppColor.inkGreyDark),
             overflow: TextOverflow.ellipsis,
           ),
@@ -183,7 +211,7 @@ class _TrackItemState extends State<TrackItem> {
     }
 
     return Container(
-      height: 60,
+      height: MediaQuery.of(context).size.height * 0.1,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -298,12 +326,12 @@ class _TrackItemState extends State<TrackItem> {
                                       height: 20,
                                     ),
                                     Text(
-                                      widget.song.title,
+                                      widget.track.title,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    Text(widget.song.artist.name!,
+                                    Text(widget.track.artist.name!,
                                         style: TextStyle(
                                           color: AppColor.inkGrey,
                                         )),
@@ -316,7 +344,7 @@ class _TrackItemState extends State<TrackItem> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: CachedNetworkImage(
-                                      imageUrl: widget.song.imgURL,
+                                      imageUrl: widget.track.imgURL,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
