@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_item_context_menu.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_context_menu_action.dart';
@@ -104,7 +106,6 @@ class _TrackItemState extends State<TrackItem> {
           onPressed: (BuildContext context) {
             setState(() {
               widget.isLiked = !widget.isLiked;
-              print("Liked: ${widget.isLiked}");
             });
           },
           foregroundColor: AppColor.primaryColor,
@@ -120,16 +121,12 @@ class _TrackItemState extends State<TrackItem> {
       motion: const ScrollMotion(),
       children: [
         SlidableAction(
-          onPressed: (BuildContext context) {
-            print("Added to current playlist");
-          },
+          onPressed: (BuildContext context) {},
           foregroundColor: AppColor.primaryColor,
           icon: CupertinoIcons.square_fill_line_vertical_square,
         ),
         SlidableAction(
-          onPressed: (BuildContext context) {
-            print("Added to new playlist");
-          },
+          onPressed: (BuildContext context) {},
           foregroundColor: AppColor.primaryColor,
           icon: CupertinoIcons.square_line_vertical_square_fill,
         ),
@@ -278,7 +275,7 @@ class _TrackItemState extends State<TrackItem> {
             // Your stateful logic goes here
 
             return Container(
-              height: 400,
+              height: MediaQuery.of(context).size.height * 0.5,
               width: double.infinity,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -306,7 +303,7 @@ class _TrackItemState extends State<TrackItem> {
                       children: [
                         // Track info
                         Container(
-                          height: 110,
+                          height: MediaQuery.of(context).size.height * 0.15,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.grey[100]),
@@ -325,11 +322,17 @@ class _TrackItemState extends State<TrackItem> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    Text(
-                                      widget.track.title,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                      child: Text(
+                                        widget.track.title,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      ),
                                     ),
                                     Text(widget.track.artist.name!,
                                         style: TextStyle(
@@ -376,7 +379,7 @@ class _TrackItemState extends State<TrackItem> {
                         const SizedBox(
                           height: 10,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: double.infinity,
                           child: Row(
                             children: [
@@ -384,14 +387,23 @@ class _TrackItemState extends State<TrackItem> {
                                   buttonText: "Share", isLiked: true),
                               Spacer(),
                               TrackBottomSheetButton(
-                                  buttonText: "View Artist", isLiked: true),
+                                buttonText: "View Artist",
+                                isLiked: true,
+                                onPressed: () {
+                                  context.pop();
+                                  context.pushNamed(
+                                    Routes.artistDetail,
+                                    extra: widget.track.artist,
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: double.infinity,
                           child: Row(
                             children: [
@@ -399,7 +411,16 @@ class _TrackItemState extends State<TrackItem> {
                                   buttonText: "Add to Playlist", isLiked: true),
                               Spacer(),
                               TrackBottomSheetButton(
-                                  buttonText: "About Track", isLiked: true),
+                                buttonText: "About Track",
+                                isLiked: true,
+                                onPressed: () {
+                                  context.pop();
+                                  context.pushNamed(
+                                    Routes.creditPage,
+                                    extra: {"track": widget.track},
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),

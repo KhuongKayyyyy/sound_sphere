@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
@@ -25,17 +26,17 @@ class _TrackBottomSheetButtonState extends State<TrackBottomSheetButton> {
         case 'like':
           return widget.isLiked ? Icons.favorite : Icons.favorite_border;
         case 'share':
-          return Icons.share;
+          return CupertinoIcons.share;
         case 'download':
-          return Icons.download;
+          return CupertinoIcons.cloud_download;
         case 'view artist':
-          return Icons.person;
+          return CupertinoIcons.person;
         case 'about track':
           return Icons.info_outline_rounded;
         case 'add to playlist':
           return Icons.playlist_add;
         default:
-          return Icons.help; // Default icon if the text doesn't match
+          return CupertinoIcons.info; // Default icon if the text doesn't match
       }
     }
 

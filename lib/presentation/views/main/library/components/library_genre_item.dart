@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui'; // Import for ImageFilter
 import 'package:flutter/material.dart';
+import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/genres.dart';
 
 class LibraryGenreItem extends StatelessWidget {
@@ -120,6 +121,11 @@ class LibraryGenreItem extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w900,
           ),
+        ),
+        const Spacer(),
+        Icon(
+          Icons.chevron_right,
+          color: AppColor.inkGrey,
         ),
       ],
     );

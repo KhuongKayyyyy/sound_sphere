@@ -69,7 +69,9 @@ class _MainWrapperState extends State<MainWrapper>
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      body: widget.navigationShell, // Use the navigation shell
+      body: Padding(
+          padding: EdgeInsets.only(bottom: 0),
+          child: widget.navigationShell), // Use the navigation shell
       bottomNavigationBar: SizedBox(
         height: 140,
         child: Stack(

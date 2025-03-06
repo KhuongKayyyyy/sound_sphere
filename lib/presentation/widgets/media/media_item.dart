@@ -95,10 +95,13 @@ class _MediaItemState extends State<MediaItem> {
               ),
             ),
             const SizedBox(height: 5),
-            Text(
-              widget.track?.title ?? widget.album?.title ?? '',
-              style: const TextStyle(fontWeight: FontWeight.w600),
-              overflow: TextOverflow.ellipsis,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.42,
+              child: Text(
+                widget.track?.title ?? widget.album?.title ?? '',
+                style: const TextStyle(fontWeight: FontWeight.w600),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             Text(
               widget.track?.artist.name ?? widget.album?.aritst.name ?? '',

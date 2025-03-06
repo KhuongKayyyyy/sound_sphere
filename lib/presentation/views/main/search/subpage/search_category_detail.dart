@@ -129,7 +129,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 songList: FakeData.obitoSongs.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
-                  Routes.extendListView,
+                  Routes.playlistExtened,
                   extra: {
                     'songs': FakeData.obitoSongs.take(10).toList(),
                     'title': "Playlist",
@@ -153,7 +153,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 songList: FakeData.obitoSongs.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
-                  Routes.extendListView,
+                  Routes.playlistExtened,
                   extra: {
                     'songs': FakeData.obitoSongs.take(10).toList(),
                     'title': "Vietnamese Music In Spatial Audio",
@@ -181,7 +181,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                     );
                   } else if (trackState is TopTrackLoaded) {
                     return TopSongsSection(
-                      songList: trackState.tracks.take(9).toList(),
+                      songList: trackState.tracks,
                       isBlackTitle: true,
                     );
                   } else if (trackState is TopTrackError) {
@@ -193,13 +193,6 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 },
               ),
               _buildEssentialAlbumSection(),
-              // TextButton(
-              //     onPressed: () async {
-              //       // AlbumRepository.fetchAlbumWithPreviewInformation(
-              //       //     "title image_url artist");
-              //       ArtistRepository.fetchArtists(1);
-              //     },
-              //     child: Text("test ")),
               _buildArtistWeLoveSection(),
               const SizedBox(
                 height: 150,

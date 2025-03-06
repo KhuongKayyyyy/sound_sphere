@@ -25,8 +25,7 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  bool _isFavorite = false;
-  final bool _isLoop = false;
+  final bool _isFavorite = false;
 
   // handle menu state
   bool _isShowPlaylist = false;

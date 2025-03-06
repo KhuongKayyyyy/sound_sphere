@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
-import 'package:sound_sphere/presentation/views/main/library/components/library_app_bar.dart';
-import 'package:sound_sphere/presentation/views/main/library/components/library_artist_item.dart';
-import 'package:sound_sphere/presentation/views/main/library/components/library_genre_list.dart';
+import 'package:sound_sphere/presentation/views/main/library/components/library_type_section.dart';
+import 'package:sound_sphere/presentation/widgets/search_bar/custom_app_bar.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
@@ -16,7 +15,6 @@ class LibraryPage extends StatefulWidget {
 }
 
 class _LibraryPageState extends State<LibraryPage> {
-  int _currentIndex = 0;
   bool showAppBar = false;
   late final ScrollController _scrollController;
   double previousScrollOffset = 0.0;
@@ -66,76 +64,36 @@ class _LibraryPageState extends State<LibraryPage> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          LibraryAppBar(
-            currentIndex: _currentIndex,
-            onTabSelected: (int value) {
-              setState(() {
-                _currentIndex = value;
-              });
-            },
-            showAppBarTitle: showAppBar,
+          CustomAppBar(title: "Library"),
+          LibraryTypeSection(),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              child: Text(
+                "Recently Added",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
-          SliverToBoxAdapter(child: const SizedBox(height: 20)),
-          Builder(
-            builder: (context) {
-              switch (_currentIndex) {
-                case 0:
-                  return SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 4.0,
-                      crossAxisSpacing: 4.0,
-                      childAspectRatio: 0.9,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return Skeletonizer(
-                            enabled: _showSkeleton,
-                            child: LibraryAlbumItem(
-                                album: FakeData.albums[index]));
-                      },
-                      childCount: FakeData.albums.length,
-                    ),
-                  );
-                case 1:
-                  return SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.85,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Skeletonizer(
-                            enabled: _showSkeleton,
-                            child: LibraryArtistItem(
-                                artist: FakeData.artists[index]),
-                          ),
-                        );
-                      },
-                      childCount: FakeData.artists.length,
-                    ),
-                  );
-                default:
-                  return SliverToBoxAdapter(
-                    child: Skeletonizer(
-                      enabled: _showSkeleton,
-                      child: Column(
-                        children: [
-                          LibraryGenreList(
-                              genres: FakeData.genres.take(3).toList()),
-                          LibraryGenreList(
-                              genres: FakeData.genres.skip(3).take(5).toList()),
-                          LibraryGenreList(
-                              genres: FakeData.genres.skip(8).toList())
-                        ],
-                      ),
-                    ),
-                  );
-              }
-            },
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 4.0,
+              crossAxisSpacing: 4.0,
+              childAspectRatio: 0.85,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Skeletonizer(
+                    enabled: _showSkeleton,
+                    child: LibraryAlbumItem(album: FakeData.albums[index]));
+              },
+              childCount: FakeData.albums.length,
+            ),
           ),
           SliverToBoxAdapter(
             child: Container(

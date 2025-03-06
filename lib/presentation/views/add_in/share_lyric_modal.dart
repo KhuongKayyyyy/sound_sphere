@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
 
 class ShareLyricModal extends StatefulWidget {
@@ -9,10 +8,10 @@ class ShareLyricModal extends StatefulWidget {
   final String imageUrl;
 
   const ShareLyricModal({
-    Key? key,
+    super.key,
     required this.lyrics,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   State<ShareLyricModal> createState() => _ShareLyricModalState();
@@ -255,8 +254,7 @@ class _ShareLyricModalState extends State<ShareLyricModal> {
         .split('\n')
         .where((line) => line.trim().isNotEmpty)
         .toList();
-    String selectedLyrics =
-        _selectedIndices.map((index) => lines[index]).join('\n');
+    _selectedIndices.map((index) => lines[index]).join('\n');
     // Implement sharing logic here.
   }
 

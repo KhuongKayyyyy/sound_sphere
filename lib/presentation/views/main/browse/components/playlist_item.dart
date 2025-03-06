@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
 
 class PlaylistItem extends StatelessWidget {
   final String img;
+  final String title;
+  final String subtitle;
   final bool isBig;
 
   const PlaylistItem({
     required this.img,
     required this.isBig,
+    required this.title,
+    required this.subtitle,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.extendListView, extra: {
-        "title": "New Year Playlist",
-        "songs": FakeData.wrxdieSong,
-      }),
+      onTap: () => context.pushNamed(Routes.playlistExtendedWithImage,
+          extra: {'imageUrl': img}),
       child: Column(
         children: [
           Container(
@@ -43,13 +44,11 @@ class PlaylistItem extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            isBig ? "Your New Year Starts Here!" : "Midnight Countdown",
+            title,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           Text(
-            isBig
-                ? "Wave goodbye to 2021 with these incredible tracks"
-                : "SoundSphere Music Party",
+            subtitle,
             style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],

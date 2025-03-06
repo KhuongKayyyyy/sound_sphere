@@ -15,7 +15,7 @@ class Top100PlaylistItem extends StatelessWidget {
     final Color locationColor = _randomColor();
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.extendListView, extra: {
+        context.pushNamed(Routes.playlistExtened, extra: {
           "title": "Top 100 $location",
           "songs": FakeData.wrxdieSong,
           "page": Random().nextInt(4) + 1, // Random page from 1 to 4

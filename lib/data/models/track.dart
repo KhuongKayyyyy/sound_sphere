@@ -120,7 +120,7 @@ class Track {
       return artist.name!;
     }
     String featuredArtistsNames =
-        featuredArtists!.map((artist) => artist.name).join(', ');
+        featuredArtists!.map((artist) => artist.name).skip(1).join(', ');
     return '${artist.name}, $featuredArtistsNames';
   }
 
@@ -138,7 +138,6 @@ class Track {
       await player.dispose(); // Dispose of the player after use
     } catch (e) {
       duration = 'Error fetching duration';
-      print('Error fetching duration: $e');
     }
   }
 

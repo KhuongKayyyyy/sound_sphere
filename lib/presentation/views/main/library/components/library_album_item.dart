@@ -11,8 +11,8 @@ class LibraryAlbumItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 150,
-          width: 150,
+          height: 170,
+          width: 170,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               boxShadow: [

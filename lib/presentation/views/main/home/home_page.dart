@@ -1,15 +1,11 @@
 import 'dart:async'; // Import the Timer class
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
-import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
-import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/best_album_section.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/history_playlist_button.dart';
@@ -17,6 +13,7 @@ import 'package:sound_sphere/presentation/views/main/home/components/mixed_playl
 import 'package:sound_sphere/presentation/views/main/home/components/playlist_section.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/media_section.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sound_sphere/presentation/widgets/search_bar/custom_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,62 +74,18 @@ class _HomePageState extends State<HomePage> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          _buildHomePageAppBar(),
+          CustomAppBar(title: "Listen now"),
           _buildAppUltilitySection(),
-          SliverToBoxAdapter(
-            child: TextButton(
-              onPressed: () {
-                TrackRepository.getTopTrackByPlay();
-              },
-              child: const Text("Test"),
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: TextButton(
+          //     onPressed: () {
+          //       TrackRepository.getTopTrackByPlay();
+          //     },
+          //     child: const Text("Test"),
+          //   ),
+          // ),
           _buildReccommendedMusicSection(),
         ],
-      ),
-    );
-  }
-
-  Widget _buildHomePageAppBar() {
-    return SliverAppBar(
-      pinned: true,
-      expandedHeight: 80,
-      flexibleSpace: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          var appBarHeight = constraints.biggest.height;
-          var isExpanded = appBarHeight > kToolbarHeight;
-
-          return FlexibleSpaceBar(
-            titlePadding: const EdgeInsets.only(left: 16, bottom: 8),
-            title: Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      textAlign:
-                          isExpanded ? TextAlign.start : TextAlign.center,
-                      'Listen now',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: isExpanded ? 24.0 : 16.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: _showLoginModal,
-                    icon: Icon(
-                      CupertinoIcons.person,
-                      color: AppColor.primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       ),
     );
   }
@@ -238,15 +191,6 @@ class _HomePageState extends State<HomePage> {
         }
         return const SizedBox(child: Text("No event added"));
       },
-    );
-  }
-
-  void _showLoginModal() {
-    showModalBottomSheet(
-      context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      builder: (context) => const LoginPage(),
     );
   }
 }

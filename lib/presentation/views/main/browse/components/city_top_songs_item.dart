@@ -14,7 +14,7 @@ class CityTopSongsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.extendListView, extra: {
+      onTap: () => context.pushNamed(Routes.playlistExtened, extra: {
         "title": "Top 25 $cityName",
         "songs": FakeData.obitoSongs,
         "page": Random().nextInt(9) + 1,

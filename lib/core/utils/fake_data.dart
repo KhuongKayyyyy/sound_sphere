@@ -2,6 +2,7 @@ import 'package:sound_sphere/data/models/app_user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
 import 'package:sound_sphere/data/models/lyrics.dart';
+import 'package:sound_sphere/data/models/playlist.dart';
 import 'package:sound_sphere/data/models/radio.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
@@ -122,31 +123,6 @@ class FakeData {
 
   // Create a list to store the lyrics
   List<Lyric> lyrics = [];
-
-  // Find all matches
-  // Iterable<RegExpMatch> matches = regExp.allMatches(soyLyricString);
-
-  // void parseLyrics(String soyLyricString) {
-  //   for (var match in matches) {
-  //     String minutes = match.group(1) ?? '0';
-  //     String seconds = match.group(2) ?? '0';
-  //     String lyricText = match.group(3)?.trim() ?? '';
-
-  //     // Convert time to Duration
-  //     Duration timeStamp = Duration(
-  //       minutes: int.parse(minutes),
-  //       milliseconds: (double.parse(seconds) * 1000).round(),
-  //     );
-
-  //     // Add to list of lyrics
-  //     lyrics.add(Lyric(lyricText, timeStamp));
-  //   }
-
-  //   // Print lyrics
-  //   for (var lyric in lyrics) {
-  //     print(lyric);
-  //   }
-  // }
 
   static List<SearchCategory> searchCategory = [
     SearchCategory(
@@ -816,6 +792,57 @@ class FakeData {
         image:
             "https://www.apple.com/newsroom/images/product/apple-music/Apple_announces-apple-music-hits_08182020_inline.jpg.large.jpg",
         description: "Hits that change world"),
+  ];
+
+  static List<Playlist> playlists = [
+    Playlist(
+        id: "1",
+        name: "Christmas Playlist",
+        imgURL:
+            "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
+        tracks: []),
+    Playlist(
+        id: "2",
+        name: "Kendrick Lamar Essentials",
+        imgURL:
+            "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
+        tracks: []),
+    Playlist(
+        id: "3",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
+    Playlist(
+        id: "4",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
+    Playlist(
+        id: "5",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
+    Playlist(
+        id: "6",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
+    Playlist(
+        id: "7",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
+    Playlist(
+        id: "8",
+        name: "Celebrate Tet 2025",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
+        tracks: []),
   ];
   static List<Artist> artists = [
     Artist(

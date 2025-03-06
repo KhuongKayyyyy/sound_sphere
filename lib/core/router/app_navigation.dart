@@ -9,12 +9,21 @@ import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.d
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_grid.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_list.dart';
+import 'package:sound_sphere/presentation/views/extended_view/playlist_extended_list.dart';
+import 'package:sound_sphere/presentation/views/extended_view/playlist_with_image.dart';
 import 'package:sound_sphere/presentation/views/main/browse/browse_page.dart';
+import 'package:sound_sphere/presentation/views/main/download/download_page.dart';
 import 'package:sound_sphere/presentation/views/main/for_you/for_you_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/subpage/add_artist_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/subpage/history_playlist_page.dart';
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_album_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_artist_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_genre_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_made4u_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_playlist_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_song_page.dart';
 import 'package:sound_sphere/presentation/views/main/search/components/into_search.dart';
 import 'package:sound_sphere/presentation/views/main/search/subpage/artist_we_love_page.dart';
 import 'package:sound_sphere/presentation/views/main/search/subpage/search_category_detail.dart';
@@ -170,22 +179,42 @@ class AppNavigation {
           builder: (context, state) => const BrowsePage(),
         ),
         GoRoute(
-          path: Routes.extendListView,
-          name: Routes.extendListView,
+          path: Routes.playlistExtened,
+          name: Routes.playlistExtened,
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;
             final songList = extras['songs'] as List<Track>;
             final title = extras['title'] as String;
             final page = extras['page'] as int;
             final limit = extras['limit'] as int;
-            return AllSongList(
-              songs: songList,
+            return PlayListExtendedList(
+              tracks: songList,
               title: title,
               page: page,
               limit: limit,
             );
           },
-        )
+        ),
+        GoRoute(
+          path: Routes.extendedList,
+          name: Routes.extendedList,
+          builder: (context, state) {
+            final extras = state.extra as Map<String, dynamic>;
+            final songList = extras['songs'] as List<Track>;
+            final title = extras['title'] as String;
+
+            return AllSongList(tracks: songList, title: title);
+          },
+        ),
+        GoRoute(
+          path: Routes.playlistExtendedWithImage,
+          name: Routes.playlistExtendedWithImage,
+          builder: (context, state) {
+            final extras = state.extra as Map<String, dynamic>;
+            final imageUrl = extras['imageUrl'] as String;
+            return PlaylistWithImage(imageUrl: imageUrl);
+          },
+        ),
       ],
     );
   }
@@ -211,7 +240,42 @@ class AppNavigation {
           path: Routes.library,
           name: Routes.library,
           builder: (context, state) => const LibraryPage(),
-        )
+        ),
+        GoRoute(
+          path: Routes.playlistLibrary,
+          name: Routes.playlistLibrary,
+          builder: (context, state) => const LibraryPlaylistPage(),
+        ),
+        GoRoute(
+          path: Routes.artistLibrary,
+          name: Routes.artistLibrary,
+          builder: (context, state) => const LibraryArtistPage(),
+        ),
+        GoRoute(
+          path: Routes.albumLibrary,
+          name: Routes.albumLibrary,
+          builder: (context, state) => const LibraryAlbumPage(),
+        ),
+        GoRoute(
+          path: Routes.songLibrary,
+          name: Routes.songLibrary,
+          builder: (context, state) => const LibrarySongPage(),
+        ),
+        GoRoute(
+          path: Routes.made4uLibrary,
+          name: Routes.made4uLibrary,
+          builder: (context, state) => const LibraryMade4uPage(),
+        ),
+        GoRoute(
+          path: Routes.genreLibrary,
+          name: Routes.genreLibrary,
+          builder: (context, state) => const LibraryGenrePage(),
+        ),
+        GoRoute(
+          path: Routes.download,
+          name: Routes.download,
+          builder: (context, state) => const DownloadPage(),
+        ),
       ],
     );
   }

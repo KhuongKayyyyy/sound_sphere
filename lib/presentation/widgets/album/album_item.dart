@@ -24,8 +24,12 @@ class AlbumItem extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          album.title,
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.42,
+          child: Text(
+            overflow: TextOverflow.ellipsis,
+            album.title,
+          ),
         ),
         Text(
           album.aritst.name!,

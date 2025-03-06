@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/data/models/track.dart';
 
@@ -38,7 +39,9 @@ class TrackRepository {
         }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -68,7 +71,9 @@ class TrackRepository {
         }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -104,13 +109,19 @@ class TrackRepository {
             tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
           }
         } else {
-          print('Unexpected response format: $decodedJson');
+          if (kDebugMode) {
+            print('Unexpected response format: $decodedJson');
+          }
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -150,10 +161,14 @@ class TrackRepository {
           log('Unexpected response format: $decodedJson' as num);
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -189,13 +204,19 @@ class TrackRepository {
             tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
           }
         } else {
-          print('Unexpected response format: $decodedJson');
+          if (kDebugMode) {
+            print('Unexpected response format: $decodedJson');
+          }
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -232,13 +253,19 @@ class TrackRepository {
             tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
           }
         } else {
-          print('Unexpected response format: $decodedJson');
+          if (kDebugMode) {
+            print('Unexpected response format: $decodedJson');
+          }
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -270,13 +297,19 @@ class TrackRepository {
           var metadata = decodedJson['metadata'];
           lyric = metadata['lyric'] ?? 'No lyric available';
         } else {
-          print('Unexpected response format: $decodedJson');
+          if (kDebugMode) {
+            print('Unexpected response format: $decodedJson');
+          }
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
@@ -297,7 +330,7 @@ class TrackRepository {
         "isPopulateCreator": true,
         "isPopulateCollaborators": true,
         "sort": "-total_play",
-        "limit": 20
+        "limit": 50
       }));
 
       var response = await request.close();
@@ -314,17 +347,25 @@ class TrackRepository {
             tracks.add(Track.fromJson(trackJson as Map<String, dynamic>));
           }
         } else {
-          print('Unexpected response format: $decodedJson');
+          if (kDebugMode) {
+            print('Unexpected response format: $decodedJson');
+          }
         }
       } else {
-        print('Failed to fetch data. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Failed to fetch data. Status code: ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     } finally {
       client.close();
     }
-    print(tracks.length);
+    if (kDebugMode) {
+      print(tracks.length);
+    }
     return tracks;
   }
 }

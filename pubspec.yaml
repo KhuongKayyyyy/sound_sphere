@@ -55,6 +55,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   dartz: ^0.10.1
   intl: ^0.18.1
+  palette_generator: ^0.3.0
 
 
 
@@ -69,6 +70,8 @@ dependencies:
   flutter_slidable: ^3.1.1
   text_scroll: ^0.2.0
   skeletonizer: ^1.4.2
+
+
 
 
 

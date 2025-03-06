@@ -26,9 +26,34 @@ class Routes {
 
   // extended view routes
   static const String extendGridView = '/extend-grid-view';
-  static const String extendListView = '/extend-list-view';
+  static const String playlistExtened = '/extend-list-view';
+  static const String playlistExtendedWithImage =
+      '/playlist-extended-with-image';
   static const String extendArtistList = '/extend-artist-list';
+  static const String extendedList = '/extended-list';
 
   // add_in view
   static const String creditPage = '/credit-page';
+
+  // library routes
+  static const String playlistLibrary = '/library-playlist';
+  static const String albumLibrary = '/library-album';
+  static const String artistLibrary = '/library-artist';
+  static const String songLibrary = '/library-song';
+  static const String composerLibrary = '/library-composer';
+  static const String genreLibrary = '/library-genre';
+  static const String compilationLibrary = '/library-compilation';
+  static const String musicVideoLibrary = '/library-music-video';
+  static const String made4uLibrary = '/library-made4u';
+
+  // download routes
+  static const String download = '/download';
+  static const String downloadAlbum = '/download-album';
+  static const String downloadSong = '/download-song';
+  static const String downloadPlaylist = '/download-playlist';
+  static const String downloadArtist = '/download-artist';
+  static const String downloadComposer = '/download-composer';
+  static const String downloadGenre = '/download-genre';
+  static const String downloadCompilation = '/download-compilation';
+  static const String downloadMusicVideo = '/download-music-video';
 }

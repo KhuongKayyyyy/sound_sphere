@@ -42,7 +42,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
       onTap: () {
         final Random random = Random();
         final int page = random.nextInt(11) + 1;
-        context.pushNamed(Routes.extendListView, extra: {
+        context.pushNamed(Routes.playlistExtened, extra: {
           "title": widget.mixedPlaylistTitle,
           "songs": FakeData.obitoSongs,
           "page": page,

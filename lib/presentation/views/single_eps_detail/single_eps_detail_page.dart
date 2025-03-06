@@ -31,7 +31,6 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
   List<Track> recommendTracks = [];
-  String _duration = "Fetching duration...";
 
   bool showSkeleton = true;
 
@@ -334,7 +333,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
                   color: Colors.grey[400]),
             ),
             Text(
-              "© ${track.getArtistsAsString()} ${Helpers.getYearFromReleaseDate(track.releaseDate!)} ${track.album}",
+              "© ${track.getArtistsAsString()} ${Helpers.getYearFromReleaseDate(track.releaseDate!)} ${track.album.title}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

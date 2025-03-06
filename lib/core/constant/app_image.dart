@@ -11,6 +11,7 @@ class AppImage {
       'assets/images/default_emoji_avatar.gif';
 
   static const String airdrop = 'assets/images/airdrop.png';
+  // ignore: constant_identifier_names
   static const String facebook_share = 'assets/images/facebook_share.png';
   static const String instagram = 'assets/images/instagram.png';
   static const String message = 'assets/images/message.png';

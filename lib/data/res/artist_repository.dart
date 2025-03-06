@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
@@ -91,7 +92,9 @@ class ArtistRepository {
     } finally {
       client.close();
     }
-    print(artist.name);
+    if (kDebugMode) {
+      print(artist.name);
+    }
     return artist;
   }
 }

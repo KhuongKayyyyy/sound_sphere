@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/main/browse/components/top_song_item.dart';
 
@@ -32,9 +31,9 @@ class TopSongsSection extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   context.pushNamed(
-                    Routes.extendListView,
+                    Routes.extendedList,
                     extra: {
-                      'songs': FakeData.obitoSongs,
+                      'songs': songList,
                       'title': "Top Songs",
                     },
                   );
@@ -63,7 +62,7 @@ class TopSongsSection extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 0.2,
               crossAxisSpacing: 10,
-              children: List.generate(songList.length, (index) {
+              children: List.generate(songList.take(9).length, (index) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: TopSongItem(

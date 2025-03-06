@@ -123,7 +123,6 @@ class AlbumRepository {
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var responseBody = await response.transform(utf8.decoder).join();
-        // print(responseBody);
         var decodedJson = jsonDecode(responseBody)['metadata'];
         if (decodedJson is Map<String, dynamic>) {
           album = Album.fromJson(decodedJson);
