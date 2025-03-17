@@ -1,4 +1,3 @@
-import 'package:sound_sphere/data/models/app_user.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
 import 'package:sound_sphere/data/models/lyrics.dart';
@@ -9,13 +8,13 @@ import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class FakeData {
-  static AppUser user = AppUser(
-    name: "Nguyen Dat Khuong",
-    password: "1123",
-    email: "zzkhngzz@gmail.com",
-    avatarURL:
-        "https://yt3.googleusercontent.com/oN0p3-PD3HUzn2KbMm4fVhvRrKtJhodGlwocI184BBSpybcQIphSeh3Z0i7WBgTq7e12yKxb=s900-c-k-c0x00ffffff-no-rj",
-  );
+  // static AppUser user = AppUser(
+  //   name: "Nguyen Dat Khuong",
+  //   password: "1123",
+  //   email: "zzkhngzz@gmail.com",
+  //   avatarURL:
+  //       "https://yt3.googleusercontent.com/oN0p3-PD3HUzn2KbMm4fVhvRrKtJhodGlwocI184BBSpybcQIphSeh3Z0i7WBgTq7e12yKxb=s900-c-k-c0x00ffffff-no-rj",
+  // );
   List<Track> parseSongs(List<dynamic> jsonList) {
     return jsonList.map((json) => Track.fromJson(json)).toList();
   }

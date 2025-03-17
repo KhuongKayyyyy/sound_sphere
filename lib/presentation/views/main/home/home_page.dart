@@ -1,10 +1,15 @@
 import 'dart:async'; // Import the Timer class
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
+import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/res/user_repository.dart';
+import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/best_album_section.dart';
@@ -27,11 +32,20 @@ class _HomePageState extends State<HomePage> {
   late TrackBloc hitTrackBloc;
   ScrollController? _scrollController;
   bool showAvatar = true;
-  bool _showSkeleton = true; // State to control the skeleton visibility
+  bool _showSkeleton = true;
 
   @override
   void initState() {
     super.initState();
+    FlutterSecureStorage()
+        .read(key: ApiConfig.refreshToken)
+        .then((refreshToken) {
+      if (refreshToken != null) {
+        print("Refresh Token: $refreshToken");
+      } else {
+        print("No refresh token found");
+      }
+    });
 
     Timer(const Duration(microseconds: 1500), () {
       setState(() {
@@ -71,22 +85,126 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          CustomAppBar(title: "Listen now"),
-          _buildAppUltilitySection(),
-          // SliverToBoxAdapter(
-          //   child: TextButton(
-          //     onPressed: () {
-          //       TrackRepository.getTopTrackByPlay();
-          //     },
-          //     child: const Text("Test"),
-          //   ),
-          // ),
-          _buildReccommendedMusicSection(),
-        ],
+      body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, authState) {
+          if (authState is AuthGetUserSuccess) {
+            return _buildHomeBody();
+          } else if (authState is AuthGetUserFailure) {
+            return CustomScrollView(
+              slivers: [
+                CustomAppBar(
+                  title: "Listen now",
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.all(20),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        AppColor.primaryColor,
+                        AppColor.secondaryColor
+                      ]),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Explore 100 million songs. All ad-free.",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            height: 1.5,
+                          ),
+                        ),
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              CupertinoIcons.music_note_2,
+                              color: Colors.white,
+                              size: 40,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  color: Colors.grey,
+                                  offset: Offset(2.0, 2.0),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              "Sound Sphere",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                                height: 1.5,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 10.0,
+                                    color: Colors.grey,
+                                    offset: Offset(2.0, 2.0),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        const Spacer(),
+                        Text("Try it now",
+                            style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        Text("Plan auto-renews for 65.000 VND/month.",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          } else if (authState is AuthLoading) {
+            Skeletonizer(
+              enabled: _showSkeleton,
+              child: _buildHomeBody(),
+            );
+          }
+          return Skeletonizer(
+            enabled: _showSkeleton,
+            child: _buildHomeBody(),
+          );
+        },
       ),
+    );
+  }
+
+  CustomScrollView _buildHomeBody() {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        CustomAppBar(title: "Listen now"),
+        SliverToBoxAdapter(
+          child: TextButton(
+            onPressed: () {
+              // UserRepository().getUser();
+              // UserRepository().refreshAccessToken(
+              //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2QyZjM0ZGFiNzMxZmFjODJhNjhhOTAiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzQxODgxMDEyLCJleHAiOjE3NDI0ODU4MTJ9.EqEgV2OXnUK_ZjTV4M1qBKzx2V-73Zb0R3anEnA3Xvo");
+              UserRepository().logOutUser();
+            },
+            child: const Text("Test"),
+          ),
+        ),
+        _buildAppUltilitySection(),
+        _buildReccommendedMusicSection(),
+      ],
     );
   }
 

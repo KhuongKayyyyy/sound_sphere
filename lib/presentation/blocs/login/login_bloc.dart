@@ -4,14 +4,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sound_sphere/core/validators/validator.dart';
-import 'package:sound_sphere/data/res/user_repository_impl.dart';
+import 'package:sound_sphere/data/res/firebase_user_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final UserRepositoryImpl _userRepository;
-  LoginBloc({required UserRepositoryImpl userRepository})
+  final FirebaseUserRepository _userRepository;
+  LoginBloc({required FirebaseUserRepository userRepository})
       : _userRepository = userRepository,
         super(LoginInitial()) {
     on<LoginEventEmailChanged>(_onEmailChanged);

@@ -17,8 +17,9 @@ class Routes {
   // onboarding routes
 
   // auth routes
-  static const String login = '/login';
-  static const String signup = '/signup';
+  // static const String login = '/login';
+  // static const String signup = '/signup';
+  static const String authentication = '/authentication';
 
   // no player routes
   static const String addArtist = '/add-artist';
@@ -34,6 +35,12 @@ class Routes {
 
   // add_in view
   static const String creditPage = '/credit-page';
+  static const String notificationPage = '/notification-page';
+  static const String managePayment = '/manage-payment';
+  static const String subscription = '/subscription';
+  static const String purchaseHistory = '/purchase-history';
+  static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
 
   // library routes
   static const String playlistLibrary = '/library-playlist';

@@ -3,9 +3,12 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
+  final bool isSignedIn;
   final dynamic widget;
-  const BottomNavigationBarWidget({super.key, required this.widget});
+  const BottomNavigationBarWidget(
+      {super.key, required this.widget, required this.isSignedIn});
 
+  // bool _isSignedIn = false;
   Widget _buildNavigationIcon({
     required dynamic icon, // Accept both IconData and String (for asset path)
     required String label,
@@ -15,7 +18,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
     bool isSelected = widget.navigationShell.currentIndex == index;
 
     return InkWell(
-      onTap: () => _onTabTapped(index, widget),
+      onTap: () => isSignedIn ? _onTabTapped(index, widget) : null,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -90,44 +93,43 @@ class BottomNavigationBarWidget extends StatelessWidget {
         ),
       ),
       child: Container(
-        margin: const EdgeInsets.only(top: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildNavigationIcon(
-              icon: Icons.play_circle_fill_rounded,
-              label: "Home",
-              index: 0,
-              widget: widget,
-            ),
-            _buildNavigationIcon(
-              icon:
-                  AppIcon.browse, // Assuming AppIcon.browse is an Image or Icon
-              label: "Browse",
-              index: 1,
-              widget: widget,
-            ),
-            _buildNavigationIcon(
-              icon: Icons.favorite,
-              label: "For you",
-              index: 2,
-              widget: widget,
-            ),
-            _buildNavigationIcon(
-              icon: AppIcon.library,
-              label: "Library",
-              index: 3,
-              widget: widget,
-            ),
-            _buildNavigationIcon(
-              icon: Icons.search,
-              label: "Search",
-              index: 4,
-              widget: widget,
-            ),
-          ],
-        ),
-      ),
+          margin: const EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNavigationIcon(
+                icon: Icons.play_circle_fill_rounded,
+                label: "Home",
+                index: 0,
+                widget: widget,
+              ),
+              _buildNavigationIcon(
+                icon: AppIcon
+                    .browse, // Assuming AppIcon.browse is an Image or Icon
+                label: "Browse",
+                index: 1,
+                widget: widget,
+              ),
+              _buildNavigationIcon(
+                icon: Icons.favorite,
+                label: "For you",
+                index: 2,
+                widget: widget,
+              ),
+              _buildNavigationIcon(
+                icon: AppIcon.library,
+                label: "Library",
+                index: 3,
+                widget: widget,
+              ),
+              _buildNavigationIcon(
+                icon: Icons.search,
+                label: "Search",
+                index: 4,
+                widget: widget,
+              ),
+            ],
+          )),
     );
   }
 

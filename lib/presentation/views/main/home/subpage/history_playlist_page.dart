@@ -175,7 +175,7 @@ class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
               ),
               const SizedBox(height: 10),
               Text(
-                "Sound Sphere for ${FakeData.user.name}",
+                "Sound Sphere for Khương",
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               Text(

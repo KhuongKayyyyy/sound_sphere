@@ -34,5 +34,28 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGBrzNeuOQ4Lu5Yio-8qVBAwBLekehbng",
+      authDomain: "soundsphere-39fd0.firebaseapp.com",
+      projectId: "soundsphere-39fd0",
+      storageBucket: "soundsphere-39fd0.firebasestorage.app",
+      messagingSenderId: "3599123419",
+      appId: "1:3599123419:web:abb1720c6a40f8c7445dfe",
+      measurementId: "G-G9ZQ7E47HF"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </body>
 </html>

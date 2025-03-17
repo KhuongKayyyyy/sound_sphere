@@ -4,9 +4,16 @@ import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/views/account/edit_profile_page.dart';
+import 'package:sound_sphere/presentation/views/account/manage_payment_page.dart';
+import 'package:sound_sphere/presentation/views/account/notification_page.dart';
+import 'package:sound_sphere/presentation/views/account/profile_page.dart';
+import 'package:sound_sphere/presentation/views/account/purchase_history.dart';
+import 'package:sound_sphere/presentation/views/account/subscription_page.dart';
 import 'package:sound_sphere/presentation/views/add_in/credit_page.dart';
 import 'package:sound_sphere/presentation/views/album_detail/album_detail_page.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/artist_detail_page.dart';
+import 'package:sound_sphere/presentation/views/authentication/authentication_page.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_grid.dart';
 import 'package:sound_sphere/presentation/views/extended_view/all_song_list.dart';
 import 'package:sound_sphere/presentation/views/extended_view/playlist_extended_list.dart';
@@ -99,12 +106,56 @@ class AppNavigation {
               },
             );
           }),
-      // GoRoute(
-      //     path: Routes.signup,
-      //     name: Routes.signup,
-      //     builder: (context, state) {
-      //       return const SignUpPage();
-      //     })
+      GoRoute(
+        path: Routes.authentication,
+        name: Routes.authentication,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const AuthenticationPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0, 1), // Start from bottom
+                  end: Offset.zero, // End at original position
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+          path: Routes.notificationPage,
+          name: Routes.notificationPage,
+          builder: (context, state) {
+            return const NotificationPage();
+          }),
+      GoRoute(
+          path: Routes.managePayment,
+          name: Routes.managePayment,
+          builder: (context, state) {
+            return const ManagePaymentPage();
+          }),
+      GoRoute(
+          path: Routes.subscription,
+          name: Routes.subscription,
+          builder: (context, state) {
+            return const SubscriptionPage();
+          }),
+      GoRoute(
+          path: Routes.purchaseHistory,
+          name: Routes.purchaseHistory,
+          builder: (context, state) {
+            return const PurchaseHistory();
+          }),
+      GoRoute(
+          path: Routes.editProfile,
+          name: Routes.editProfile,
+          builder: (context, state) {
+            return const EditProfilePage();
+          }),
     ];
   }
 
@@ -344,7 +395,14 @@ class AppNavigation {
               final extras = state.extra as Map<String, dynamic>;
               final track = extras['track'] as Track;
               return CreditPage(track: track);
-            })
+            }),
+        GoRoute(
+          path: Routes.profile,
+          name: Routes.profile,
+          builder: (context, state) {
+            return const ProfilePage();
+          },
+        )
       ],
     );
   }

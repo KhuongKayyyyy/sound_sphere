@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
@@ -91,9 +92,11 @@ class _MusicPlayerWidgetState extends State<MusicPlayerWidget>
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    print(GoRouter.of(context)
+                    if (kDebugMode) {
+                      print(GoRouter.of(context)
                         .routerDelegate
                         .currentConfiguration);
+                    }
                     context.pushNamed(Routes.player);
                   },
                   child: Row(

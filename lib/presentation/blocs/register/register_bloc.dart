@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sound_sphere/core/validators/validator.dart';
-import 'package:sound_sphere/data/res/user_repository_impl.dart';
+import 'package:sound_sphere/data/res/firebase_user_repository.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final UserRepositoryImpl _userRepository;
-  RegisterBloc({required UserRepositoryImpl userRepository})
+  final FirebaseUserRepository _userRepository;
+  RegisterBloc({required FirebaseUserRepository userRepository})
       : _userRepository = userRepository,
         super(RegisterInitial()) {
     on<RegisterEmailChanged>(_onEmailChanged);

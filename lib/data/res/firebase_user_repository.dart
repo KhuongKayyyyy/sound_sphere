@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class UserRepositoryImpl {
+class FirebaseUserRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
-  UserRepositoryImpl({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
+  FirebaseUserRepository(
+      {FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn();
 
@@ -75,4 +76,6 @@ class UserRepositoryImpl {
   Future<User?> getUser() async {
     return _firebaseAuth.currentUser;
   }
+
+  // authentication with NestJs backend
 }

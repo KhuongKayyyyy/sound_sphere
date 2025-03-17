@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 
@@ -15,9 +16,12 @@ class AppTheme {
       colorScheme: ColorScheme.fromSwatch().copyWith(
         secondary: AppColor.secondaryColor,
       ),
+      cupertinoOverrideTheme: CupertinoThemeData(
+        brightness: Brightness.light, // or Brightness.dark
+      ),
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
-          TargetPlatform.iOS: SlowPageTransitionBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           TargetPlatform.android: SlowPageTransitionBuilder(),
         },
       ),

@@ -28,4 +28,12 @@ class Helpers {
       return 'Invalid date'; // Handle error if the date parsing fails
     }
   }
+
+  static String getUserNickName(String email) {
+    try {
+      return '@${email.split('@')[0]}';
+    } catch (e) {
+      return 'Invalid email'; // Handle error if the email parsing fails
+    }
+  }
 }

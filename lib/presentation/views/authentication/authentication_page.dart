@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/data/res/user_repository_impl.dart';
+import 'package:sound_sphere/data/res/firebase_user_repository.dart';
 import 'package:sound_sphere/presentation/blocs/register/register_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/login/login_bloc.dart';
 import 'package:sound_sphere/presentation/views/authentication/components/login_form.dart';
@@ -14,14 +14,14 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/foundation.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AuthenticationPage extends StatefulWidget {
+  const AuthenticationPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AuthenticationPage> createState() => _AuthenticationPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
+class _AuthenticationPageState extends State<AuthenticationPage>
     with SingleTickerProviderStateMixin {
   Color backgroundColor = const Color.fromRGBO(236, 219, 254, 1);
   TextEditingController emailController = TextEditingController();
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage>
   late AnimationController _animationController;
 
   // bloc
-  UserRepositoryImpl userRepository = UserRepositoryImpl();
+  FirebaseUserRepository userRepository = FirebaseUserRepository();
   late final LoginBloc loginBloc;
   late final RegisterBloc registerBloc;
   @override

@@ -1,8 +1,11 @@
 class ApiConfig {
   // ignore: constant_identifier_names
-  static const String BASE_URL = 'http://127.0.0.1:8080/api/v1';
+  static const String BASE_URL = 'http://103.216.116.55:3002/api/v1';
   // ignore: non_constant_identifier_names
   static final int DEFAULT_LIMIT = 10;
+
+  static const String token = 'token';
+  static const String refreshToken = 'refresh_token';
 }
 
 class ArtistApi {
@@ -43,4 +46,17 @@ class TrackApi {
   static const String fullTrack =
       'title genre release_date image_url url_media';
   static const String trackLyric = "lyric";
+}
+
+class AuthenticationAPI {
+  static const String login = '${ApiConfig.BASE_URL}/auth/login';
+  static const String register = '${ApiConfig.BASE_URL}/auth/register';
+  static const String logout = '${ApiConfig.BASE_URL}/auth/logout';
+  static const String refreshToken = '${ApiConfig.BASE_URL}/auth/refresh-token';
+}
+
+class UserAPI {
+  static const String getUserPrivate = '${ApiConfig.BASE_URL}/users/me';
+  static String getUserPublicById(String id) =>
+      '${ApiConfig.BASE_URL}/users/$id';
 }

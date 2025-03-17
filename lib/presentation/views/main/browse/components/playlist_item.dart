@@ -26,14 +26,17 @@ class PlaylistItem extends StatelessWidget {
           Container(
             height: isBig ? 150 : 180,
             width: isBig ? 330 : 180,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              ),
-            ]),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.4),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
