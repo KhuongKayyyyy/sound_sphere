@@ -15,9 +15,9 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  TextEditingController _nameController =
+  final TextEditingController _nameController =
       TextEditingController(text: "Default Name");
-  TextEditingController _nickNameController =
+  final TextEditingController _nickNameController =
       TextEditingController(text: "Default Nick Name");
 
   @override

@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:sound_sphere/data/res/user_repository.dart';
 import 'package:sound_sphere/presentation/blocs/app_bloc_observer.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,9 @@ void main() async {
           BlocProvider(
               create: (context) =>
                   AuthenticationBloc()..add(AuthGetUserRequested())),
+          BlocProvider(
+            create: (context) => PlaylistBloc(), // No event added here
+          ),
         ],
         child: const MyApp(),
       ),

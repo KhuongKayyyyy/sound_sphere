@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/res/user_repository.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
         .read(key: ApiConfig.refreshToken)
         .then((refreshToken) {
       if (refreshToken != null) {
-        print("Refresh Token: $refreshToken");
+        // print("Refresh Token: $refreshToken");
       } else {
-        print("No refresh token found");
+        // print("No refresh token found");
       }
     });
 
@@ -186,6 +186,42 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showToastMessage(String message) {
+    Fluttertoast.showToast(msg: "Test", toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void showFloatingDialog(BuildContext context, String message) {
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 80,
+        left: MediaQuery.of(context).size.width * 0.1,
+        right: MediaQuery.of(context).size.width * 0.1,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+
+    // Remove after 3 seconds
+    Future.delayed(Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
+  }
+
   CustomScrollView _buildHomeBody() {
     return CustomScrollView(
       controller: _scrollController,
@@ -193,17 +229,18 @@ class _HomePageState extends State<HomePage> {
         CustomAppBar(title: "Listen now"),
         SliverToBoxAdapter(
           child: TextButton(
-            onPressed: () {
-              // UserRepository().getUser();
-              // UserRepository().refreshAccessToken(
-              //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2QyZjM0ZGFiNzMxZmFjODJhNjhhOTAiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzQxODgxMDEyLCJleHAiOjE3NDI0ODU4MTJ9.EqEgV2OXnUK_ZjTV4M1qBKzx2V-73Zb0R3anEnA3Xvo");
-              UserRepository().logOutUser();
+            onPressed: () async {
+              // String? token =
+              //     await FlutterSecureStorage().read(key: ApiConfig.token);
+              // print(token);
+              // String? refreshToken = await FlutterSecureStorage()
+              //     .read(key: ApiConfig.refreshToken);
             },
             child: const Text("Test"),
           ),
         ),
-        _buildAppUltilitySection(),
         _buildReccommendedMusicSection(),
+        _buildAppUltilitySection(),
       ],
     );
   }

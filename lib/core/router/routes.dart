@@ -63,4 +63,8 @@ class Routes {
   static const String downloadGenre = '/download-genre';
   static const String downloadCompilation = '/download-compilation';
   static const String downloadMusicVideo = '/download-music-video';
+
+  // playlist routes
+  static const String playlist = '/playlist';
+  static const String playlistDetailPage = '/playlist-detail-page';
 }

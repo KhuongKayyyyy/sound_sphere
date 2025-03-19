@@ -3,26 +3,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/views/playlist/add_to_a_playlist_page.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_item_context_menu.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_context_menu_action.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
 // ignore: must_be_immutable
 class TrackItem extends StatefulWidget {
+  Color? backgroundColor;
   Track track;
-  bool isLiked;
   bool? isSliable;
+  bool? isBlank;
   int? index;
   TrackItem(
       {super.key,
+      this.backgroundColor,
       required this.track,
-      required this.isLiked,
       this.index,
-      this.isSliable});
+      this.isSliable,
+      this.isBlank});
 
   @override
   State<TrackItem> createState() => _TrackItemState();
@@ -104,9 +108,7 @@ class _TrackItemState extends State<TrackItem> {
         SlidableAction(
           flex: 2,
           onPressed: (BuildContext context) {
-            setState(() {
-              widget.isLiked = !widget.isLiked;
-            });
+            setState(() {});
           },
           foregroundColor: AppColor.primaryColor,
           icon: Icons.add,
@@ -179,7 +181,7 @@ class _TrackItemState extends State<TrackItem> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 170,
+            width: MediaQuery.of(context).size.width * 0.45,
             child: Text(
               widget.track.title,
               style: const TextStyle(fontWeight: FontWeight.w600),
@@ -211,7 +213,7 @@ class _TrackItemState extends State<TrackItem> {
       height: MediaQuery.of(context).size.height * 0.1,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: widget.backgroundColor ?? Colors.white,
       ),
       child: Padding(
         padding: const EdgeInsets.all(5),
@@ -221,8 +223,8 @@ class _TrackItemState extends State<TrackItem> {
             const SizedBox(width: 10),
             buildTrackInfo(),
             const Spacer(),
-            widget.isLiked ? buildIsLikedTrack() : const SizedBox.shrink(),
-            buildTrackMenu(),
+            // widget.isLiked ? buildIsLikedTrack() : const SizedBox.shrink(),
+            if (widget.isBlank == true) SizedBox.shrink() else buildTrackMenu(),
           ],
         ),
       ),
@@ -408,7 +410,13 @@ class _TrackItemState extends State<TrackItem> {
                           child: Row(
                             children: [
                               TrackBottomSheetButton(
-                                  buttonText: "Add to Playlist", isLiked: true),
+                                  onPressed: () {
+                                    context.pop();
+                                    _showAddToPlaylistBottomModal(
+                                        context, widget.track);
+                                  },
+                                  buttonText: "Add to Playlist",
+                                  isLiked: true),
                               Spacer(),
                               TrackBottomSheetButton(
                                 buttonText: "About Track",
@@ -434,5 +442,14 @@ class _TrackItemState extends State<TrackItem> {
         );
       },
     );
+  }
+
+  void _showAddToPlaylistBottomModal(BuildContext context, Track track) {
+    showCupertinoModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        builder: (context) => AddToAPlaylistPage(
+              track: track,
+            ));
   }
 }

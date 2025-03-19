@@ -56,7 +56,6 @@ class ArtistTopSong extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20),
                 child: TrackItem(
                   track: topSongs[index],
-                  isLiked: false,
                   isSliable: false,
                 ),
               );

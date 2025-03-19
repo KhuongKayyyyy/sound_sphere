@@ -126,8 +126,15 @@ class UserRepository {
     await secureStorage.delete(key: ApiConfig.refreshToken);
   }
 
-  Future<void> refreshAccessToken(String refreshToken) async {
+  Future<void> refreshAccessToken() async {
     try {
+      String? refreshToken =
+          await secureStorage.read(key: ApiConfig.refreshToken);
+
+      if (refreshToken == null || refreshToken.isEmpty) {
+        throw AuthenticationException("Refresh token is null or empty");
+      }
+
       var client = HttpClient();
       var request =
           await client.postUrl(Uri.parse(AuthenticationAPI.refreshToken));
@@ -151,14 +158,28 @@ class UserRepository {
       if (decodedJson == null || decodedJson.isEmpty) {
         throw EmptyResponseException("Response body is null or empty");
       }
+
       if (response.statusCode == HttpStatus.ok) {
-        if (decodedJson['metadata'] is Map<String, dynamic>) {
+        if (decodedJson.containsKey('metadata') &&
+            decodedJson['metadata'] is Map<String, dynamic>) {
+          Map<String, dynamic> metadata = decodedJson['metadata'];
+
+          // Extract new tokens
+          String? newAccessToken = metadata['accessToken'];
+          String? newRefreshToken = metadata['refreshToken'];
+
+          if (newAccessToken == null || newAccessToken.isEmpty) {
+            throw Exception("New access token is null or empty");
+          }
+          if (newRefreshToken == null || newRefreshToken.isEmpty) {
+            throw Exception("New refresh token is null or empty");
+          }
+
+          // Store the new tokens
           await secureStorage.write(
-              key: ApiConfig.token,
-              value: decodedJson['metadata']['accessToken']);
+              key: ApiConfig.token, value: newAccessToken);
           await secureStorage.write(
-              key: ApiConfig.refreshToken,
-              value: decodedJson['metadata']['refreshToken']);
+              key: ApiConfig.refreshToken, value: newRefreshToken);
         } else {
           throw InvalidUserDataException("Invalid user data format");
         }
@@ -205,7 +226,6 @@ class UserRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         AppUser user = AppUser.fromJson(decodedJson['metadata']);
-        print(user);
         return user;
       } else if (response.statusCode == HttpStatus.unauthorized) {
         // Token expired, try refreshing it
@@ -213,7 +233,7 @@ class UserRepository {
           if (refreshToken == null) {
             throw AuthenticationException("Refresh token is null");
           }
-          await refreshAccessToken(refreshToken);
+          await refreshAccessToken();
           return getUser();
         } catch (e) {
           throw AuthenticationException("Session expired, please log in again");

@@ -60,7 +60,6 @@ class _PlayListExtendedListState extends State<PlayListExtendedList> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TrackItem(
             track: widget.tracks.elementAt(index),
-            isLiked: false,
           ),
         );
       },
@@ -80,7 +79,6 @@ class _PlayListExtendedListState extends State<PlayListExtendedList> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: TrackItem(
                     track: FakeData.obitoSongs.elementAt(index),
-                    isLiked: false,
                   ),
                 );
               },
@@ -94,7 +92,6 @@ class _PlayListExtendedListState extends State<PlayListExtendedList> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TrackItem(
                   track: trackState.tracks.elementAt(index),
-                  isLiked: false,
                 ),
               );
             },

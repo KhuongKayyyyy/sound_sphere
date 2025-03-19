@@ -35,4 +35,11 @@ class Artist {
   String toString() {
     return 'Artist{id: $id, name: $name, avatarURL: $avatarURL}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is Artist && other.id == id);
+
+  @override
+  int get hashCode => id.hashCode;
 }

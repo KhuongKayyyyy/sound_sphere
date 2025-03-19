@@ -144,7 +144,6 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     return SliverToBoxAdapter(
         child: TrackItem(
       track: track,
-      isLiked: false,
       index: 1,
     ));
   }

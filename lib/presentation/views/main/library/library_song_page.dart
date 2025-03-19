@@ -69,7 +69,6 @@ class _LibrarySongPageState extends State<LibrarySongPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TrackItem(
                       track: FakeData.wrxdieSong.elementAt(index),
-                      isLiked: false,
                     ),
                   );
                 }),

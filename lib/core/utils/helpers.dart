@@ -1,4 +1,6 @@
 import 'package:intl/intl.dart';
+import 'package:sound_sphere/data/models/artist.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class Helpers {
   // static double calculateTextWidth(String text, TextStyle style) {
@@ -35,5 +37,19 @@ class Helpers {
     } catch (e) {
       return 'Invalid email'; // Handle error if the email parsing fails
     }
+  }
+
+  static List<Artist> getArtistsFromTracks(List<Track> tracks) {
+    Set<Artist> artistSet = {};
+
+    for (var track in tracks) {
+      artistSet.add(track.artist);
+
+      if (track.featuredArtists != null) {
+        artistSet.addAll(track.featuredArtists!);
+      }
+    }
+
+    return artistSet.toList();
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_header.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/search_bar_delegate.dart';
 import 'package:sound_sphere/presentation/widgets/button/primary_button.dart';
-import 'package:sound_sphere/presentation/widgets/playlist/horizontal_playlist.dart';
+import 'package:sound_sphere/presentation/widgets/playlist/horizontal_playlist_item.dart';
 
 class LibraryMade4uPage extends StatefulWidget {
   const LibraryMade4uPage({super.key});
@@ -63,7 +65,11 @@ class _LibraryMade4uPageState extends State<LibraryMade4uPage> {
             ListView.builder(
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) {
-                return HorizontalPlaylist(
+                return HorizontalPlaylistItem(
+                    onPressed: () {
+                      context.pushNamed(Routes.playlistDetailPage,
+                          extra: FakeData.playlists.elementAt(index));
+                    },
                     playlist: FakeData.playlists.elementAt(index));
               },
               itemCount: FakeData.playlists.length,

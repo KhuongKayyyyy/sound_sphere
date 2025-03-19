@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_header.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/playlist_add_new.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/search_bar_delegate.dart';
-import 'package:sound_sphere/presentation/widgets/playlist/horizontal_playlist.dart';
+import 'package:sound_sphere/presentation/widgets/playlist/horizontal_playlist_item.dart';
 
 class LibraryPlaylistPage extends StatefulWidget {
   const LibraryPlaylistPage({super.key});
@@ -20,6 +26,10 @@ class _LibraryPlaylistPageState extends State<LibraryPlaylistPage> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+
+    if (context.read<PlaylistBloc>().state is! PlaylistGetSuccess) {
+      context.read<PlaylistBloc>().add(PlaylistGetListRequested());
+    }
   }
 
   void _scrollListener() {
@@ -59,15 +69,21 @@ class _LibraryPlaylistPageState extends State<LibraryPlaylistPage> {
             child: Column(
               children: [
                 PlaylistAddNew(),
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return HorizontalPlaylist(
-                        playlist: FakeData.playlists.elementAt(index));
+                BlocBuilder<PlaylistBloc, PlaylistState>(
+                  builder: (context, playlistState) {
+                    if (playlistState is PlaylistLoading) {
+                      return Skeletonizer(
+                          enabled: true,
+                          child: _buildPlaylistList(FakeData.playlists));
+                    } else if (playlistState is PlaylistGetFailure) {
+                      return Center(
+                        child: Text(playlistState.message),
+                      );
+                    } else if (playlistState is PlaylistGetSuccess) {
+                      return _buildPlaylistList(playlistState.playlists);
+                    }
+                    return Container();
                   },
-                  itemCount: FakeData.playlists.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
                 ),
                 Container(
                   color: Colors.white,
@@ -76,6 +92,24 @@ class _LibraryPlaylistPageState extends State<LibraryPlaylistPage> {
               ],
             ),
           )),
+    );
+  }
+
+  ListView _buildPlaylistList(List<Playlist> playlists) {
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      itemBuilder: (context, index) {
+        return HorizontalPlaylistItem(
+          playlist: playlists[index],
+          onPressed: () {
+            context.pushNamed(Routes.playlistDetailPage,
+                extra: playlists[index]);
+          },
+        );
+      },
+      itemCount: playlists.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
     );
   }
 }

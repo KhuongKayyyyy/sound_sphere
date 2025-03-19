@@ -60,3 +60,13 @@ class UserAPI {
   static String getUserPublicById(String id) =>
       '${ApiConfig.BASE_URL}/users/$id';
 }
+
+class PlaylistAPI {
+  static const String playlist = '${ApiConfig.BASE_URL}/playlists/';
+  static String getPlaylistById(String id) =>
+      '${ApiConfig.BASE_URL}/playlists/$id';
+  static const String addTrackToPlaylist =
+      '${ApiConfig.BASE_URL}/playlists/add-track';
+  static const String removeTrackFromPlaylist =
+      '${ApiConfig.BASE_URL}/playlists/remove-track';
+}

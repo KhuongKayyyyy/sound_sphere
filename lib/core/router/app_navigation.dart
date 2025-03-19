@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/artist.dart';
+import 'package:sound_sphere/data/models/playlist.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/account/edit_profile_page.dart';
@@ -37,6 +38,7 @@ import 'package:sound_sphere/presentation/views/main/search/subpage/search_categ
 import 'package:sound_sphere/presentation/views/main_wrapper/main_wrapper.dart';
 import 'package:sound_sphere/presentation/views/main/search/search_page.dart';
 import 'package:sound_sphere/presentation/views/player/player_page.dart';
+import 'package:sound_sphere/presentation/views/playlist/playlist_detail_page.dart';
 import 'package:sound_sphere/presentation/views/single_eps_detail/single_eps_detail_page.dart';
 
 class AppNavigation {
@@ -327,6 +329,16 @@ class AppNavigation {
           name: Routes.download,
           builder: (context, state) => const DownloadPage(),
         ),
+        GoRoute(
+          path: Routes.playlistDetailPage,
+          name: Routes.playlistDetailPage,
+          builder: (context, state) {
+            final playlist = state.extra as Playlist;
+            return PlaylistDetailPage(
+              playlist: playlist,
+            );
+          },
+        )
       ],
     );
   }

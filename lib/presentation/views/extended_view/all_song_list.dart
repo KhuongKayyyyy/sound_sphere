@@ -38,7 +38,6 @@ class _AllSongListState extends State<AllSongList> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TrackItem(
             track: widget.tracks.elementAt(index),
-            isLiked: false,
           ),
         );
       },

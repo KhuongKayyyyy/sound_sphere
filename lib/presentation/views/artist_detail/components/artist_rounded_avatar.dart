@@ -2,23 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
 
-// ignore: must_be_immutable
-class ArtistRoundedAvatar extends StatefulWidget {
-  Artist artist;
-  bool isLike;
-  VoidCallback onTap;
-  ArtistRoundedAvatar(
-      {super.key,
-      required this.artist,
-      required this.isLike,
-      required this.onTap});
+class ArtistRoundedAvatar extends StatelessWidget {
+  final Artist artist;
+  final bool isLike;
+  final VoidCallback onTap;
 
-  @override
-  State<ArtistRoundedAvatar> createState() => _ArtistRoundedAvatarState();
-}
-
-class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
-  get index => null;
+  const ArtistRoundedAvatar({
+    super.key,
+    required this.artist,
+    required this.isLike,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +22,33 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
         Stack(
           children: [
             InkWell(
-              onTap: widget.onTap,
+              onTap: onTap,
               child: SizedBox(
                 height: 100,
                 width: 100,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
-                    FakeData.artists.first.avatarURL!,
+                    artist.avatarURL ??
+                        FakeData.artists.first.avatarURL!, // Fallback image
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Icon(
+                      Icons.person, // Show a default icon if image fails
+                      size: 50,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ),
             ),
-            if (widget.isLike)
+            if (isLike)
               Container(
                 height: 100,
                 width: 100,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black.withOpacity(0.5)),
+                  shape: BoxShape.circle,
+                  color: Colors.black.withOpacity(0.5),
+                ),
                 child: const Center(
                   child: Icon(
                     Icons.favorite,
@@ -60,8 +61,9 @@ class _ArtistRoundedAvatarState extends State<ArtistRoundedAvatar> {
         ),
         const SizedBox(height: 10),
         Text(
-          widget.artist.name!,
+          artist.name ?? "Unknown Artist", // Avoid null issue
           style: const TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
         ),
       ],
     );

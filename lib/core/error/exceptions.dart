@@ -19,6 +19,16 @@ class InvalidJsonFormatException implements Exception {
   InvalidJsonFormatException(this.message);
 }
 
+class InvalidRequestException implements Exception {
+  final String message;
+  InvalidRequestException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}
+
 class InvalidUserDataException implements Exception {
   final String message;
   InvalidUserDataException(this.message);
@@ -27,4 +37,9 @@ class InvalidUserDataException implements Exception {
 class AuthenticationException implements Exception {
   final String message;
   AuthenticationException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
 }
