@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/core/constant/app_setting.dart';
 import 'package:sound_sphere/core/router/app_navigation.dart';
 import 'package:sound_sphere/core/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,6 +42,11 @@ void main() async {
       ),
     ),
   );
+}
+
+void appSetting() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(AppSetting.playlistOrder, "Title");
 }
 
 void configLoading() {

@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 
-class PlaylistItem extends StatelessWidget {
+class VerticalPlaylistItem extends StatelessWidget {
   final String img;
   final String title;
   final String subtitle;
   final bool isBig;
+  final Function()? onTap;
 
-  const PlaylistItem({
+  const VerticalPlaylistItem({
     required this.img,
     required this.isBig,
     required this.title,
     required this.subtitle,
+    this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.playlistExtendedWithImage,
-          extra: {'imageUrl': img}),
+      onTap: () => onTap != null
+          ? onTap!()
+          : GoRouter.of(context).goNamed(Routes.playlistDetail),
       child: Column(
         children: [
           Container(

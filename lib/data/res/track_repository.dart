@@ -368,4 +368,8 @@ class TrackRepository {
     }
     return tracks;
   }
+
+  // static Future<List<Track>> addTrackToFavorite() async{
+
+  // }
 }

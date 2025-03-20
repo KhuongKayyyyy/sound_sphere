@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
@@ -15,6 +17,7 @@ import 'package:sound_sphere/data/models/playlist.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_rounded_avatar.dart';
 import 'package:sound_sphere/presentation/widgets/button/primary_button.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
@@ -29,6 +32,7 @@ class PlaylistDetailPage extends StatefulWidget {
 
 class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
   late PlaylistBloc _playlistBloc;
+  late TrackBloc trackBloc;
   late ScrollController _scrollController;
   bool _showTitle = false;
   @override
@@ -39,6 +43,12 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
 
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+
+    trackBloc = TrackBloc();
+    trackBloc.add(FetchTracksEvent(0, 0, TrackApi.previewTrack));
+    final int page = Random().nextInt(25) + 1;
+
+    trackBloc.add(FetchTracksEvent(page, 5, TrackApi.previewTrack));
   }
 
   void _scrollListener() {
@@ -61,39 +71,57 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: _buildAppBar(context),
-      child: BlocListener<PlaylistBloc, PlaylistState>(
-        bloc: _playlistBloc,
-        listener: (context, state) {
-          if (state is PLRemoveTrackSuccess) {
-            EasyLoading.showSuccess("Track removed");
-            _playlistBloc
-                .add(PLGetDetailRequested(state.playlist)); // Re-fetch tracks
-          } else if (state is PLRemoveTrackFailure) {
-            EasyLoading.showError(state.message);
-          } else if (state is PLRemoveTrackLoading) {
-            EasyLoading.show(status: "Removing track...");
-          }
-        },
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              _buildHeader(),
-              _buildPlaySection(),
-              Divider(
-                height: 1,
-                thickness: 0.5,
-              ),
-              _buildPlaylistSongSection(),
-              _buildSuggestSection(),
-              _buildFeaturedArtistSection(),
-            ],
+    return MultiBlocListener(
+        listeners: [
+          BlocListener<PlaylistBloc, PlaylistState>(
+            bloc: _playlistBloc,
+            listener: (context, state) {
+              if (state is PLRemoveTrackSuccess) {
+                EasyLoading.showSuccess("Track removed");
+                _playlistBloc.add(
+                    PLGetDetailRequested(state.playlist)); // Re-fetch tracks
+              } else if (state is PLRemoveTrackFailure) {
+                EasyLoading.showError(state.message);
+              } else if (state is PLRemoveTrackLoading) {
+                EasyLoading.show(status: "Removing track...");
+              } else if (state is PLDeleteSuccess) {
+                EasyLoading.showSuccess("Playlist deleted");
+                context.read<PlaylistBloc>().add(PlaylistGetListRequested());
+                context.pop();
+              } else if (state is PLDeleteFailure) {
+                EasyLoading.showError(state.message);
+              } else if (state is PLDeleteLoading) {
+                EasyLoading.show(status: "Deleting playlist...");
+              } else if (state is PLAddTrackSuccess) {
+                EasyLoading.showSuccess("Track added");
+                _playlistBloc.add(PLGetDetailRequested(state.playlist));
+              } else if (state is PLAddTrackFailure) {
+                EasyLoading.showError(state.message);
+              } else if (state is PLAddTrackLoading) {
+                EasyLoading.show(status: "Adding track...");
+              }
+            },
           ),
-        ),
-      ),
-    );
+        ],
+        child: CupertinoPageScaffold(
+          navigationBar: _buildAppBar(context),
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                _buildHeader(),
+                _buildPlaySection(),
+                Divider(
+                  height: 1,
+                  thickness: 0.5,
+                ),
+                _buildPlaylistSongSection(),
+                _buildSuggestSection(),
+                _buildFeaturedArtistSection(),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _buildFeaturedArtistSection() {
@@ -181,6 +209,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
           }),
           appBarButton(Icons.more_horiz_rounded, () {
             // Add your action here
+            _showPlaylistMenu(context);
           }),
         ],
       ),
@@ -192,6 +221,88 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
           style: TextStyle(color: Colors.black),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showPlaylistMenu(BuildContext context) {
+    return showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context);
+                // Add your action for "Edit Playlist" here
+              },
+              child: Text("Edit Playlist"),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context);
+                // Add your action for "Share Playlist" here
+              },
+              child: Text("Share Playlist"),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context);
+                // Add your action for "Delete Playlist" here
+                _showDeletePlaylistDialog();
+              },
+              isDestructiveAction: true,
+              child: Text("Delete Playlist"),
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel"),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showDeletePlaylistDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BlocListener<PlaylistBloc, PlaylistState>(
+          bloc: _playlistBloc,
+          listener: (context, state) {
+            if (state is PLDeleteSuccess) {
+              EasyLoading.showSuccess("Playlist deleted");
+              context.read<PlaylistBloc>().add(PlaylistGetListRequested());
+            } else if (state is PLDeleteFailure) {
+              EasyLoading.showError(state.message);
+            } else if (state is PLDeleteLoading) {
+              // EasyLoading.show(status: "Deleting playlist...");
+            }
+          },
+          child: CupertinoAlertDialog(
+            title: Text("Confirm"),
+            content: Text("Are you sure you want to delete this playlist?"),
+            actions: [
+              CupertinoDialogAction(
+                child: Text("Cancel"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              CupertinoDialogAction(
+                child: Text("Delete", style: TextStyle(color: Colors.red)),
+                onPressed: () {
+                  _playlistBloc
+                      .add(PLDeleteRequested(playlistId: widget.playlist.id!));
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -218,6 +329,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 4),
                   Text(
                     "Preview and add to your playlist",
                     style: TextStyle(
@@ -230,7 +342,11 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
               ),
               Spacer(),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  final int page = Random().nextInt(25) + 1;
+                  trackBloc
+                      .add(FetchTracksEvent(page, 5, TrackApi.previewTrack));
+                },
                 child: Icon(
                   Icons.replay_outlined,
                   color: AppColor.primaryColor,
@@ -238,33 +354,63 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Expanded(
-                    child: TrackItem(
-                      backgroundColor: Colors.grey[100],
-                      track: FakeData.obitoSongs.elementAt(index),
-                      isSliable: false,
-                      isBlank: true,
-                    ),
-                  ),
-                  InkWell(
-                    child: Icon(CupertinoIcons.plus_circle,
-                        color: AppColor.primaryColor),
-                  ),
-                ],
-              );
+          BlocBuilder<TrackBloc, TrackState>(
+            bloc: trackBloc,
+            builder: (context, state) {
+              if (state is TracksLoaded) {
+                return _buildSuggestSongList(state.tracks);
+              } else if (state is TracksLoading) {
+                return Skeletonizer(
+                  enabled: true,
+                  child: _buildSuggestSongList(FakeData.obitoSongs),
+                );
+              } else if (state is TracksError) {
+                return Center(
+                  child: Text(state.message),
+                );
+              } else {
+                return Skeletonizer(
+                  enabled: true,
+                  child: _buildSuggestSongList(FakeData.obitoSongs),
+                );
+              }
             },
           ),
         ],
       ),
+    );
+  }
+
+  ListView _buildSuggestSongList(List<Track> newTracks) {
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: newTracks.length,
+      itemBuilder: (context, index) {
+        return Row(
+          children: [
+            Expanded(
+              child: TrackItem(
+                backgroundColor: Colors.grey[100],
+                track: newTracks[index],
+                isSliable: false,
+                isBlank: true,
+                isPreviewable: true,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _playlistBloc.add(PLAddTrackRequested(
+                    playlistId: widget.playlist.id!,
+                    trackId: newTracks[index].id!));
+              },
+              child: Icon(CupertinoIcons.plus_circle,
+                  color: AppColor.primaryColor),
+            ),
+          ],
+        );
+      },
     );
   }
 

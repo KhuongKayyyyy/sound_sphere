@@ -6,9 +6,10 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 class LibraryPlaylistHeader extends StatefulWidget {
   final String title;
   final bool isScrolled;
+  final Function? onTap;
 
   const LibraryPlaylistHeader(
-      {super.key, required this.isScrolled, required this.title});
+      {super.key, required this.isScrolled, required this.title, this.onTap});
 
   @override
   State<LibraryPlaylistHeader> createState() => _LibraryPlaylistHeaderState();
@@ -41,6 +42,7 @@ class _LibraryPlaylistHeaderState extends State<LibraryPlaylistHeader> {
       ),
       actions: [
         InkWell(
+          onTap: () => widget.onTap != null ? widget.onTap!() : null,
           child: Container(
             decoration: BoxDecoration(
                 color: AppColor.inkGreyLight,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'playlist_item.dart';
+import 'vertical_playlist_item.dart';
 
 class PlaylistSection extends StatelessWidget {
   final List<String> imageList;
@@ -32,7 +32,7 @@ class PlaylistSection extends StatelessWidget {
             padding: index == imageList.length - 1
                 ? const EdgeInsets.symmetric(horizontal: 20)
                 : const EdgeInsets.only(left: 20),
-            child: PlaylistItem(
+            child: VerticalPlaylistItem(
                 img: imageList[index],
                 isBig: isBig,
                 title: title[index],

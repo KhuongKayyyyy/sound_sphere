@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/presentation/views/playlist/add_to_a_playlist_page.dart';
 
 class AlbumDetailAppBar extends StatelessWidget {
   final Album album;
@@ -46,7 +49,9 @@ class AlbumDetailAppBar extends StatelessWidget {
         _buildCircleIcon(
           context: context,
           icon: Icons.add,
-          onPressed: () {},
+          onPressed: () {
+            _showAddToPlaylistBottomSheet(context);
+          },
         ),
         const SizedBox(width: 10),
         _buildCircleIcon(
@@ -211,5 +216,14 @@ class AlbumDetailAppBar extends StatelessWidget {
             icon != null ? () => GoRouter.of(context).go('/player') : null,
       ),
     );
+  }
+
+  void _showAddToPlaylistBottomSheet(BuildContext context) {
+    showCupertinoModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        builder: (context) => AddToAPlaylistPage(
+              album: album,
+            ));
   }
 }

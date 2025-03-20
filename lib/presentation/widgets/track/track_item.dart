@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
@@ -20,12 +23,14 @@ class TrackItem extends StatefulWidget {
   bool? isSliable;
   bool? isBlank;
   int? index;
+  bool? isPreviewable;
   TrackItem(
       {super.key,
       this.backgroundColor,
       required this.track,
       this.index,
       this.isSliable,
+      this.isPreviewable,
       this.isBlank});
 
   @override
@@ -33,9 +38,44 @@ class TrackItem extends StatefulWidget {
 }
 
 class _TrackItemState extends State<TrackItem> {
+  AudioPlayer? _audioPlayer;
+  bool isPlaying = false;
+  double progress = 0.0;
+  Duration previewDuration = const Duration(seconds: 30);
+
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    _audioPlayer?.dispose();
+    super.dispose();
+  }
+
+  Future<void> _togglePreview() async {
+    if (isPlaying) {
+      await _audioPlayer?.pause();
+      setState(() {
+        isPlaying = false;
+        progress = 0.0;
+      });
+    } else {
+      _audioPlayer = AudioPlayer();
+      await _audioPlayer!.setUrl(widget.track.urlMedia);
+      _audioPlayer!.play();
+      setState(() => isPlaying = true);
+
+      _audioPlayer!.positionStream.listen((Duration position) {
+        setState(() {
+          progress = position.inMilliseconds / previewDuration.inMilliseconds;
+        });
+      });
+
+      Future.delayed(previewDuration, () {
+        _audioPlayer?.pause();
+        setState(() {
+          isPlaying = false;
+          progress = 0.0;
+        });
+      });
+    }
   }
 
   @override
@@ -47,8 +87,12 @@ class _TrackItemState extends State<TrackItem> {
                 child: _buildTrackItemWithContextMenu(
                 child: InkWell(
                   onTap: () {
-                    PlayerController().setPlayerAudio([widget.track]);
-                    PlayerController().play();
+                    if (widget.isPreviewable == true) {
+                      _togglePreview();
+                    } else {
+                      PlayerController().setPlayerAudio([widget.track]);
+                      PlayerController().play();
+                    }
                   },
                   child: _buildTrackInfo(context),
                 ),
@@ -67,15 +111,6 @@ class _TrackItemState extends State<TrackItem> {
                   ),
                 ),
               ),
-        // Divider
-        // Padding(
-        //   padding: const EdgeInsets.only(left: 80),
-        //   child: const Divider(
-        //     height: 2,
-        //     thickness: 1,
-        //     color: Colors.grey,
-        //   ),
-        // ),
       ],
     );
   }
@@ -165,12 +200,55 @@ class _TrackItemState extends State<TrackItem> {
                       fontWeight: FontWeight.bold, color: Colors.grey),
                 ),
               )
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: widget.track.imgURL,
-                  fit: BoxFit.cover,
-                ),
+            : Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: widget.track.imgURL,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                        if (isPlaying)
+                          Positioned.fill(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                              child: Container(
+                                color: Colors.black
+                                    .withOpacity(0.2), // Slight tint
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  if (isPlaying)
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.height * 0.08,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            value: progress,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 5,
+                            strokeCap: StrokeCap.round,
+                            backgroundColor: Colors.grey.withOpacity(0.5),
+                          ),
+                          Icon(
+                            Icons.pause,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
       );
     }

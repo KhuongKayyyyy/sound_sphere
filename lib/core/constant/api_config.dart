@@ -46,6 +46,12 @@ class TrackApi {
   static const String fullTrack =
       'title genre release_date image_url url_media';
   static const String trackLyric = "lyric";
+
+  // library
+  static const String addTrackToLibrary =
+      '${ApiConfig.BASE_URL}/user-library/Track/';
+  static String switchTrackFavorite(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/Track/$trackId/toggle-favorite';
 }
 
 class AuthenticationAPI {
@@ -69,4 +75,10 @@ class PlaylistAPI {
       '${ApiConfig.BASE_URL}/playlists/add-track';
   static const String removeTrackFromPlaylist =
       '${ApiConfig.BASE_URL}/playlists/remove-track';
+  static String switchToPublic(String playlistId) =>
+      '${ApiConfig.BASE_URL}/playlists/$playlistId/public';
+  static String switchToPrivate(String playlistId) =>
+      '${ApiConfig.BASE_URL}/playlists/$playlistId/private';
+  static String addAlbumToPlaylist =
+      '${ApiConfig.BASE_URL}/playlists/add-tracks-from-album';
 }

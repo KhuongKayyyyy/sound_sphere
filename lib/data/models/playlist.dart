@@ -78,4 +78,30 @@ class Playlist {
       updatedAt: DateTime.now(),
     );
   }
+
+  Playlist copyWith({
+    String? id,
+    String? name,
+    bool? isPublic,
+    String? imgURL,
+    List<TrackInPlaylist>? tracks,
+    int? totalPlay,
+    int? totalSave,
+    int? totalDuration,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Playlist(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      isPublic: isPublic ?? this.isPublic,
+      imgURL: imgURL ?? this.imgURL,
+      tracks: tracks ?? this.tracks,
+      totalPlay: totalPlay ?? this.totalPlay,
+      totalSave: totalSave ?? this.totalSave,
+      totalDuration: totalDuration ?? this.totalDuration,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

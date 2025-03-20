@@ -297,7 +297,7 @@ class AppNavigation {
         GoRoute(
           path: Routes.playlistLibrary,
           name: Routes.playlistLibrary,
-          builder: (context, state) => const LibraryPlaylistPage(),
+          builder: (context, state) => LibraryPlaylistPage(),
         ),
         GoRoute(
           path: Routes.artistLibrary,

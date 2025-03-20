@@ -106,3 +106,43 @@ class PLRemoveTrackFailure extends PlaylistState {
   @override
   List<Object> get props => [message];
 }
+
+class PLChangeStateSuccess extends PlaylistState {
+  final List<Playlist> playlists;
+
+  const PLChangeStateSuccess(this.playlists);
+
+  @override
+  List<Object> get props => [playlists];
+}
+
+class PLChangeStateFailure extends PlaylistState {
+  final String message;
+
+  const PLChangeStateFailure(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class PLChangeStateLoading extends PlaylistState {}
+
+class PLDeleteSuccess extends PlaylistState {
+  final Playlist playlist;
+
+  const PLDeleteSuccess(this.playlist);
+
+  @override
+  List<Object> get props => [playlist];
+}
+
+class PLDeleteFailure extends PlaylistState {
+  final String message;
+
+  const PLDeleteFailure(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class PLDeleteLoading extends PlaylistState {}

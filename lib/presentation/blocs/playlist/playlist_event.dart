@@ -49,3 +49,32 @@ class PLRemoveTrackRequested extends PlaylistEvent {
   @override
   List<Object> get props => [playlistId, trackId];
 }
+
+class PLChangeStateRequested extends PlaylistEvent {
+  final List<Playlist> playlists;
+
+  const PLChangeStateRequested(this.playlists);
+
+  @override
+  List<Object> get props => [playlists];
+}
+
+class PLAddAlbumToPlaylistRequested extends PlaylistEvent {
+  final String playlistId;
+  final String albumId;
+
+  const PLAddAlbumToPlaylistRequested(
+      {required this.playlistId, required this.albumId});
+
+  @override
+  List<Object> get props => [playlistId, albumId];
+}
+
+class PLDeleteRequested extends PlaylistEvent {
+  final String playlistId;
+
+  const PLDeleteRequested({required this.playlistId});
+
+  @override
+  List<Object> get props => [playlistId];
+}

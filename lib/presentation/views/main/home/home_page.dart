@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/data/res/playlist_repository.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
@@ -186,42 +186,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showToastMessage(String message) {
-    Fluttertoast.showToast(msg: "Test", toastLength: Toast.LENGTH_SHORT);
-  }
-
-  void showFloatingDialog(BuildContext context, String message) {
-    OverlayEntry overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: 80,
-        left: MediaQuery.of(context).size.width * 0.1,
-        right: MediaQuery.of(context).size.width * 0.1,
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.black87,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              message,
-              style: TextStyle(color: Colors.white, fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ),
-    );
-
-    Overlay.of(context).insert(overlayEntry);
-
-    // Remove after 3 seconds
-    Future.delayed(Duration(seconds: 3), () {
-      overlayEntry.remove();
-    });
-  }
-
   CustomScrollView _buildHomeBody() {
     return CustomScrollView(
       controller: _scrollController,
@@ -235,6 +199,9 @@ class _HomePageState extends State<HomePage> {
               // print(token);
               // String? refreshToken = await FlutterSecureStorage()
               //     .read(key: ApiConfig.refreshToken);
+              PlaylistRepository().addAlbumToPlayList(
+                  playlistId: "67d90e42ab731fac82a68f22",
+                  albumId: "6767be0e8b695e26ed4c69d0");
             },
             child: const Text("Test"),
           ),

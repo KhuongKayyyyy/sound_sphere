@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
+import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/playlist.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
@@ -13,8 +13,9 @@ import 'package:sound_sphere/presentation/views/main/library/components/playlist
 import 'package:sound_sphere/presentation/widgets/playlist/horizontal_playlist_item.dart';
 
 class AddToAPlaylistPage extends StatefulWidget {
-  final Track track;
-  const AddToAPlaylistPage({super.key, required this.track});
+  final Track? track;
+  final Album? album;
+  const AddToAPlaylistPage({super.key, this.track, this.album});
 
   @override
   State<AddToAPlaylistPage> createState() => _AddToAPlaylistPageState();
@@ -42,6 +43,7 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
           EasyLoading.dismiss();
           context.pop();
           _showSuccessToast(state.playlist);
+          context.read<PlaylistBloc>().add(PlaylistGetListRequested());
         } else if (state is PLAddTrackFailure) {
           EasyLoading.dismiss();
           EasyLoading.showError(state.message);
@@ -203,9 +205,15 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
                 HorizontalPlaylistItem(
                   playlist: playlists[index],
                   onPressed: () {
-                    _handleAddTrackToPlaylist(
-                        playlistId: playlists.elementAt(index).id!,
-                        trackId: widget.track.id!);
+                    if (widget.track != null) {
+                      _handleAddTrackToPlaylist(
+                          playlistId: playlists.elementAt(index).id!,
+                          trackId: widget.track!.id!);
+                    } else if (widget.album != null) {
+                      _handleAddAlbumToPlaylist(
+                          playlistId: playlists.elementAt(index).id!,
+                          albumId: widget.album!.id!);
+                    }
                   },
                 ),
                 Divider(
@@ -226,5 +234,11 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
     context
         .read<PlaylistBloc>()
         .add(PLAddTrackRequested(playlistId: playlistId, trackId: trackId));
+  }
+
+  void _handleAddAlbumToPlaylist(
+      {required String playlistId, required String albumId}) {
+    context.read<PlaylistBloc>().add(PLAddAlbumToPlaylistRequested(
+        playlistId: playlistId, albumId: albumId));
   }
 }
