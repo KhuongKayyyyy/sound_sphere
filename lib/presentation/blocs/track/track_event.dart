@@ -18,11 +18,11 @@ class FetchTracksEvent extends TrackEvent {
 }
 
 class FetchTrackDetail extends TrackEvent {
-  final String id;
-  const FetchTrackDetail(this.id);
+  final Track track;
+  const FetchTrackDetail({required this.track});
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [track];
 }
 
 class FetchTracksByArtistEvent extends TrackEvent {
@@ -42,3 +42,11 @@ class FetchTrackLyrics extends TrackEvent {
 }
 
 class FetchTopTrack extends TrackEvent {}
+
+class FetchFeaturedTrack extends TrackEvent {
+  final String artistId;
+  const FetchFeaturedTrack(this.artistId);
+
+  @override
+  List<Object> get props => [artistId];
+}

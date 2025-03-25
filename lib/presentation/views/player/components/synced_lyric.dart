@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/lyrics.dart';
+import 'package:sound_sphere/data/models/track.dart';
 
 class SyncedLyric extends StatefulWidget {
+  final Track track;
   final ScrollController lyricsScrollController;
-  const SyncedLyric({super.key, required this.lyricsScrollController});
+  const SyncedLyric(
+      {super.key, required this.lyricsScrollController, required this.track});
 
   @override
   State<SyncedLyric> createState() => _SyncedLyricState();
@@ -29,7 +32,7 @@ class _SyncedLyricState extends State<SyncedLyric> {
     super.initState();
 
     // Split the lyrics into lines and process each one
-    lyrics = FakeData.soyLyricString
+    lyrics = widget.track.lyrics
         .split('\n') // Split into individual lines
         .where((line) => RegExp(r'^\[\d{2}:\d{2}\.\d{2}\]')
             .hasMatch(line)) // Filter lines with valid timestamps
@@ -81,13 +84,20 @@ class _SyncedLyricState extends State<SyncedLyric> {
                   )),
                   child: Text(
                     lyrics![index].words,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: lyrics![index].timeStamp.isAfter(dt)
                           ? Colors.white.withOpacity(0.3)
                           : Colors.white,
                       fontSize: 28,
                       fontWeight: FontWeight.w900,
                     ),
+                    // style: TextStyle(
+                    //   color: lyrics![index].timeStamp.isAfter(dt)
+                    //       ? Colors.white.withOpacity(0.3)
+                    //       : Colors.white,
+                    //   fontSize: 28,
+                    //   fontWeight: FontWeight.w900,
+                    // ),
                   ),
                 ),
               );

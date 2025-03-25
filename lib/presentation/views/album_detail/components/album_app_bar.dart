@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
+import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
@@ -212,8 +213,9 @@ class AlbumDetailAppBar extends StatelessWidget {
         icon: icon != null
             ? Icon(icon, color: Colors.white)
             : Image.asset(assetPath!, color: Colors.white),
-        onPressed:
-            icon != null ? () => GoRouter.of(context).go('/player') : null,
+        onPressed: icon != null
+            ? () => PlayerController().setPlayerAudio(album.tracks)
+            : null,
       ),
     );
   }

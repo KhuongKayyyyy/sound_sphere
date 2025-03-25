@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/error/exceptions.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/res/user_repository.dart';
 
 class PlaylistRepository {
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
-  Future<List<Playlist>> getPlaylistOfUser() async {
+  Future<List<UserPlaylist>> getPlaylistOfUser() async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
       var client = HttpClient();
@@ -40,7 +40,7 @@ class PlaylistRepository {
         if (decodedJson['metadata'] is Map<String, dynamic> &&
             decodedJson['metadata']['data'] is List<dynamic>) {
           final playlists = (decodedJson['metadata']['data'] as List<dynamic>)
-              .map((e) => Playlist.fromJson(e as Map<String, dynamic>))
+              .map((e) => UserPlaylist.fromJson(e as Map<String, dynamic>))
               .toList();
 
           return playlists;
@@ -71,7 +71,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> getPlaylistById({required String playlistId}) async {
+  Future<UserPlaylist> getPlaylistById({required String playlistId}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
       var client = HttpClient();
@@ -100,7 +100,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -129,7 +129,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> addTrackToPlaylist(
+  Future<UserPlaylist> addTrackToPlaylist(
       {required String playlistId, required String trackId}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
@@ -164,7 +164,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -198,7 +198,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> removeTrackToPlaylist(
+  Future<UserPlaylist> removeTrackToPlaylist(
       {required String playlistId, required String trackId}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
@@ -233,7 +233,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -267,7 +267,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> createNewPlaylist({required String playlistName}) async {
+  Future<UserPlaylist> createNewPlaylist({required String playlistName}) async {
     {
       try {
         String? token = await secureStorage.read(key: ApiConfig.token);
@@ -300,7 +300,7 @@ class PlaylistRepository {
 
         if (response.statusCode == HttpStatus.ok) {
           if (decodedJson['metadata'] is Map<String, dynamic>) {
-            final playlist = Playlist.fromJson(decodedJson['metadata']);
+            final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
             return playlist;
           } else {
             throw InvalidUserDataException("Invalid user data format");
@@ -331,7 +331,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> switchToPublic({required String playlistID}) async {
+  Future<UserPlaylist> switchToPublic({required String playlistID}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
       var client = HttpClient();
@@ -360,7 +360,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -389,7 +389,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> switchToPrivate({required String playlistID}) async {
+  Future<UserPlaylist> switchToPrivate({required String playlistID}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
       var client = HttpClient();
@@ -418,7 +418,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -447,7 +447,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> addAlbumToPlayList(
+  Future<UserPlaylist> addAlbumToPlayList(
       {required String playlistId, required String albumId}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
@@ -482,7 +482,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");
@@ -516,7 +516,7 @@ class PlaylistRepository {
     }
   }
 
-  Future<Playlist> deletePlaylist({required String playlistId}) async {
+  Future<UserPlaylist> deletePlaylist({required String playlistId}) async {
     try {
       String? token = await secureStorage.read(key: ApiConfig.token);
       var client = HttpClient();
@@ -545,7 +545,7 @@ class PlaylistRepository {
 
       if (response.statusCode == HttpStatus.ok) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
-          final playlist = Playlist.fromJson(decodedJson['metadata']);
+          final playlist = UserPlaylist.fromJson(decodedJson['metadata']);
           return playlist;
         } else {
           throw InvalidUserDataException("Invalid user data format");

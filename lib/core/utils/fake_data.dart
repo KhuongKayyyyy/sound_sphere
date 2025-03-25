@@ -1,13 +1,1131 @@
 import 'package:sound_sphere/data/models/artist.dart';
 import 'package:sound_sphere/data/models/genres.dart';
-import 'package:sound_sphere/data/models/lyrics.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/models/radio.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class FakeData {
+  static void initialize() {
+    gnxTracks.add(
+      Track(
+        id: "1",
+        title: "wacced Out Murals ",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: dusfebhc]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: wacced out murals]
+[length: 05:17]
+[00:01.97]Siento aquí tu presencia
+[00:07.78]La noche de anoche
+[00:11.98]Y nos ponemos a llorar
+[00:24.34]Yesterday, somebody whacked out my mural
+[00:26.74]That energy'll make you niggas move to Europe
+[00:29.81]But it's regular for me, yeah, that's for sure
+[00:32.78]The love and hate is definite without a cure
+[00:35.34]All this talk is bitch-made, that's on my Lord
+[00:38.33]I'll kill 'em all before I let 'em kill my joy
+[00:41.61]I done been through it all, what you endure?
+[00:44.33]It used to be fuck that nigga, but now it's plural
+[00:47.02]Fuck everybody, that's on my body
+[00:49.90]My blick first, then God got me
+[00:53.26]I watch 'em pander with them back-handed compliments
+[00:56.26]Put they head on a Cuban link as a monument
+[00:59.07]I paid homage and I always mind my business
+[01:01.94]I made the—
+[01:04.98]I never lost who I am for a rap image
+[01:08.26]It's motivation if you wonder how I did it
+[01:10.54]Yeah, nigga, go and up your rank
+[01:13.44]Know you a god even when they say you ain't
+[01:16.27]Yeah, nigga, keep your feelings out the way
+[01:19.31]Never let no one put smut up on your name
+[01:22.23]Yeah, nigga, keep your head down and work like I do
+[01:25.27]But understand everybody ain't gon' like you
+[01:28.11]Yeah, nigga, if they say it's love, you've been lied to
+[01:31.18]A couple rules of engagements, I'ma guide you
+[01:35.58]Que refleja en tu mirada
+[01:39.51]La noche, tú y yo
+[01:43.07]Ridin' in my GNX with Anita Baker in the tape deck, it's gon' be a sweet love
+[01:47.70]Fuck apologies, I wanna see y'all geeked up
+[01:51.20]Don't acknowledge me, then maybe we can say it's fair
+[01:54.32]Take it to the internet and I'ma take it there
+[01:56.82]Miss my uncle Lil' Mane, he said that he would kill me if I didn't make it
+[02:00.35]Now I'm possessed by a spirit and they can't take it
+[02:03.68]Used to bump Tha Carter III, I held my Rollie chain proud
+[02:06.19]Irony, I think my hard work let Lil Wayne down
+[02:08.95]Whatever, though, call me crazy, everybody questionable
+[02:11.83]Turn me to an eskimo, I drew the line and decimals
+[02:14.82]Snoop posted "Taylor Made," I prayed it was the edibles
+[02:17.67]I couldn't believe it, it was only right for me to let it go
+[02:20.63]Won the Super Bowl and Nas the only one congratulate me
+[02:23.59]All these niggas agitated, I'm just glad they showin' they faces
+[02:26.55]Quite frankly, plenty artists, but they outdated
+[02:29.40]Old-ass flows, tryna convince me that you they favorite
+[02:32.47]This is not for lyricists, I swear it's not the sentiments
+[02:35.27]Fuck a double entendre, I want y'all to feel this shit
+[02:38.27]Old soul, bitch, I probably built them pyramids
+[02:41.22]Ducking strays when I rap battled in the Nickersons
+[02:44.23]Where you from? Not where I'm from, we all indigenous
+[02:46.91]Against all odds, I squabbled up for them dividends
+[02:49.95]Against all odds, I showed up as a gentleman
+[02:52.82]I done lost plenty friends, sixteen to be specific
+[02:55.82]Put that on my kids' children, we gon' see the future first
+[02:58.82]They like, "Dot big trippin," I just want what I deserve
+[03:01.82]What bridge they done burnt? All of them, it's over with
+[03:04.42]I'm doin' what COVID did, they'll never get over it
+[03:08.19]Yeah, nigga, go and up your rank
+[03:10.70]Know you a god even when they say you ain't
+[03:13.34]Yeah, nigga, keep your feelings out the way
+[03:16.73]Never let no one put smut up on your name
+[03:19.14]Yeah, nigga, keep your head down and work like I do
+[03:22.42]But understand everybody ain't gon' like you
+[03:25.26]Yeah, nigga, if they say it's love, you've been lied to
+[03:28.37]A couple rules of engagements, here to guide you
+[03:31.13]Niggas from my city couldn't entertain old boy
+[03:33.90]Promisin' bank transactions and even bitcoin
+[03:37.07]I never peaced it up, that shit don't sit well with me
+[03:39.94]Before I take a truce, I'll take 'em to Hell with me
+[03:42.70]If that money got in the hands of a crash dummy
+[03:45.66]Could jeopardize my family and burden the ones who love me
+[03:48.74]Niggas mad 'cause I decided not to pretend
+[03:51.66]Y'all stay politically correct, I'ma do what I did
+[03:54.38]Ain't no sympathy here, this shit's hilarious
+[03:57.26]It's a lot of opinions, but no power to carry it
+[04:00.06]2025, they still movin' on some scary shit
+[04:03.10]Tell 'em quit they job and pay the real niggas they severance
+[04:06.06]Don't insult my intelligence, I'm not just for the television
+[04:08.90]Teleport to Bullets Road and dig up all my relatives
+[04:11.89]Okay, nigga, let's settle it, these niggas been fake loyal
+[04:14.66]Since y'all pandering to choose a side, let me do it for you
+[04:17.78]Okay, fuck your hip-hop, I watched the party just die
+[04:20.22]Niggas cackling about— while all of y'all is on trial
+[04:23.18]Niggas thought that I was antisocial when I stayed inside of my house
+[04:26.42]You better off to have one woman, everything tricky right now
+[04:29.10]You niggas live in denial
+[04:30.66]Ayy, fuck anybody empathetic to the other side, I vow
+[04:33.78]A bitch nigga love bitch niggas, they exist with 'em in style
+[04:36.58]Exterminate 'em right now
+[04:38.34]Make Katt Williams and them proud, the truth 'bout to get loud
+[04:40.81]No juice iniside of my cup, I sober up and knock 'em all off
+[04:43.54]Don't let no white comedian talk about no Black woman, that's law
+[04:46.38]I know propaganda work for them, and fuck whoever that's close to them
+[04:49.43]The niggas that coon, the niggas that bein' groomed, slide on both of them
+[04:52.54]You ever ate Cap'n Crunch and proceeded to pour water in it?
+[04:55.31]Pulled over by the law, you ridin' dirty, so you can't argue with 'em?
+[04:58.06]Then make it to be a star, bare your soul and put your heart up in it
+[05:00.83]Well, I did
+[05:01.95]Whacked the murals out, but it ain't no legends if my legend ends
+[05:17.09]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/WaccedOutMurals-KendrickLamar-16803196.mp3?st=hB_3_NB-S4mog4KfsuhVNQ&e=1743148045&a=1&p=0&r=a559843092eaa737fb8c982a162a2065&t=1742546903572",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "2",
+        title: "squabble up",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: pshxutju]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: squabble up]
+[length: 02:38]
+[00:00.24]Diagnosed, I am
+[00:04.52]Reincarnated
+[00:05.77]I was stargazin'
+[00:06.99]Life goes on, I need all my babies (gyah, gyah)
+[00:09.67]Woke up, lookin' for the broccoli
+[00:11.60]High key, keep a horn on me, that Kamasi
+[00:13.88]IP ownership, the blueprint is by me
+[00:16.16]Mr. Get Off, I get off at my feet
+[00:18.59]When I hear music, it makes me dance
+[00:23.05]You got the music, now is your chance
+[00:27.63]A yeet nigga couldn't try me in a tri-state
+[00:30.12]Buddy passed, but I give him splash 'til he hydrated
+[00:32.48]Bounce out, know he spook town, eyes dilated
+[00:34.77]I got the money in a pile, both gyrated
+[00:37.35]I feel good, get the fuck out my face
+[00:39.67]Look good, but she don't got no ties
+[00:41.85]I walked in, walked out with the sides
+[00:44.14]Man down, let me know what the prize
+[00:46.71]What the fuck? I got hits, I got bucks, I got new paper cups
+[00:50.56]I got friends, I got foes, but they all sitting ducks
+[00:52.82]Here this turf can get crackin', double back like a deluxe
+[00:55.58]50 deep, but it ain't deep enough
+[00:57.54]Fuck a plea, they'll go beat him up
+[00:59.89]Fallin' from my money tree, and it grow throughout the mud
+[01:02.11]Spit a loogie at the camera, speed off, yeah, it's us
+[01:05.04]I feel good, get the fuck out my face
+[01:07.42]Look good, but she don't got no ties
+[01:09.62]I walked in, walked out with the sides
+[01:11.97]Man down, let me know what the prize
+[01:14.07]Squabble up, squabble up, squabble up, squabble up
+[01:18.86]Squabble up (mm-mm), squabble up (mm-mm)
+[01:21.12]Squabble up (mm-mm), squabble up
+[01:23.47]Hol' up (hol' up), where you from? (Where you from?)
+[01:27.82]My bitch (my bitch), I'm finna go dumb (finna go dumb)
+[01:32.29]Sideways (sideways), monster (monster) fever (fever)
+[01:39.13]I'm on one (I'm on one)
+[01:41.63]Thump, thump, thump, thump, thump, baby rockin' it
+[01:43.97]Quid pro quo, what you want? 'Cause I'm watchin' it
+[01:46.30]Work on the flow, let me know if you crockin' it
+[01:48.51]Brodie won't go, but I know that he poppin' it
+[01:50.82]It was woof tickets on sale 'til I silenced it
+[01:53.12]Pipe down, young, get some hoes out politics
+[01:55.53]Bitch with 'em and some bitch in 'em, that's a lot of bitch
+[01:57.80]Don't hit 'em, he got kids with him, my apologies
+[02:00.10]Ghetto child, he was blackin' out with the Smirnoff
+[02:02.47]Yee-haw, we outside, boy, they 'bout to kill him off
+[02:04.76]Blaps on blaps, it's a fact, this a brickerall
+[02:07.04]Tell me why the fuck you niggas rap if it's fictional?
+[02:09.31]Tell me why the fuck you niggas fed if you criminal?
+[02:11.78]"Hey, Dot, can I get a drop?" I'm like, "Nigga, nah"
+[02:13.92]Ace boon coon from the Westside to synagogue
+[02:16.12]It's a full moon, let the wolves out, I've been a dog (ah!)
+[02:18.65]I feel good, get the fuck out my face
+[02:21.25]Look good, but she don't got no ties
+[02:23.31]I walked in, walked out with the sides
+[02:25.86]Man down, let me know what the prize
+[02:28.08]Squabble up, squabble up, squabble up, squabble up
+[02:32.64]Squabble up (mm-mm), squabble up (mm-mm)
+[02:35.06]Squabble up (mm-mm), squabble up
+[02:36.25]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/SquabbleUp-KendrickLamar-16803197.mp3?st=bkbkcNxnB1Fp5SRGqDi7Sg&e=1743148228&a=1&p=0&r=fcc3a48f3df339063faa7de744c835cc&t=1742547035878",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "3",
+        title: "luther",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: iuyflyav]
+[ar: Kendrick Lamar & SZA]
+[al: Kendrick Lamar]
+[ti: luther]
+[length: 02:58]
+[00:09.76](If this world were mine)
+[00:12.36]Hey, Roman numeral seven, bae, drop it like it's hot
+[00:15.93]If this world was mine, I'd take your dreams and make 'em multiply
+[00:19.38]If this world was mine, I'd take your enemies in front of God
+[00:22.74]Introduce 'em to that light, hit them strictly with that fire
+[00:26.90]Fah-fah, fah-fah-fah, fah-fah, fah
+[00:33.22]Hey, Roman numeral seven, bae, drop it like it's hot
+[00:36.84]If this world was mine, I'd take your dreams and make 'em multiply
+[00:40.29]If this world was mine, I'd take your enemies in front of God
+[00:43.85]Introduce 'em to that light, hit them strictly with that fire
+[00:47.23]It's a vibe, do your dance, let 'em watch
+[00:49.83]She a fan, he a flop, they just wanna kumbaya, nah
+[00:53.78]In this world, concrete flowers grow
+[00:57.15]Heartache, she only doin' what she know
+[01:00.56]Weekends, get it poppin' on the low
+[01:03.97]Better days comin' for sure
+[01:05.83]If this world were-
+[01:09.31]If it was up to me
+[01:11.32]I wouldn't give these nobodies no sympathy
+[01:14.74]I'd take away the pain, I'd give you everything
+[01:19.46]I just wanna see you win, wanna see
+[01:21.22]If this world were mine
+[01:22.82]It go in (when you), out (ride it), do it real slow (slide)
+[01:26.73]Baby, you a star, strike, pose
+[01:30.22]When I'm (when you), with you (with me), everything goes (slow)
+[01:33.77]Come and (put that), put that (on my), on my (titi), soul (soul)
+[01:37.13]'Rari (red), crown (stack), wrist (stay), froze (really)
+[01:40.74]Drip (tell me), pound (if you), on the way home (love me)
+[01:44.23]In this world, concrete flowers grow
+[01:47.69]Heartache, she only doin' what she know
+[01:51.06]Weekends, get it poppin' on the low
+[01:54.60]Better days comin' for sure
+[01:56.35]If this world were-
+[01:59.99]If it was up to me
+[02:01.78]I wouldn't give these nobodies no sympathy
+[02:05.28]I'd take away the pain, I'd give you everything
+[02:09.89]I just wanna see you win, wanna see
+[02:11.60]If this world were mine
+[02:13.43]I can't lie, I trust you, I love you, I won't waste your time
+[02:17.17]I turn it off just so I can turn you on
+[02:19.86]I'ma make you say it loud
+[02:22.46]I'm not even trippin', I won't stress you out
+[02:25.82]I might even settle down for you, I'ma show you I'm a pro
+[02:29.85]I'ma take my time and turn it off, just so I can turn you on, baby
+[02:34.52]Weekends, get it poppin' on the low
+[02:37.97]Better days comin' for sure (I know you're comin', I know you're comin' for)
+[02:42.06]
+[02:45.55]
+[02:47.71](Better days)
+[02:53.15](If this world were mine)
+[02:55.09]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/Luther-KendrickLamar-16803198.mp3?st=e_L_wtihItor02Ciw89-8A&e=1743144665&a=1&p=0&r=cef06894c5e2999b65e5efd97e1c9186&t=1742543801591",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "4",
+        title: "man at the garden",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''
+[id: tvczgdlr]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: man at the garden]
+[length: 03:53]
+[00:32.29]Twice emotional stability
+[00:33.76]A sound body and tranquility
+[00:35.56]I deserve it all
+[00:37.33]Like minds and less enemies
+[00:38.85]Stock investments, more entities
+[00:41.24]I deserve it all
+[00:42.72]VVS, that's white diamonds
+[00:43.97]GNX with the seat back reclinin', bitch
+[00:46.38]I deserve it all
+[00:47.70]Put my homes on the beachfront
+[00:49.54]Flyin' private, what you eat for lunch?
+[00:51.50]I deserve it all
+[00:53.07]The respect and the accolades
+[00:54.87]Lampin' on the island, watching Cast Away
+[00:56.78]I deserve it all
+[00:58.08]For every good nigga that passed away
+[00:59.74]Sent 2.5 million on an average day
+[01:01.60]I deserve it all
+[01:03.63]Keep my name by the world leaders
+[01:05.31]Keep my crowds loud inside Ibiza
+[01:07.23]I deserve it all
+[01:08.94]More money, more power, more freedom
+[01:10.74]Everything Heaven allowed us, bitch
+[01:12.34]I deserve it all
+[01:15.02]Hm, I deserve it all
+[01:21.86]Hm, I deserve it all
+[01:28.48]All
+[01:33.47]All
+[01:34.99]'Cause my intentions was pure
+[01:36.67]Even when you wasn't sure
+[01:38.15]Even with every allure
+[01:39.58]How much temptation you endured?
+[01:41.84]You probably look for every cure
+[01:43.23]I said I deserve it all
+[01:45.12]I'm wakin' up at 6:00 a.m.
+[01:46.99]Six miles a day, conditioning my win
+[01:48.68]I said I deserve it all
+[01:50.55]I'm showin' up as your friend
+[01:51.77]Tellin' truths better than your next of kin
+[01:53.65]I said I deserve it all
+[01:55.55]I never ask for too much credit
+[01:57.01]Seekin' validation just for the aesthetics, bitch
+[01:59.46]I deserve it all
+[02:00.91]I see you as a human first
+[02:02.17]Even when you didn't understand your worth
+[02:04.33]Bitch, I deserve it all
+[02:06.09]It's innate to mind my business
+[02:07.41]Writin' words, tryna elevate these children
+[02:09.44]That's why I deserve it all
+[02:11.42]Pray for those who prayed against me
+[02:12.52]Every reason why my ancestors sent me
+[02:14.66]Bitch, I deserve it all
+[02:19.76]I deserve it all
+[02:25.05]I deserve it all
+[02:30.91]All
+[02:36.38]All
+[02:37.72]Put a smile on my mama
+[02:39.39]Good health and good karma
+[02:40.84]Yeah, she deserves it all
+[02:42.32]One hunnid murals out in Compton
+[02:44.58]Remember me, I kept my promise
+[02:46.20]Yeah, we deserve it all
+[02:47.50]A better life for my daughter
+[02:49.42]Made my son take it further than his father
+[02:51.33]Yeah, he deserves it all
+[02:52.72]A close relationship with God
+[02:54.40]Whisper to me every time I close my eyes
+[02:56.49]He say, "You deserve it all"
+[02:58.07]Keep these bitch niggas away from me
+[02:59.96]Keep all my blessings faithfully
+[03:01.25]Keep my essence contagious, that's okay with me
+[03:03.02]I burn this bitch down, don't you play with me or stay with me
+[03:05.78]I'm crashin' out right now, no one's safe with me
+[03:07.52]I did it with integrity, and niggas still try hate on me
+[03:10.42]Just wait and see, more blood be spillin', it's just paint to me
+[03:13.15]Dangerously, nothin' changed with me, still got pain in me
+[03:15.74]Flip a coin, want the shameless me or the famous me?
+[03:18.11]How annoying does it angers me to know the lames can speak
+[03:20.86]On the origins of the game I breathe, that's insane to me
+[03:23.48]It's important, I deserve it all because it's mine
+[03:26.04]Tell me why you think you deserve the greatest of all time, motherfucker
+[03:32.77]I deserve it all
+[03:38.15]I deserve it all
+[03:41.50]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/ManAtTheGarden-KendrickLamar-16803199.mp3?st=8U0MAf719WQMTl8Zbju6Rg&e=1743148346&a=1&p=0&r=def89b34241ee15123ab981369a478c0&t=1742547154588",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "5",
+        title: "hey now (feat Dody6)",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: pshxutjo]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: hey now (feat. Dody6)]
+[length: 03:38]
+[00:04.06]Damn, baby
+[00:09.10]I like it
+[00:14.07]Damn
+[00:17.43]Hm
+[00:19.36]Hey now, say now, I'm all about my Yen
+[00:21.26]Big face Buddha, get my peace from within
+[00:23.91]Send the kites to all my dirties in the pen
+[00:25.99]Let the honorary walk for the win, for the win
+[00:28.33]You crash out, then you better break the backboard
+[00:30.82]I got friends, hopin' that they make the tabloids
+[00:33.27]You know the last one figured, he was Magneto
+[00:35.52]You play God, you gon' get what you ask for
+[00:37.93]We got the same twenty-four, what you mad for?
+[00:40.25]I put a square on his back like I'm Jack Dorsey
+[00:42.73]It's high beams if I make a public appearance
+[00:45.19]Go back to hidin', 'cause I'm not too friendly with—
+[00:47.29]One, one thousand, two, one thousand, four
+[00:49.69]The Black know I just strangled me a goat
+[00:52.06]I walked in with a therapeutic flow
+[00:53.96]Put a few hundred up, let 'em go, let 'em go
+[00:56.93]Hey now, say now
+[00:59.34]Hey now, say now
+[01:01.64]Hey now, say now
+[01:03.32]Hm, hey now, say now
+[01:06.37]Hey now, say now, I'm all about my Yen
+[01:08.28]Big face Buddha, get my peace from within
+[01:11.00]Send the kites to all my dirties in the pen
+[01:12.74]Let the honorary walk for the win, for the win
+[01:15.71]Hey now, say now
+[01:18.07]Hey now, say now
+[01:20.46]Hey now, say now
+[01:22.77]Hey now, say now
+[01:24.77]Hey now, say now, I done slid on they backstreet
+[01:27.33]Heavy on the Parmesan, every day tax season
+[01:29.50]What the—you wearin'? Bro, it's tacky—
+[01:32.13]Layin' on they deathbed, tryna match me
+[01:34.20]Oh, my God, I'm 'bout to do the fool
+[01:36.32]They be screamin' out "P", but they resume is boof
+[01:38.83]Switch both lanes, the engine sound like the zoo
+[01:41.04]Need a fee just to breathe, —I can't talk to you
+[01:43.44]It's the Ben Frank murderer, Mister, I ain't heard of you
+[01:46.01]Gulf streams, back to back, flyin' through the turbulence
+[01:48.06]Who is he? Free lunch (hm) Kraft Services
+[01:50.88]Throw your—out this rental, if I smell nervousness
+[01:53.16]Hey now, say now, let me pop my—
+[01:55.29]Water down my wrist, I'm around my—
+[01:57.57]It's a green light, don't get out of bounds, I'ma blitz
+[01:59.85]It's a bird, it's a plane, no, it's all blue strips
+[02:02.28]—, what?
+[02:02.84]Hey now, say now
+[02:05.12]Hey now, say now
+[02:07.42]Hey now, say now
+[02:09.18]Hm, hey now, say now
+[02:11.97]I'm way too important
+[02:14.24]I'm way too important
+[02:16.66]I'm way too important to ever let you slide on me again
+[02:21.16]Startin' to see spaceships on Rosecrans (Startin' to see spaceships on Rosecrans)
+[02:26.24]I seen the aliens hold hands (I seen the aliens hold hands)
+[02:31.00]They wanna see me do my dance (They wanna see me do my dance)
+[02:35.76]I let 'em watch me do my dance
+[02:39.91]Who the—I feel like? I feel like Joker
+[02:42.27]Harley Quinn, I'm in the cut with a blower
+[02:43.93]Ayy, —get spooky every day in October
+[02:46.68]My torpedo even jumped out on smokers, J-Cat
+[02:48.61]Ayy, we mean muggin'—, Dody too important
+[02:51.04]If they talkin' 'bout playin' ball, me and my team gon' get to scorin'
+[02:53.42]If they talkin' 'bout playin' ball, they can take it up with Jordan
+[02:55.81]It's bald heads and the hecklin' for all endorsements
+[02:58.26]Eeny, meeny, miny, moe I'm tryna tag a—toe
+[03:00.56]I'm aggressive on the beat and real life, —know
+[03:02.75]Ayy, I tatted up my body, it depend, level four
+[03:05.11]Ayy, I sharpened up a knife and came home to a blow
+[03:07.47]My b- gon' get to tweakin' like she playin' with her nose
+[03:09.82]Lil' brodie 'bout to crash, man, y'all—be on go
+[03:12.29]I'm a different type of trophy, baby girl, I'm rose gold
+[03:14.63]Me and Dot get to slidin', put 'em in a choke hold
+[03:16.62]—actin' like some—actin' like some—
+[03:19.17]Ayy, I jumped out that pan, then I jumped up in a Ghost
+[03:21.59]I'm the hush type of—, see my face, then he froze
+[03:24.00]All that shit he was talkin', found out he not that bold
+[03:26.31]Okay, this shit like forty, that's a dub, okay, let's add it up
+[03:28.82]Baby—fat, can you do it? Can you back it up?
+[03:31.32]Kickflip a—, I got Tech Decks, and it ain't—for me to call and get your chin checked
+[03:35.40]Tell 'em Dody did that
+[03:36.49]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/HeyNow-KendrickLamar-16803201.mp3?st=1neOavos2OKqKFq32mLi3Q&e=1743148444&a=1&p=0&r=9dc0196b99f71ffe38f0d6307b6b40cb&t=1742547250273",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "6",
+        title: "reincarnated",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: pshxutjp]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: reincarnated]
+[length: 04:36]
+[00:00.23]Que reflejan tu mirada
+[00:04.43]La noche, tú y yo
+[00:20.64]I got this fire burnin' in me from within
+[00:22.47]Concentrated thoughts on who I used to be, I'm sheddin' skin
+[00:24.95]Every day, a new version of me, a third of me demented
+[00:27.69]Cemented in pain, juggling opposing kinds of fame
+[00:30.58]I don't know how to make friends, I'm a lonely soul
+[00:32.63]I recollect this isolation, I was four years old
+[00:35.56]Truth be told, I've been battling my soul, tryna navigate the real and fake
+[00:39.01]Cynical about the judgement day
+[00:40.78]I did bad, slight progression last year and it fucked me up
+[00:43.88]Reincarnated on this earth for a hundred plus
+[00:46.41]Body after body, lesson after lesson
+[00:48.47]Let's take it back to Michigan in 1947
+[00:51.20]My father kicked me out the house 'cause I wouldn't listen to him
+[00:54.05]I didn't care about his influence, only loved what I was doing
+[00:56.74]Gifted as a musician, I played guitar on the grand level
+[00:59.65]The most talented where I'm from, but I had to rebel
+[01:02.57]And so I'm off in the sunset, searchin' for my place in the world
+[01:05.77]With my guitar up on my hip, that's the story unfurled
+[01:08.34]I found myself with a pocket full of money, and a whole lot of respect
+[01:11.77]While the record vendors loved me
+[01:13.27]I was head of rhythm and blues
+[01:14.98]The women that fell to they feet, so many to choose
+[01:17.63]But I manipulated power, as I lied to the masses
+[01:20.53]Died with my money, gluttony was too attractive, reincarnated
+[01:34.48]Another life had placed me as a black woman in a chillin' circuit
+[01:37.56]Seductive vocalist as the promoter hit the curtains
+[01:39.82]My voice was angelic straight from heaven, the crowd sobbed
+[01:42.67]A musical genius what the articles emphasized
+[01:45.32]Had everything I wanted but I couldn't escape addiction
+[01:47.86]Hair on needles had me in fetal position, restricted
+[01:50.40]Turned on my family, I went wherever cameras be
+[01:53.07]Cocaine, no private planes for my insanity
+[01:55.93]Self-indulged, discipline never been my sentiments
+[01:58.26]I needed drugs, to me, an eight-ball was like penicillin
+[02:00.96]Fuck love, my happiness was in that brown sugar
+[02:03.51]Sex and melodies gave me hope when nobody's lookin'
+[02:06.29]My first assistant was a small-town scholar
+[02:08.53]Never did a Quaalude 'til I got myself around her
+[02:11.72]My daddy looked the other way, he saw sin in me
+[02:14.37]I died with syringes pinched in me, reincarnated
+[02:26.52]My present life is Kendrick Lamar
+[02:28.13]A rapper looking at the lyrics to keep you in awe
+[02:30.74]The only factor I respected was raising the bar
+[02:33.34]My instincts sent material straight to the charts, huh
+[02:36.79]My father kicked me out the house, I finally forgive him
+[02:39.50]I'm old enough to understand the way I was livin'
+[02:42.30]Ego and pride had me looking at him with resentment
+[02:44.56]I close my eyes hoping that I don't come off contentious
+[02:47.16]I'm yelling, "Father, did I finally get it right?" Everything I did was selfless
+[02:50.73]I spoke freely when the people needed me, I helped them
+[02:53.64]I didn't gloat even told them no when the vultures came took control
+[02:57.04]Of my fleshly body when the money changed
+[02:58.92]"Son you do well but your heart is closed
+[03:01.17]I can tell residue that linger from your past creates itself"
+[03:04.18]Father I'm not perfect I got urges, but I hold them down
+[03:06.70]"But your pride has to die," okay father show me how
+[03:09.24]Tell me every deed that you done and what you do it for
+[03:11.90]I kept one hundred institutions paid, "Okay, tell me more"
+[03:14.87]I put one hundred hoods on one stage, "Okay, tell me more"
+[03:17.16]I'm tryna push peace in LA, "But you love war"
+[03:19.97]No, I don't, "Oh, yes, you do," okay then tell me the truth
+[03:22.47]"Every individual is only a version of you
+[03:25.13]How can they forgive when there's no forgiveness in your heart?"
+[03:27.80]I could tell you where I'm going, "I could tell you who you are"
+[03:31.13]You fell out of heaven 'cause you was anxious
+[03:33.30]Didn't like authority, only searched to be heinous
+[03:35.82]Isaiah fourteen was the only thing that was prevalent
+[03:41.83]My greatest music director was you
+[03:43.34]It was colors, it was pinks, it was reds, it was blues
+[03:46.04]It was harmony and motion
+[03:47.41]I sent you down to earth 'cause you was broken
+[03:49.56]Rehabilitation not psychosis
+[03:51.48]But now we here now, centuries you manipulated man with music
+[03:54.96]Embodied you as superstars to see how you moving
+[03:57.79]You came a long way from garnishing evil-ish views
+[04:00.27]And all I ever wanted from you was love and approval
+[04:03.45]I learned a lot, no more putting these people in fear
+[04:05.78]The more that word is diminished, the more it's not real
+[04:08.14]The more light that I can capture, the more I can feel
+[04:10.82]I'm using words for inspiration as an ideal
+[04:13.92]"So can you promise that you won't take your gifts for granted?"
+[04:16.28]I promise that I'll use my gifts to bring understanding
+[04:18.77]"For every man, woman and child, how much can you vow?"
+[04:21.34]I vow my life just to live one in harmony now
+[04:23.86]"You crushed a lot of people keeping their thoughts in captivity"
+[04:26.85]And I'm ashamed that I ever created that enemy
+[04:29.54]Then let's rejoice where we at
+[04:31.70]I rewrote the devil's story just to take our power back, 'carnated
+[04:33.46]''',
+        urlMedia:
+            "https://a01.nct.vn/Unv_Audio542/Reincarnated-KendrickLamar-16803202.mp3?st=G9GssZtaXgD2qNTDXatyPQ&e=1743148533&a=1&p=0&r=08634b7e0563b0f0cd686c58f8d3d374&t=1742547338431",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "7",
+        title: "tv off (feat. Lefty Gunplay)",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''
+[id: yvretajk]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: tv off (feat. Lefty Gunplay)]
+[length: 03:41]
+[00:04.88]All I ever wanted was a Black Grand National
+[00:07.24]Fuck being rational, give 'em what they ask for
+[00:11.12]It's not enough (Ayy)
+[00:12.12]Few solid niggas left, but it's not enough
+[00:14.48]Few bitches that'll really step, but it's not enough
+[00:16.77]Say you bigger than myself, but it's not enough (Huh)
+[00:19.44]I get on they ass, yeah, somebody gotta do it
+[00:21.46]I'll make them niggas mad
+[00:22.65]Yeah, somebody gotta do it
+[00:23.74]I'll take the G-pass, shit, watch a nigga do it
+[00:26.20]Huh, we survived outside, all from the music, nigga, what?
+[00:30.36]They like, "What he on?"
+[00:31.61]It's the Alpha and Omega bitch, welcome home
+[00:35.08]This is not a song
+[00:36.53]This a revеlation, how to get a nigga gone
+[00:38.78]You need you a man, baby, I don't understand, baby
+[00:40.72]Pay your bill and makе you feel protected like I can, baby
+[00:43.04]Teach you somethin' if you need correction, that's the plan, baby
+[00:45.62]Don't put your life in these weird niggas' hands, baby (Woah)
+[00:48.01]It's not enough (Ayy)
+[00:50.46]Few solid niggas left, but it's not enough
+[00:52.76]Few bitches that'll really step, but it's not enough
+[00:55.15]Say you bigger than myself, but it's not enough (Huh)
+[00:58.21]I get on they ass, yeah, somebody gotta do it
+[00:59.67]I'll make them niggas mad, yeah, somebody gotta do it
+[01:02.22]I'll take the G-pass, shit, watch a nigga do it
+[01:04.90]Huh, we survived outside, all from the music, nigga, what?
+[01:08.73]Hey, turn this TV off
+[01:09.73]Ain't with my type activities?
+[01:10.97]Then don't you get involved
+[01:12.19]Hey, what, huh, how many should I send? Send 'em all
+[01:14.00]Take a risk or take a trip
+[01:15.42]You know I'm trippin' for my dog
+[01:16.92]Who you with? Couple sergeants and lieutenants for the get back
+[01:19.12]This revolution been televised
+[01:20.30]I fell through with the knick-knacks
+[01:21.59]Hey, young nigga, get your chili up, yeah, I meant that
+[01:23.96]Hey, black out if they act out, yeah, I did that
+[01:28.26]Hey, what's up, though?
+[01:28.94]I hate a bitch that's hatin' on a bitch and they both hoes
+[01:31.21]I hate a nigga hatin' on them niggas and they both broke
+[01:33.37]If you ain't coming for no chili, what you come for?
+[01:36.21]Nigga feel like he entitled 'cause he knew me since a kid
+[01:38.82]Bitch, I cut my granny off if she don't see it how I see it, hm
+[01:40.94]Got a big mouth but he lack big ideas
+[01:43.64]Send him to the moon, that's just how I feel, yelling
+[01:45.91]It's not enough (Ayy)
+[01:47.95]Few solid niggas left, but it's not enough
+[01:50.28]Few bitches that'll really step, but it's not enough
+[01:52.83]Say you bigger than myself, but it's not enough
+[01:58.26]Huh
+[01:59.65]Huh, huh
+[02:02.29]Hey
+[02:03.62]Hey (Mustard on the beat, ho)
+[02:04.96]Mustard
+[02:10.37]Niggas actin' bad, but somebody gotta do it
+[02:11.66]Got my foot up on the gas, but somebody gotta do it
+[02:13.86]Huh, turn this TV off, turn this TV off
+[02:16.00]Huh, turn this TV off, turn this TV off
+[02:18.87]Huh, turn this TV off, turn this TV off
+[02:21.03]Huh, turn this TV off, turn this TV off
+[02:23.90]Ain't no other king in this rap thing, like siblings
+[02:25.98]Nothing but my children, one shot, they disappearin'
+[02:28.25]I'm in a city with a flag
+[02:30.12]Be gettin' thrown like it was pass interference
+[02:31.90]Padlock around the building
+[02:33.35]Crash, pullin' up in unmarked truck just to play freeze tag
+[02:35.72]With a bone to pick like it was sea bass
+[02:37.57]So when I made it out
+[02:38.81]I made about fifty K from a show
+[02:40.26]Tryna show niggas the ropes before they hung from a rope
+[02:42.58]I'm prophetic, they only talk about it how I get it
+[02:45.29]Only good for saving face, seen the cosmetics
+[02:47.67]How many heads I gotta take to level my aesthetics?
+[02:50.00]Hurry up and get your muscle up, we out the plyometric
+[02:52.33]Nicarana by the lux, soon as I up the highest metric
+[02:54.31]The city just made it sweet, you could die, I bet it
+[02:57.21]They mouth get full of deceit, let these cowards tell it
+[02:59.78]Walk in New Orleans with the etiquette of L.A., yelling
+[03:01.80]Mustard (Ah, man)
+[03:06.75]Niggas actin' bad, but somebody gotta do it
+[03:08.75]Got my foot up on the gas, but somebody gotta do it
+[03:11.35]Huh, turn this TV off, turn this TV off
+[03:13.75]Huh, turn this TV off, turn this TV off
+[03:16.08]Huh, turn this TV off, turn this TV off
+[03:18.32]Huh, turn this TV off, turn this TV off
+[03:21.02]Shit gets crazy, scary, spooky, hilarious
+[03:23.03]Crazy, scary, spooky, hilarious
+[03:25.58]Shit gets crazy, scary, spooky, hilarious
+[03:27.93]Crazy, scary, spooky, hilarious
+[03:30.20]Shit gets crazy, scary, spooky, hilarious
+[03:32.52]Crazy, scary, spooky, hilarious
+[03:34.63]Shit gets crazy, scary, spooky, hilarious
+[03:37.48]Crazy, scary, spooky, hilarious
+[03:39.77]''',
+        urlMedia:
+            "https://a01.nct.vn/Unv_Audio542/TvOff-KendrickLamar-16803203.mp3?st=TTj00M_i9EP08r8wedO3WQ&e=1743148633&a=1&p=0&r=ad6d0681dae8312fed6fcf19486c6c8f&t=1742547438900",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "8",
+        title: "dodger blue (feat. Whallie the Sensei, Sietie7x & Roddy Ricch)",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: pshxuffd]
+[ar: Kendrick Lamar]
+[al: Kendrick Lamar Videos]
+[ti: dodger blue (feat. Wallie the Sensei, Siete7x & Roddy Ricch)]
+[length: 02:11]
+[00:03.22]Ooh
+[00:06.48]
+[00:08.95]Ooh
+[00:12.49]
+[00:15.27]White diamonds, 2 a.m., she wildin'
+[00:17.92]Bitches sick, got their stomach in her comments
+[00:20.85]What school you went to? Gardena, Compton
+[00:23.76]Westchester, King-Drew, then we function
+[00:26.23]Lil' nigga, but that dog in me, that's on top
+[00:29.48]On my kids, I'll sock you niggas up
+[00:31.65]Have you ever took a fade and ran three more back to back?
+[00:34.59]Oh, you haven't? Then shut the fuck up and keep it rap
+[00:37.62]Gah, gah, gah
+[00:39.14]Bitch, I'm from the Land
+[00:40.58]Don't say you hate L.A. when you don't travel past the ten
+[00:44.65]Am I trippin'? Yes, I am
+[00:46.03]Meditate over some money, I see Franklin, I find zen
+[00:50.73]Bitch, I'm from the Land
+[00:51.99]Don't say you hate L.A., but live in L.A. and pretend
+[00:55.25]My neck on Tarantino, Alejandro, Spike Lee
+[00:58.06]Just know you took the scenic route if you stand by me, stupid
+[01:01.97]So fly in this bitch
+[01:03.62]50 on me, don't die tryin' and shit (ooh-ooh)
+[01:06.41]You know I'm up and down when I slide in this bitch
+[01:09.31]Dreamers and the Jets outside in this bitch
+[01:12.24]Westside, get the money, yeah, that's fo' sho'
+[01:15.17]Streets don't love you, better respect the code
+[01:17.92]Ain't no sleepin' in on Sunday
+[01:20.93]If it's 'bout the money, then my niggas on go
+[01:23.43]When I walk in, oh yeah, bring that
+[01:26.91]It's unanimous, how I pop shit
+[01:29.28]When I walk in, hos better get in check
+[01:32.63]You're lookin' at a bad bitch, nothin' less
+[01:35.23]Walk, walk, walk, walk
+[01:37.94]Walk, walk, walk, walk
+[01:40.98]Tip, toe, pivot, walk
+[01:43.86]Tip, toe, pivot, walk
+[01:46.80]Ooh, don't take it personal
+[01:51.54]You won't be the first to know
+[01:54.30]Just might be the first to go
+[01:57.17]Just might be, ooh
+[02:00.08]Don't take it personal
+[02:02.99]You won't be the first to know
+[02:05.71]Just might be the first to go
+[02:08.54]Just might be
+[02:10.29]''',
+        urlMedia:
+            "https://a01.nct.vn/Unv_Audio542/DodgerBlue-KendrickLamar-16803204.mp3?st=HudRyq1C5iRUuA8Dj8E_RQ&e=1743148713&a=1&p=0&r=5562d09e0087beaedb19ccf6bb168922&t=1742547521607",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "9",
+        title: "peakaboo",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: aairwbla]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: peekaboo (feat. AzChike)]
+[length: 02:36]
+[00:00.62]Give a helping hand
+[00:04.72]To your fellow men, oh-oh, my
+[00:12.14]A'ight, what?
+[00:17.89]Look
+[00:19.84]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:21.38]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:22.24]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:23.54]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:25.39]Huh? They ain't talkin' 'bout nothin'
+[00:28.59]Hm, a'ight
+[00:29.45]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:30.74]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:31.81]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:33.03]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[00:34.96]Huh? They ain't talkin' 'bout nothin', hm
+[00:38.95]Peekaboo, how'd you put them boogers in my chain?
+[00:41.45]Peekaboo, 80 pointers, like a Kobe game
+[00:43.70]Peekaboo, 7.62s I'll make 'em plank
+[00:46.16]Peekaboo, poppin' out, you better not smoke my name
+[00:48.30]Peekaboo, put two foreigns on the 405
+[00:50.69]Peekaboo, cacio e pepe if I'm doin' pasta
+[00:53.16]Peekaboo, why you actin' tough on IG Live?
+[00:55.78]Peekaboo, you know my lil'—off they rocker
+[00:58.17]Peekaboo, surprise, —it's that—Chike E. Cheese
+[01:00.52]Peekaboo, let me FaceTime my opp, —I'm up the street
+[01:02.82]Peekaboo, yeah, it's Az, I'm puttin' somethin' to sleep
+[01:05.28]Peekaboo, he on the ground, I praise God and start stompin' feet
+[01:07.66]Peekaboo, I put ten on his face, —my shooter playin'
+[01:10.04]Peekaboo, I hit it from the back, I told her move her hands
+[01:12.66]Peekaboo, then slide—where her, uh, at
+[01:14.91]Peekaboo, I'm on your top, I'm with Dot, —don't look back
+[01:17.56]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[01:18.78]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[01:19.76]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[01:20.96]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[01:23.03]Huh? They ain't talkin' 'bout nothin', hm
+[01:27.04]Hey, hey, hey, hey, hey, hey, hey, that's my—
+[01:29.40]Hey, hey, hey, hey, hey, hey, hey, that's my—
+[01:31.88]Hey, hey, hey, hey, with all that fake—
+[01:34.24]Hey, hey, hey, hey, ain't the one to play with
+[01:36.69]Hey, hey, hey, hey, hey, pull off in a Lamb'
+[01:38.43]Double-park it all at Tam's, Mr. Get-Off-On-Your-Mans
+[01:40.88]If he hatin', disrespect, you better follow up with hands
+[01:43.61]Losses to the neck, but now I'm trophied up, I'm sayin', like
+[01:46.16]Bing-bop-boom-boom-boom-bop-bam
+[01:48.55]The type of—I'm on, you wouldn't understand
+[01:51.06]The type of skits I'm on, you wouldn't understand
+[01:53.32]Big dog business, I would not hold your hand
+[01:55.75]Broke—business, I could not be your man
+[01:57.73]Never got his—whooped until we open up that can
+[02:00.42]Damn, alley-oop me bands, I'ma slam
+[02:02.64]Gym freak—I like my MAC touchin' yams
+[02:05.00]Pay the opps all around me, I'ma tell you, "Turn it off"
+[02:07.30]Heard what happened to your mans, not sorry for your loss
+[02:09.61]Should've prayed before them shooters came and nailed him to the cross
+[02:12.22]I let your boy get a pass, —you lucky he soft, for real
+[02:14.93]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:16.29]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:17.58]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:18.68]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:20.96]Huh? They ain't talkin' 'bout nothin', hm, a'ight
+[02:24.70]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:26.03]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:27.24]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:28.47]What they talkin' 'bout? They ain't talkin' 'bout nothin'
+[02:30.19]Huh? They ain't talkin' 'bout nothin', hm
+[02:33.98]Peekaboo
+[02:34.41]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/Peekaboo-KendrickLamar-16803205.mp3?st=-KzXA-K59vAZ8hJBHDbnbA&e=1743149031&a=1&p=0&r=5c768abb85b85f74c06a3c5a6a479c96&t=1742547838782",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "10",
+        title: "heart pt. 6",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''
+[id: pshxutja]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: heart pt. 6]
+[length: 04:52]
+[00:23.30]Load up the Pro Tools and press three
+[00:25.50]Studio filled with Jack In The Box and Pepsis
+[00:28.32]Niggas watchin' Worldstar videos, not the ESPYs
+[00:31.23]Laughin' at B Pump, her stomach turnin', I get up and proceeded to write somethin'
+[00:35.63]Ab-Soul in the corner mumblin' raps, fumblin' packs of Black & Milds
+[00:39.69]Crumblin' Kush 'til he cracked a smile
+[00:41.78]His words legendary, wishin' I could rhyme like him
+[00:44.77]Studied his style to define my pen
+[00:47.06]That was back when the only goal was to get Jay Rock through the door
+[00:50.10]Warner Brother Records, hope Naim Ali would let us know
+[00:53.13]Was excited just to go to them label meetings
+[00:55.84]Wasn't my record deal, but still, I couldn't believe it
+[00:58.57]Me and Rock inside the booth, hibernatin'
+[01:01.09]It was simple math, if he made it, that mean I made it
+[01:03.98]Everything I had was for the team, I remained patient
+[01:06.80]Grindin' with my brothers, it was us against them, no one above us, bless our hearts
+[01:11.59]Use your heart and not your eyes (baby, just relax and ride)
+[01:17.06]If you got time and I got time (yeah, yeah)
+[01:22.95]Free your thoughts and watch them fly
+[01:28.80]Use your heart and not your eyes (mm)
+[01:34.89]My nigga Dave had a champagne Acura
+[01:37.14]A bunch of instrumentals I freestyled in the passenger
+[01:39.81]That nigga wore several hats, a producer, a manager, director, and DJ
+[01:43.97]A hothead squabblin', Bloods, Pirus, and Keeways
+[01:46.99]For this little thing of ours, we called TDE
+[01:49.77]I watch you take some penitentiary chances to say the least
+[01:52.80]Remember in the county buildin' with MixedByAli
+[01:55.64]We tried to freak the system just to make a couple ends meet
+[01:58.71]That's my nigga for shit sure
+[02:00.71]He brought Q over, but Q didn't rap, but he learned from our inspo
+[02:04.50]We split Louisiana chicken riverboat special
+[02:07.51]Sleepin' next to 02R consoles to be our refuge
+[02:10.82]He was homeless and I left home
+[02:12.80]Q said, "Dot, you won't be slept on, you the nigga to bet on (use your h-)
+[02:16.93]Top had given us the million in the home lived in
+[02:19.36]Hopin' that we see some millions, God bless our hearts
+[02:22.80]Use your heart and not your eyes (baby, just relax and ride)
+[02:28.22]If you got time and I got time (yeah, yeah)
+[02:34.23]Free your thoughts and watch them fly
+[02:40.15]Use your heart and not your eyes
+[02:46.03]Punch played Phil Jackson in my early practices
+[02:48.96]Strategies on how to be great amongst the averages
+[02:52.00]I picked his brain on what was ordained, highly collaborative
+[02:54.99]Rep pushed the label the same, amongst the savages
+[02:57.85]Moose kept my name in the function that he would run in
+[03:00.89]TEEZ kept the vultures away from me that was comin'
+[03:03.99]Sounwave let me borrow his clothes for shows
+[03:06.66]As a hype man, to cook up in this room 'til the night ends
+[03:09.74]Time flies, I'm carryin' debates of a top five
+[03:12.65]Buryin' my opps and allies
+[03:15.05]But I'd done a half job communicatin' feelings of bein' stagnant
+[03:18.45]Life was gettin' bigger than just rappin'
+[03:20.79]The bidness, what I was lackin'
+[03:22.45]Top used to record me back when it was poor me
+[03:25.22]And now we at the round table for what assures me
+[03:28.18]I guess my motivation was the yearnin' for independence
+[03:31.32]Poured everything I had left in the family bidness
+[03:34.22]Now it's about Kendrick, I wanna evolve, place my skillset as a Black exec'
+[03:38.95]I jog my memory, knowin' Black Hippy didn't work 'cause of me
+[03:42.47]Creatively, I moved on, with new concepts in reach
+[03:45.57]Top, remember all them sessions we would strategize?
+[03:48.19]To hit the streets, then come back record three records, ah
+[03:51.38]To tell the truth, it fucked me up when D-Man passed
+[03:54.32]The motive was the condolences, but the pride crashed
+[03:57.43]I had to bypass old mythologies, I had
+[04:00.59]Put my heart on display like it was an iMac
+[04:03.08]To all my young niggas, let me be the demonstration
+[04:06.01]How to conduct differences with a healthy conversation
+[04:09.11]If that's your family, then handle it as such
+[04:11.76]Don't let the socials gas you up, or let emotions be your crutch
+[04:14.53]Pick up the phone and bust it up before the history is lost
+[04:17.56]Hand-to-handshake is good when you have a heart-to-heart
+[04:20.42]Use your heart and not your eyes (baby, just relax your mind)
+[04:26.55]If you got time and I got time (yeah, yeah)
+[04:32.55]Free your thoughts and watch them fly
+[04:38.48]Use your heart and not your eyes (hmm-hmm-hmm-hmm-hmm-hmm)
+[04:46.07]''',
+        urlMedia:
+            "https://a01.nct.vn/Unv_Audio542/HeartPt6-KendrickLamar-16803206.mp3?st=lYrw7zYN14VjAkQSNVCJnw&e=1743148871&a=1&p=0&r=83e9c5df07f2423fbc70e5c3a9f251a9&t=1742547677843",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "11",
+        title: "gnx (feat. Hitta J3, YoungThreat & Peysoh)",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''
+[id: pshxutjs]
+[ar: Kendrick Lamar]
+[al: GNX]
+[ti: gnx (feat. Hitta J3, YoungThreat & Peysoh)]
+[length: 03:14]
+[00:12.62]Tell 'em Kendrick did it, ay, who showed you how to run a blitz?
+[00:15.18]Tell 'em Kendrick did it, who put the West back in front of—?
+[00:17.83]Tell 'em Kendrick did it, ayy I'm trippin' and I'm lovin' it
+[00:20.68]Tell 'em Kendrick did it, like, wha
+[00:24.35]Hi, have you ever been a joint and you know it?
+[00:27.73]Have you ever had to flip your unemployment?
+[00:30.37]On the dead guys, —I ain't goin'—
+[00:32.98]Ayy, on the dead ones
+[00:35.15]We'll treat an enem- like some bread crumbs
+[00:37.66]All of my killers on go, like, who said somethin'?
+[00:40.06]Redrum, all I think about when I see heads come
+[00:43.05]Do my dance, hit the chop when I see opps go
+[00:45.76]Let 'em claim it, we the ones who really pop, bro
+[00:48.22]Don't televise it, we the ones who lettin' chops blow
+[00:50.79]Opps know, let 'em piss him off and it's a flop show
+[00:53.33]Murder man, singin' murder music off a murder van
+[00:56.15]Beat the—up like I been celibate and I murder sound
+[00:58.74]Who is him? One and only shotta, known as murder man
+[01:01.28]Catch you doin' dirty, it's no other way but the murder plans
+[01:04.33]I broke her heart and you the type to go and fix it
+[01:06.92]Don't wanna speak if you ain't talkin' 'bout no ticket
+[01:09.54]I'm bougie with it, but I might just let you kiss it
+[01:11.50]Hit that block with diamonds on me, you could tell 'em Peysoh did it
+[01:16.98]Tell 'em Peysoh did it, ay, who showed you how to run a blitz?
+[01:19.38]Tell 'em Peysoh did it, who put the West back in front of—?
+[01:21.82]Tell 'em Peysoh did it, ayy I'm trippin' and I'm lovin' it
+[01:24.63]Tell 'em Peysoh did it, like, wha
+[01:28.42]Hi, have you ever been a joint and you know it?
+[01:31.71]Have you ever had to flip your unemployment?
+[01:34.49]On the dead guys, —I ain't goin'
+[01:36.21]How 'bout suicide doors, it's the Hitta, man
+[01:38.53]You don't wanna see them doors slidin' on the Caravan
+[01:41.27]I know killers who was catchin' bodies and not one fade
+[01:43.95]I was 13 up at Avalon, poppin' chains
+[01:46.52]14, ridin' minibikes with some dead friends
+[01:49.22]21 flag on my head like a Taliban
+[01:51.88]25, feelin' like the box, it was full of sand
+[01:54.69]At the cemetery, —up that's where I could've been
+[01:57.00]142nd, I'm connected like I'm Rosecrans
+[01:59.73]Kinda—I seen, try and forget and I will pop a Xan'
+[02:02.46]Uppin' scores, doin' files, sacrifices like a boxing ring
+[02:05.46]Can't throw in the towel, pistol-packin' since a child
+[02:08.39]Ayy, like it's Iraq, shooter name Hussein
+[02:11.32]Ridin' with the dirty blicky, switchy, make a new flame
+[02:13.88]She said I been a dog all my life, bae, can you change?
+[02:16.58]True to my religion, Cuban links, more than two chains
+[02:20.76]Tell 'em Hitta did it, ay, who showed you how to run a blitz?
+[02:23.24]Tell 'em Hitta did it, who put the West back in front of—?
+[02:25.83]Tell 'em Hitta did it, ayy I'm trippin' and I'm lovin' it
+[02:30.14]It's gettin' down to the wire
+[02:31.67]Get on my Bob the Builder—, get down with the pliers
+[02:34.36]Been comin' back-to-back hits, how this—ain't tired?
+[02:36.99]I'm with some rockstar—, they want Lizzie McGuire
+[02:40.18]I'm switchin' gears, I pop the clutch, I'll send a—
+[02:43.03]A risk-taker, I'll call you—bluff
+[02:45.06]If they hangin' out for real, we come deduct
+[02:47.20]Tuckin' tails, they out of luck
+[02:48.47]When it's wartime, they hidin' in the cut
+[02:51.18]Y'all had y'all chance, y'all couldn't do it
+[02:52.61]I swear I'm comin' worse than y'all baby moms
+[02:54.77]I'm puttin'—through it
+[02:56.50]They hate to see me doin' it
+[02:59.25]Meal ticket, I'm pursuin' it
+[03:00.84]I'm in the field for real, UCLA Bruins
+[03:03.25]They askin' how I do it, how a young—so fluent
+[03:06.07]I kept my mouth closed and I ain't never leave no witness
+[03:08.47]D.O.A. up on the scene, tell 'em YoungThreat did it, —
+[03:11.64]''',
+        urlMedia:
+            "https://stream.nct.vn/Unv_Audio542/Gnx-KendrickLamar-16803851.mp3?st=yShSh1_pQuSUgOjuYnsLlA&e=1743148923&a=1&p=0&r=8f9ba9791126e897d19d6b365593a67d&t=1742547728555",
+      ),
+    );
+    gnxTracks.add(
+      Track(
+        id: "12",
+        title: "gloria",
+        artist: KendrickLamar,
+        album: gnx,
+        duration: "3:41",
+        imgURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+        lyrics: '''[id: pshxgfis]
+[ar: Kendrick Lamar & SZA]
+[al: 4:48]
+[ti: gloria]
+[length: 04:48]
+[00:00.01]Sentado
+[00:02.99]Anita y tú
+[00:06.84]
+[00:18.10]Me and my bitch got a complicated relationship
+[00:21.15]She's so controllin', I noticed it ain't no playin' with
+[00:24.45]I met her when I was off the porch as a teenager
+[00:28.15]She said one day I would right my wrongs and see paper
+[00:31.55]We started out young, lookin' for some identity
+[00:34.78]Made a thousand mistakes, but never did we lack chemistry
+[00:38.22]Wrappin' my hand 'round your waist
+[00:40.02]That was back when you did whatever I say
+[00:42.53]Dreams of sellin' narcotics, runnin' blocks, or robbin' banks
+[00:46.08]I was in love with you, didn't know what it was with you
+[00:49.43]Kiss you in back of the class just to get a buzz with you
+[00:52.80]Some niggas wanted you, but they weren't committed
+[00:55.52]Preoccupied playin' John Madden and bullshittin'
+[00:58.83]Remember when granny died? You looked at me and said
+[01:02.08]"Baby, dry your eyes, depend on me as your relief
+[01:05.28]Let your anger be mine," we was locked in ever since then
+[01:09.25]So territorial, even took me 'way from my friends, hm, hm
+[01:15.99]Scared of forever, you know nothin' else is gon' pass
+[01:22.43]I just gotta let you know, woah
+[01:29.47]Whenever you want me, you got me 'til the end of time
+[01:34.36]Ooh, just gotta let you know
+[01:40.35]Said you gon' see other people if I didn't grow with you
+[01:43.53]Wasn't no more holdin' them pistols in front of stores with you
+[01:46.95]You want reality, not tragedy, for sure, I get you
+[01:50.34]To tell the truth, I been pretty used to what open-minded people do
+[01:54.30]In 2014, I went to Africa, baby, you was my passenger
+[01:58.36]My eyes and ears for all the years the neighborhood had baffled us
+[02:01.87]Of course I had to wrap it up, I didn't fully trust you
+[02:05.31]Fabrication, I disgust you, then you blocked me, I said, "Fuck you"
+[02:08.78]Nigga, what? I gave you life
+[02:11.65]I breathe the motherfuckin' charisma in this bitch
+[02:13.81]I bring the blessings, I gave you power
+[02:16.13]Nigga, I bring the rainfall, I gave you hustle
+[02:19.31]Then fall right back and love the very moment that I touch you
+[02:24.57]Scared of forever, you know nothin' else is gon' pass
+[02:29.69]I just gotta let you know
+[02:34.50]
+[02:38.09]Whenever you want me, you got me 'til the end of time
+[02:42.89]Ooh, just gotta let you know
+[02:49.92]You were spontaneous, firecracker, plus our love is dangerous
+[02:53.43]Life of passion, laughin' at you lose your temper, slightly crashin'
+[02:57.08]Dumb enough to ill reaction, ain't no disrespect
+[03:00.25]Highly sensitive, possess, so protect you, even when it's tragic
+[03:03.74]So jealous, hate it when I hit the club to get some bitches
+[03:07.20]Wrote 'em off, rather see me hit the church and get religious
+[03:10.69]Who you foolin'? I know what you doin', you my contradiction
+[03:14.32]'Member when you caught that body and still wiggled through that sentence?
+[03:17.78]Loved you more, when you flip and lose your shit, I hugged you more
+[03:21.15]It's sexy to me, cuss they ass out and hold that grudge some more
+[03:24.52]Down bitch, I know your favorite movie, is it Notebook?
+[03:27.91]So good, if they all sub me, get 'em all booked
+[03:31.22]My baby boo, you either heal niggas or you kill niggas
+[03:34.89]Both is true, it take some tough skin just to deal with you
+[03:38.17]Logical explanation don't exist, flippin' pages
+[03:41.65]Chapter after chapter, probably remarry and head to Vegas
+[03:45.04]Bitches gettin' marked out, they can't erase our history
+[03:48.31]They margins ain't big enough, they all led by bigotry
+[03:51.85]My woman and my right hand, my saint and my sin
+[03:54.90]Ain't no bitch like my bitch, 'cause that bitch been my pen
+[03:58.98]Gloria, I wanna take you to euphoria
+[04:03.46]Bitches want you, but they ain't strong enough
+[04:07.68]I heard her talkin' we notorious
+[04:10.54]It's so much, I can only
+[04:12.68]I see you, you see me
+[04:15.72]Both see what we want, oh, oh
+[04:19.35]I see you, you see me
+[04:22.66]Both see what we want
+[04:24.31]''',
+        urlMedia:
+            "https://a01.nct.vn/Unv_Audio542/Gloria-KendrickLamar-16803208.mp3?st=_sJcTy5RGVn9EBRSEcqx4A&e=1743148999&a=1&p=0&r=622c730fb5e48b09a6821f6d6509d78d&t=1742547806039",
+      ),
+    );
+  }
+
   // static AppUser user = AppUser(
   //   name: "Nguyen Dat Khuong",
   //   password: "1123",
@@ -19,109 +1137,9 @@ class FakeData {
     return jsonList.map((json) => Track.fromJson(json)).toList();
   }
 
-  static String soyLyricString = '''
-[00:09.66]The club isn't the best place to find a lover
-[00:12.16]So the bar is where I go
-[00:14.91]Me and my friends at the table doing shots
-[00:17.17]Drinking faster and then we talk slow
-[00:19.92]Come over and start up a conversation with just me
-[00:22.41]And trust me I'll give it a chance now
-[00:24.92]Take my hand, stop
-[00:26.16]Put Van The Man on the jukebox
-[00:27.16]And then we start to dance
-[00:28.41]And now I'm singing like
-[00:29.91]Girl, you know I want your love
-[00:32.16]Your love was handmade for somebody like me
-[00:35.41]Come on now, follow my lead
-[00:37.17]I may be crazy, don't mind me
-[00:39.66]Say, boy, let's not talk too much
-[00:42.41]Grab on my waist and put that body on me
-[00:45.41]Come on now, follow my lead
-[00:47.16]Come, come on now, follow my lead
-[00:50.91]I'm in love with the shape of you
-[00:53.41]We push and pull like a magnet do
-[00:55.66]Although my heart is falling too
-[00:58.16]I'm in love with your body
-[01:00.67]And last night you were in my room
-[01:03.16]And now my bedsheets smell like you
-[01:05.41]Every day discovering something brand new
-[01:08.17]I'm in love with your body
-[01:09.91]Oh I oh I oh I oh I
-[01:13.41]I'm in love with your body
-[01:14.91]Oh I oh I oh I oh I
-[01:18.42]I'm in love with your body
-[01:19.91]Oh I oh I oh I oh I
-[01:23.17]I'm in love with your body
-[01:25.42]Every day discovering something brand new
-[01:28.16]I'm in love with the shape of you
-[01:29.91]One week in we let the story begin
-[01:31.91]We're going out on our first date
-[01:34.92]You and me are thrifty
-[01:36.05]So go all you can eat
-[01:37.05]Fill up your bag and I fill up a plate
-[01:39.77]We talk for hours and hours about the sweet and the sour
-[01:42.27]And how your family is doing okay
-[01:44.77]Leave and get in a taxi, then kiss in the backseat
-[01:47.52]Tell the driver make the radio play
-[01:49.27]And I'm singing like
-[01:50.17]Girl, you know I want your love
-[01:52.18]Your love was handmade for somebody like me
-[01:55.42]Come on now, follow my lead
-[01:57.17]I may be crazy, don't mind me
-[01:59.92]Say, boy, let's not talk too much
-[02:02.17]Grab on my waist and put that body on me
-[02:05.17]Come on now, follow my lead
-[02:06.92]Come, come on now, follow my lead
-[02:10.67]I'm in love with the shape of you
-[02:13.42]We push and pull like a magnet do
-[02:15.67]Although my heart is falling too
-[02:18.17]I'm in love with your body
-[02:20.67]And last night you were in my room
-[02:23.42]And now my bedsheets smell like you
-[02:25.17]Every day discovering something brand new
-[02:28.17]I'm in love with your body
-[02:29.92]Oh I oh I oh I oh I
-[02:33.42]I'm in love with your body
-[02:34.93]Oh I oh I oh I oh I
-[02:38.18]I'm in love with your body
-[02:39.92]Oh I oh I oh I oh I
-[02:43.42]I'm in love with your body
-[02:44.92]Every day discovering something brand new
-[02:48.17]I'm in love with the shape of you
-[02:49.93]Come on, be my baby, come on
-[02:52.68]Come on, be my baby, come on
-[02:54.92]Come on, be my baby, come on
-[02:57.43]Come on, be my baby, come on
-[03:00.18]Come on, be my baby, come on
-[03:02.42]Come on, be my baby, come on
-[03:05.17]Come on, be my baby, come on
-[03:07.42]Come on, be my baby, come on
-[03:10.67]I'm in love with the shape of you
-[03:13.43]We push and pull like a magnet do
-[03:15.68]Although my heart is falling too
-[03:18.42]I'm in love with your body
-[03:20.67]Last night you were in my room
-[03:23.17]And now my bedsheets smell like you
-[03:25.42]Every day discovering something brand new
-[03:28.17]I'm in love with your body
-[03:29.75]Come on, be my baby, come on
-[03:32.67]Come on, be my baby, come on
-[03:33.74]I'm in love with your body
-[03:35.00]Come on, be my baby, come on
-[03:37.50]Come on, be my baby, come on
-[03:38.75]I'm in love with your body
-[03:39.99]Come on, be my baby, come on
-[03:42.50]Come on, be my baby, come on
-[03:43.74]I'm in love with your body
-[03:45.49]Every day discovering something brand new
-[03:48.24]I'm in love with the shape of you ''';
-
   // Regex to match timestamps and lyrics
   static RegExp regExp =
       RegExp(r'\[(\d+):(\d+\.\d+)\](.*?)((?=\[\d+:\d+\.\d+\])|$)');
-
-  // Create a list to store the lyrics
-  List<Lyric> lyrics = [];
 
   static List<SearchCategory> searchCategory = [
     SearchCategory(
@@ -241,449 +1259,24 @@ class FakeData {
         imageUrl:
             "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1690832280.jpg?crop=0.92281xw:1xh;center,top&resize=1200:*"),
   ];
-
-  List<Map<String, dynamic>> theWrxdiesSongJson = [
-    {
-      "title": "Ca Khúc Cuối",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Ca Khúc Cuối do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/CaKhucCuoi-Wxrdie-16696442.mp3?st=Ax2On0CKvPXqg_OfbhlM2w&e=1732107706&a=1&p=0&r=3335999d3edc5e6adb775316278a211d"
-    },
-    {
-      "title": "Thèn Chóa",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["KayC", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Thèn Chóa do ca sĩ KayC, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/ThenChoa-WxrdieKayC-16696443.mp3?st=E86EfD_yNoT3L8CpeCXqxA&e=1732105895&a=1&p=0&r=4344ee700fa8e1a8a075deb46ca531f6"
-    },
-    {
-      "title": "Băng Qua Cầu Giấy",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/11/d/0/d/4/1731340774750_500.jpg",
-      "artist": ["Wxrdie", "RPT JasonDilla"],
-      "lyric":
-          "Ver Wxrdie:\nBăng qua Cầu Giấy, anh chẳng nhận ra lối về \nHomie rủ anh pull up qua chill làm vài khói đê \nCó thể chỉ vì muốn em vui nên trông anh hơi giống hề \nNhưng riêng câu \"yêu em\", anh sẽ nói khi không phê \nĐi xe trên quốc lộ, lao thật nhanh không đoái hoài \nVít ga tốc độ, anh chẳng muốn phải ngoái lại \nTừng câu em vừa nói khiến con tim này tái dại \nEm nói rất dài, nhưng chốt lại bằng câu \"bye bye\" \nAnh không cần nghe thêm, anh không cần phải quan tâm \nAnh có thể đợi em, luôn từ nay luôn sang năm \nỐm đau một chút thôi, em cũng không cần phải sang thăm \nBapeboy Camo, 10 gram GK như lang băm \nĐừng lo Covid vì anh vẫn hút như nam châm \nAnh chỉ lo rằng sẽ vẫn cô đơn dù bao nhiêu gian truân \nĐừng nhắn thêm tin nào cho anh, Insta anh không *** nhận \nChẳng thể nói với em rằng Lonely Stoni này là đang hâm\nPhong Khin đi mấy nốt nhạc đưa anh ra khỏi chốn này \nTự hứa với bản thân là phải quên em trong 4 ngày \nAnh sẽ phải đối mặt thôi, anh không muốn phải trốn chạy \nĐừng để anh thấy em với ai khác, baby anh không muốn vậy \nVùi mình trong studio, làn khói thật to, anh không muốn dậy \nChỉ muốn ai đó đưa anh đi, một thiên thần nào đó có thể xuống đây \nQuấn thêm một cây nén phải thật chắc và điếu phải luôn đầy \nĐôi ba lời ca về em, anh ngân nga lúc cuối ngày \nBăng qua Cầu Giấy, anh chẳng nhận ra lối về \nHomie này gọi điện qua, làm vài khói đê \nCó thể chỉ vì muốn em vui nên trông anh hơi giống hề \nNhưng riêng câu \"yêu em\", anh sẽ nói khi không phê \nTít xa trên quốc lộ, lao thật nhanh không đoái hoài \nVít ga tốc độ, anh chẳng muốn phải ngoái lại \nTừng câu em vừa nói khiến con tim này tái dại \nEm nói rất dài, nhưng chốt lại bằng câu \"bye bye\" \n\nVer JasonDilla:\n12 giờ đêm qua nghe tiếng em kêu thất thanh \nTrong cơn mộng du, em nói rằng yêu nhất anh \n12 giờ đêm nay, anh đang trên xe rất lạnh \nVì biết rằng chẳng đi về đâu, chuyện của ta bất thành \nEm chỉ đến khi anh có rất nhiều, \nKhông còn gì, em bỏ đi rất nhanh \nAnh đã biết em không phải miền đất lành \nXin thông báo là bây giờ em mất anh \nĐể anh cùng những giai điệu đang chắp cánh \nHòa vào những vì sao lấp lánh \nChúng ta chỉ đến đây, coi như max cảnh \nKhông muốn nói bye, nhưng mà thôi chắc đành \nKhông thể nói chi, anh không biết phải nói gì \nCho vào vali, xong rồi anh lại gói đi \nBao yêu thương nhưng sao đã vội quên \nĐể nỗi buồn đi cùng anh, xa rời em",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/BangQuaCauGiay-WxrdieRPTJasonDilla-16690253.mp3?st=ABb_b_HWQxZnG-d42LMtwQ&e=1732106490&a=1&p=0&r=ac36ab769149ace0eb4ba7b8ef63cf9d"
-    },
-    {
-      "title": "Đến Thăm Anh Đi",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Đến Thăm Anh Đi do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/DenThamAnhDi-Wxrdie-16696445.mp3?st=gl9eN2045qDTqH1qpKy3QA&e=1732106004&a=1&p=0&r=4f4d63c095145502a92e33bf64b9bd76"
-    },
-    {
-      "title": "Life Of A Hxstler",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Life Of A Hxstler do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/LifeOfAHxstler-Wxrdie-16696446.mp3?st=4mbU962OwjoRIBdqun5Qdw&e=1732105828&a=1&p=0&r=78509ba194fc937dcf1ea80f1cf707d5"
-    },
-    {
-      "title": "Lonely Stonie",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Lonely Stonie do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/LonelyStonie-Wxrdie-16696447.mp3?st=HdxymxoDNm21PmSOppZBHg&e=1732105818&a=1&p=0&r=8adbe48d3898573eba7e80087567f3d4"
-    },
-    {
-      "title": "Mấy Đứa Nhóc",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Mấy Đứa Nhóc do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/MayDuaNhoc-Wxrdie-16696448.mp3?st=BQ3k56iR-H9HA8wx6XyQxw&e=1732105809&a=1&p=0&r=877e9c5e5b5e9d80f5150321c6e880f4"
-    },
-    {
-      "title": "Trở Về",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["JustaTee", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Trở Về do ca sĩ JustaTee, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/TroVe-WxrdieJustatee-16696449.mp3?st=m7SP-gx6wqM4qSPSLBas1A&e=1732105883&a=1&p=0&r=dd8a0be8aea8464fa0437845298c0c8d"
-    },
-    {
-      "title": "Pray For",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["KayC", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Pray For do ca sĩ KayC, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/PrayFor-WxrdieKayC-16696450.mp3?st=5laZkwZnQOGwlQQTh4qbVQ&e=1732105863&a=1&p=0&r=9da8b02370c8c0afd4332f53e8f8170a"
-    },
-    {
-      "title": "Bởi Vì",
-      "cover_img":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Bởi Vì do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/BoiVi-Wxrdie-16696451.mp3?st=AkWvsMCW9lpGDhSXVbS7kw&e=1732105800&a=1&p=0&r=3b662f6526ce32eacd2e744eb45bc008"
-    },
-    {
-      "title": "Tim Anh Ghen",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "LVK", "Dangrangto"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Tim Anh Ghen do ca sĩ Wxrdie, LVK, Dangrangto, V.A trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/TimAnhGhen-WxrdieDangrangtoTeuYungBoyLVK-16696453.mp3?st=mH-E2P-hTOpQ0PnjtVwo7A&e=1732107680&a=1&p=0&r=cdc2a1876907caed04e12e7455e402a1"
-    },
-    {
-      "title": "Get Money",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "Thai VG"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Get Money do ca sĩ Wxrdie, Thai VG trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/GetMoney-WxrdieThaiVG-16696454.mp3?st=oQJbWmljLPuoWXBt1ONfDw&e=1732106040&a=1&p=0&r=88bc087feb22adcae036965ccf090117"
-    },
-    {
-      "title": "Anh Freestyle",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Gill", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Anh Freestyle do ca sĩ Gill, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/AnhFreestyle-WxrdieGill-16696455.mp3?st=cm7i_IjLhSNOaW0hre5u-A&e=1732105850&a=1&p=0&r=43e6378336030714bb25d1de226cf5ab"
-    },
-    {
-      "title": "Đau Đầu",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/10/23/0/6/b/2/1729657738885_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "Yeah, yeah, yeah\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nAnh chỉ muốn hustle hard\nĐể mình mau giàu\nNghĩ quá nhiều khiến anh bị đau\nCòn mấy thằng anh em đang ở sau\nKhông có thời gian để mà âu sầu\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nAnh chỉ muốn hustle hard\nĐể mình mau giàu\nNghĩ quá nhiều khiến anh bị đau\nCòn mấy thằng anh em\nĐang ở sau tàu\nKhông có thời gian\nĐể mà âu sầu yeah\nKhi anh xuất hiện ở trên social\nAll of your brand muốn được promo\nAll of your friends want to follow\nDj inbox xin cả vocal\nWhen I pull up\nI'mma *** all the club\nI told my bro, senda loco\nI told my bro\nLet me roll one\nNếu mày không phải đồng minh, ok hold on\nIn studio nhạc tao biên soạn\nBa mươi con flow\nNạp vào băng như từng viên đạn\nNhưng sự thật bị chúng nó xuyên tạc\nLàm bọn ruồi trên mạng\nChúng nó bu vào đến điên loạn\nTừ ngày đến tối\nChỉ lên mạng xỉa xói\nÍt thằng nào làm\nMà đa phần là chỉ nói\nBước ra từ trong khu rừng tối\nAnh em tao lại kiếm về\nVà chia thành từng gói, yeah\nNăm trăm tao nhập vào nhà kho, yeah\nNăm trăm tao đưa cho bà bô, yeah\nNăm trăm tao xếp vào trong ba lô\nNăm mươi tao tiêu\nNăm mươi tao chia cho my bros\nBọn nó cứ đứng đó\nĐể mà ngó vào\nĐàn em tao quần bó vào\nWave Alpha lùa mày như là gió Lào\nĐưa ra quyết định thông minh hơn\nAnh em trông tinh khôn\nYou gonna know what the *** going on\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nAnh chỉ muốn hustle hard\nĐể mình mau giàu\nNghĩ quá nhiều khiến anh bị đau\nCòn mấy thằng anh em đang ở sau\nKhông có thời gian để mà âu sầu\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nAnh chỉ muốn hustle hard\nĐể mình mau giàu\nNghĩ quá nhiều khiến anh bị đau\nCòn mấy thằng anh em\nĐang ở sau tàu\nKhông có thời gian\nĐể mà âu sầu yeah\nChúng nó bon chen\nHết cái để bốc phét\nLại lấy tao ra làm content\nVài cái comment\nChúng nó muốn bôi nhọ bọn tao\nBằng vài cái comment\nKhông đại diện cho gen gì cả\nCũng không phải hình mẫu lý tưởng\nCho con em\nChỉ là những cậu bé\nTao bước ra từ con hẻm\nSh Ý vẫn sáng đèn ở trong đêm\nBiết thời buổi cần like\nVà tao biết thời buổi cần tim\nChúng mày quên mất mình là ai\nTao chỉ biết mỉm cười rồi lặng im\nHai lần của một phần hai\nGiúp tao được kết nối với thần linh\nPhải sám hối cho những lần sai\nVà phải tự ban thêm cho mình\nMột lần tin\nAnh em xã đoàn\n24/7 vẫn luôn luôn sẵn sàng\nPull up làm con show\nQuá là dã man\nTình cảm anh em\nĐi lên như giá vàng\nNhìn chúng nó quá xàm\nNhững gì fake\nThì trước sau cũng đã tàn\nKhỏi phải nói nhiều\nVề những thứ đã làm\nChỉ được bám theo\nKế hoạch ta đã bàn\nVà bầy chó vẫn phải ăng ẳng\nCùng nhịp beat vẫn đập văng vẳng\nChẳng có chi mà phải căng thẳng\nDoanh thu vẫn ngày một tăng dần\nDòng máu Việt Nam, đích tôn họ Phạm\nThắp hương cúng tổ tiên\nMỗi ngày trăng rằm\nHàng tá thứ phải lo\nNhưng vẫn luôn phải nhớ\nNhững gì ba má của tao\nThường căn dặn\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nNghĩ quá nhiều khiến anh bị đau\nAnh chỉ muốn hustle hard\nĐể mình mau giàu\nNghĩ quá nhiều khiến anh bị đau\nCòn mấy thằng anh em đang ở sau\nKhông có thời gian để mà âu sầu\nNghĩ quá nhiều\nKhiến anh bị đau, đau đau\nNghĩ quá nhiều\nKhiến anh bị đau đau đau\nNghĩ quá nhiều\nKhiến anh bị đau đau đau\nNghĩ quá nhiều\nKhiến anh bị đau đau đau\nNghĩ quá nhiều khiến anh bị",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/DauDau-Wxrdie-16696456.mp3?st=fO2U2CEa6fCF-AMJpYKoaQ&e=1732105991&a=1&p=0&r=3b57ddd59da2b2ff9a36c5984a5a1312"
-    },
-    {
-      "title": "29",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "Mason Nguyen"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho 29 do ca sĩ Wxrdie, Mason Nguyen trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/29-WxrdieMasonNguyen-16696457.mp3?st=8S1qZ13D4ySprRaRtusm7Q&e=1732105964&a=1&p=0&r=953b4c3a5b775763911495958686d8ae"
-    },
-    {
-      "title": "Siêu Nhân Ngao",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["24k.Right", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Siêu Nhân Ngao do ca sĩ 24k.Right, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/SieuNhanNgao-Wxrdie24kRight-16696458.mp3?st=TcGN6f5J-a8SQxx4rvZxGA&e=1732105842&a=1&p=0&r=5295342c464e4864c6feb1ec3c3ac899"
-    },
-    {
-      "title": "Gia Tài",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "BABY SMOKE"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Gia Tài do ca sĩ Wxrdie, BABY SMOKE trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/GiaTai-WxrdieBABYMOKE-16696459.mp3?st=sc_1ZmxtsxiybLQHr43XdQ&e=1732106025&a=1&p=0&r=b36424c44f3bb5fc1c4b5655d39d58de"
-    },
-    {
-      "title": "Lối Sống",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Lối Sống do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/LoiSong-Wxrdie-16696460.mp3?st=RrmZsO4ZEQfsTcbyQBWqTw&e=1732105791&a=1&p=0&r=5c2c86055f278ca8e0ed64949c060c04"
-    },
-    {
-      "title": "Nu Cep",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Nu Cep do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/NuCep-Wxrdie-16696461.mp3?st=y2_80rSQypSeZ0EABCFUEA&e=1732105769&a=1&p=0&r=95e4064709f46b1991d5109065a8ce80"
-    },
-    {
-      "title": "Tổng Kết",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "Lil Wuyn"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Tổng Kết do ca sĩ Wxrdie, Lil Wuyn trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/TongKet-WxrdieLilWuyn-16696462.mp3?st=xKEg6-Q9ColSJXSWg44GWw&e=1732105923&a=1&p=0&r=2ddd1a7b35405aefa804bdf90c8ec185"
-    },
-    {
-      "title": "Cả 2",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "QNT", "Spideyboy"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Cả 2 do ca sĩ Wxrdie, QNT, Spideyboy trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/Ca2-WxrdieQNTSpideyboy-16696463.mp3?st=-qpkyT0pHT-_4Go7mDqCxg&e=1732105942&a=1&p=0&r=9f0570cb5511e40755caad3aabbae1ec"
-    },
-    {
-      "title": "Lâu Đài",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie", "Flava Sati"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Lâu Đài do ca sĩ Wxrdie, Flava Sati trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/LauDai-WxrdieFlavaSati-16696464.mp3?st=JS6OQYVaOk8qCeJJ-BjBLg&e=1732105956&a=1&p=0&r=979da8de2cf7f3f213b54e42ce49390b"
-    },
-    {
-      "title": "Mời Em",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Mcee Blue", "Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Mời Em do ca sĩ Mcee Blue, Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/MoiEm-WxrdieMceeBlue-16696465.mp3?st=X3UvOrFTBXiXBQozB6y4lQ&e=1732105936&a=1&p=0&r=587c7fed858bfaa76f8f00c149bc7ecc"
-    },
-    {
-      "title": "Thíc Qé",
-      "image_url":
-          "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-      "artist": ["Wxrdie"],
-      "lyric":
-          "- Hiện chưa có lời bài hát nào cho Thíc Qé do ca sĩ Wxrdie trình bày. Bạn có thể click vào đây để đăng lời cho bài hát này.",
-      "url_media":
-          "https://stream.nct.vn/Unv_Audio539/ThicQe-Wxrdie-16696466.mp3?st=frtwl4NzXjikmfwIA9VxUg&e=1732107847&a=1&p=0&r=6939df3d4eb5249cfc412f1c69e6a134"
-    }
-  ];
-
-  static List<Track> wrxdieSong =
-      FakeData().parseSongs(FakeData().theWrxdiesSongJson);
-  static List<Track> obitoSongs = [
-    Track(
-        title: "Shape Of You",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "",
-        imgURL:
-            "https://upload.wikimedia.org/wikipedia/vi/a/a3/Shape_of_You_cover.jpg",
-        lyrics: "",
-        urlMedia:
-            "https://stream.nct.vn/Warner_Audio39/ShapeOfYou-EdSheeran-6448581.mp3?st=N5THxUw4o_I-mm_RKhIrWQ&e=1732110284&a=1&p=0&r=a3702adeee3a9be4090d41d0b323583c&t=1731510634985"),
-    Track(
-        title: "Đầu đường xó chợ",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:41",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Gọi thằng anh để tránh cái án\nTrong xóm tao hỏi mày đang đâu\nTiếng canh sòng ở bên đường đắp\nGấp gáp trả lời là đang xâu\nCó thằng anh thì chấp hành tốt\nRa sớm nói chuyện như Đen Vâu\nTrên bàn nhậu nó kể\nHồi đó chỉ vì vài ánh nhìn\nMà bem nhau\nCó thằng kiếm cơm bằng xe đai\nLang thang nơi biên giới dù đêm thâu\nCó thằng mất đi anh chị em\nCần bia và rượu để quên đau\nTao lớn lên từ đường hẻm\nNơi không dễ dàng để tin nhau\nTao biết hết ngõ ngách tầng lớp thấp\nNơi không ai muốn vào thêm sâu\nMấy thằng trẻ còn chưa đầy hai mươi\nNhưng số vết nó chém\nNhiều hơn số tuổi\nMục tiêu chạy vệt đỏ còn đang tươi\nNhưng cái tôi lớn kêu nó cố đuổi\nMắt nó trừng như thể trời gầm\nDù nhà thờ Đức Mẹ Quan Âm\nDùng bạo lực để tạo ra luật\nQuyền lực là thứ mà nó quan tâm\nĐời tẩy chay vì nó dính án\nĐối với tao tụi nó là bạn\nTao thấy được lí do nó làm\nĐằng sau câu truyện mà nó dính dáng\nXưa nó vẫn cùng tao đến trường\nThầy cô khen tương lai nó sáng\nNhưng tất cả mọi thứ thay đổi\nChỉ vì một lần nó đeo khăn tang\nThằng tốt tính nhưng ba mẹ mất sớm\nVì chất kích thích nên phải vào đời\nThằng thì anh em ngã xuống\nVì dao kiếm\nHận thù nên lao đầu vào cuộc chơi\nThằng bị ăn hiếp ám ảnh từ nhỏ\nNên thích vung đấm\nĐể không thành trò cười\nThằng thì đỏ đen, bán gia bại sản\nCha mẹ từ mặt nên thành bụi đời\nThằng thì tâm lý tan nát vì tội\nMỗi đêm dằn vặt đọc kinh xám hối\nThằng thì vẫn chưa nhìn thấy được ngày ra\nVì một phút bốc đồng\nĐể cảm xúc lên ngôi\nThằng thì vốn không còn lựa chọn nào\nĐành bước chân vào để được tồn tại\nThằng thì chỉ mong\nTìm lại được yên bình\nNhư những ngày bé để không chọn sai\nGọi thằng anh để tránh cái án\nTrong xóm tao hỏi mày đang đâu\nTiếng canh sòng ở bên đường đắp\nGấp gáp trả lời là đang xâu\nCó thằng anh thì chấp hành tốt\nRa sớm nói chuyện như Đen Vâu\nTrên bàn nhậu nó kể\nHồi đó chỉ vì vài ánh nhìn\nMà bem nhau\nCó thằng kiếm cơm bằng xe đai\nLang thang nơi biên giới dù đêm thâu\nCó thằng mất đi anh chị em\nCần bia và rượu để quên đau\nTao lớn lên từ đường hẻm\nNơi không dễ dàng để tin nhau\nTao biết hết ngõ ngách tầng lớp thấp\nNơi không ai muốn vào thêm sâu\nThằng thì đi tắm sông chung bầy\nSẩy chân té vào tay người âm\nThằng hưởng dương trong khuôn viên trường\nNên nó sống mãi tuổi 15\nThằng bước ra sau phiên phúc thẩm\nChỉ cười rồi nói là thua rồi\nThằng có tiền còn sống không thọ\nThì thằng thiếu thốn thường đua đòi\nĐất chật người ngông\nCha nó lấy bạo lực làm nôi\nNên nó không thích sống kiếp làm công\nHai chữ gia đình sẻ làm đôi\nNó bỏ nhà đi bụi đời\nRa đường làm con tốt\nHay ra đường để làm con tốt\nThí cặp mắt này mù vì\nDù gì sống đách cần nhìn trước sau\nNó chưa từng có ước ao\nNgoài việc thoát khỏi bản chất\nCủa một thằng ù lì\nĐiểm cuối cuộc đời hên xui\nNhư chơi oẳn tù xì\nCái bo cũng chỉ để gõ\nNếu ở đó nó được gọi là cô nhi\nNên lánh nhanh\nTrước khi đột ngột qua đời\nNó không định đánh anh đâu\nMà là tới cắt nhượng\nMóc ruột lột da\nAnh liều một pha\nCho má có vốn mở sạp bán bánh canh\nRồi ra đầu thú theo lệnh\nTheo lệnh triệu tập của 113",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/DauDuongXoCho-Obito-11836720.mp3?st=UZXn7SFNYKW6jLCrvHdH2w&e=1730940483&a=1&p=0&r=4a25d3ccf74387bf4ec1dd6aba4d0e1c"),
-    Track(
-        title: "Biên Giới Long Bình",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://cdnphoto.dantri.com.vn/dwOovse6dSoNOrSDXyRAmQt9LZ0=/thumb_w/1020/2024/07/31/obito-rapper-26-1722417901486.jpg",
-        lyrics:
-            "Xe đai đang lăn bánh\nHướng thẳng về phía biên giới Long Bình\nTay nó vặn hết số với tiếng nẹt bô\nQua nhiều công trình\nĐồ phạm pháp sau lưng xe\nNên đường lui nó quyết không nhìn\nTốc độ nó đang đi\nĐủ có thể đưa nó lên khung hình\nLỡ đụng ai chết nó cũng mặc kệ\nVì lời khuyên trong nghề toàn thế\nThà là không ai nhìn thấy nó\nCòn hơn là không còn thấy đường về\nĐặt mạng sống lên trên bàn cân\nVì chỉ mong cho nhà cửa không đói\nTâm cắn rứt thì cũng phải cam\nNó trách sao đời đối xử nó tệ\nNó sẵn sàng cho kẹo đồng bay\nKhi giao dịch bị sai chi tiết\nSẵn sàng xuống tay hạ thằng khác\nNếu đó là cách để nó đi tiếp\nNếu là cách để nhà nó no\nKéo một khói thật to khi siết\nVới người thân nó là người tốt\nCòn với mày là một sự uy hiếp\nChấp nhận để thân dính mùi tanh\nĐể nhà ngửi mùi trong lành\nKhí nó toát ra mặt lạnh tanh\nKhi cuộc đời nó không thành\nNó là thứ gia đình mày sợ\nKhi đồng hồ báo là đêm về khuya\nNó là đứa con ngoan của quỷ\nKhi bị đời cho ra rìa\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một vụ\nThêm một vụ, thêm một vụ\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một vụ, thêm một vụ\nThêm một vụ nó gây ra\nGiác quan nhạy trong màn đêm\nKĩ thuật như là game\nSố vết thương cộng thêm\nTâm lý nguyên màu đen\nNgửi được sự nguy hiểm\nHành tung như là phim\nCoi nó như thằng điên\nThằng bé chỉ muốn được yên\nNó không muốn\nNó được sinh ra trên cõi đời này\nĐể trở thành xấu\nNó hối hận vì sự lựa chọn\nĐể làm việc sai của nó lần đầu\nGiày xéo chính bản thân vì tội\nNó gây đau thương cho bao người khác\nNhưng quá trễ trở thành cụm từ\nMà nó nhớ mãi như một bài nhạc\nNó ước được chọn, ước được chọn\nƯớc được chọn lại\nKhác cuộc đời, khác hoàn cảnh\nKhác cả thực tại\nKhác suy nghĩ, khác hành động\nKhác những lần dại\nNhưng nó phải đền tội trong hôm nay\nVì cuộc sống không ưu ái một ai\nDon't let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một thằng, thêm một thằng\nDont let them run though\nĐừng để nó chạy\nLỡ lại khổ ai thành nạn nhân\nDon't let them run, don't let them run\nDon't let them run\nLại thêm một thằng, thêm một thằng\nThêm một thằng được sinh ra",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/BienGioiLongBinh-Obito-11836721.mp3?st=JU3Tz_zgIhP6j2XEIb2vZQ&e=1730872705&a=1&p=0&r=40bc0bbb44f75652e74b9f74d70ea85d"),
-    Track(
-        title: "16",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Bắt đầu 16\nTừ bỏ ý định làm người xấu\nTập tễnh viết lời vào tờ giấy\nĐem bao chuyện không hay\nMuốn kể cho mọi người thấu\nYoung boy with the passion\nLove to know he thinks back\nMặc kệ mọi thứ đang dang dở\nBut * it I still rap\nBắt đầu thêm những chuyện không vui\nNhưng lần này vấn đề\nNó không nằm ở ngoài đường\nThằng bé bắt đầu biết dùng âm nhạc\nĐể vẽ thêm màu sắc\nThêm hi vọng trong đời thường\nBa mẹ nó làm việc đến thâu đêm\nCũng không vui với cái cách nó chọn đường\nThằng bé lúc đó cũng không nghĩ\nÂm nhạc cùng với nó sau này\nTrở thành tình trường\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nLúc đầu toàn lời độc trong lời văn\nChửi thề dính ở mồm như thuốc phiện\nNhạc chửi thì ai mà muốn nghe\nCõi sâu của tâm hồn\nThì sau này nó mới tìm\nCảm xúc cứ như nén ở phần ngực\nCon người mới đôi khi khiến nó buồn bực\nMơ lớn và tính cách hiếu thắng\nNhưng tự tìm cách bước\nĐôi khi khiến nó ấm ức\nNhưng kiên quyết\nKhông muốn trở thành người xấu\nVẫn cố dù không biết đi từ đâu\nChân cứ bước đi trong vô thức\nCũng vô thức trưởng thành hơn ngày đầu\nSự vô thức làm tâm hồn nó nở hoa\nSự vô thức làm nó chìm trong cảm xúc\nSự vô thức tạo cho nó thế giới riêng\nVô tình khiến nó không biết\nChuyện gì đang diễn ra\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNgười thân trong nhà cắn xé nhau\nBiến cố ập ngay lúc nó bay bổng\nThêm một lần thằng bé đó đau lòng\nBắt đầu biết sao ba mẹ làm thâu đêm\nĐể ý khi mẹ trốn vào một góc\nBiết được những con số cần giải quyết\nNhững con số khi nhìn vào là bật khóc\nQuyết định đứng dậy và nó đi\nBỏ tâm sự vào âm nhạc điều nó nghĩ\nLao đầu vào cuộc đời mạng nó phi\nKhông ngại làm con tốt cho đời thí\nChuyến xe đưa nó đi xa thật xa\nTrách nhiệm không cho chân nó được ngã\nNuôi ý chí để dòng họ nó nhờ vả\nÔm giấc mộng thành công\nĐể tâm hồn được về nhà\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16\nNăm đó nó vừa tròn 16",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/16-Obito-11836722.mp3?st=hvwVuVSedw9_OSZBFgPUkA&e=1730941456&a=1&p=0&r=7e5eea6f1af4fb2c1c03367b79c6ce47"),
-    Track(
-        title: "Sài Gòn ơi",
-        album: Album.defaultAlbum(),
-        artist: Artist.defaultArtist(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Ouuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh\nTim anh nóng lòng gặp nàng\nĐể cảm xúc lên từng nhịp\nNơi quá khứ anh không vui\nHạnh phúc mắt anh không nhìn kịp\nAnh pack hết đồ nhìn thật lâu\nBồi hồi trên chuyến xe trong đêm\nMắt sáng như sao\nVì được nghe thật nhiều điều vui\nKhi bên em\nTrò chơi em thích đánh đố\nPhố sáng khi em lên đồ\nVì tương lai nên anh cũng cố\nDù em khiến anh đôi khi hơi rồ\nVà giá như giá như giá như\nVà giá như giá như giá như\nGiá như anh hiểu được em\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nOuuuu Sài Gòn ơi ouuu Sài Gòn ơi\nSao em lại đối với anh như này\nTưởng chừng như dài lâu\nTưởng như yêu đậm sâu\nTưởng như ta hợp nhau\nGiờ còn chẳng nói với nhau một câu\nEm dắt anh đi gặp nhiều người\nDù họ không tốt với anh\nHọ khiến anh rơi giữa dòng đời\nMàn đêm đang kéo tới nhanh\nVà rồi em đâu\nTình mình thêm đau\nTại sao em nỡ vô tâm\nĐể vỡ trái tim người yêu em nhiều nhất\nOh oh baby à baby\nRồi người ta cũng sẽ bỏ em đi\nKhi mọi thứ đã đủ đầy\nChỉ mình em với những\nKhoảng không cô đơn\nỪ thì anh vẫn thương em\nNhưng làm sao để quay về\nNgày tình mình như hôm nào\nOh oh oh\nOh oh oh\nOh oh oh\nOh\nGiá như anh hiểu được em",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/SaiGonOi-Obito-11836723.mp3?st=y51o9x0jRFZce6uYriRd-Q&e=1730896233&a=1&p=0&r=209d155f38ece3be722e7eac81b938ac"),
-    Track(
-        title: "Trốn Chạy",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Đầu óc tao đang nặng trịch đi\nNếu mà ngay từ đầu\nNày chỉ muốn lợi dụng tao\nSao con ph* mày không nói m* vậy đi\nLàm ra vẻ ai cũng muốn làm hại mày\nCho tao hỏi mày làm vậy để chi\nNước mắt cá sấu để chi\nHay vì sợ cuộc đời mày dễ bí\nHay trên đời mày không còn ai để thí\nNội tao tim yếu rồi đêm đau\nSố mà tao kiếm được\nTao mong gửi về cho gia đình\nBao nhiêu thành phố nhiêu đêm thâu\nChạy show cho một đống\nĐể tâm lý rơi vào sự vô định\nLời mày nói đ** đúng với sự thật\nCơm mày ăn đ** phải là của mày\nVấn đề trong đời tao đủ chật\nVà tao nghĩ mặt mày cũng đủ dày\nTất cả thứ thuộc về tao\nĐáng ra có thể giúp\nCho ba mẹ tao bớt cực và bớt khóc\nTất cả thứ thuộc về tao\nĐáng ra có thể mua\nCho thằng em tao tuổi thơ không cực nhọc\nTất cả thứ thuộc về tao\nĐáng ra có thể làm\nCho gia đình tao thoát khỏi nơi chết chóc\nTất cả thứ thuộc về tao\nGiờ lại nằm trong túi mày\nTao phải nghĩ cách tồn tại đến nát óc\nCũng là giá tao phải trả cho hào quang\nGiá tao phải trả vì ngu dốt\nGiá tao phải trả\nVì những thứ tao không hiểu\nNhưng lại đi đặt niềm tin nơi không tốt\nTâm lý bị xé nát nơi quận 2\nSức khoẻ bị vắt kiệt đến hết sức\nKhoá miệng tao không tin một ai\nVà có cả suy nghĩ\nCần nhảy xuống để kết thúc\nChân cứ lê bước đi trong màn đêm\nCố tìm lại bản thân tao từng nên\nRượu gái chất cấm trong hộp đêm\nTrốn chạy những cảm xúc đang ập đến\nSự tự tin tao luôn có mất đi\nÁnh nắng trong nụ cười tao mất đi\nNgây thơ trong người tao mất đi\nCảm xúc cho âm nhạc cũng mất đi\nĐầu óc tao đang nặng trịch đi\nNếu mà ngay từ đầu\nMày chỉ muốn lợi dụng tao\nSao con ph* mày không nói m* vậy đi\nLàm ra vẻ ai cũng muốn làm hại mày\nCho tao hỏi mày làm vậy để chi\nNước mắt cá sấu để chi\nHay vì sợ cuộc đời mày dễ bí\nHay trên đời mày không còn ai để thí\nNội tao tim yếu rồi đêm đau\nSố mà tao kiếm được\nTao mong gửi về cho gia đình\nBao nhiêu thành phố nhiêu đêm thâu\nChạy show cho một đống\nĐể tâm lý rơi vào sự vô định\nLời mày nói đ** đúng với sự thật\nCơm mày ăn đ** phải là của mày\nVấn đề trong đời tao đủ chật\nVà tao nghĩ mặt mày cũng đủ dày\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nGiữ tất cả mọi thứ cho riêng tao\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nMong một giấc thật ngon trong chiêm bao\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nThêm thuốc vào cho quên đau\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nNỗi niềm này tao phải nuốt ngược vào\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy trốn chạy trốn chạy\nNên tao phải trốn chạy trốn chạy\nTrốn chạy trốn chạy\nTrốn chạy trốn chạy\nNên tao phải trốn\nNên tao phải trốn",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/TronChay-Obito-11836724.mp3?st=4iskjvq9LGjKzexQ8GeOcg&e=1730941467&a=1&p=0&r=4659e255b7dea9de38652b51fb63ab71"),
-    Track(
-        title: "Cất cánh (interlude)",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics: "Hẹn gấp chú ýChúng tôi xin báo báo chúng ta...",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/CatCanhInterlude-Obito-11836725.mp3?st=PyngbhDxU408JT7BQwYweA&e=1730941472&a=1&p=0&r=1f6f6862be768dd4c956d0208f162a7b"),
-    Track(
-        title: "Hà Nội",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Họ gọi thành phố này là\nNơi khó tồn tại\nNhưng đây là nhà\nChỉ một mình em hiểu được buốt giá\nYêu sự buốt giá\nVì lòng lạnh lẽo nhiều rồi\nKhông có điều gì\nEm không hiểu được\nChỉ một tình yêu một lòng\nEm đã lựa chọn không ai lấy được\nAi làm đau anh à\nKhông sao đâu baby\nBaby hãy hãy nắm lấy tay em\nAi lừa dối anh à\nKhông sao đâu baby\nBaby có thể tin em\nEm xua đi cơn mưa buồn\nEm nuôi anh trong tâm hồn\nEm không chơi\nEm không đùa em yêu thôi\nEm cho anh thế giới đẹp\nEm cho anh thấy hết rồi\nNếu có ngã em sẽ dìu anh đi thôi\nBaby anh đang lo gì\nBaby anh đang nghĩ gì\nNghĩ nhiều mệt thêm thôi\nRơi sâu vô xuống bóng tối những góc tối\nChỉ mình anh thấy\nNước mắt giá buốt vết xước\nNhững nhức nhối\nVờ rằng không thấy\nAnh chỉ đang cố nuốt hết vào trong\nChờ một ngày nắng lên\nNhư anh hằng mong\nChợt bỗng dưng thấy em đến bên\nHealing all off my scars\nĐuổi đám mây tối đen\nVẽ lên cánh chim đang vươn xa\nLàm anh hiểu ra làm anh hiểu ra\nLàm anh hiểu ra nhiều điều\nEm khiến anh nhìn sâu vào tâm hồn\nLà tiếng êm mặc kệ\nBên ngoài kia ồn\nDẫn anh đi trong đêm\nSoi sáng bước anh đến\nLung linh như ánh nến trước gió",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/HaNoi-Obito-11836726.mp3?st=ymr6zD6Z6RoSpFft5dAfYQ&e=1730935954&a=1&p=0&r=6e396336ce1420af4ae3678531138da5"),
-    Track(
-        title: "Vô Điều Kiện",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Khi mà ngây thơ không còn nguyên\nThì tìm đâu ra bình yên\nNốc thêm viên để xua cơn noi\nChân đi tìm sự vô điều kiện\nThấy được nhiều thứ cần kiêng\nCố gắng cho đến lúc nằm yên\nKhông mở lòng một cách tuỳ tiện\nKhông để thứ không đáng làm phiền\nNhớ lại những lúc mà còn nhỏ\nThế giới này thật đẹp\nViệc cho việc nhận\nVốn không cần phải ghi chép\nCho đi vì mình yêu\nNhận lại dù không đòi\nTrao ai cũng như vậy\nKhông biết thế nào xấu\nThế nào là cao đẹp\nĐơn giản là tình yêu thuần khiết\nHay tại tao lớn quá nhanh\nTâm hồn đang héo mòn dần\nĐã từ bao giờ khi con tim\nVà lý trí chia hai\nRồi không còn thân\nĐã từ bao giờ\nTao đa nghi với mọi thứ\nNiềm vui kia không còn cần\nĐã từ bao giờ\nTao lại trở nên\nKhô cằn đến như này\nNụ cười kia không còn phần\nHay là tại tao tại mày tại đời\nTao cũng không biết\nHay là tại tao tại mày tại đời\nSự vô điều kiện từng trong tao\nNay lại thành có điều kiện\nTao cần điều kiện\nĐể có thể gặp một người\nCó thể đặt niềm tin vào một người\nCó thể làm việc cùng một người\nCó thể chia sẻ cho một người\nVà có thể để đi cùng với một người\nHay là tại tao tại mày tại đời\nTao cũng không biết\nHay là tại tao tại mày tại đời\nTao cũng không biết\nKhi mà ngây thơ không còn nguyên\nThì tìm đâu ra bình yên\nNốc thêm viên để xua cơn noi\nChân đi tìm sự vô điều kiện\nThấy được nhiều thứ cần kiêng\nCố gắng cho đến lúc nằm yên\nKhông mở lòng một cách tuỳ tiện\nKhông để thứ không đáng làm phiền",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/VoDieuKien-Obito-11836727.mp3?st=qULnRM2rG4aIkk12btOxDQ&e=1730941483&a=1&p=0&r=21f8de9b7961594887ce91e17cce6bbb"),
-    Track(
-        title: "Đánh Đổi",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Tao đánh đổi màn đêm yên giấc\nViết những bài nhạc hay nhất cuộc đời\nDi sản là nguồn cảm hứng\nFan theo răm rắp nhạc tao thuộc lời\nTrên bàn tiệc của tiên và quỷ\nTao là thằng duy nhất được mời\nMọi thứ đổ dồn hết vào tao\nNhư kiểu tao là một ván cược hời\nTao là đứa con của mặt trăng\nMang năng lượng mặt trời\nCuộc đời xoay tao như trực thăng\nVẫn vượt lên như thể gặp thời\nTao không vứt đi bản chất tao\nNhư mấy thằng khác để ví được lời\nNếu mày cũng mặt nặng mài nhẹ\nVì không đồng ý thì thôi được rồi\nShout out cho anh Sea\nLời chúc phúc bay trên bầu trời\nEm mong anh hãy nói với mẹ\nCuộc sống con giờ đã đỡ cực rồi\nHai anh em đã đổ nước mắt\nNhiều câu chuyện về những người tồi\nSự đánh đổi này vẫn luôn đẹp\nNhư thể ngày xưa chơi cất nhà chòi\n**** it\nĐêm đông lạnh giữa trời Hà Nội\nFlow tao chảy cùng những niềm đau\nNhư thể đang châm thêm mực vào ngòi\nChuỗi hành trình cùng nhiều câu hỏi\nAi là cá còn ai là mồi\nMọi thứ đều luôn có mặt tối\nNhưng liệu mày có sẵn sàng đánh đổi\nNgắm nhìn cả thế giới từ xa\nDamn it's cold\nNếu mày hỏi tao ác hay thiện\nMan I don't know\nChắc đây vốn đã là\nCái giá cho bao lần đau\nSự đánh đổi này cho tao thấy\nMọi thứ đã không như ngày đầu\nNgắm nhìn cả thế giới từ xa\nDamn it's cold\nNếu mày hỏi tao ác hay thiện\nMan I don't know\nChắc đây vốn đã là\nCái giá cho bao lần đau\nSự đánh đổi này cho tao thấy\nMọi thứ đã không như ngày đầu\nIt's a fair trade\nTelling all the truth\nIt's a fair trade\nAin't none pussy in the way\nIt's a fair trade\n**** you if you fake it\nIt's a ****ing fair trade oh\n2020 và tao nổi như hiện tượng\nNhưng không chìm vào trong đấy\nĐể rồi chết như thằng ngu\nBa năm đánh đổi\nĐể tu thân trong hoạ đời\nRồi biết đâu là thật giả\nTâm tao nhàn như tiều phu\nĐảo mắt quan sát\nNhư diều hâu đang đi lượn\nIm lặng và cười nhếch\nVới drama và ruồi bu\n2023 lời tao bắn như cái máy\nMà còn *** trượt phát nào\nSự đánh đổi đó thằng ***\nTrò đời quăng tao vào địa ngục\nCho tao biết mặt trái của whole game\nCho tao bài hit, cho fame\nXong nó lấy đi tất cả sao bao đêm\nTao vẫn vươn từ dưới đáy đi lên\nBật và đòi lại bằng được no shame\nChiêm nghiệm và mài giũa thâu đêm\nGiờ tinh khiết và óng ánh như blue gem\nKhông tìm thấy tao\nTao bận đi tu luyện\nCâu chuyện của tao\nCó đủ để hay hơn tụi mày\nTu xong dù thành tiên\nHay là thành quỷ\nVẫn ẩn khỏi radar\nThân vẫn đóng lớp bụi dày\nRất nhiều thằng trẻ\nLà trường hợp giống như tao\nNhưng bị nghề này nó dập\nXong tâm lý ở dưới đáy\nTao thoát được tệ nạn\nThoát được cảnh vung dao\nTao đánh đổi tất cả\nĐể chân chạy đến được đây hoes\nTrên cao\nTao biết là tao\nVẫn đang chính là tao\nKhi mà chơi chán\nThì peace I’m out\nĐôi khi rất là cô đơn\nTao lấy hết sự cô đơn\nTao lấp vào trong bank account\nNhư là pacquiao manny\nPacquiao shadowbox trên nền vinahouse\nVẫn chưa thấy thằng nào nhanh hơn tao\nThác đổ thác đổ\nFlow tao dồn xuống như là K50\nỞ dưới toàn núi đồi núi đồi\nBỏ mẹ rồi úi dồi úi dồi\nCẩn thận không bị cuốn vào cuốn vào\nAnh là mỏ ối người muốn đào\nAnh về rồi cúi người xuống nào",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/DanhDoi-Obito-11836728.mp3?st=agDsY1Ru2fnZi9gaFQvNVQ&e=1730941408&a=1&p=0&r=be413a18a18a47a6aa1c2bfdc7831b8d"),
-    Track(
-        title: "Backstage Freestyle",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "This is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nLiệu thằng nào biết\nSau khi bước xuống sân khấu\nThằng đang đứng rap\nNó giấu gì ở đằng sau\nNăm học cấp hai\nGhế nhà trường nó dính máu\nNiềm vui về gia đình\nDần đang biến thành niềm đau\nMan I feel pain my heart feel shitty\nTao biến những khoảnh khắc\nTao sụp đổ cùng nước mắt kia thành vàng\nVỗ ngực tự hào đó là tao\nNhắm vào vấn đề\nLời tao nã như AK\nĐể diễn tả ra được hết\nNhững xúc mà tao đang\nTrải qua từng ngày\nVới thân xác tuổi 18\nHai năm trước lập thành tích\nCũng là xích mà tao mang\nMày khoe mấy tờ giấy\nMua mày nhiều vàng\nCòn tờ giấy tao lấy\nMua về sự an toàn\nĐằng sau ánh hào quang\nNơi góc tối tao cất giữ\nLà khu đất cấm biệt tích\nMấy thằng ngu còn làm càng\nSinh ra để làm sao man\nSáng đến cách mấy\nCũng phải trải qua cay đắng\nTao đếm từng bài học\nXem nó như sắp tài liệu\nNhỡ khi đụng chuyện\nCần thiết vào trong đầu tao ngay ngắn\nMày lấy được nhiều fame\nTiền bạc và ống kính\nNhưng sau ánh hào quang\nTim mày liệu có ngay thẳng\nTao nói ra điều này\nĐể chứng minh rằng\nThành công tao có được ngày hôm nay\nVốn không phải do may mắn\nKhông chơi bóng rổ\nNhưng tao ball like Lebron\nVua của bản thân homie\nÝ chí tao là hổ gầm lên\nXua những giọng nói\nXung quanh đầu tao đang cố\nKêu tao thua đi\nGửi đi lời thách thức\nCho những thằng muốn tao ngã\nTao vẫn đang xuất hiện như là oxy\nTao sẽ kéo gia đình tao\nĐi hết ra khỏi hood\nSống một cuộc đời thượng lưu\nYeah mày nói đi\nỪ thì tao là đàn ông\nĐàn ông cũng phải khóc\nEveryone know it\nỪ thì mày hay phán xét về cuộc sống\nBut you don't know *\nDù mày đưa tao tiền tỷ\nĐể đổi lấy linh hồn tao\nMan I said * it\nAi lấy đi mà xài\nTao vẫn chọn con tim\nVì tao kiếm nhiều hơn thế\nBitch I know it\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nWoah từ sân bay đến sảnh\nResort đến khách sạn\nTừ Roll Royce đến Mer baby\nĐặt chân đến thành phố\nKhông phải là quê nhà\nMang đến âm nhạc baby\nKhung cảnh lặp lại\nAgain and again\nNhưng cảm xúc vẫn vậy baby\nCảnh anh ngồi bên kính xe\nLàn gió bên cửa sổ\nNgẫm nghĩ về cuộc đời baby\nTao rap đến khan tiếng\nNước miếng bắn vào màn hình\nThay vì ngồi than khổ yeah\nTao nuốt hết buồn đau\nVẽ nó vào bên trong nhạc\nNgười ta nói tao năng nổ yeah\nTao cược cả cuộc đời\nVào canh bạc với quỷ dữ\nCó cả máu tao đang đổ yeah\nVóc dáng của thiên thần\nNhưng mà ruột gan tao có\nNó xám tro như đồ cổ yeah\nNên thứ tao cho đi\nChỉ nhạc là nhạc và nhạc\nNhưng thứ tao bỏ vào âm nhạc\nLà vàng kim cương\nLà vàng cho nhạc rap\nChỉ là vài tờ nháp\nNhưng là cả một câu chuyện ở đằng sau\nNên dù đứng trên sân khấu\nGương mặt của tao cười\nNhưng liệu đó có thật sự là tao\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt\nThis is a hard flow\nI go J Cole on it\nTao găm niềm đau vào từng câu\nSắp xếp đúng chỗ như là công việc\nYeah feeling like Drizzy\nNhạc tao vang khắp\nSân khấu và ngõ hẻm\nCũng có thể cho mày\nTăng thêm thân nhiệt",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/BackstageFreestyle-Obito-11836729.mp3?st=VvMYNWaJM1xhU4oxZpybXw&e=1730941493&a=1&p=0&r=89a51152ed1c04665f3a30b3348a75c3"),
-    Track(
-        title: "Tell the kids i love them",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Và liệu em có nghe\nTình yêu đang vụn vỡ\nVà mất bao lâu\nĐể quên đi tổn thương\nDù là nhiều năm đã qua\nTrái tim chẳng thay đổi\nVà chỉ mong được bình yên sau này\nYeah và từ lần đó\nAnh chẳng còn nhớ nhung đầy vơi\nChẳng thân quen chẳng còn đau\nNhư đã từng yeah\nLife is better if you want to\nNếu em nhìn thật sâu\nVào trong đôi mắt\nEm có thể thấy rằng anh đang khóc\nAnh cũng nhiều lần gây tội\nVà cũng tiếc nuối vì chuyện công cốc\nAnh chạy theo tiếng đường phố\nLặp sai và sai cứ thế lao dốc\nAnh từng nghĩ rằng anh khôn\nCho đến khi đời bảo rằng anh ngốc\nAnh vẽ ra nhiều viễn cảnh\nNhưng anh không làm dù nó khiến anh mê\nAnh ao ước khi cần chạy\nThì việc anh *** chân vẫn là thực tế\nAnh nghĩ rằng nếu hung dữ\nThì những người khác sẽ thấy anh ghê\nNhưng đến khi được yêu thương\nAnh lại thích thú như một thằng hề\nAnh từng thích dùng bạo lực\nVì không thích thằng nào không tôn trọng anh\nĐến khi anh hiểu được ra\nAi không thích mình thì chỉ việc tránh\nAnh từng nói dối rất nhiều\nDù mấy chuyện đó không vì lợi danh\nĐến khi anh hiểu được ra\nHậu quả để lại không phải điều lành\nYeah anh không cao siêu như em nghĩ\nAnh từng là em là mày\nTừng là thằng ngu làm liều khi bí\nQuan trọng là khi nhận ra\nHành động tiếp theo của em là gì\nVì đồng tiền vốn đang có hôm nay\nKhông thể nào mai trở thành tiền tỉ\nAnh chỉ đơn giản là người làm nhạc\nLà thằng chạy theo đam mê\nVì biết cố gắng là một lối thoát\nĐã từng đâm đầu việc sai\nĐể biết rút ra mới là việc đúng\nNếu muốn yên bình trong ngày mai\nThì nay phải sống như ngày cuối cùng\nTìm một nơi để yên giấc\nSau tháng năm mệt nhoài\nVà để tâm hồn\nĐược hòa vào lời hát\nCó thể em ao ước giống như anh\nKhông muốn màu sắc cuộc đời\nChỉ pha vỏn vẹn giữa đen và trắng\nKhông muốn nhìn vào trong gương\nVì không thích thứ mình trở thành\nNhưng tất cả những cơn giông đó\nGiúp em trân trọng hơn khi bầu trời xanh\nAnh cảm ơn nếu mắt em sáng\nCảm ơn từng stream bài nhạc\nKhán giả nghe khi anh còn làm\nTrái tim anh vẫn nơi đây\nKhông hề âm mưu hay sinh ra kế\nAnh chỉ là một bằng chứng sống\nChứng minh câu nói\nKhông gì là không thể\nEm không cần cố để được như anh\nMỗi cây mỗi lá mỗi cành\nMỗi người mỗi chuyện\nMỗi nhà mỗi cảnh\nEm chỉ cần là chính em\nChạy theo tương lai em muốn trở thành\nDù đường đời em trải nhiều màu\nThì cũng chỉ tô đẹp thêm\nCho một bức tranh\nHãy lắng nghe những gì em muốn\nĐể thời gian sửa những điều em sai\nVì cuộc đời không hề gắt gỏng\nVới những đứa con đang muốn làm lại\nHãy sống thật là hạnh phúc\nĐưa bản thân đến một nơi cao\nBài này vẫn sẽ mãi ở đây\nĐể luôn nhắc nhở\nEm là một ngôi sao",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/TellTheKidsILoveThem-ObitoShikii-11836730.mp3?st=_hIeAUEndIv_MXkukTPLyQ&e=1730872460&a=1&p=0&r=f0b8cfc55795fcecdf442d990cee5ad8"),
-    Track(
-        title: "Ước mơ của Mẹ (interlude)",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Nè anh AloNèMẹ con hỏi mẹ cái này cái được không?Nói điNếu mà bây giờ kiểu gia đình mình lo xong hết kiểu chuyệnLo xong hết mấy cái vấn đề của gia đình,những cái khó khăn của gia đìnhThì cái lúc đó mẹ rảnh nèMẹ không còn phải lo,phải nghĩ gì nữa hếtThì cái chuyện đầu tiên mà mẹ làm thì mẹ sẽ làm cái gì?Mẹ cũng không biết cái gì luôn nữaĐầu tiên mẹ làm á hả?Dạ Đầu tiên mẹ làm làGiống bây giờ mẹ đi lên trên conMẹ ở chừng 5,10 bữa, nửa thángÀMẹ đi chơi,mẹ về ở với con cho đãRồi hết rồi phải không?Rồi bắt đầu cáiỞ nhà đợi con của mẹ hả?Mẹ Nếu mà thì thì nếu mà giả sử đi giả sử mấy cái chuyệnkiểu con nói với mẹkiểu vấn đề này kiaxong hếtrồi khó khăn cũng xong hếtnói chung mẹ không cần phải lo phải nghĩ gì đóthì cái điều đầu tiên mà mẹ nói với conlà mẹ nói cái gì?Điều đầu tiên mẹ muốn nói với conlà con biết mẹ muốn nói gì không?Mẹ cảm ơn conđồng hành với mẹvới batrong lúc gia đình khó khăn,con còn nhỏ, con mới lớn lên,mới có lập nghiệp được mà con không lo cho bản thân của conmà con còn lo ngược lại cho mẹcon chợi mẹ buồn,con lo lắng cho mẹrồi những lúc mà cầm tiền,đồng tiền của congiống như cầm cái đồng tiền của con,nó nặng lắm, con biết khôngnhưng mà con cứ lo cho mẹCon lo cho mẹ,con...con...là...mẹ cảm ơn con là con lớn lên, con không cóphụ lòng ba mẹ mà con locho mẹ, lo cho gia đình trong lúchoàn cảnh như vầy nè,con không có chạy theo những hàm muốn riêng biệtcủa con, con biết không?Mà con lo cho mẹcon bỏ hết những hàm muốntuổi trẻ của con,màcon làm, con dành ***, con gửi tiền vềcho mẹ, lo cho gia đìnhlà cho dù ít nhiều gìCái đành tiền đó nó lớn lao lắm,con hiểu không?Trong khoảng thời gian này nó lớn lao đó với mẹ dữ lắmVà mẹ thấy được giống như mẹ nuôi con mẹ thành công rồi đó, con hiểu không?Dạ,rồi,biết rồiRồi thôi, đợi con trai đi làm nhạc xong rồi con trai kiếm tiền về,con trai dẫn mẹ đi du lịch",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/UocMoCuaMeInterlude-Obito-11836731.mp3?st=NjJ59vePZ2fwG0QyizSNmA&e=1730939939&a=1&p=0&r=d545f1552cd44ea822faed7f314c5eba"),
-    Track(
-        title: "Con kể Ba nghe",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Ba à, thằng con trai ba\nGiờ cằn cõi khô khốc\nQua nhiều khổ nan\nKhi đôi mắt con nhìn được thấy\nVà thân được nếm độc của hổ mang\nSống trong cái vòng tròn bé tí\nXung quanh nhiều quỷ còn hơn là bạn\nCon vẫn không hiểu tại sao\nNgày xưa khó vậy\nMà ba không thở than\nCon gặp được người phụ nữ\nSẵn sàng yêu con\nDù lắm tài nhiều tật\nVẫn giữ thói quen ba dạy\nNếu trên đời ngột ngạt\nThì tâm niệm phật\nCon chỉ mới 22 tuổi\nMà tuổi còn không nhiều\nNhư tâm sự con mang\nHay đây là cái giá phải trả\nVì con bước ra đời khi còn sớm chán\n18 tuổi con vang danh\nNhiều người bảo là con may mắn\nTrong khi vẫn còn đầy người như con\nNhưng họ không vượt qua được cay đắng\nCon ngẩng đầu được lúc này\nChắc là phước phần của gia đình tặng\nMặc dù thứ con đạt được\nBị người ta cướp hết\nRồi thành tay trắng\nCon giấu đâu cho ba biết\nVì con sợ ba biết ba lo\nDưới quê trăm công nghìn việc\nĐè trên vai ba mà toàn việc khó\nBa nào con nấy ba ơi\nKhông gồng được như ba nên con viết\nBiển đời này bắt con bơi\nĐể được như ba thì con cũng không tiếc\nSức trẻ nên con xa quê\nCô đơn nơi chốn hoa lệ\nNơi mà nếu không thành công\nThì dù tốt đến mấy cũng như thằng hề\nCon phải thoát ra khỏi hẻm\nNơi máu còn tanh bên lề\nNơi mà tụi nó không ngại\nViệc chém thằng khác từ lành đến phế\nCon hay đi ngủ lúc 5 giờ sáng\nDậy lúc 3 giờ chiều\nCó khi giữa đêm giật mình\nVì gặp ác mộng do nghĩ ngợi nhiều\nỐm do ăn không ngon\nChìm trong cảm xúc và phiêu\nNhưng tâm lý con không yếu\nChỉ là con mệt vì quá nhiều điều\nĐang diễn ra xoay xung quanh con\nVới nhiều mặt nạ\nThức tỉnh thêm nhiều con mắt\nĐể con nhìn cho rõ ai đang thật dạ\nCon ít nói đi dần dần đến mức\nNgười đời nghĩ tâm con ma\nCon cũng tách biệt hết mức\nĐể dò lũ ác để con triệt hạ\nNhưng ba ơi cũng nhiều thứ tốt\nMà con nhận ra\nCon có một người phụ nữ\nSẵn sàng ở bên khi con gục ngã\nCon băng qua nhiều cảnh đời\nCàng đi càng học từ mỗi lần qua\nCon bỏ được nhiều thói xấu\nCho dù đứng trước nhiều lời nhục mạ\nVà nhờ ơn gia đình nhà nội\nMà giờ con không vung dao\nChém người ta\nCon thoát khỏi được vòng lặp\nMà mấy thằng anh của con trượt ngã\nCon thoát khỏi kiếp lưu manh\nThoát khỏi cái cảnh gặp gì cũng phá\nThoát khỏi những việc tù tội\nThoát khỏi luôn cảnh không còn nhà\nVà con nghĩ con cũng đủ sức\nĐể giống như ba, để con ráng\nThằng con trai ba không sợ gì\nNếu mà không sai đâu, ba đừng lo\nChâu Long năm con vẫn không quên\nDòng họ Lý con đến từ đó\nChứng kiến được nhiều cảnh từ nhỏ\nChiêm nghiệm thêm và vẫn tiếp tục dò\nChân con vẫn đi mặc kệ sương gió",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/ConKeBaNghe-Obito-11836732.mp3?st=W5NWLS1Dey7U1fiI6zNTbA&e=1730914745&a=1&p=0&r=de5273be10d84991d1c6f083f08c4dde"),
-    Track(
-        title: "Champion",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            " Thay lớp da non tao lột xác\nThis is a new game\nCầm về túi tiền vài trăm triệu\nTao mua thêm new chain\nMiệng đời tụi mày độc ác\nMặc sức mà thêu lên\nTao đạp đổ hết mọi định kiến\nFeel like I'm Lil Wayne\nLittle homie I'm be outside\nKhi còn trẻ tao hay cãi mẹ\nDù biết là tao sai\nDùng bạo lực để đổi bài học\nSự thơ ngây mau phai\nKhi xung quanh tao toàn là quỷ\nNiềm tin không trao ai\nLàm sao mày có thể hiểu được\nGia phả tao giàu đến mức\nCó thể cho tương lai con mày rẽ ngược\nMỗi ngày đi tìm dây chun\nVào trong kho để buộc tiền tỉ\nNên đừng đem tiền đặt lên bàn\nVì linh hồn tao không thể tiêu huỷ được\nBiến cố ập năm tao 16\nIts *** hurt\nTâm hồn xanh\nCùng với thể xác tao như đã chết\nTiếng mã tấu nó chặt ngoài cửa\nGiờ còn cả vết\nNhững ngày mẹ tao ôm tao khóc\nVì nợ nó đến\nNhưng mà big dawg\nHomie *** it I'm a big dawg\nTao chúc phúc cho những thằng bạn\nĐã khiến tao ít lo\nNăm 18 tao lên Sài Gòn\nSimple love hit to\nNhưng bị quây bởi lũ linh cẩu\nTình thương cũng ít có\nTao đặt nỗi đau vào từng chữ\nNhững ngày nhìn nội già yếu\nThuốc và thuốc phải uống từng cử\nNhững ngày nhìn tóc ba bạc\nKhói thuốc buồn sau cơm từng bữa\nNhững ngày không lo không nghĩ\nCủa đứa trẻ con cũng không còn nữa\nNên tao gánh hết mọi áp lực trên lưng\nTao lướt\nMưa hay gió, đao hay kiếm\nKhông ngăn tao bước\nSẽ đạt hết tất cả những điều\nMà tao ao ước\nChỉ cần thấy gia đình tao cười\nLà coi như phước\nNên mày biết tao khi tiếp xúc\nChứ không nên đọc báo\nChuyện của tao không thằng nào vẽ\nVì nó sẽ hộc máu\nThứ tao trải không phải để khoe\nMà vốn dĩ chỉ để mày hiểu\nNơi tao lớn là ổ tệ nạn\nPhải tìm cách thoát mau\nWoah woah you *** get it\nTao mất đi cỡ vài tỉ\nĐể nhìn cho thấu được ai là tà\nTao mất đi hai năm trời\nĐể tìm con tim này quay về nhà\nVà tao mất đi hết\nTrải nghiệm đẹp của tuổi trẻ\nKhi tao về già\nYeah tao chính là thằng láu cá\nKhi dùng từ ngữ\nNhưng không phải do tao mất dạy\nHay do tao hư\nĐống chất xám này đáng tiền tỉ\nLà vì nó thật\nNếu đặt cược cả mạng mày vào\nMày có *** thử\nSo what, lời nhạc như mưa này\nLà nỗi buồn của tao\nTừng giọt máu, nước mắt\nGiai điệu trong lòng của tao\nKhi đối diện với dao và kiếm\nLiệu mày có thật sự can đảm\nNếu không thì đừng đem vào nhạc\nVì nó không thật với tao\nYoung boy\nMày đừng nói như là mày hiểu về tao\nNếu truyện nghe không do tao kể\nThì nó không đúng về tao\nTao sẽ sống cho đến lúc chết\nTụi mày phải kể về tao\nNhưng mọi vết thương đặt ở bài hát này\nSẽ chấm dứt về sau\nOh God please forgive me for my sins\nSống như là tội phạm\nTay nhúng chàm yeah that’s a thing\nLội ngược dòng nước chảy xiết\nBiến câu truyện này thành cổ tích\nThân xác chằng chịt những vết thương\nBiến đứa trẻ ngông thành nhà vô địch\nBước ra từ đường phố\nTao không cần bằng khen\nYeah I’m the champion\nNhảy số như nhà bank\nKhông làm vì fame\nCảnh giác như là đang đi tuần\nRide with the gang\nNé đi tiền án\nDù phải thêm là bao nhiêu lần\nGiọng thằng này vang\nNăm trôi theo ngày tháng\n*** I'm the champion\nLót vàng trên đường đi\nĐẹp trai trong từng scene\nYeah I’m the champ\nTrị liệu bằng âm nhạc\nThêm nhánh cho ngành y\nBoy I’m the champ\nĐời tao mỗi khác\nKhi nhạc tao release\nYou know I’m the champ\nNhận đau thương mất mát\nNhưng nếu thành tiền tỉ\nYeah you call me a champ\nYeah tao muốn con Rollie\nBốn bánh double R\nYoung ASAP thats what they call me\nBall like superstar\nTao bẻ xích đang mắc ở chân\nChỉ để lại bóng ở trên radar\nĐem cuộc đời tao vào trong nhạc\nNếu mày muốn check tao chấp thêm var\nMiệng tao rap ra lời\nTheo cả nghĩa bóng lẫn nghĩa đen\nMạch tao đập ở trên đất Việt\nNhưng nhạc tao rap là Mỹ Đen\nDouble money count it up\nLàm việc bằng miệng tao chỉ seen\nMichael Jackson khi hành động\nĐi lùi lên đầu moonwalking\nVô cực flow, choppa loaded\nSimple love năm 18\nĐưa tao bay khắp Việt Nam\nRock the motherfucking show\nBán linh hồn, lil homie, that's a no\nVẫn ở đâu đó, get lit with the mob\nLà ngọn lửa của đường phố\nAy you know the code is whut\nYeah CL5 in this *\nVững trên top này không cần gank\nOtđ fly with this kicks\nVali tiền này cho gia đình\nYeah I'm so high in this bitch\nChất thêm lên từng cọc từng cọc\nAin't gonna cap this * lit\n2020 tao chào ngành nhạc\nNhảy từ 0 lên 100\nTụi nó đồn tao mất linh hồn\nOne hit wonder, có gì căng\n2022 lòng đầy sẹo\nTrái tim nóng giờ như là băng\nTao nhìn đời bằng con mắt khác\nXong tiền tao phất lên như trực thăng\nStraight to the top, not gonna stop\nHad to get out the fame and *\nTao thích làm bất động sảng\nHơn là giang hồ trên nhạc\nVì tao biết nó không ra được việc\nThứ mà tao muốn\nTao lấy cho bằng được\nTao rap điều tao trải là thiệt\nTao đem đốt hết đau đớn\nVào trang nhạc mà tao viết xong\nKiếm thêm vài cục tiền legit\nBước ra từ đường phố\nTao không cần bằng khen\nYeah I'm the champion\nNhảy số như nhà bank\nKhông làm vì fame\nCảnh giác như là đang đi tuần\nRide with the gang, né đi tiền án\nDù phải thêm là bao nhiêu lần\nGiọng thằng này vang\nNăm trôi theo ngày tháng\n*** I'm the champion\nLót vàng trên đường đi\nĐẹp trai trong từng scene\nYeah I’m the champ\nTrị liệu bằng âm nhạc\nThêm nhánh cho ngành y\nBoy I'm the champ\nĐời tao mỗi khác\nKhi nhạc tao release\nYou know I'm the champ\nNhận đau thương mất mát\nBiến nó thành tiền tỉ\nYeah you call me a champ",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/Champion-Obito-11836733.mp3?st=ZFqS5Ol3ahQS2T72lX994Q&e=1730941515&a=1&p=0&r=fe6e91e6190d68e3f5cdb1902d30ea81"),
-    Track(
-        title: "Chưa Xong",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Cuối năm 22 này\nLại tròn thêm một năm\nNâng từ bốn lên thành năm\nKhoảng thời gian tao hành nghề\nQuá nhiều thằng nói\nCó quá nhiều thằng mồm\nTụi mày khua môi múa mép\nBiến từ rapper thành hề\nBiết là cho có\nNhưng có *** đâu mà cho\nThực tại là như thế\nKhi tiệc tan thì đành về\nTao chạy như sắp chết\nĐể lấy tiền lau mồ hôi\nVà thực lực tao phải đủ\nVới những thứ tao cần thề\nMày hỏi tao thoả mãn\nTao chỉ biết là chưa xong\nTao vẫn chưa thấy đích đến\nCủa cái thứ mà tao mê\nTao muốn ăn nhiều hơn\nĐể tài khoản tao được mập\nNhưng đồ thường hay đồ bẩn\nThì nói thẳng là tao chê\nCó thể như du côn\nHay trông như tri thức\nNhưng tất cả thứ tao kiếm\nThì không cần phải sao kê\nKhi nghe mày nói nhiều\nVề mấy thứ mày nói suốt\nMắt tao nhắm đầu tao gật\nNhư kiểu người tao đang phê\nTao chạm được cột mốc\nBa tháng kiếm được một tỉ\nTrộm vía lo được cho nhà\nNhưng mọi thứ vẫn chưa xong\nTao dạy hai thằng em hết mọi thứ\nMà tao biết\nMong hạt mầm tao gieo xuống\nNgày nào đó được đơm bông\nTao ép mình phải lớn\nGiữa rừng người muốn nhỏ lại\nDù cái giá là tâm lý\nTao cũng xem nhẹ nhưng không\nTao kéo cho bằng được\nCả gia đình tao vực dậy\nVà từng bước ra khỏi hood cầu cho chuyện\nNhư tao mong\nSẽ *** có thời gian\nNgồi phân sai hay phân đúng\nVì tao không thể nào\nÉp mấy thằng ngu được như tao\nThu nhỏ lại cái tôi\nTao hạ bản thân xuống\nLắng tai nghe tất cả\nĐể hành động không hư hao\nTao chìm vào suy nghĩ\nÉp não tao vượt lane\nMắt nhìn cho thật rõ\nMấy thằng phông bạt như nhau\nTừng là thằng đầu đường\nHay đi chơi với xã hội\nNay tao sáng\nKhi nhạc bật cảm giác như một ngôi sao\nTao là đứa con lai\nCủa văn hoá ba thành phố\nBa vùng miền\nMấy người giỏi ngồi lại nói cho tao nghe\nTao tự tin đến mức nhiều thằng nghĩ\nTao trượt tuyết\nVì nhìn mũi tao phát tài\nNhưng nói thật tao không care\nTao thấy nhiều cái tâm\nKhông có tâm, không có tầm\nVẫn thích đem sự ngu dốt\nBằng cái miệng phò ra khoe\nTao biết ơn với mọi thứ\nBóng dáng người phụ nữ\nVòng xoay những người tốt đến và đi\nĐiều nên nghe\nĐừng hỏi tao xong chưa\nMọi thứ vẫn chưa xong\nXong sao được\nKhi cuộc vui\nNó còn chưa được bắt đầu\nTao nhảy đến hết số, phi đến hết ga\nĐến lấy thêm nhiều cọc\nĐể chuyện sai còn đắp vào\nTao cho tụi mày đếm\nSố lần tao trượt chân\nNếu tụi mày vui\nThì là phước tao cho không\nCòn nếu tụi mày hỏi\nLà khi nào tao chết\nCâu trả lời vẫn vậy\nNói tóm gọn là chưa xong\nCách sống và thái độ\nTao cư xử như nhà vua\nVì tao biết khi sinh ra\nNgai vàng vốn dành cho tao\nNên nếu tao có chết\nThì cái chết do tao chọn\nTao chọn ngã trên chiến thắng\nVà yên nghỉ ở trên cao\nMua hết thứ tao thích\nĐổ tiền vào kim cương\nViệc nào đang còn chậm\nThì quăng thêm vào cho mau\nTao chọn một cuộc đời\nPhải làm vua của mọi thứ\nNên cái giá dù có chát\nThì là cũng dành cho tao\nĐóng thêm hơi khói\nKhông sợ nói trên đường đi\nLuôn luôn ghi nhớ\nTừng giọt trên hàng mi\nNói miết không ra gì\nVậy thì nói để làm chi\nNhiều tiền nhiều vấn đề\nThì đưa vấn đề thêm đi\nTao bị chá bởi ánh sáng của tương lai\nCộng thêm hiệu ứng kim cương quá nặng\nMà hai tai tao đang đeo\nTao cũng không đợi mưa\nĐể được nhìn thấy cầu vồng\nVì cầu vồng tao rực sáng\nVà lúc nào cũng mang theo\nTao quý trọng thời gian\nVà quyết định phải thay đổi\nVì nhìn thấy nhiều thằng anh\nChìm vào tội rồi mang neo\nTao cũng thấy đủ chuyện\nĐể bản thân tao đủ biết là\nCuộc đời này màu đục\nCòn nhiều hơn màu trong veo\n2012 tao vẫn lang thang trong xóm\nXác của tệ nạn chất thành đống vì do keo\n2022 tao moonwalk trên âm nhạc\nTrở thành thằng tỉ phú trẻ\nVới đống sẹo mà tao đeo\n2018 tao bắt đầu viết nhạc\nVẫn yêu thương cuộc đời\nDù đời này thích phạt\n2020 đưa lưng ra dính đạn\nCứng và vẫn vững\nChịu đựng để hốt bạc\nNếu mà đề xuất chuyện làm ăn\nMà biết mày phông bạt\nThì tao như bị câm\nGiữ tim tao lạnh như là băng\nTất cả những hơi ấm\nChỉ dành riêng cho người thân\nĐơn giản thì không phải làm căng\nKỹ năng và kinh tế\nVẫn tăng thêm phần trăm\nChất xám tao toả ra mùi tiền\nMặt lạnh như là đá\nNhưng là đá trong nhà băng\nTurn it up, *** it up, pick it up\nXong việc thì xách lên và đi\nThêm một show\nThêm một cọc thêm bọc\nLấy hết rồi nhét vào vali\nKhông khí nóng bừng như El Classico\nNhiều thằng nói tao không làm được\nNow I finished them\nChín con số một verse, thats a minimum\nMấy em muốn làm phiền\nMơ tiếp đi cưng\nCó mấy thằng anh\nXưa tao hết mực yêu thương\nSẵn sàng xuống tay\nMiễn là tụi nó có tiền\nHỏi thì thằng nào\nCũng sợ chết gặp Diêm Vương\nNhưng tay nó dính máu\nChỉ để đổi lại chút quyền\nMong cho tụi nó\nTìm cuộc đời ở trang khác\nHiểu được sự quan trọng\nCủa lúc giận và lúc hiền\nNâng tầm ảnh hưởng\nBằng những thứ tao đang rap\nShiki gửi beat trap\nTao check phát là xúc liền\nTóm lại là vẫn là chưa xong\nTất cả mọi thứ vẫn chưa xong\nTóm lại là vẫn là chưa xong\nTất cả mọi thứ vẫn chưa xong\nTóm lại là vẫn là chưa xong\nTất cả mọi thứ vẫn chưa xong\nTóm lại là vẫn là chưa xong\nTất cả mọi thứ vẫn chưa xong\n2018 tao bắt đầu viết nhạc\nVẫn yêu thương cuộc đời\nDù đời này thích phạt\nThương tích nếu có\nQuăng tao miếng gạc\nRap cho đến lúc\nPhổi tao không còn biết ngạt\nThis * aint easy\n2022 vẫn đang nhảy trên tiếng nhạc\nVẫn đang chạy tốt\nMỗi ngày đều hốt bạc\nVẫn đang dõng dạc đang rap\nVẫn đang dõng dạc đang rap\nVẫn đang dõng dạc đang rap\nVẫn đang dõng dạc đang rap",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/ChuaXong-Obito-11836734.mp3?st=m5Ly-YAX39vBPrV1LVkPUA&e=1730941521&a=1&p=0&r=c85d81fbda4e91f9bd177ddaec678af5"),
-    Track(
-        title: "Tự sự",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics:
-            "Tao đang đi sâu vào cõi tâm trí\nTự sự với bản thân tao\nXem dòng thời gian biến tao thành gì\nBiết nhiều điều nhưng tao không nói\nKhông để tà trong tâm nên thói\nĐặt bàn tay lên giữa lồng ngực\nSiết chặt nó vào để không quên lối\nCảm giác như linh hồn của tao\nĐang phải cầm cố cho nơi ánh sáng\nĐứng trước khán giả tao cười\nDù lệ đang đổ sau ánh hào quang\nDamn ***\nBầu trời tao giờ hiếm khi màu xanh\nSài Gòn chỉ có nắng và mưa\nTao ngồi trong nhà\nNhưng sao lòng vẫn lạnh\nHay là có một thế giới chỉ em và anh\nXung quanh rất nhiều cám dỗ\nNhưng tim này vẫn y nguyên lòng thành\nNếu gặp em ở đời sau\nAnh vẫn sẽ trao trái tim màu trắng\nGirl I love you to my end\nEm là vì sao mà anh được tặng\nTao cũng không rõ tao dữ hay lành\nChỉ là khu tao từng sống\nMuốn tồn tại thì cần phải lanh\nBên trong tao đau\nNhư ai đang cắt của tao đi từng thớ thịt\nBước đi lòng như mảnh lưới rách\nCùng những vết thương\nChưa được chữ lành\nĐêm giông tới khi mắt tao thấy\nTừng lần nội tao nằm viện\nCơ thể ngày một đi càng gầy\nTao thấy tóc ba mẹ tao bạc\nKhó khăn việc thì ngày một đầy\nTao không còn cách nào khác\nNgoài chọn đứng lên tiếp tục từng ngày\nTao cũng biết buồn biết đau như ai\nTao cũng có lúc mất đi\nSự tự tin đôi khi như ai\nTao cũng nhiều lần\nKhông tin vào con đường đang đi như ai\nVà cũng nhiều lần phải khóc\nNhưng không cho ai thấy tao đau như ai\nNhiều đứa vẫn nghĩ làm nghề này dễ\nMày múa fame bẩn trên mạng\nBiến tâm hồn mày thành trò hề\nMày thích là được là tâm điểm\nNhưng không chịu được những lời chê\nĐặt đống phân lên lời mày nói\nMà miệng bày đặt hay thốt và thề\nTrách nhiệm đưa nhà đi ra khỏi hẻm\nBản thân sẵn sàng đánh đổi\nNhững thứ hàng trăm người khát và thèm\nThoát khỏi nơi mũi kim đầy phố\nMáu và lệ xen kẽ đầy đồ\nThoát khỏi nơi mà những con ngõ\nLà chỗ để chạy khi hình sự ập vô\nĐôi khi tao ước được quay ngược lại\nKhông phải để được sửa lỗi\nQuá khứ cứ để đó những việc sai\nQuay lại để tao được sống\nTrong những cảm giác khi tao tự tại\nVì trên đời có những cảm xúc\nTao muốn được trải qua nó lần hai\nĐến đây tự sự chắc cũng phải kết\nTrở về lại với thực tại\nVẫn không cho phép bản thân biết mệt\nNgười duy nhất ngăn được tao\nChắc có lẽ chỉ mỗi thần chết\nWish myself with all the best\nAll the bless in this *** like",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/TuSu-Obito-11836735.mp3?st=EM8VbPPC3-lSPyY6XSMEBQ&e=1730936648&a=1&p=0&r=a8958b686d6b6a614146e859a819182e"),
-    Track(
-        title: "Outro",
-        artist: Artist.defaultArtist(),
-        album: Album.defaultAlbum(),
-        duration: "3:30",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        lyrics: "",
-        urlMedia:
-            "https://stream.nct.vn/Believe_Audio345/Outro-Obito-11836736.mp3?st=EwkFVlqkJEjnEIF8Mg-Jsw&e=1730941531&a=1&p=0&r=2032318f2fc5f8b5e72b1a42dac3145f"),
-  ];
+  // ignore: non_constant_identifier_names
+  static Artist KendrickLamar = Artist(
+      id: "Kendrick Lamar",
+      name: "Kendrick Lamar",
+      avatarURL:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx8935i5xXzUD5jhdcyxMWoCqxAO8mm6U7jw&s");
+  static List<Track> gnxTracks = [];
+  static Album gnx = Album(
+      title: "GNX",
+      aritst: KendrickLamar,
+      genre: Genres(
+          name: "Hip Hop",
+          imgURL:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s"),
+      tracks: gnxTracks,
+      imgURL:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG9cjCeLfsyopSSTTyA5M8BTDY_Lgj5vN-A&s",
+      releaseDate: "2021-01-01");
 
   static List<String> chrismastPlaylistImg = [
     "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
@@ -793,50 +1386,50 @@ class FakeData {
         description: "Hits that change world"),
   ];
 
-  static List<Playlist> playlists = [
-    Playlist(
+  static List<UserPlaylist> playlists = [
+    UserPlaylist(
         id: "1",
         name: "Christmas Playlist",
         imgURL:
             "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "2",
         name: "Kendrick Lamar Essentials",
         imgURL:
             "https://assets.editorial.aetnd.com/uploads/2009/10/christmas-trees-gettyimages-1072744106.jpg",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "3",
         name: "Celebrate Tet 2025",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "4",
         name: "Celebrate Tet 2025",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "5",
         name: "Celebrate Tet 2025",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "6",
         name: "Celebrate Tet 2025",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "7",
         name: "Celebrate Tet 2025",
         imgURL:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6juTTwcRX498vxuvlxk6OtYndwdCjVwrzSJj5cEnzmEyfjjtsgi8wLAKdvFwHBR8Lr8&usqp=CAU",
         tracks: []),
-    Playlist(
+    UserPlaylist(
         id: "8",
         name: "Celebrate Tet 2025",
         imgURL:
@@ -1080,21 +1673,13 @@ class FakeData {
 
   static List<Album> albums = [
     Album(
-        title: "The Wrxdies",
-        aritst: Artist.defaultArtist(),
-        genre: genres[2],
-        releaseDate: "2024",
-        imgURL:
-            "https://avatar-ex-swe.nixcdn.com/song/2024/11/12/b/e/7/0/1731385118149_500.jpg",
-        tracks: wrxdieSong),
-    Album(
         title: "Đánh đổi",
         aritst: Artist.defaultArtist(),
         genre: genres[2],
         releaseDate: "2023",
         imgURL:
             "https://avatar-ex-swe.nixcdn.com/song/2023/10/02/c/5/c/8/1696247047452_500.jpg",
-        tracks: obitoSongs),
+        tracks: gnxTracks),
     Album(
         title: "Lemonade",
         aritst: Artist.defaultArtist(),

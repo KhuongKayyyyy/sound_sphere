@@ -7,9 +7,11 @@ import 'package:sound_sphere/core/constant/app_setting.dart';
 import 'package:sound_sphere/core/router/app_navigation.dart';
 import 'package:sound_sphere/core/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/res/user_repository.dart';
 import 'package:sound_sphere/presentation/blocs/app_bloc_observer.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 
 void main() async {
@@ -20,9 +22,9 @@ void main() async {
   } catch (e) {
     debugPrint("Firebase initialization error: $e");
   }
-
   configLoading();
   Bloc.observer = AppBlocObserver();
+  FakeData.initialize();
 
   runApp(
     MultiRepositoryProvider(
@@ -35,7 +37,10 @@ void main() async {
               create: (context) =>
                   AuthenticationBloc()..add(AuthGetUserRequested())),
           BlocProvider(
-            create: (context) => PlaylistBloc(), // No event added here
+            create: (context) => PlaylistBloc(),
+          ),
+          BlocProvider(
+            create: (context) => LibraryBloc(),
           ),
         ],
         child: const MyApp(),

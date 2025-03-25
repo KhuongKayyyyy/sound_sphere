@@ -45,7 +45,7 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
                 if (trackState is TopTrackLoading) {
                   return Skeletonizer(
                       child: TopSongsSection(
-                    songList: FakeData.obitoSongs.take(8).toList(),
+                    songList: FakeData.gnxTracks.take(8).toList(),
                     isBlackTitle: false,
                   ));
                 } else if (trackState is TopTrackError) {
@@ -68,11 +68,11 @@ class _BrowseChartPageState extends State<BrowseChartPage> {
               padding: const EdgeInsets.only(left: 10),
               child: MediaSection(
                   mediaSectionTitle: "Everyone talking about",
-                  songList: FakeData.obitoSongs.take(8).toList(),
+                  songList: FakeData.gnxTracks.take(8).toList(),
                   isExpandable: true,
                   onPressed: () {
                     context.pushNamed(Routes.extendGridView, extra: {
-                      "songs": FakeData.obitoSongs.take(8).toList(),
+                      "songs": FakeData.gnxTracks.take(8).toList(),
                       "title": "Everyone talking about"
                     });
                   }),

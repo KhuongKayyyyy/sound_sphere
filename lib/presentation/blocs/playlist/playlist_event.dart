@@ -12,7 +12,7 @@ class PlaylistGetListRequested extends PlaylistEvent {
 }
 
 class PLGetDetailRequested extends PlaylistEvent {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const PLGetDetailRequested(this.playlist);
 
@@ -51,7 +51,7 @@ class PLRemoveTrackRequested extends PlaylistEvent {
 }
 
 class PLChangeStateRequested extends PlaylistEvent {
-  final List<Playlist> playlists;
+  final List<UserPlaylist> playlists;
 
   const PLChangeStateRequested(this.playlists);
 

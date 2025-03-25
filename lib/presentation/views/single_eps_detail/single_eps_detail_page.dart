@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,20 +6,21 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
-import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/data/res/track_repository.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/widgets/album/album_item.dart';
 import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
+import 'package:sound_sphere/presentation/widgets/toast/unfavorite_toast.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 // ignore: must_be_immutable
 class SingleEPsDetailPage extends StatefulWidget {
-  String trackId;
-  SingleEPsDetailPage({super.key, required this.trackId});
+  final Track track;
+  const SingleEPsDetailPage({super.key, required this.track});
 
   @override
   State<SingleEPsDetailPage> createState() => _SingleEPsDetailPageState();
@@ -30,27 +29,20 @@ class SingleEPsDetailPage extends StatefulWidget {
 class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   bool showAppBarTitle = false;
   ScrollController _scrollController = ScrollController();
-  List<Track> recommendTracks = [];
-
-  bool showSkeleton = true;
-
+  List<Track> trackOfArtist = [];
+  List<Track> featuredTracks = [];
   Track track = Track.defaultTrack();
-  late TrackBloc trackBloc;
+  bool isFavorite = false;
+  late TrackBloc trackDetailBloc;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
 
-    trackBloc = TrackBloc();
-    trackBloc.add(FetchTrackDetail(widget.trackId));
+    trackDetailBloc = TrackBloc();
+    trackDetailBloc.add(FetchTrackDetail(track: widget.track));
     // fetchDuration();
-
-    Timer(const Duration(seconds: 1), () {
-      setState(() {
-        showSkeleton = false;
-      });
-    });
   }
 
   @override
@@ -59,13 +51,6 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     _scrollController.dispose();
     super.dispose();
   }
-
-  // Future<void> fetchDuration() async {
-  //   await widget.trackId.fetchDuration();
-  //   setState(() {
-  //     _duration = widget.trackId.duration;
-  //   });
-  // }
 
   void _onScroll() {
     if (_scrollController.offset > 250 && !showAppBarTitle) {
@@ -79,28 +64,79 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
     }
   }
 
+  void _showToast(bool isFavorite) {
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 150,
+        left: MediaQuery.of(context).size.width * 0.5 - 75, // Center the toast
+        child: FavoriteToast(isFavorite: isFavorite),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+    Future.delayed(Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<TrackBloc, TrackState>(
-        bloc: trackBloc,
-        builder: (context, state) {
-          if (state is TrackDetailLoaded) {
-            track = state.track;
-            recommendTracks = state.trackByArtist;
-            return _buildSingleDetailPage();
-          } else if (state is TrackDetailError) {
-            return Center(
-              child: Text(state.message),
-            );
-          } else if (state is TrackDetailLoading) {
-            return Skeletonizer(
-              enableSwitchAnimation: true,
-              child: _buildSingleDetailPage(),
-            );
-          }
-          return const SizedBox();
-        },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<TrackBloc, TrackState>(
+          bloc: trackDetailBloc,
+          listener: (context, state) {
+            if (state is TrackDetailLoaded) {
+              setState(() {
+                track = state.track;
+                trackOfArtist = state.trackByArtist;
+                featuredTracks = state.featuredTracks;
+                isFavorite = state.isFavorite;
+              });
+            }
+            if (state is TrackDetailError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+            }
+          },
+        ),
+        BlocListener<LibraryBloc, LibraryState>(
+          bloc: context.read<LibraryBloc>(),
+          listener: (context, state) {
+            if (state is ToggleTrackFavoriteSuccess) {
+              setState(() {
+                isFavorite = state.isFavorite;
+              });
+              _showToast(isFavorite);
+              context.read<LibraryBloc>().add(GetTrackLibraryRequest());
+            } else if (state is AddTrackToFavoritesSuccess) {
+              setState(() {
+                isFavorite = true;
+              });
+              _showToast(isFavorite);
+              context.read<LibraryBloc>().add(GetTrackLibraryRequest());
+            }
+          },
+        ),
+      ],
+      child: Scaffold(
+        body: BlocBuilder<TrackBloc, TrackState>(
+          bloc: trackDetailBloc,
+          builder: (context, state) {
+            if (state is TrackDetailLoaded) {
+              return _buildSingleDetailPage();
+            } else if (state is TrackDetailError) {
+              return Center(child: Text(state.message));
+            } else if (state is TrackDetailLoading) {
+              return Skeletonizer(
+                enableSwitchAnimation: true,
+                child: _buildSingleDetailPage(),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
@@ -128,9 +164,10 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             const SizedBox(
               height: 20,
             ),
-            _buildAritstMusic("More by ${track.artist.name}",
-                songList: recommendTracks),
-            _buildAritstMusic("Feature on", albumList: FakeData.albums),
+            if (trackOfArtist.isNotEmpty)
+              _buildAritstMusic("More by ${track.artist.name}",
+                  songList: trackOfArtist),
+            _buildAritstMusic("Feature on", songList: featuredTracks),
             const SizedBox(
               height: 150,
             )
@@ -143,6 +180,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
   SliverToBoxAdapter _buildSingleSongList() {
     return SliverToBoxAdapter(
         child: TrackItem(
+      isFavorite: isFavorite,
       track: track,
       index: 1,
     ));
@@ -161,7 +199,16 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
           : null,
       centerTitle: true,
       actions: [
-        _buildAppBarIcon(Icons.favorite_outline_rounded, () {}),
+        isFavorite
+            ? _buildAppBarIcon(Icons.favorite_rounded, () {
+                context.read<LibraryBloc>().add(
+                    ToggleTrackFavorite(track: track, isFavorite: !isFavorite));
+              })
+            : _buildAppBarIcon(Icons.favorite_outline_rounded, () {
+                context
+                    .read<LibraryBloc>()
+                    .add(AddTrackToFavorites(trackId: track.id!));
+              }),
         const SizedBox(
           width: 10,
         ),
@@ -211,11 +258,14 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             ]),
             height: 200,
             width: 200,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                track.imgURL,
-                fit: BoxFit.cover,
+            child: Hero(
+              tag: track.id!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
+                  track.imgURL,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -265,7 +315,7 @@ class _SingleEPsDetailPageState extends State<SingleEPsDetailPage> {
             PlayerController().isPlayingAlbum = false;
           }),
           _buildPlayButton(AppIcon.shuffle, "Shuffle", () {
-            TrackRepository.getTrackOfArtist(track.artist.name!);
+            TrackRepository.getTracksOfArtist(track.artist.name!);
           }),
         ],
       ),

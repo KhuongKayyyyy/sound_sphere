@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:just_audio/just_audio.dart';
@@ -11,19 +12,23 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 import 'package:sound_sphere/presentation/views/playlist/add_to_a_playlist_page.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_item_context_menu.dart';
 import 'package:sound_sphere/presentation/widgets/context/track_context_menu_action.dart';
+import 'package:sound_sphere/presentation/widgets/toast/add_to_lib_toast.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_button_sheet_button.dart';
 
 // ignore: must_be_immutable
 class TrackItem extends StatefulWidget {
+  bool? isFavorite;
   Color? backgroundColor;
   Track track;
   bool? isSliable;
   bool? isBlank;
   int? index;
   bool? isPreviewable;
+
   TrackItem(
       {super.key,
       this.backgroundColor,
@@ -31,7 +36,8 @@ class TrackItem extends StatefulWidget {
       this.index,
       this.isSliable,
       this.isPreviewable,
-      this.isBlank});
+      this.isBlank,
+      this.isFavorite});
 
   @override
   State<TrackItem> createState() => _TrackItemState();
@@ -78,40 +84,90 @@ class _TrackItemState extends State<TrackItem> {
     }
   }
 
+  void _showToast() {
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 150,
+        left: MediaQuery.of(context).size.width * 0.5 - 75, // Center the toast
+        child: AddToLibToast(),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+    Future.delayed(Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        widget.isSliable == false
-            ? Material(
-                child: _buildTrackItemWithContextMenu(
-                child: InkWell(
-                  onTap: () {
-                    if (widget.isPreviewable == true) {
-                      _togglePreview();
-                    } else {
-                      PlayerController().setPlayerAudio([widget.track]);
-                      PlayerController().play();
-                    }
-                  },
-                  child: _buildTrackInfo(context),
-                ),
-              ))
-            : _buildTrackItemWithContextMenu(
-                child: Slidable(
-                  key: Key(widget.track.id.toString()),
-                  startActionPane: handleAddToCurrentPlaylist(),
-                  endActionPane: handleAddToLibrary(),
+    return BlocListener<LibraryBloc, LibraryState>(
+      listener: (context, state) {
+        if (state is AddTrackToLibrarySuccess) {
+          context.read<LibraryBloc>().add(GetTrackLibraryRequest());
+          _showToast();
+        } else if (state is AddTrackToLibraryError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Failed to add track to library: ${state.message}"),
+            ),
+          );
+        }
+      },
+      child: Column(
+        children: [
+          widget.isSliable == false
+              ? Material(
+                  child: _buildTrackItemWithContextMenu(
                   child: InkWell(
                     onTap: () {
-                      PlayerController().setPlayerAudio([widget.track]);
-                      PlayerController().play();
+                      if (widget.isPreviewable == true) {
+                        _togglePreview();
+                      } else {
+                        PlayerController().setPlayerAudio([widget.track]);
+                        PlayerController().play();
+                      }
                     },
                     child: _buildTrackInfo(context),
                   ),
+                ))
+              : _buildTrackItemWithContextMenu(
+                  child: BlocBuilder<LibraryBloc, LibraryState>(
+                    builder: (context, state) {
+                      if (state is TrackLibraryLoaded) {
+                        if (state.tracks.contains(widget.track)) {
+                          return Slidable(
+                            key: Key(widget.track.id.toString()),
+                            startActionPane: handleAddToCurrentPlaylist(),
+                            endActionPane: handleRemoveFromLib(),
+                            child: InkWell(
+                              onTap: () {
+                                PlayerController()
+                                    .setPlayerAudio([widget.track]);
+                                PlayerController().play();
+                              },
+                              child: _buildTrackInfo(context),
+                            ),
+                          );
+                        }
+                      }
+                      return Slidable(
+                        key: Key(widget.track.id.toString()),
+                        startActionPane: handleAddToCurrentPlaylist(),
+                        endActionPane: handleAddToLibrary(),
+                        child: InkWell(
+                          onTap: () {
+                            PlayerController().setPlayerAudio([widget.track]);
+                            PlayerController().play();
+                          },
+                          child: _buildTrackInfo(context),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -136,6 +192,52 @@ class _TrackItemState extends State<TrackItem> {
     );
   }
 
+  ActionPane handleRemoveFromLib() {
+    return ActionPane(
+      motion: const ScrollMotion(),
+      children: [
+        SlidableAction(
+          flex: 2,
+          onPressed: (BuildContext context) {
+            showCupertinoModalPopup(
+              context: context,
+              builder: (BuildContext context) {
+                return CupertinoActionSheet(
+                  title: const Text('Confirm'),
+                  message:
+                      const Text('Are you sure you want to remove this track?'),
+                  actions: [
+                    CupertinoActionSheetAction(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        context.read<LibraryBloc>().add(
+                              RemoveTrackFromLibRequest(widget.track.id!),
+                            );
+                        setState(() {
+                          widget.isFavorite = false;
+                        });
+                      },
+                      isDestructiveAction: true,
+                      child: const Text('Remove'),
+                    ),
+                    CupertinoActionSheetAction(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          foregroundColor: AppColor.primaryColor,
+          icon: Icons.delete,
+        ),
+      ],
+    );
+  }
+
   ActionPane handleAddToLibrary() {
     return ActionPane(
       motion: const ScrollMotion(),
@@ -143,11 +245,14 @@ class _TrackItemState extends State<TrackItem> {
         SlidableAction(
           flex: 2,
           onPressed: (BuildContext context) {
-            setState(() {});
+            setState(() {
+              context.read<LibraryBloc>().add(
+                    AddTrackToLibraryRequest(widget.track.id!),
+                  );
+            });
           },
           foregroundColor: AppColor.primaryColor,
           icon: Icons.add,
-          label: 'Add to Library',
         ),
       ],
     );
@@ -167,27 +272,11 @@ class _TrackItemState extends State<TrackItem> {
           foregroundColor: AppColor.primaryColor,
           icon: CupertinoIcons.square_line_vertical_square_fill,
         ),
-        // SizedBox(
-        //   width: 80,
-        //   child: SlidableAction(
-        //     onPressed: (BuildContext context) {},
-        //     backgroundColor: Colors.purple,
-        //     icon: CupertinoIcons.square_fill_line_vertical_square,
-        //   ),
-        // ),
-        // SizedBox(
-        //   width: 80,
-        //   child: SlidableAction(
-        //     onPressed: (BuildContext context) {},
-        //     backgroundColor: Colors.yellow,
-        //     icon: CupertinoIcons.square_line_vertical_square_fill,
-        //   ),
-        // ),
       ],
     );
   }
 
-  Container _buildTrackInfo(BuildContext context) {
+  Widget _buildTrackInfo(BuildContext context) {
     Widget buildTrackImageOrIndex() {
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.08,
@@ -287,65 +376,48 @@ class _TrackItemState extends State<TrackItem> {
       );
     }
 
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.1,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: widget.backgroundColor ?? Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Row(
-          children: [
-            buildTrackImageOrIndex(),
-            const SizedBox(width: 10),
-            buildTrackInfo(),
-            const Spacer(),
-            // widget.isLiked ? buildIsLikedTrack() : const SizedBox.shrink(),
-            if (widget.isBlank == true) SizedBox.shrink() else buildTrackMenu(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  FutureBuilder<dynamic> buildIsLikedTrack() {
-    return FutureBuilder(
-      future: Future.delayed(const Duration(milliseconds: 3)),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            height: 20,
-            width: 20,
-            child: CircularProgressIndicator(
-              strokeWidth: 3,
-              color: AppColor.primaryColor,
+    return BlocBuilder<LibraryBloc, LibraryState>(
+      builder: (context, state) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.1,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: widget.backgroundColor ?? Colors.white,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Row(
+              children: [
+                if (widget.isFavorite == true)
+                  Row(
+                    children: [
+                      Icon(
+                        CupertinoIcons.heart_fill,
+                        color: AppColor.primaryColor,
+                        size: 10,
+                      ),
+                      const SizedBox(width: 5),
+                    ],
+                  )
+                else
+                  SizedBox(width: 5),
+                buildTrackImageOrIndex(),
+                const SizedBox(width: 10),
+                buildTrackInfo(),
+                const Spacer(),
+                if (widget.isBlank == true)
+                  SizedBox.shrink()
+                else
+                  buildTrackMenu(),
+              ],
             ),
-          );
-        } else {
-          return AnimatedOpacity(
-            opacity: 1.0,
-            duration: const Duration(seconds: 3),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[100],
-              ),
-              padding: const EdgeInsets.all(3),
-              child: Icon(
-                CupertinoIcons.down_arrow,
-                color: Colors.grey,
-                size: 15,
-              ),
-            ),
-          );
-        }
+          ),
+        );
       },
     );
   }
 
   Future<dynamic> showTrackInfoBottomModal(BuildContext context) {
-    bool isLiked = false;
     return showModalBottomSheet(
       useRootNavigator: true,
       context: context,
@@ -444,10 +516,22 @@ class _TrackItemState extends State<TrackItem> {
                           child: Row(
                             children: [
                               TrackBottomSheetButton(
-                                buttonText: "Like",
-                                isLiked: isLiked,
+                                buttonText: widget.isFavorite == true
+                                    ? "Favorited"
+                                    : "Favorite",
+                                isLiked: widget.isFavorite ?? false,
                                 onPressed: () => setState(() {
-                                  isLiked = !isLiked;
+                                  context.read<LibraryBloc>().add(
+                                        ToggleTrackFavorite(
+                                          track: widget.track,
+                                          isFavorite:
+                                              !(widget.isFavorite ?? false),
+                                        ),
+                                      );
+                                  setState(() {
+                                    widget.isFavorite =
+                                        !(widget.isFavorite ?? false);
+                                  });
                                 }),
                               ),
                               Spacer(),

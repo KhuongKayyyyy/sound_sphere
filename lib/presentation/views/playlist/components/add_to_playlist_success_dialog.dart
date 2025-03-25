@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 
 class AddToPlaylistSuccessDialog extends StatelessWidget {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const AddToPlaylistSuccessDialog({Key? key, required this.playlist})
       : super(key: key);

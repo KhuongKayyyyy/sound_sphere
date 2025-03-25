@@ -9,11 +9,12 @@ sealed class AlbumEvent extends Equatable {
 
 class FetchAlbumsPreviewEvent extends AlbumEvent {
   final int page;
+  final int limit;
 
-  const FetchAlbumsPreviewEvent(this.page);
+  const FetchAlbumsPreviewEvent(this.page, this.limit);
 
   @override
-  List<Object> get props => [page];
+  List<Object> get props => [page, limit];
 }
 
 class FetchAlbumDetailEvent extends AlbumEvent {

@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/constant/app_image.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 
 class HorizontalPlaylistItem extends StatefulWidget {
   final Function onPressed;
-  final Playlist playlist;
+  final UserPlaylist playlist;
   const HorizontalPlaylistItem(
       {super.key, required this.playlist, required this.onPressed});
 

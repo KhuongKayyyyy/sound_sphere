@@ -12,9 +12,9 @@ class HistoryPlaylistPlayer extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: FakeData.obitoSongs.take(10).toList().length,
+      itemCount: FakeData.gnxTracks.take(10).toList().length,
       itemBuilder: (context, index) {
-        return HistoryPlayerSongItem(song: FakeData.obitoSongs[index]);
+        return HistoryPlayerSongItem(song: FakeData.gnxTracks[index]);
       },
     );
   }

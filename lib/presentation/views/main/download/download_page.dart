@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
+import 'package:sound_sphere/presentation/views/main/library/components/library_item.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_header.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_type_section.dart';
 
@@ -76,7 +76,7 @@ class _DownloadPageState extends State<DownloadPage> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    return LibraryAlbumItem(album: FakeData.albums[index]);
+                    return LibraryItem(album: FakeData.albums[index]);
                   },
                   childCount: FakeData.albums.length,
                 ),

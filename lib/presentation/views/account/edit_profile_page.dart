@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/app_user.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 
@@ -23,7 +23,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController _nickNameController =
       TextEditingController(text: "Default Nick Name");
   bool _isUpdated = false;
-  List<Playlist> _playlists = [];
+  List<UserPlaylist> _playlists = [];
   List<bool> _initialPlaylistStates = [];
 
   @override
@@ -56,8 +56,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return true;
   }
 
-  List<Playlist> _getChangedPlaylists() {
-    List<Playlist> changedPlaylists = [];
+  List<UserPlaylist> _getChangedPlaylists() {
+    List<UserPlaylist> changedPlaylists = [];
     for (int i = 0; i < _playlists.length; i++) {
       if (_playlists[i].isPublic != _initialPlaylistStates[i]) {
         changedPlaylists.add(_playlists[i]);
@@ -86,7 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           trailing: TextButton(
             onPressed: _isUpdated
                 ? () {
-                    List<Playlist> updatedPlaylists = _getChangedPlaylists()
+                    List<UserPlaylist> updatedPlaylists = _getChangedPlaylists()
                         .map((playlist) =>
                             playlist.copyWith(isPublic: !playlist.isPublic!))
                         .toList();
@@ -264,7 +264,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget _buildPlaylistItem(Playlist playlist) {
+  Widget _buildPlaylistItem(UserPlaylist playlist) {
     return Column(
       children: [
         Row(

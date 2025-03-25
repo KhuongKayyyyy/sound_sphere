@@ -31,7 +31,7 @@ class ArtistMusicSection extends StatelessWidget {
         const SizedBox(height: 10),
         if (songs != null)
           SizedBox(
-            height: 200,
+            height: 210,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: songs!.length,

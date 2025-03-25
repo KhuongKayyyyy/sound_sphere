@@ -2,9 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/core/utils/fake_data.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 import 'package:sound_sphere/presentation/views/player/components/current_song.dart';
 import 'package:sound_sphere/presentation/views/player/components/history_playlist_player.dart';
 import 'package:sound_sphere/presentation/views/player/components/infinite_playlist.dart';
@@ -25,7 +28,7 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  final bool _isFavorite = false;
+  bool _isFavorite = false;
 
   // handle menu state
   bool _isShowPlaylist = false;
@@ -46,6 +49,9 @@ class _PlayerPageState extends State<PlayerPage> {
     // _loadState();
     _lyricsScrollController.addListener(_onScroll);
     _playlistScrollController.addListener(_onPlaylistScroll);
+    context
+        .read<LibraryBloc>()
+        .add(CheckIfTrackIsFavorite(PlayerController().getCurrentSong().id!));
   }
 
   // Future<void> _loadState() async {
@@ -131,111 +137,123 @@ class _PlayerPageState extends State<PlayerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onVerticalDragUpdate: (details) {
-          if (details.primaryDelta! > 10) {
-            // Drag distance threshold
-            context.pop(); // Pop the context when dragging down
-          }
-        },
-        child: Stack(
-          children: [
-            // Background image
-            ..._buildPlayerBackground(),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 70),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () => context.pop(),
-                      child: Container(
-                        height: 5,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.6),
-                          borderRadius: BorderRadius.circular(5),
+    return BlocBuilder<LibraryBloc, LibraryState>(
+      builder: (context, state) {
+        if (state is CheckTrackFavoriteSuccess) {
+          // widget.playerController.getCurrentSong().isFavorite =
+          //     state.isFavorite;
+          _isFavorite = state.isFavorite;
+        }
+        return Scaffold(
+          body: GestureDetector(
+            onVerticalDragUpdate: (details) {
+              if (details.primaryDelta! > 10) {
+                // Drag distance threshold
+                context.pop(); // Pop the context when dragging down
+              }
+            },
+            child: Stack(
+              children: [
+                // Background image
+                ..._buildPlayerBackground(),
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 70),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () => context.pop(),
+                          child: Container(
+                            height: 5,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                  // Animated section for song info and playlist
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    height: _isScrollingLyrics
-                        ? MediaQuery.of(context).size.height - 85
-                        : 500, // Adjust heights here if necessary
-                    child: Stack(
-                      children: [
-                        // Song Info with smoother fade-out effect
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 700),
-                          curve: Curves.easeInOut,
-                          top: _isInMenu
-                              ? -MediaQuery.of(context).size.height
-                              : 0,
-                          child: AnimatedOpacity(
-                            opacity: _isInMenu ? 0.0 : 1.0,
-                            duration: const Duration(milliseconds: 700),
-                            curve: Curves.easeInOut,
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CurrentSong(isFavorite: _isFavorite),
+                      // Animated section for song info and playlist
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        height: _isScrollingLyrics
+                            ? MediaQuery.of(context).size.height - 85
+                            : 500, // Adjust heights here if necessary
+                        child: Stack(
+                          children: [
+                            // Song Info with smoother fade-out effect
+                            AnimatedPositioned(
+                              duration: const Duration(milliseconds: 700),
+                              curve: Curves.easeInOut,
+                              top: _isInMenu
+                                  ? -MediaQuery.of(context).size.height
+                                  : 0,
+                              child: AnimatedOpacity(
+                                opacity: _isInMenu ? 0.0 : 1.0,
+                                duration: const Duration(milliseconds: 700),
+                                curve: Curves.easeInOut,
+                                child: SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CurrentSong(
+                                      isFavorite: _isFavorite,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        // Playlist with smooth fade-in and position animation
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 700),
-                          curve: Curves.easeInOut,
-                          top: _isInMenu
-                              ? 0
-                              : MediaQuery.of(context).size.height,
-                          child: AnimatedOpacity(
-                            opacity: _isInMenu ? 1.0 : 0.0,
-                            duration: const Duration(milliseconds: 700),
-                            curve: Curves.easeInOut,
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width,
-                              child: _buildPlayerFunction(),
+                            // Playlist with smooth fade-in and position animation
+                            AnimatedPositioned(
+                              duration: const Duration(milliseconds: 700),
+                              curve: Curves.easeInOut,
+                              top: _isInMenu
+                                  ? 0
+                                  : MediaQuery.of(context).size.height,
+                              child: AnimatedOpacity(
+                                opacity: _isInMenu ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds: 700),
+                                curve: Curves.easeInOut,
+                                child: SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: _buildPlayerFunction(),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  bottom:
+                      !_isScrollingLyrics ? 30 : -150, // Adjust this as needed
+                  left: 0,
+                  right: 0,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    opacity: !_isScrollingLyrics
+                        ? 1.0
+                        : 0.0, // Fully visible when not scrolling lyrics
+                    curve: Curves.easeInOut,
+                    child: !_isScrollingLyrics
+                        ? _buildPlayerPlayControl()
+                        : Container(), // Hide when not needed
+                  ),
+                )
+              ],
             ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              bottom: !_isScrollingLyrics ? 30 : -150, // Adjust this as needed
-              left: 0,
-              right: 0,
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                opacity: !_isScrollingLyrics
-                    ? 1.0
-                    : 0.0, // Fully visible when not scrolling lyrics
-                curve: Curves.easeInOut,
-                child: !_isScrollingLyrics
-                    ? _buildPlayerPlayControl()
-                    : Container(), // Hide when not needed
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -341,14 +359,15 @@ class _PlayerPageState extends State<PlayerPage> {
                           // child: NonSyncLyrics(
                           //   lyricsScrollController: _lyricsScrollController,
                           // ),
-                          child: PlayerController().getCurrentSong().title ==
-                                  "Shape Of You"
-                              ? Padding(
-                                  padding: const EdgeInsets.only(top: 0),
-                                  child: SyncedLyric(
-                                    lyricsScrollController:
-                                        _lyricsScrollController,
-                                  ),
+                          child: PlayerController()
+                                      .getCurrentSong()
+                                      .album
+                                      .title ==
+                                  FakeData.gnx.title
+                              ? SyncedLyric(
+                                  track: PlayerController().getCurrentSong(),
+                                  lyricsScrollController:
+                                      _lyricsScrollController,
                                 )
                               : NonSyncLyrics(
                                   lyricsScrollController:

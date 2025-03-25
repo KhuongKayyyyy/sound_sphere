@@ -1,6 +1,6 @@
 import 'package:sound_sphere/data/models/track_in_playlist.dart';
 
-class Playlist {
+class UserPlaylist {
   final String? id;
   final String? name;
   bool? isPublic;
@@ -12,7 +12,7 @@ class Playlist {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Playlist(
+  UserPlaylist(
       {this.imgURL,
       this.id,
       this.name,
@@ -24,8 +24,8 @@ class Playlist {
       this.createdAt,
       this.updatedAt});
 
-  factory Playlist.fromJson(Map<String, dynamic> json) {
-    return Playlist(
+  factory UserPlaylist.fromJson(Map<String, dynamic> json) {
+    return UserPlaylist(
       id: json['_id'] as String?,
       name: json['title'] as String?,
       isPublic: json['isPublic'] as bool?,
@@ -63,8 +63,8 @@ class Playlist {
     return 'Playlist{id: $id, name: $name, isPublic: $isPublic, imgURL: $imgURL, tracks: $tracks, totalPlay: $totalPlay, totalSave: $totalSave, totalDuration: $totalDuration}';
   }
 
-  factory Playlist.empty() {
-    return Playlist(
+  factory UserPlaylist.empty() {
+    return UserPlaylist(
       id: "1",
       name: "Empty",
       isPublic: false,
@@ -79,7 +79,7 @@ class Playlist {
     );
   }
 
-  Playlist copyWith({
+  UserPlaylist copyWith({
     String? id,
     String? name,
     bool? isPublic,
@@ -91,7 +91,7 @@ class Playlist {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return Playlist(
+    return UserPlaylist(
       id: id ?? this.id,
       name: name ?? this.name,
       isPublic: isPublic ?? this.isPublic,

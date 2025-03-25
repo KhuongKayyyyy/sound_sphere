@@ -23,7 +23,7 @@ class _TrackBottomSheetButtonState extends State<TrackBottomSheetButton> {
     // Determine the icon based on the button text
     IconData getIcon() {
       switch (widget.buttonText.toLowerCase()) {
-        case 'like':
+        case 'favorite' || 'favorited':
           return widget.isLiked ? Icons.favorite : Icons.favorite_border;
         case 'share':
           return CupertinoIcons.share;
@@ -54,7 +54,8 @@ class _TrackBottomSheetButtonState extends State<TrackBottomSheetButton> {
             const SizedBox(width: 10),
             Icon(
               getIcon(),
-              color: widget.isLiked && widget.buttonText.toLowerCase() == 'like'
+              color: widget.isLiked &&
+                      widget.buttonText.toLowerCase() == 'favorited'
                   ? AppColor.primaryColor
                   : Colors.black,
             ),

@@ -12,7 +12,8 @@ import 'package:sound_sphere/data/res/track_repository.dart';
 import 'package:sound_sphere/presentation/blocs/aritst/artist_bloc.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_music.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/artist_new_album.dart';
-import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song.dart';
+import 'package:sound_sphere/presentation/views/artist_detail/components/artist_playlist_item.dart';
+import 'package:sound_sphere/presentation/views/artist_detail/components/artist_top_song_grid.dart';
 import 'package:sound_sphere/presentation/views/artist_detail/components/similar_artist_section.dart';
 import 'package:sound_sphere/presentation/widgets/context/media_item_context_menu.dart';
 
@@ -26,7 +27,7 @@ class ArtistDetailPage extends StatefulWidget {
 
 class _ArtistDetailPageState extends State<ArtistDetailPage> {
   Artist artist = Artist.defaultArtist();
-  Track newSong = FakeData.obitoSongs[4];
+  Track newSong = FakeData.gnxTracks[4];
 
   ScrollController? _scrollController;
   bool showAppBar = false;
@@ -95,9 +96,9 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
               child: _buildArtistDetail(
                   context,
                   FakeData.albums.first,
-                  FakeData.obitoSongs,
+                  FakeData.gnxTracks,
                   FakeData.albums,
-                  FakeData.obitoSongs,
+                  FakeData.gnxTracks,
                   FakeData.artists));
         }
       },
@@ -161,7 +162,7 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
           const SizedBox(width: 15),
           InkWell(
             onTap: () {
-              TrackRepository.getTopTrackOfArtist(artist.id!);
+              TrackRepository.getTopTracksOfArtist(artistId: artist.id!);
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -207,24 +208,52 @@ class _ArtistDetailPageState extends State<ArtistDetailPage> {
               ),
             ],
           ),
-          ArtistTopSong(
-            topSongs: topTrackOfArtist.length > 8
-                ? topTrackOfArtist.take(8).toList()
-                : topTrackOfArtist,
-          ),
+          if (topTrackOfArtist.isNotEmpty)
+            ArtistTopSongGrid(
+              topSongs: topTrackOfArtist.length > 8
+                  ? topTrackOfArtist.take(8).toList()
+                  : topTrackOfArtist,
+            ),
           const SizedBox(height: 10),
           if (albumOfArtist.isNotEmpty)
             ArtistMusic(sectionName: "Albums", albumList: albumOfArtist),
           ArtistMusic(sectionName: "Single & EPs", songList: trackOfArtist),
           const SizedBox(height: 10),
-          ArtistMusic(
-              sectionName: "Artist Playlists",
-              albumList: FakeData.albums.take(8).toList()),
+          _buildArtistPlaylist(),
+          const SizedBox(height: 10),
+          // ArtistMusic(
+          //     sectionName: "Artist Playlists",
+          //     albumList: FakeData.albums.take(8).toList()),
           SimilarArtistSection(
             similarArtists: relatedArtists,
           ),
         ],
       ),
+    );
+  }
+
+  Column _buildArtistPlaylist() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20, bottom: 10),
+          child: Text(
+            "Artist Playlists",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ArtistPlaylistItem(artist: artist, playlistType: "Essentials"),
+            ArtistPlaylistItem(artist: artist, playlistType: "Influences"),
+          ],
+        ),
+      ],
     );
   }
 

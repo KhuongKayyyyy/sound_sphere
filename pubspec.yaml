@@ -72,6 +72,9 @@ dependencies:
   skeletonizer: ^1.4.2
   modal_bottom_sheet: ^3.0.0
   fluttertoast: ^8.2.12
+  google_fonts: ^6.2.1
+  image_color_builder: ^1.0.4
+  diacritic: ^0.1.6
 
 
 
@@ -134,3 +137,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+
+dependency_overrides:
+  http: ^1.0.0

@@ -8,7 +8,9 @@ import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/res/playlist_repository.dart';
+import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/data/res/library_repository.dart';
+import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/added_artist_button.dart';
@@ -18,6 +20,7 @@ import 'package:sound_sphere/presentation/views/main/home/components/mixed_playl
 import 'package:sound_sphere/presentation/views/main/home/components/playlist_section.dart';
 import 'package:sound_sphere/presentation/views/main/home/components/media_section.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sound_sphere/presentation/widgets/media/media_item.dart';
 import 'package:sound_sphere/presentation/widgets/search_bar/custom_app_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,6 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late AlbumBloc albumBloc;
   late TrackBloc recommendTrackBloc;
   late TrackBloc hitTrackBloc;
   ScrollController? _scrollController;
@@ -54,10 +58,16 @@ class _HomePageState extends State<HomePage> {
     });
 
     recommendTrackBloc = TrackBloc();
-    recommendTrackBloc
-        .add(const FetchTracksEvent(1, 10, TrackApi.previewTrack));
+    final random = (DateTime.now().millisecondsSinceEpoch % 20) + 1;
+    recommendTrackBloc.add(FetchTracksEvent(random, 10, TrackApi.previewTrack));
     hitTrackBloc = TrackBloc();
-    hitTrackBloc.add(const FetchTracksEvent(2, 10, TrackApi.previewTrack));
+    // hitTrackBloc
+    //     .add(FetchTracksEvent((random % 20) + 1, 10, TrackApi.previewTrack));
+
+    hitTrackBloc.add(FetchTracksEvent(1, 10, TrackApi.previewTrack));
+
+    albumBloc = AlbumBloc();
+    albumBloc.add(FetchAlbumsPreviewEvent(1, 5));
 
     _scrollController = ScrollController();
     _scrollController!.addListener(_onScroll);
@@ -191,23 +201,17 @@ class _HomePageState extends State<HomePage> {
       controller: _scrollController,
       slivers: [
         CustomAppBar(title: "Listen now"),
-        SliverToBoxAdapter(
-          child: TextButton(
-            onPressed: () async {
-              // String? token =
-              //     await FlutterSecureStorage().read(key: ApiConfig.token);
-              // print(token);
-              // String? refreshToken = await FlutterSecureStorage()
-              //     .read(key: ApiConfig.refreshToken);
-              PlaylistRepository().addAlbumToPlayList(
-                  playlistId: "67d90e42ab731fac82a68f22",
-                  albumId: "6767be0e8b695e26ed4c69d0");
-            },
-            child: const Text("Test"),
-          ),
-        ),
-        _buildReccommendedMusicSection(),
+        // SliverToBoxAdapter(
+        //   child: TextButton(
+        //     onPressed: () async {
+        //       LibraryRepository()
+        //           .removeTrackFromLibrary("6767be0c8b695e26ed4c6990");
+        //     },
+        //     child: const Text("Test"),
+        //   ),
+        // ),
         _buildAppUltilitySection(),
+        _buildReccommendedMusicSection(),
       ],
     );
   }
@@ -246,22 +250,24 @@ class _HomePageState extends State<HomePage> {
           children: [
             const SizedBox(height: 20),
             Skeletonizer(
-              enabled: _showSkeleton, // Control skeleton visibility
+              enabled: _showSkeleton,
               child:
                   const PlaylistSection(playlistSectionTitle: "Top Playlists"),
             ),
             _buildMediaSection(hitTrackBloc, "Top songs"),
             const SizedBox(height: 10),
+            _buildNewsAlbumSection(),
+            const SizedBox(height: 10),
             const PlaylistSection(playlistSectionTitle: "Made for you"),
             const SizedBox(height: 10),
-            _buildMediaSection(recommendTrackBloc, "Son Tung MTP's hits"),
+            _buildMediaSection(recommendTrackBloc, "Songs you may love"),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: BestAlbumSection(
                 onPressed: () => context.pushNamed(
                   Routes.albumDetail,
-                  extra: "6747e52700a1fcb7eb635fbb",
+                  extra: "6767be228b695e26ed4c6c0f",
                 ),
               ),
             ),
@@ -269,6 +275,74 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildNewsAlbumSection() {
+    return BlocBuilder<AlbumBloc, AlbumState>(
+      bloc: albumBloc,
+      builder: (context, state) {
+        if (state is AlbumPreviewLoaded) {
+          return _buildNewAlbumList(state.albums);
+        } else if (state is AlbumPreviewError) {
+          return Center(
+            child: Text(state.message),
+          );
+        } else if (state is AlbumPreviewLoading) {
+          return Skeletonizer(
+            enabled: _showSkeleton,
+            child: const PlaylistSection(playlistSectionTitle: "New albums"),
+          );
+        }
+        return const SizedBox(child: Text("No event added"));
+      },
+    );
+  }
+
+  Widget _buildNewAlbumList(List<Album> albums) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                "New albums",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+              onPressed: () {
+                context.pushNamed(Routes.extendGridView, extra: {
+                  'albums': albums,
+                  'title': "New albums",
+                });
+              },
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              padding: EdgeInsets.zero,
+            )
+          ],
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.25,
+          child: ListView.builder(
+            itemCount: albums.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Padding(
+                  padding: EdgeInsets.only(
+                    left: 10,
+                    right: index == albums.length - 1 ? 10 : 0,
+                  ),
+                  child: MediaItem(album: albums[index]));
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -282,13 +356,13 @@ class _HomePageState extends State<HomePage> {
             enabled: _showSkeleton, // Control skeleton visibility
             child: MediaSection(
               mediaSectionTitle: title,
-              songList: FakeData.obitoSongs.take(5).toList(),
+              songList: FakeData.gnxTracks.take(5).toList(),
               isExpandable: true,
               onPressed: () => context.pushNamed(
                 Routes.extendGridView,
                 extra: {
-                  'songs': FakeData.obitoSongs,
                   'title': title,
+                  'songs': FakeData.gnxTracks,
                 },
               ),
             ),

@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:sound_sphere/core/constant/api_config.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/data/res/playlist_repository.dart';
 import 'package:sound_sphere/data/res/track_repository.dart';
@@ -53,7 +54,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
       PLChangeStateRequested event, Emitter<PlaylistState> emit) async {
     emit(PLChangeStateLoading());
     try {
-      List<Playlist> newPlaylist = [];
+      List<UserPlaylist> newPlaylist = [];
       for (var playlist in event.playlists) {
         if (playlist.isPublic! == true) {
           final tempPlaylist = await _playlistRepository.switchToPrivate(
@@ -104,7 +105,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
       PLAddNewRequested event, Emitter<PlaylistState> emit) async {
     emit(PLAddNewLoading());
     try {
-      final Playlist playlist = await _playlistRepository.createNewPlaylist(
+      final UserPlaylist playlist = await _playlistRepository.createNewPlaylist(
           playlistName: event.playlistName);
       emit(PLAddNewSuccess(playlist));
     } catch (e) {
@@ -116,7 +117,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
       PlaylistGetListRequested event, Emitter<PlaylistState> emit) async {
     emit(PlaylistLoading()); // Shows loading
     try {
-      final List<Playlist> playlists =
+      final List<UserPlaylist> playlists =
           await _playlistRepository.getPlaylistOfUser();
 
       if (playlists.isNotEmpty) {
@@ -137,7 +138,8 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
           playlistId: event.playlist.id!);
       List<Track> tracks = [];
       for (var track in newPlaylist.tracks!) {
-        tracks.add(await TrackRepository.getTrackDetailById(track.id));
+        tracks.add(await TrackRepository.getTrackDetailById(
+            track.id, TrackApi.fullTrack));
       }
       List<Artist> artists = Helpers.getArtistsFromTracks(tracks);
       emit(PLGetDetailSuccess(tracks, artists));

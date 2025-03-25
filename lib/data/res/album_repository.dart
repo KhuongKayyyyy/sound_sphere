@@ -6,7 +6,8 @@ import 'package:sound_sphere/core/utils/logger.dart';
 import 'package:sound_sphere/data/models/album.dart';
 
 class AlbumRepository {
-  static Future<List<Album>> fetchAlbumWithPreviewInformation(int page) async {
+  static Future<List<Album>> fetchAlbumWithPreviewInformation(
+      int page, int limit) async {
     var client = HttpClient();
     List<Album> albums = [];
     try {
@@ -18,8 +19,7 @@ class AlbumRepository {
       request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
       request.write(jsonEncode({
         'page': page,
-        'limit': ApiConfig.DEFAULT_LIMIT,
-        // 'sort': 'title',
+        'limit': limit,
         "select": "title creator image_url type",
         'isPopulateCreator': true
       }));
@@ -44,6 +44,7 @@ class AlbumRepository {
     } finally {
       client.close();
     }
+    print(albums);
     return albums;
   }
 

@@ -12,7 +12,7 @@ final class PlaylistInitial extends PlaylistState {}
 class PlaylistLoading extends PlaylistState {}
 
 class PlaylistGetSuccess extends PlaylistState {
-  final List<Playlist> playlists;
+  final List<UserPlaylist> playlists;
 
   const PlaylistGetSuccess(this.playlists);
 
@@ -50,7 +50,7 @@ class PLGetDetailFailure extends PlaylistState {
 class PLAddNewLoading extends PlaylistState {}
 
 class PLAddNewSuccess extends PlaylistState {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const PLAddNewSuccess(this.playlist);
 
@@ -70,7 +70,7 @@ class PLAddNewFailure extends PlaylistState {
 class PLAddTrackLoading extends PlaylistState {}
 
 class PLAddTrackSuccess extends PlaylistState {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const PLAddTrackSuccess(this.playlist);
 
@@ -90,7 +90,7 @@ class PLAddTrackFailure extends PlaylistState {
 class PLRemoveTrackLoading extends PlaylistState {}
 
 class PLRemoveTrackSuccess extends PlaylistState {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const PLRemoveTrackSuccess(this.playlist);
 
@@ -108,7 +108,7 @@ class PLRemoveTrackFailure extends PlaylistState {
 }
 
 class PLChangeStateSuccess extends PlaylistState {
-  final List<Playlist> playlists;
+  final List<UserPlaylist> playlists;
 
   const PLChangeStateSuccess(this.playlists);
 
@@ -128,7 +128,7 @@ class PLChangeStateFailure extends PlaylistState {
 class PLChangeStateLoading extends PlaylistState {}
 
 class PLDeleteSuccess extends PlaylistState {
-  final Playlist playlist;
+  final UserPlaylist playlist;
 
   const PLDeleteSuccess(this.playlist);
 

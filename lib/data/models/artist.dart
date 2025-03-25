@@ -31,6 +31,10 @@ class Artist {
     };
   }
 
+  int compareTo(Artist other) {
+    return (name ?? '').compareTo(other.name ?? '');
+  }
+
   @override
   String toString() {
     return 'Artist{id: $id, name: $name, avatarURL: $avatarURL}';

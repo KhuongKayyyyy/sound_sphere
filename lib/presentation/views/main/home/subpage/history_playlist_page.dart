@@ -17,7 +17,7 @@ class HistoryPlaylistPage extends StatefulWidget {
 }
 
 class _HistoryPlaylistPageState extends State<HistoryPlaylistPage> {
-  final List<Track> songList = FakeData.obitoSongs.take(10).toList();
+  final List<Track> songList = FakeData.gnxTracks.take(10).toList();
   ScrollController? _scrollController;
   bool showSearchBar = true;
   bool showAppBarTitle = false; // Track whether to show app bar title

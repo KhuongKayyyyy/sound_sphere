@@ -52,7 +52,7 @@ class _InfinitePlaylistState extends State<InfinitePlaylist> {
             ),
           ),
           InfinitePlaylistSongList(
-            songList: FakeData.obitoSongs,
+            songList: FakeData.gnxTracks,
             scrollController: null,
           ),
         ],

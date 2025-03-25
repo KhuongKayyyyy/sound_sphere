@@ -59,7 +59,7 @@ class _SearchHistoryState extends State<SearchHistory> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SearchSongItem(song: FakeData.obitoSongs[index]),
+                child: SearchSongItem(song: FakeData.gnxTracks[index]),
               );
             },
           ),

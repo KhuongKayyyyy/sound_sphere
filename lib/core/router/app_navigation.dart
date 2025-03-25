@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sound_sphere/core/router/routes.dart';
+import 'package:sound_sphere/data/models/album.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/models/search_category.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/views/account/edit_profile_page.dart';
@@ -27,6 +28,7 @@ import 'package:sound_sphere/presentation/views/main/home/subpage/history_playli
 import 'package:sound_sphere/presentation/views/main/home/home_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_album_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_artist_page.dart';
+import 'package:sound_sphere/presentation/views/main/library/library_detail_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_genre_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_made4u_page.dart';
 import 'package:sound_sphere/presentation/views/main/library/library_page.dart';
@@ -179,9 +181,9 @@ class AppNavigation {
           path: Routes.albumDetail,
           name: Routes.albumDetail,
           builder: (context, state) {
-            final albumId = state.extra as String;
+            final album = state.extra as Album;
             return AlbumDetailPage(
-              albumId: albumId,
+              album: album,
             );
           },
         ),
@@ -199,9 +201,9 @@ class AppNavigation {
           path: Routes.songDetail,
           name: Routes.songDetail,
           builder: (context, state) {
-            final trackId = state.extra as String;
+            final track = state.extra as Track;
             return SingleEPsDetailPage(
-              trackId: trackId,
+              track: track,
             );
           },
         ),
@@ -210,8 +212,15 @@ class AppNavigation {
           name: Routes.extendGridView,
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;
-            final songList = extras['songs'] as List<Track>;
+            final songList = extras['songs'] as List<Track>?;
+            final albumList = extras['albums'] as List<Album>?;
             final title = extras['title'] as String;
+            if (albumList != null) {
+              return AllSongGrid(
+                albums: albumList,
+                title: title,
+              );
+            }
             return AllSongGrid(
               songs: songList,
               title: title,
@@ -330,10 +339,20 @@ class AppNavigation {
           builder: (context, state) => const DownloadPage(),
         ),
         GoRoute(
+          path: Routes.detailLibrary,
+          name: Routes.detailLibrary,
+          builder: (context, state) {
+            final track = state.extra as Track;
+            return LibraryDetailPage(
+              track: track,
+            );
+          },
+        ),
+        GoRoute(
           path: Routes.playlistDetailPage,
           name: Routes.playlistDetailPage,
           builder: (context, state) {
-            final playlist = state.extra as Playlist;
+            final playlist = state.extra as UserPlaylist;
             return PlaylistDetailPage(
               playlist: playlist,
             );

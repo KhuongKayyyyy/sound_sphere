@@ -16,7 +16,7 @@ class CityTopSongsItem extends StatelessWidget {
     return InkWell(
       onTap: () => context.pushNamed(Routes.playlistExtened, extra: {
         "title": "Top 25 $cityName",
-        "songs": FakeData.obitoSongs,
+        "songs": FakeData.gnxTracks,
         "page": Random().nextInt(9) + 1,
         "limit": 25,
       }),

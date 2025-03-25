@@ -5,7 +5,10 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
+import 'package:sound_sphere/data/models/track.dart';
+import 'package:sound_sphere/data/models/track_in_library.dart';
 import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_app_bar.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_brief_info.dart';
 import 'package:sound_sphere/presentation/views/album_detail/components/album_detail_popup.dart';
@@ -13,16 +16,15 @@ import 'package:sound_sphere/presentation/views/album_detail/components/album_so
 import 'package:sound_sphere/presentation/views/album_detail/components/artist_music_section.dart';
 
 class AlbumDetailPage extends StatefulWidget {
-  final String albumId;
+  final Album album;
 
-  const AlbumDetailPage({super.key, required this.albumId});
+  const AlbumDetailPage({super.key, required this.album});
 
   @override
   State<AlbumDetailPage> createState() => _AlbumDetailPageState();
 }
 
 class _AlbumDetailPageState extends State<AlbumDetailPage> {
-  Album album = FakeData.albums.first;
   ScrollController? _scrollController;
   bool showAppBarTitle = false;
   Color appBarIconColor = Colors.white;
@@ -35,7 +37,8 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
     _scrollController!.addListener(_onScroll);
 
     albumBloc = AlbumBloc();
-    albumBloc.add(FetchAlbumDetailEvent(widget.albumId));
+    albumBloc.add(FetchAlbumDetailEvent(widget.album.id!));
+    context.read<LibraryBloc>().add(GetTrackLibraryRequest());
   }
 
   @override
@@ -60,7 +63,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
       builder: (BuildContext builder) {
         return CupertinoPopupSurface(
           child: AlbumDetailPopup(
-            album: album,
+            album: widget.album,
           ),
         );
       },
@@ -74,17 +77,29 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
         bloc: albumBloc,
         builder: (context, albumState) {
           if (albumState is AlbumDetailLoaded) {
-            album = albumState.album;
-            return _buildAlbumDetailPage();
+            return _buildAlbumDetailPage(
+                album: albumState.album,
+                popularTracks: albumState.topTrackOfArtist,
+                featuredTracks: albumState.featuredTracks,
+                favoriteTracks: albumState.favoriteTracks);
           } else {
-            return Skeletonizer(child: _buildAlbumDetailPage());
+            return Skeletonizer(
+                child: _buildAlbumDetailPage(
+                    album: FakeData.gnx,
+                    popularTracks: FakeData.gnxTracks,
+                    featuredTracks: FakeData.gnxTracks,
+                    favoriteTracks: []));
           }
         },
       ),
     );
   }
 
-  CustomScrollView _buildAlbumDetailPage() {
+  CustomScrollView _buildAlbumDetailPage(
+      {required Album album,
+      required List<Track> popularTracks,
+      required List<Track> featuredTracks,
+      required List<TrackInLibrary> favoriteTracks}) {
     return CustomScrollView(
       controller: _scrollController,
       slivers: [
@@ -94,7 +109,7 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
           appBarIconColor: appBarIconColor,
           showCupertinoBottomSheet: _showCupertinoBottomSheet,
         ),
-        AlbumSongList(tracks: album.tracks),
+        AlbumSongList(tracks: album.tracks, favoriteTracks: favoriteTracks),
         AlbumBriefInfo(album: album),
         SliverToBoxAdapter(
           child: Container(
@@ -102,12 +117,13 @@ class _AlbumDetailPageState extends State<AlbumDetailPage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                ArtistMusicSection(
-                    title: "More by ${album.aritst.name}",
-                    albums: FakeData.albums),
-                ArtistMusicSection(
-                    title: "Featured on",
-                    songs: FakeData.obitoSongs.take(10).toList()),
+                if (popularTracks.isNotEmpty)
+                  ArtistMusicSection(
+                      title: "Popular by ${album.aritst.name}",
+                      songs: popularTracks),
+                if (featuredTracks.isNotEmpty)
+                  ArtistMusicSection(
+                      title: "Featured on", songs: featuredTracks),
                 const SizedBox(height: 150),
               ],
             ),

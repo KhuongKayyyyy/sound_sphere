@@ -13,7 +13,7 @@ import 'package:sound_sphere/core/constant/app_image.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/artist.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
@@ -23,7 +23,7 @@ import 'package:sound_sphere/presentation/widgets/button/primary_button.dart';
 import 'package:sound_sphere/presentation/widgets/track/track_item.dart';
 
 class PlaylistDetailPage extends StatefulWidget {
-  final Playlist playlist;
+  final UserPlaylist playlist;
   const PlaylistDetailPage({super.key, required this.playlist});
 
   @override
@@ -362,7 +362,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
               } else if (state is TracksLoading) {
                 return Skeletonizer(
                   enabled: true,
-                  child: _buildSuggestSongList(FakeData.obitoSongs),
+                  child: _buildSuggestSongList(FakeData.gnxTracks),
                 );
               } else if (state is TracksError) {
                 return Center(
@@ -371,7 +371,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
               } else {
                 return Skeletonizer(
                   enabled: true,
-                  child: _buildSuggestSongList(FakeData.obitoSongs),
+                  child: _buildSuggestSongList(FakeData.gnxTracks),
                 );
               }
             },
@@ -423,7 +423,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
         } else if (playlistState is PlaylistLoading) {
           return Skeletonizer(
             enabled: true,
-            child: _buildSongList(FakeData.obitoSongs),
+            child: _buildSongList(FakeData.gnxTracks),
           );
         } else if (playlistState is PLGetDetailFailure) {
           return Center(
@@ -432,7 +432,7 @@ class _PlaylistDetailPageState extends State<PlaylistDetailPage> {
         } else {
           return Skeletonizer(
             enabled: true,
-            child: _buildSongList(FakeData.obitoSongs),
+            child: _buildSongList(FakeData.gnxTracks),
           );
         }
       },

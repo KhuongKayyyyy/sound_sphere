@@ -52,6 +52,7 @@ class Routes {
   static const String compilationLibrary = '/library-compilation';
   static const String musicVideoLibrary = '/library-music-video';
   static const String made4uLibrary = '/library-made4u';
+  static const String detailLibrary = '/library-detail';
 
   // download routes
   static const String download = '/download';

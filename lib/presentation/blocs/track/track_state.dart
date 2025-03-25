@@ -26,8 +26,14 @@ class TracksError extends TrackState {
 class TrackDetailLoaded extends TrackState {
   final Track track;
   final List<Track> trackByArtist;
+  final List<Track> featuredTracks;
+  final bool isFavorite;
 
-  const TrackDetailLoaded(this.track, this.trackByArtist);
+  const TrackDetailLoaded(
+      {required this.track,
+      required this.trackByArtist,
+      required this.featuredTracks,
+      required this.isFavorite});
 }
 
 class TrackDetailError extends TrackState {
@@ -79,3 +85,15 @@ class TopTrackError extends TrackState {
 }
 
 class TopTrackLoading extends TrackState {}
+
+class FeaturedTrackLoaded extends TrackState {
+  final List<Track> tracks;
+
+  const FeaturedTrackLoaded(this.tracks);
+}
+
+class FeaturedTrackError extends TrackState {
+  final String message;
+
+  const FeaturedTrackError(this.message);
+}

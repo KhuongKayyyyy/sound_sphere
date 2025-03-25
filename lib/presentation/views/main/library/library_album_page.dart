@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/presentation/views/main/library/components/library_album_item.dart';
+import 'package:sound_sphere/presentation/views/main/library/components/library_item.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_header.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/search_bar_delegate.dart';
 import 'package:sound_sphere/presentation/widgets/button/primary_button.dart';
@@ -67,7 +67,7 @@ class _LibraryAlbumPageState extends State<LibraryAlbumPage> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  return LibraryAlbumItem(album: FakeData.albums[index]);
+                  return LibraryItem(album: FakeData.albums[index]);
                 },
                 childCount: FakeData.albums.length,
               ),

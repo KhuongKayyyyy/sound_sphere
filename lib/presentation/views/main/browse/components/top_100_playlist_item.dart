@@ -17,7 +17,7 @@ class Top100PlaylistItem extends StatelessWidget {
       onTap: () {
         context.pushNamed(Routes.playlistExtened, extra: {
           "title": "Top 100 $location",
-          "songs": FakeData.wrxdieSong,
+          "songs": FakeData.gnxTracks,
           "page": Random().nextInt(4) + 1, // Random page from 1 to 4
           "limit": 50,
         });

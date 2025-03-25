@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
-import 'package:sound_sphere/core/constant/app_setting.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/library_header.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/playlist_add_new.dart';
@@ -35,33 +33,12 @@ class _LibraryPlaylistPageState extends State<LibraryPlaylistPage> {
     if (context.read<PlaylistBloc>().state is! PlaylistGetSuccess) {
       context.read<PlaylistBloc>().add(PlaylistGetListRequested());
     }
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   getOrderType();
-    // });
   }
 
-  // Future<void> getOrderType() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final String? action = prefs.getString(AppSetting.playlistOrder);
-
-  //   if (action != null && mounted) {
-  //     setState(() {
-  //       widget.orderType = action;
-  //     });
-  //   }
-  // }
-
   void updateOrderType(String orderType) async {
-    // final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString(AppSetting.playlistOrder, orderType);
     setState(() {
       widget.orderType = orderType;
     });
-    // if (mounted) {
-    //   setState(() {
-    //     widget.orderType = orderType;
-    //   });
-    // }
   }
 
   void _scrollListener() {
@@ -176,7 +153,7 @@ class _LibraryPlaylistPageState extends State<LibraryPlaylistPage> {
     );
   }
 
-  ListView _buildPlaylistList(List<Playlist> playlists) {
+  ListView _buildPlaylistList(List<UserPlaylist> playlists) {
     if (widget.orderType == "Title") {
       playlists.sort((a, b) => a.name!.compareTo(b.name!));
     } else if (widget.orderType == "Date added") {
@@ -259,7 +236,7 @@ class PlayListSearchDelegate extends SearchDelegate<String> {
             child: Text(playlistState.message),
           );
         } else if (playlistState is PlaylistGetSuccess) {
-          final List<Playlist> filteredPlaylists = playlistState.playlists
+          final List<UserPlaylist> filteredPlaylists = playlistState.playlists
               .where((playlist) =>
                   playlist.name!.toLowerCase().contains(query.toLowerCase()))
               .toList();
@@ -331,7 +308,7 @@ class PlayListSearchDelegate extends SearchDelegate<String> {
     );
   }
 
-  Widget _buildPlaylistList(List<Playlist> playlists) {
+  Widget _buildPlaylistList(List<UserPlaylist> playlists) {
     return ListView.builder(
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {

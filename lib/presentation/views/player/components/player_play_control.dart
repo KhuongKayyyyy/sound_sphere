@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_sphere/core/constant/app_icon.dart';
 import 'package:sound_sphere/core/controller/player_controller.dart';
+import 'package:sound_sphere/presentation/blocs/library/library_bloc.dart';
 
 class PlayerPlayControl extends StatefulWidget {
   final PlayerController playerController = PlayerController();
@@ -30,6 +32,8 @@ class _PlayerPlayControlState extends State<PlayerPlayControl> {
             children: [
               InkWell(
                 onTap: () {
+                  // context.read<LibraryBloc>().add(CheckIfTrackIsFavorite(
+                  //     widget.playerController.currentSong.id!));
                   widget.playerController.moveToPreviousSong();
                 },
                 child: Image.asset(
@@ -85,7 +89,10 @@ class _PlayerPlayControlState extends State<PlayerPlayControl> {
                   // setState(() {
                   //   _moveToNextSong();
                   // });
+                  // context.read<LibraryBloc>().add(CheckIfTrackIsFavorite(
+                  //     widget.playerController.currentSong.id!));
                   widget.playerController.moveToNextSong();
+                  setState(() {});
                 },
                 child: Image.asset(
                   AppIcon.play_next,

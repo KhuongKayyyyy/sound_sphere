@@ -44,7 +44,7 @@ class _MixedPlaylistBigState extends State<MixedPlaylistBig>
         final int page = random.nextInt(11) + 1;
         context.pushNamed(Routes.playlistExtened, extra: {
           "title": widget.mixedPlaylistTitle,
-          "songs": FakeData.obitoSongs,
+          "songs": FakeData.gnxTracks,
           "page": page,
           "limit": 20,
         });

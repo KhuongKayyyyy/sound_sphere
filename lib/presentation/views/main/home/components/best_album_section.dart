@@ -15,9 +15,10 @@ class BestAlbumSection extends StatelessWidget {
           "Featured in 100 Best Albums",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
+        const SizedBox(height: 10),
         BestAlbumItem(
           onPressed: onPressed,
-          album: FakeData.albums.first,
+          album: FakeData.gnx,
         )
       ],
     );

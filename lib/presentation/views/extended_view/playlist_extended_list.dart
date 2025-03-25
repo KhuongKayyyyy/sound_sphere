@@ -73,12 +73,12 @@ class _PlayListExtendedListState extends State<PlayListExtendedList> {
         if (trackState is TracksLoading) {
           return Skeletonizer(
             child: ListView.builder(
-              itemCount: FakeData.obitoSongs.length,
+              itemCount: FakeData.gnxTracks.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: TrackItem(
-                    track: FakeData.obitoSongs.elementAt(index),
+                    track: FakeData.gnxTracks.elementAt(index),
                   ),
                 );
               },

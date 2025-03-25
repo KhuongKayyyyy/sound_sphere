@@ -46,12 +46,9 @@ class TrackApi {
   static const String fullTrack =
       'title genre release_date image_url url_media';
   static const String trackLyric = "lyric";
-
-  // library
-  static const String addTrackToLibrary =
-      '${ApiConfig.BASE_URL}/user-library/Track/';
-  static String switchTrackFavorite(String trackId) =>
-      '${ApiConfig.BASE_URL}/user-library/Track/$trackId/toggle-favorite';
+  static const String featuredTrack = "/tracks/featured/artist/";
+  static String featuredTrackByArtist(String artistId) =>
+      '${ApiConfig.BASE_URL}/tracks/featured/artist/$artistId';
 }
 
 class AuthenticationAPI {
@@ -81,4 +78,23 @@ class PlaylistAPI {
       '${ApiConfig.BASE_URL}/playlists/$playlistId/private';
   static String addAlbumToPlaylist =
       '${ApiConfig.BASE_URL}/playlists/add-tracks-from-album';
+}
+
+class LibraryAPI {
+  static const String library = '${ApiConfig.BASE_URL}/user-library/Track';
+  static String addTrackToLibrary(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/Track/$trackId';
+  static String addTrackToLibraryFavorite(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/Track/$trackId/favourite';
+  static String removeTrackFromLibrary(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/remove/Track/$trackId';
+
+  static const String getFavoriteTracks =
+      '${ApiConfig.BASE_URL}/user-library/Track/favourite';
+
+  static String isTrackFavorite(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/Track/$trackId/is-favourite';
+
+  static String toggleFavoriteTrack(String trackId) =>
+      '${ApiConfig.BASE_URL}/user-library/Track/$trackId/toggle-favourite';
 }

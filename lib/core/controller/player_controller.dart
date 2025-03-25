@@ -17,15 +17,12 @@ class PlayerController extends ChangeNotifier {
 
   StreamSubscription? lyricSyncSubscription;
 
-  /// Sync lyrics and scroll to the appropriate position
   void syncLyrics({
     required List<Lyric> lyrics,
     required ItemScrollController itemScrollController,
   }) {
-    // Hủy đăng ký trước đó nếu có
     lyricSyncSubscription?.cancel();
 
-    // Lắng nghe luồng vị trí từ trình phát nhạc
     lyricSyncSubscription = audioPlayer.positionStream.listen((duration) {
       DateTime dt = DateTime(1970, 1, 1).copyWith(
         hour: duration.inHours,
@@ -38,9 +35,9 @@ class PlayerController extends ChangeNotifier {
         if (lyrics[index].timeStamp.isAfter(dt)) {
           // Cuộn để đảm bảo mục này ở đầu danh sách
           itemScrollController.scrollTo(
-            index: index, // Không cần trừ đi bất kỳ giá trị nào
-            duration: const Duration(milliseconds: 1500),
-            alignment: 0.0, // Giữ mục ở đầu danh sách
+            index: index,
+            duration: const Duration(milliseconds: 2000),
+            alignment: 0.2,
           );
           break;
         }
@@ -75,12 +72,12 @@ class PlayerController extends ChangeNotifier {
 
   List<Track> playlistSongs = [];
   List<Track> historySongs = [];
-  List<Track> infiniteSongs = FakeData.obitoSongs;
+  List<Track> infiniteSongs = FakeData.gnxTracks;
   late Track currentSong;
   final ValueNotifier<Track> currentSongNotifier =
-      ValueNotifier<Track>(FakeData.obitoSongs.first);
+      ValueNotifier<Track>(FakeData.gnxTracks.first);
   final ValueNotifier<List<Track>> infiniteSongsNotifier =
-      ValueNotifier<List<Track>>(FakeData.obitoSongs);
+      ValueNotifier<List<Track>>(FakeData.gnxTracks);
 
   // ValueNotifier<int> currentSongIndexNotifier = ValueNotifier<int>(0);
 

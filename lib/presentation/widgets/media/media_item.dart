@@ -77,9 +77,16 @@ class _MediaItemState extends State<MediaItem> {
     return Material(
       child: InkWell(
         onTap: () {
+          if (widget.album != null) {
+            context.pushNamed(
+              Routes.albumDetail,
+              extra: widget.album,
+            );
+            return;
+          }
           context.pushNamed(
             Routes.songDetail,
-            extra: widget.track?.id ?? widget.album?.id,
+            extra: widget.track ?? widget.album?.id,
           );
         },
         child: Column(

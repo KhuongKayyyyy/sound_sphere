@@ -39,7 +39,7 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
         FetchArtistsEvent(1, ApiConfig.DEFAULT_LIMIT, ArtistApi.nameAndAvatar));
 
     albumBloc = AlbumBloc();
-    albumBloc.add(FetchAlbumsPreviewEvent(1));
+    albumBloc.add(FetchAlbumsPreviewEvent(1, 5));
 
     trackBloc = TrackBloc();
     trackBloc.add(FetchTopTrack());
@@ -98,14 +98,14 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
                 height: 270,
                 child: ListView.builder(
                   itemCount: FakeData.albums.take(5).length +
-                      FakeData.obitoSongs.take(5).length,
+                      FakeData.gnxTracks.take(5).length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     // Combine both lists and check the type
                     final item = index < FakeData.albums.take(5).length
                         ? FakeData.albums.take(5).elementAt(index)
                         : FakeData
-                            .obitoSongs[index - FakeData.albums.take(5).length];
+                            .gnxTracks[index - FakeData.albums.take(5).length];
 
                     // Check if the item is an Album or a Song
                     if (item is Album) {
@@ -126,48 +126,48 @@ class _SearchCategoryDetailState extends State<SearchCategoryDetail> {
               ),
               MediaSection(
                 mediaSectionTitle: "Playlist",
-                songList: FakeData.obitoSongs.take(10).toList(),
+                songList: FakeData.gnxTracks.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
                   Routes.playlistExtened,
                   extra: {
-                    'songs': FakeData.obitoSongs.take(10).toList(),
+                    'songs': FakeData.gnxTracks.take(10).toList(),
                     'title': "Playlist",
                   },
                 ),
               ),
               MediaSection(
                 mediaSectionTitle: "New Release",
-                songList: FakeData.obitoSongs.take(10).toList(),
+                songList: FakeData.gnxTracks.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
                   Routes.extendGridView,
                   extra: {
-                    'songs': FakeData.wrxdieSong.take(10).toList(),
+                    'songs': FakeData.gnxTracks.take(10).toList(),
                     'title': "New Release",
                   },
                 ),
               ),
               MediaSection(
                 mediaSectionTitle: "Vietnamese Music In Spatial Audio",
-                songList: FakeData.obitoSongs.take(10).toList(),
+                songList: FakeData.gnxTracks.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
                   Routes.playlistExtened,
                   extra: {
-                    'songs': FakeData.obitoSongs.take(10).toList(),
+                    'songs': FakeData.gnxTracks.take(10).toList(),
                     'title': "Vietnamese Music In Spatial Audio",
                   },
                 ),
               ),
               MediaSection(
                 mediaSectionTitle: "International Collaboration",
-                songList: FakeData.obitoSongs.take(10).toList(),
+                songList: FakeData.gnxTracks.take(10).toList(),
                 isExpandable: true,
                 onPressed: () => context.pushNamed(
                   Routes.extendGridView,
                   extra: {
-                    'songs': FakeData.wrxdieSong.take(10).toList(),
+                    'songs': FakeData.gnxTracks.take(10).toList(),
                     'title': "International Collaboration",
                   },
                 ),

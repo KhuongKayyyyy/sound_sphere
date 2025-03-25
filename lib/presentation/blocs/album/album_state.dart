@@ -42,8 +42,15 @@ final class AlbumDetailError extends AlbumState {
 
 final class AlbumDetailLoaded extends AlbumState {
   final Album album;
-  const AlbumDetailLoaded(this.album);
+  final List<Track> topTrackOfArtist;
+  final List<Track> featuredTracks;
+  final List<TrackInLibrary> favoriteTracks;
+  const AlbumDetailLoaded(
+      {required this.album,
+      required this.topTrackOfArtist,
+      required this.featuredTracks,
+      required this.favoriteTracks});
 
   @override
-  List<Object> get props => [album];
+  List<Object> get props => [album, topTrackOfArtist];
 }

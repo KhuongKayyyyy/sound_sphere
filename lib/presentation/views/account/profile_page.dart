@@ -7,7 +7,7 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/core/utils/helpers.dart';
 import 'package:sound_sphere/data/models/app_user.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 import 'package:sound_sphere/presentation/views/account/edit_profile_page.dart';
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildPlaylistSection(List<Playlist> playlists) {
+  Widget _buildPlaylistSection(List<UserPlaylist> playlists) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  ListView _buildPlaylistList(List<Playlist> playlists) {
+  ListView _buildPlaylistList(List<UserPlaylist> playlists) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: playlists.length,

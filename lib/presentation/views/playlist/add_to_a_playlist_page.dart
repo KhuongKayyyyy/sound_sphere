@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/models/playlist.dart';
+import 'package:sound_sphere/data/models/user_playlist.dart';
 import 'package:sound_sphere/data/models/track.dart';
 import 'package:sound_sphere/presentation/blocs/playlist/playlist_bloc.dart';
 import 'package:sound_sphere/presentation/views/main/library/components/playlist_add_new.dart';
@@ -82,7 +82,7 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
     );
   }
 
-  void _showSuccessToast(Playlist playlist) {
+  void _showSuccessToast(UserPlaylist playlist) {
     OverlayEntry overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         bottom: 200,
@@ -97,7 +97,7 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
     });
   }
 
-  Widget buildToast(Playlist playlist) => Material(
+  Widget buildToast(UserPlaylist playlist) => Material(
         color: Colors.transparent,
         child: Container(
           padding: EdgeInsets.all(10),
@@ -174,14 +174,15 @@ class _AddToAPlaylistPageState extends State<AddToAPlaylistPage> {
           );
         } else if (playlistState is PlaylistLoading) {
           return Skeletonizer(
-              child: _buildList(List.generate(5, (index) => Playlist.empty())));
+              child: _buildList(
+                  List.generate(5, (index) => UserPlaylist.empty())));
         }
         return Container();
       },
     );
   }
 
-  Widget _buildList(List<Playlist> playlists) {
+  Widget _buildList(List<UserPlaylist> playlists) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
