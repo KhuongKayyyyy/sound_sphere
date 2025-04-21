@@ -1,6 +1,8 @@
 class ApiConfig {
   // ignore: constant_identifier_names
-  static const String BASE_URL = 'http://103.216.116.55:3002/api/v1';
+  // static const String BASE_URL = 'http://103.216.116.55:3002/api/v1';
+  static const String BASE_URL = 'http://127.0.0.1:8080/api/v1';
+
   // ignore: non_constant_identifier_names
   static final int DEFAULT_LIMIT = 10;
 

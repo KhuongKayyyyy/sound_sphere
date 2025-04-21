@@ -9,7 +9,6 @@ import 'package:sound_sphere/core/constant/app_color.dart';
 import 'package:sound_sphere/core/router/routes.dart';
 import 'package:sound_sphere/core/utils/fake_data.dart';
 import 'package:sound_sphere/data/models/album.dart';
-import 'package:sound_sphere/data/res/library_repository.dart';
 import 'package:sound_sphere/presentation/blocs/album/album_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:sound_sphere/presentation/blocs/track/track_bloc.dart';

@@ -95,7 +95,7 @@ class UserRepository {
       }
 
       // Handle different status codes
-      if (response.statusCode == HttpStatus.ok) {
+      if (response.statusCode == HttpStatus.created) {
         if (decodedJson['metadata'] is Map<String, dynamic>) {
           await secureStorage.write(
               key: ApiConfig.token,
